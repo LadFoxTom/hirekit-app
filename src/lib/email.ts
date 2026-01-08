@@ -19,13 +19,19 @@ const createTransporter = () => {
   // The "from" address will be your Gmail address, but you can set a display name
   // For custom domain emails, use a service like SendGrid, Mailgun, or AWS SES
   
+  // For Gmail, we need to use TLS
   const transporter = nodemailer.createTransport({
     host,
     port,
     secure: port === 465, // true for 465, false for other ports
+    requireTLS: port === 587, // Require TLS for port 587
     auth: {
       user,
       pass: password,
+    },
+    // Additional options for Gmail
+    tls: {
+      rejectUnauthorized: false, // Allow self-signed certificates (needed for some SMTP servers)
     },
   });
 
