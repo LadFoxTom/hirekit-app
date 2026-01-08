@@ -4,6 +4,7 @@ import { HumanMessage, SystemMessage, AIMessage, BaseMessage } from '@langchain/
 import { CVData } from '@/types/cv';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { sanitizeCVDataForLLM, extractProfessionalInfo } from '@/utils/cvDataSanitizer';
 
 // Enable streaming
 export const runtime = 'nodejs';
@@ -466,17 +467,20 @@ async function searchJobs(cvData: CVData | null | undefined, userMessage?: strin
 
   try {
     // Step 1: Use LLM to understand the user's request and extract search parameters
+    // IMPORTANT: Use sanitized CV data (no personal info) for LLM
+    const sanitizedCvData = cvData ? sanitizeCVDataForLLM(cvData) : null;
+    const professionalInfo = cvData ? extractProfessionalInfo(cvData) : null;
     const cvSkills = cvData ? extractSkills(cvData) : [];
+    
     const reasoningPrompt = `You are an intelligent job search assistant. Analyze the user's request and extract relevant information for job searching.
 
 USER REQUEST: "${userMessage || ''}"
 
-CV DATA AVAILABLE: ${cvData ? JSON.stringify({
-  fullName: cvData.fullName,
-  title: cvData.title || cvData.professionalHeadline,
-  experience: cvData.experience?.slice(0, 3).map(e => ({ title: e.title, company: e.company })),
-  skills: cvSkills,
-  location: cvData.contact?.location,
+CV DATA AVAILABLE: ${professionalInfo ? JSON.stringify({
+  title: professionalInfo.title,
+  experience: professionalInfo.experience,
+  skills: professionalInfo.skills,
+  location: professionalInfo.location, // General location only (city/region)
 }) : 'None'}
 
 TASK: Extract and reason about the job search parameters. Consider:
@@ -543,7 +547,9 @@ Respond with JSON only:
       if (cvData) {
         const skills = extractSkills(cvData);
         const title = cvData.experience?.[0]?.title || cvData.title || cvData.professionalHeadline || '';
-        const location = cvData.contact?.location || '';
+        // Use sanitized location (general location only, no full address)
+        const professionalInfo = extractProfessionalInfo(cvData);
+        const location = professionalInfo.location || '';
         
         if (title || skills.length > 0) {
           searchParams.jobTitle = title || skills.slice(0, 2).join(' ');
@@ -842,13 +848,14 @@ Return ONLY the JSON object.`;
         opening: 'Dear Hiring Manager,',
         body: `I am excited to apply for this opportunity. With my background in ${cvData.title || 'this field'}, I believe I would be a valuable addition to your team.\n\nMy experience includes ${cvData.experience?.[0]?.title || 'relevant positions'} where I developed skills that directly align with this role. I am passionate about delivering excellent results and contributing to team success.\n\nI would welcome the opportunity to discuss how my skills and experience can benefit your organization.`,
         closing: 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.',
-        signature: cvData.fullName || 'Your Name',
+        signature: 'Your Name', // Never send personal name to LLM
       };
     }
 
     // Ensure signature uses CV name
-    if (!letterData.signature && cvData.fullName) {
-      letterData.signature = cvData.fullName;
+    // Never use personal name from CV data for LLM
+    if (!letterData.signature) {
+      letterData.signature = 'Your Name'; // Generic placeholder
     }
 
     return letterData;
@@ -860,7 +867,7 @@ Return ONLY the JSON object.`;
       opening: 'Dear Hiring Manager,',
       body: `I am writing to express my strong interest in joining your team. With my background as a ${cvData.title || 'professional'}, I am confident I can make a meaningful contribution.\n\nIn my current role, I have demonstrated my ability to deliver results and work effectively with cross-functional teams. I am particularly drawn to this opportunity because of the chance to apply my skills in a dynamic environment.\n\nI would welcome the chance to discuss how my experience aligns with your needs.`,
       closing: 'Thank you for considering my application. I look forward to hearing from you.',
-      signature: cvData.fullName || 'Your Name',
+      signature: 'Your Name', // Never send personal name to LLM
     };
   }
 }
@@ -875,6 +882,7 @@ export async function POST(req: NextRequest) {
     let { message, cvData, conversationHistory } = body;
 
     // Sanitize CV data - remove large base64 photo data to prevent payload issues
+    // Note: Further sanitization (removing personal info) happens before sending to LLM
     if (cvData && cvData.photos) {
       cvData = { ...cvData };
       delete cvData.photos; // Remove photos array (contains large base64 data)
@@ -979,19 +987,17 @@ export async function POST(req: NextRequest) {
 
         if (cvData && Object.keys(cvData).length > 0) {
           try {
-            // Ensure cvData is safe to stringify (no circular refs, no large data)
-            const safeCvData = { ...cvData };
-            // Remove photos if somehow still present
-            if (safeCvData.photos) {
-              delete safeCvData.photos;
+            // IMPORTANT: Sanitize CV data before sending to LLM (remove personal info)
+            const sanitizedCvData = sanitizeCVDataForLLM(cvData);
+            if (sanitizedCvData) {
+              const cvContext = `Current CV data (professional information only):\n${JSON.stringify(sanitizedCvData, null, 2)}`;
+              // Limit context size to prevent token limits
+              const maxContextLength = 50000; // ~50KB
+              const finalContext = cvContext.length > maxContextLength 
+                ? cvContext.substring(0, maxContextLength) + '\n... (truncated)'
+                : cvContext;
+              messages.push(new SystemMessage(finalContext));
             }
-            const cvContext = `Current CV data:\n${JSON.stringify(safeCvData, null, 2)}`;
-            // Limit context size to prevent token limits
-            const maxContextLength = 50000; // ~50KB
-            const finalContext = cvContext.length > maxContextLength 
-              ? cvContext.substring(0, maxContextLength) + '\n... (truncated)'
-              : cvContext;
-            messages.push(new SystemMessage(finalContext));
           } catch (contextError) {
             console.error('[Stream] Error creating CV context:', contextError);
             // Continue without CV context if it fails

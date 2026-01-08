@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { sanitizeCVDataForLLM } from '@/utils/cvDataSanitizer';
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
@@ -41,11 +42,14 @@ When providing suggestions:
 
 Always provide helpful, constructive feedback that will genuinely improve the CV's effectiveness.`;
 
+    // IMPORTANT: Sanitize CV data before sending to LLM (remove personal info)
+    const sanitizedCvData = sanitizeCVDataForLLM(cvData);
+    
     // Create user prompt with CV data and optimization request
     const userPrompt = `Please help optimize this CV based on the following request: "${optimizationRequest}"
 
-CURRENT CV DATA:
-${JSON.stringify(cvData, null, 2)}
+CURRENT CV DATA (professional information only):
+${JSON.stringify(sanitizedCvData, null, 2)}
 
 CONVERSATION CONTEXT:
 ${conversation?.slice(-5).map((msg: any) => `${msg.role}: ${msg.content}`).join('\n') || 'No previous conversation'}

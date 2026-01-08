@@ -65,7 +65,7 @@ export async function cropImageForPDF(
           alpha: true,
           imageSmoothingEnabled: true,
           imageSmoothingQuality: 'high'
-        })
+        }) as CanvasRenderingContext2D
         
         if (!ctx) {
           reject(new Error('Could not get canvas context'))

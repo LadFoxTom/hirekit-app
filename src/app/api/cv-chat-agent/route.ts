@@ -9,6 +9,7 @@ import { ChatOpenAI } from '@langchain/openai';
 import { CVData } from '@/types/cv';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { sanitizeCVDataForLLM, extractProfessionalInfo } from '@/utils/cvDataSanitizer';
 
 // Initialize OpenAI model
 const model = new ChatOpenAI({
@@ -267,17 +268,19 @@ function detectRequestType(message: string): 'extraction' | 'style' | 'job_searc
 async function searchJobs(cvData: CVData | null | undefined, userMessage?: string): Promise<{ jobs: JobMatch[]; message: string }> {
   try {
     // Step 1: Use LLM to understand the user's request and extract search parameters
+    // IMPORTANT: Use sanitized CV data (no personal info) for LLM
+    const professionalInfo = cvData ? extractProfessionalInfo(cvData) : null;
     const cvSkills = cvData ? extractSkills(cvData) : [];
+    
     const reasoningPrompt = `You are an intelligent job search assistant. Analyze the user's request and extract relevant information for job searching.
 
 USER REQUEST: "${userMessage || ''}"
 
-CV DATA AVAILABLE: ${cvData ? JSON.stringify({
-  fullName: cvData.fullName,
-  title: cvData.title || cvData.professionalHeadline,
-  experience: cvData.experience?.slice(0, 3).map(e => ({ title: e.title, company: e.company })),
-  skills: cvSkills,
-  location: cvData.contact?.location,
+CV DATA AVAILABLE: ${professionalInfo ? JSON.stringify({
+  title: professionalInfo.title,
+  experience: professionalInfo.experience,
+  skills: professionalInfo.skills,
+  location: professionalInfo.location, // General location only (city/region)
 }) : 'None'}
 
 TASK: Extract and reason about the job search parameters. Consider:
@@ -350,7 +353,9 @@ Respond with JSON only:
       if (cvData) {
         const skills = extractSkills(cvData);
         const title = cvData.experience?.[0]?.title || cvData.title || cvData.professionalHeadline || '';
-        const location = cvData.contact?.location || '';
+        // Use sanitized location (general location only, no full address)
+        const professionalInfo = extractProfessionalInfo(cvData);
+        const location = professionalInfo.location || '';
         
         if (title || skills.length > 0) {
           searchParams.jobTitle = title || skills.slice(0, 2).join(' ');

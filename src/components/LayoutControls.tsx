@@ -73,6 +73,9 @@ const LayoutControls: React.FC<LayoutControlsProps> = ({ data, onLayoutChange })
     photoShape: data.layout?.photoShape || 'circle',
     photoPositionX: data.layout?.photoPositionX ?? 50,
     photoPositionY: data.layout?.photoPositionY ?? 50,
+    photoSize: data.layout?.photoSize ?? 80,
+    photoBorderColor: data.layout?.photoBorderColor || '#000000',
+    photoBorderWidth: data.layout?.photoBorderWidth ?? 0,
     showIcons: data.layout?.showIcons !== undefined ? data.layout.showIcons : true,
     accentColor: data.layout?.accentColor || '#3b82f6',
     sectionOrder: data.layout?.sectionOrder || [
@@ -96,16 +99,16 @@ const LayoutControls: React.FC<LayoutControlsProps> = ({ data, onLayoutChange })
     socialLinksDisplay: data.layout?.socialLinksDisplay || 'icons-text',
     socialLinksPosition: data.layout?.socialLinksPosition || 'inline',
     socialLinksAlignment: data.layout?.socialLinksAlignment || 'left',
-    socialLinksStyle: data.layout?.socialLinksStyle || 'default',
-    socialLinksColor: data.layout?.socialLinksColor || 'primary',
     socialLinksSpacing: data.layout?.socialLinksSpacing || 'normal',
+    socialLinksStyle: data.layout?.socialLinksStyle || 'default',
     socialLinksIcons: data.layout?.socialLinksIcons !== undefined ? data.layout.socialLinksIcons : true,
+    socialLinksColor: data.layout?.socialLinksColor || 'primary',
     headerLayout: data.layout?.headerLayout || 'standard',
     headerAlignment: data.layout?.headerAlignment || 'left',
     headerSpacing: data.layout?.headerSpacing || 'normal',
     sidebarPosition: data.layout?.sidebarPosition || 'none',
     hiddenSections: data.layout?.hiddenSections || []
-  })
+  } as Required<NonNullable<CVData['layout']>>)
   
   const [showSectionIcons, setShowSectionIcons] = useState(false);
 

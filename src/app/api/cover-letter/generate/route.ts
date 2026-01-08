@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
+import { sanitizeCVDataForLLM } from '@/utils/cvDataSanitizer'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -86,16 +87,18 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // IMPORTANT: Sanitize CV data before sending to LLM (remove personal info)
+    const sanitizedCvData = sanitizeCVDataForLLM(cvData);
+    
     const userPrompt = `Create a cover letter for ${position} position at ${company}.
     
-    CV Context:
-    - Name: ${cvData.fullName || 'Candidate'}
-    - Title: ${cvData.title || 'Professional'}
-    - Experience Level: ${cvData.experienceLevel || 'mid-level'}
+    CV Context (professional information only):
+    - Title: ${sanitizedCvData?.title || sanitizedCvData?.professionalHeadline || 'Professional'}
+    - Experience Level: ${sanitizedCvData?.experienceYears || 'mid-level'}
     - Key Skills: ${skillsText}
     - Summary: ${summaryText}
     
-    Make the letter specific to this role and company.`
+    Make the letter specific to this role and company. Do not include personal identifiers like name, email, or phone number.`
 
     console.log('Calling OpenAI API...')
     

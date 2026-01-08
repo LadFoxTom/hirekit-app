@@ -21,6 +21,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { JobSwiper, JobMatch } from '@/components/JobSwiper';
 import TemplateQuickSelector from '@/components/TemplateQuickSelector';
 import { CVTemplate } from '@/components/pdf/CVDocumentPDF';
+import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
 const PDFPreviewViewer = dynamic(
@@ -1217,29 +1218,10 @@ export default function HomePage() {
   };
 
   // Sanitize CV data for API calls - remove large base64 photo data
+  // Sanitize CV data for API (removes large data like photos)
+  // Note: Personal info sanitization happens on server-side before sending to LLM
   const sanitizeCVDataForAPI = (data: CVData): CVData => {
-    try {
-      // Create a shallow copy first
-      const sanitized = { ...data };
-      // Remove photos array (contains large base64 data) - API doesn't need it
-      // This must be done BEFORE any JSON.stringify to avoid large payloads
-      if (sanitized.photos) {
-        delete sanitized.photos;
-      }
-      // Test serialization to catch any other issues early
-      const testString = JSON.stringify(sanitized);
-      if (testString.length > 1000000) { // Warn if still > 1MB
-        console.warn('[Sanitize CV Data] Payload still large:', testString.length);
-      }
-      return sanitized;
-    } catch (error) {
-      console.error('[Sanitize CV Data] Error:', error);
-      // Fallback: return minimal data structure
-      return {
-        ...data,
-        photos: undefined, // Explicitly remove photos
-      };
-    }
+    return sanitizeForAPI(data) || data;
   };
 
   // Submit message

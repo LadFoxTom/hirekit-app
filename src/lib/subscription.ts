@@ -109,6 +109,15 @@ export class SubscriptionService {
   static async getUserSubscription(userId: string) {
     const subscription = await prisma.subscription.findUnique({
       where: { userId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            email: true,
+            name: true,
+          },
+        },
+      },
     });
 
     if (!subscription) {
@@ -125,21 +134,36 @@ export class SubscriptionService {
       };
     }
 
+    // Get plan from subscription (default to 'free' if not set)
+    const plan = (subscription.plan as string) || 'free';
+    const status = (subscription.status as string) || 'active';
+
     // Merge with plan defaults
     const features = {
-      ...this.PLAN_FEATURES[subscription.plan] || this.PLAN_FEATURES.free,
-      ...(subscription.features as any as FeatureAccess),
+      ...this.PLAN_FEATURES[plan] || this.PLAN_FEATURES.free,
+      ...(subscription.features as any as FeatureAccess || {}),
     };
 
     const usageQuotas = {
-      ...this.PLAN_QUOTAS[subscription.plan] || this.PLAN_QUOTAS.free,
-      ...(subscription.usageQuotas as any as UsageQuota),
+      ...this.PLAN_QUOTAS[plan] || this.PLAN_QUOTAS.free,
+      ...(subscription.usageQuotas as any as UsageQuota || {}),
     };
 
     return {
-      ...subscription,
+      id: subscription.id,
+      userId: subscription.userId,
+      plan: plan,
+      status: status,
+      billingCycle: (subscription.billingCycle as string) || 'monthly',
+      currentPeriodStart: subscription.currentPeriodStart?.toISOString() || null,
+      currentPeriodEnd: subscription.currentPeriodEnd?.toISOString() || subscription.stripeCurrentPeriodEnd?.toISOString() || null,
+      cancelAtPeriodEnd: subscription.cancelAtPeriodEnd || false,
+      stripeCustomerId: subscription.stripeCustomerId,
+      stripeSubscriptionId: subscription.stripeSubscriptionId,
+      stripePriceId: subscription.stripePriceId,
       features,
       usageQuotas,
+      user: subscription.user,
     };
   }
 
@@ -186,7 +210,7 @@ export class SubscriptionService {
    * Increment usage for a specific quota
    */
   static async incrementUsage(userId: string, quotaType: keyof UsageQuota, amount: number = 1) {
-    const subscription = await prisma.subscription.findUnique({
+    let subscription = await prisma.subscription.findUnique({
       where: { userId },
     });
 
@@ -202,6 +226,14 @@ export class SubscriptionService {
           billingCycle: 'monthly',
         },
       });
+      // Re-fetch after creation
+      const newSubscription = await prisma.subscription.findUnique({
+        where: { userId },
+      });
+      if (!newSubscription) {
+        throw new Error('Failed to create subscription');
+      }
+      subscription = newSubscription;
     }
 
     // Update usage quota
@@ -275,18 +307,18 @@ export class SubscriptionService {
     await prisma.subscription.upsert({
       where: { userId },
       update: {
-        plan,
-        billingCycle,
-        features,
-        usageQuotas,
+        plan: plan as any,
+        billingCycle: billingCycle as any,
+        features: features as any,
+        usageQuotas: usageQuotas as any,
         status: 'active',
       },
       create: {
         userId,
-        plan,
-        billingCycle,
-        features,
-        usageQuotas,
+        plan: plan as any,
+        billingCycle: billingCycle as any,
+        features: features as any,
+        usageQuotas: usageQuotas as any,
         status: 'active',
       },
     });
