@@ -40,30 +40,44 @@ export async function POST(request: NextRequest) {
       }, { status: 500 });
     }
 
-    // Try to send email
-    const emailSent = await sendPasswordResetEmail(email, testToken);
+    // Try to send email with error details
+    try {
+      const emailSent = await sendPasswordResetEmail(email, testToken, true);
 
-    if (emailSent) {
-      return NextResponse.json({
-        success: true,
-        message: 'Test email sent successfully. Check your inbox and spam folder.',
-        config: {
-          hasApiKey: true,
-          apiKeyPrefix: `${apiKeyPrefix}...`,
-          from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
-        },
-      });
-    } else {
+      if (emailSent) {
+        return NextResponse.json({
+          success: true,
+          message: 'Test email sent successfully. Check your inbox and spam folder.',
+          config: {
+            hasApiKey: true,
+            apiKeyPrefix: `${apiKeyPrefix}...`,
+            from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+          },
+        });
+      } else {
+        return NextResponse.json({
+          success: false,
+          message: 'Email function returned false but no error was thrown.',
+          config: {
+            hasApiKey: true,
+            apiKeyPrefix: `${apiKeyPrefix}...`,
+            hasFrom: !!process.env.EMAIL_FROM,
+            from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+          },
+        }, { status: 500 });
+      }
+    } catch (emailError: any) {
       return NextResponse.json({
         success: false,
-        message: 'Failed to send test email. Check Vercel function logs for detailed error information.',
+        message: 'Failed to send test email.',
+        error: emailError.message,
+        errorDetails: emailError.toString(),
         config: {
           hasApiKey: true,
           apiKeyPrefix: `${apiKeyPrefix}...`,
           hasFrom: !!process.env.EMAIL_FROM,
           from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
         },
-        instructions: 'Check Vercel deployment logs for detailed Resend API error messages',
       }, { status: 500 });
     }
   } catch (error: any) {

@@ -5,10 +5,11 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-export const sendPasswordResetEmail = async (email: string, resetToken: string) => {
+export const sendPasswordResetEmail = async (email: string, resetToken: string, returnError = false) => {
   if (!resend) {
-    console.error('Resend API key not configured. Cannot send password reset email.');
-    console.error('Required environment variable: RESEND_API_KEY');
+    const error = 'Resend API key not configured. Required environment variable: RESEND_API_KEY';
+    console.error(error);
+    if (returnError) throw new Error(error);
     return false;
   }
 
@@ -70,17 +71,23 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string) 
     });
 
     if (error) {
-      console.error('Resend API error:', {
+      const errorDetails = {
         message: error.message,
         name: error.name,
         statusCode: error.statusCode,
         error: JSON.stringify(error, null, 2),
-      });
+      };
+      console.error('Resend API error:', errorDetails);
+      if (returnError) {
+        throw new Error(`Resend API error: ${error.message} (Status: ${error.statusCode || 'unknown'})`);
+      }
       return false;
     }
 
     if (!data) {
-      console.error('Resend returned no data and no error - unexpected response');
+      const error = 'Resend returned no data and no error - unexpected response';
+      console.error(error);
+      if (returnError) throw new Error(error);
       return false;
     }
 
@@ -91,13 +98,17 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string) 
     });
     return true;
   } catch (error: any) {
-    console.error('Error sending password reset email via Resend:', {
+    const errorDetails = {
       error: error.message,
       stack: error.stack,
       name: error.name,
       to: email,
       fullError: JSON.stringify(error, Object.getOwnPropertyNames(error), 2),
-    });
+    };
+    console.error('Error sending password reset email via Resend:', errorDetails);
+    if (returnError) {
+      throw error;
+    }
     return false;
   }
 };
