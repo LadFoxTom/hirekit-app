@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/context/LocaleContext';
+import LanguageDebug from '@/components/LanguageDebug';
 import { CVData, CV_TEMPLATES } from '@/types/cv';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -765,6 +766,12 @@ export default function HomePage() {
   const { isAuthenticated, user } = useAuth();
   const router = useRouter();
   const { t, language } = useLocale();
+  
+  // Debug logging
+  useEffect(() => {
+    console.log('[HomePage] Current language:', language);
+    console.log('[HomePage] Test translation:', t('landing.main.title'));
+  }, [language, t]);
   
   // Get dynamic suggestions based on language
   const SUGGESTIONS = getSuggestions(t);
@@ -3166,6 +3173,9 @@ export default function HomePage() {
           )}
         </AnimatePresence>
       </main>
+      
+      {/* Language Debug Component (only in development) */}
+      <LanguageDebug />
     </div>
   );
 }

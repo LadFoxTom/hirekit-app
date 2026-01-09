@@ -49,14 +49,25 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     // Load language from localStorage or detect browser language
     const savedLanguage = localStorage.getItem('language') as Language
     
+    console.log('[LocaleContext] Language detection:', {
+      savedLanguage,
+      browserLanguage: navigator.language,
+      browserLanguageCode: navigator.language.split('-')[0],
+    })
+    
     if (savedLanguage && availableLanguages.some(lang => lang.code === savedLanguage)) {
+      console.log('[LocaleContext] Using saved language:', savedLanguage)
       setLanguageState(savedLanguage)
     } else {
       // Detect browser language
       const browserLang = navigator.language.split('-')[0] as Language
+      console.log('[LocaleContext] Detected browser language:', browserLang)
       if (availableLanguages.some(lang => lang.code === browserLang)) {
+        console.log('[LocaleContext] Setting language to:', browserLang)
         setLanguageState(browserLang)
         localStorage.setItem('language', browserLang)
+      } else {
+        console.log('[LocaleContext] Browser language not supported, defaulting to English')
       }
     }
     
