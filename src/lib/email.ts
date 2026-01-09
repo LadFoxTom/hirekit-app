@@ -30,50 +30,100 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string, 
     domainVerified: useFromEmail.includes('@ladderfox.com'),
   });
 
+  // Set reply-to to support email (better deliverability)
+  const replyTo = 'support@ladderfox.com';
+  
   try {
     const { data, error } = await resend.emails.send({
       from: useFromEmail,
       to: email,
+      replyTo: replyTo,
       subject: 'Reset Your LadderFox Password',
+      headers: {
+        'List-Unsubscribe': `<${appUrl}/unsubscribe?email=${encodeURIComponent(email)}>`,
+        'X-Entity-Ref-ID': `password-reset-${Date.now()}`,
+      },
       html: `
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Reset Your LadderFox Password</title>
           </head>
-          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-              <h1 style="color: white; margin: 0;">LadderFox</h1>
-            </div>
-            <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
-              <h2 style="color: #333; margin-top: 0;">Reset Your Password</h2>
-              <p>You requested to reset your password for your LadderFox account.</p>
-              <p>Click the button below to reset your password. This link will expire in 1 hour.</p>
-              <div style="text-align: center; margin: 30px 0;">
-                <a href="${resetUrl}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">Reset Password</a>
-              </div>
-              <p style="color: #666; font-size: 14px;">Or copy and paste this link into your browser:</p>
-              <p style="color: #667eea; word-break: break-all; font-size: 12px;">${resetUrl}</p>
-              <p style="color: #666; font-size: 14px; margin-top: 30px;">If you didn't request this password reset, you can safely ignore this email.</p>
-              <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
-              <p style="color: #999; font-size: 12px; text-align: center;">© ${new Date().getFullYear()} LadderFox. All rights reserved.</p>
-            </div>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5; line-height: 1.6; color: #333333;">
+            <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f5f5f5; padding: 20px;">
+              <tr>
+                <td align="center" style="padding: 20px 0;">
+                  <table role="presentation" style="width: 100%; max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <!-- Header -->
+                    <tr>
+                      <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
+                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">LadderFox</h1>
+                      </td>
+                    </tr>
+                    <!-- Content -->
+                    <tr>
+                      <td style="padding: 40px 30px;">
+                        <h2 style="margin: 0 0 20px 0; color: #333333; font-size: 24px; font-weight: 600;">Password Reset Request</h2>
+                        <p style="margin: 0 0 20px 0; color: #666666; font-size: 16px;">Hello,</p>
+                        <p style="margin: 0 0 20px 0; color: #666666; font-size: 16px;">We received a request to reset the password for your LadderFox account associated with this email address.</p>
+                        <p style="margin: 0 0 30px 0; color: #666666; font-size: 16px;">Click the button below to create a new password. This link will expire in 1 hour for security reasons.</p>
+                        <!-- CTA Button -->
+                        <table role="presentation" style="width: 100%; margin: 30px 0;">
+                          <tr>
+                            <td align="center" style="padding: 0;">
+                              <a href="${resetUrl}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-weight: 600; font-size: 16px; text-align: center;">Reset Password</a>
+                            </td>
+                          </tr>
+                        </table>
+                        <!-- Alternative Link -->
+                        <p style="margin: 30px 0 10px 0; color: #999999; font-size: 14px;">If the button doesn't work, copy and paste this link into your browser:</p>
+                        <p style="margin: 0 0 30px 0; color: #667eea; word-break: break-all; font-size: 14px; line-height: 1.5;">${resetUrl}</p>
+                        <!-- Security Notice -->
+                        <div style="background-color: #f8f9fa; border-left: 4px solid #667eea; padding: 15px; margin: 30px 0; border-radius: 4px;">
+                          <p style="margin: 0; color: #666666; font-size: 14px; line-height: 1.6;"><strong>Didn't request this?</strong> If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.</p>
+                        </div>
+                        <!-- Expiry Notice -->
+                        <p style="margin: 20px 0 0 0; color: #999999; font-size: 13px;">This password reset link expires in 1 hour.</p>
+                      </td>
+                    </tr>
+                    <!-- Footer -->
+                    <tr>
+                      <td style="background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e9ecef;">
+                        <p style="margin: 0 0 10px 0; color: #999999; font-size: 12px;">© ${new Date().getFullYear()} LadderFox. All rights reserved.</p>
+                        <p style="margin: 0; color: #999999; font-size: 12px;">
+                          <a href="${appUrl}" style="color: #667eea; text-decoration: none;">Visit LadderFox</a> | 
+                          <a href="${appUrl}/support" style="color: #667eea; text-decoration: none;">Support</a>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
           </body>
         </html>
       `,
       text: `
-        Reset Your LadderFox Password
-        
-        You requested to reset your password for your LadderFox account.
-        
-        Click this link to reset your password (expires in 1 hour):
-        ${resetUrl}
-        
-        If you didn't request this password reset, you can safely ignore this email.
-        
-        © ${new Date().getFullYear()} LadderFox. All rights reserved.
-      `,
+Password Reset Request - LadderFox
+
+Hello,
+
+We received a request to reset the password for your LadderFox account associated with this email address.
+
+Click the link below to create a new password. This link will expire in 1 hour for security reasons.
+
+${resetUrl}
+
+Didn't request this? If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
+
+This password reset link expires in 1 hour.
+
+© ${new Date().getFullYear()} LadderFox. All rights reserved.
+Visit us at: ${appUrl}
+      `.trim(),
     });
 
     if (error) {
