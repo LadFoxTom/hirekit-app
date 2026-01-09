@@ -30,8 +30,8 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string, 
     domainVerified: useFromEmail.includes('@ladderfox.com'),
   });
 
-  // Set reply-to to support email (better deliverability)
-  const replyTo = 'support@ladderfox.com';
+  // Set reply-to to info email (better deliverability)
+  const replyTo = 'info@ladderfox.com';
   
   try {
     const { data, error } = await resend.emails.send({
