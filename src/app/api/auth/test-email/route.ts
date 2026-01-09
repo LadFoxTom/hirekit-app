@@ -14,17 +14,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log environment variables (without exposing passwords)
-    console.log('Email Configuration Check:', {
-      hasHost: !!process.env.EMAIL_SERVER_HOST,
-      hasPort: !!process.env.EMAIL_SERVER_PORT,
-      hasUser: !!process.env.EMAIL_SERVER_USER,
-      hasPassword: !!process.env.EMAIL_SERVER_PASSWORD,
+    // Log environment variables (without exposing API key)
+    console.log('Email Configuration Check (Resend):', {
+      hasApiKey: !!process.env.RESEND_API_KEY,
       hasFrom: !!process.env.EMAIL_FROM,
-      host: process.env.EMAIL_SERVER_HOST,
-      port: process.env.EMAIL_SERVER_PORT,
-      user: process.env.EMAIL_SERVER_USER,
-      from: process.env.EMAIL_FROM,
+      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
     });
 
     // Generate a test token
@@ -38,10 +32,8 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Test email sent successfully. Check your inbox and spam folder.',
         config: {
-          host: process.env.EMAIL_SERVER_HOST,
-          port: process.env.EMAIL_SERVER_PORT,
-          user: process.env.EMAIL_SERVER_USER,
-          from: process.env.EMAIL_FROM,
+          hasApiKey: !!process.env.RESEND_API_KEY,
+          from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
         },
       });
     } else {
@@ -49,10 +41,7 @@ export async function POST(request: NextRequest) {
         success: false,
         message: 'Failed to send test email. Check server logs for details.',
         config: {
-          hasHost: !!process.env.EMAIL_SERVER_HOST,
-          hasPort: !!process.env.EMAIL_SERVER_PORT,
-          hasUser: !!process.env.EMAIL_SERVER_USER,
-          hasPassword: !!process.env.EMAIL_SERVER_PASSWORD,
+          hasApiKey: !!process.env.RESEND_API_KEY,
           hasFrom: !!process.env.EMAIL_FROM,
         },
       }, { status: 500 });
