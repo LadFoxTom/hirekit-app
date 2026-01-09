@@ -74,7 +74,13 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string, 
                         <table role="presentation" style="width: 100%; margin: 30px 0;">
                           <tr>
                             <td align="center" style="padding: 0;">
-                              <a href="${resetUrl}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 6px; font-weight: 600; font-size: 16px; text-align: center;">Reset Password</a>
+                              <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                <tr>
+                                  <td align="center" valign="middle" style="background-color: #667eea; border-radius: 6px; padding: 0;">
+                                    <a href="${resetUrl}" style="display: block; background-color: #667eea; border: 2px solid #667eea; border-radius: 6px; color: #ffffff !important; text-decoration: none; padding: 16px 40px; font-weight: 600; font-size: 16px; text-align: center; line-height: 1.5; mso-hide: all; -webkit-text-size-adjust: none;">Reset Password</a>
+                                  </td>
+                                </tr>
+                              </table>
                             </td>
                           </tr>
                         </table>
