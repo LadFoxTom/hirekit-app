@@ -904,7 +904,17 @@ export async function POST(request: NextRequest) {
     const isAuthenticated = !!session?.user?.email;
     
     const body: ChatRequest = await request.json();
-    let { message, cvData, conversationHistory } = body;
+    let { message, cvData, conversationHistory, language = 'en' } = body;
+    
+    // Language mapping for LLM
+    const languageMap: Record<string, string> = {
+      'en': 'English',
+      'nl': 'Dutch',
+      'fr': 'French',
+      'es': 'Spanish',
+      'de': 'German',
+    };
+    const responseLanguage = languageMap[language] || 'English';
 
     // Sanitize CV data - remove large base64 photo data to prevent payload issues
     if (cvData && cvData.photos) {
@@ -967,10 +977,13 @@ export async function POST(request: NextRequest) {
         .replace('{userMessage}', message);
     }
 
+    // Add language instruction
+    const languageInstruction = ` Always respond in ${responseLanguage}. All your responses, questions, and suggestions must be in ${responseLanguage}.`;
+    
     const response = await model.invoke([
       {
         role: 'system',
-        content: 'You are a CV building assistant. Always respond with valid JSON only.',
+        content: `You are a CV building assistant. Always respond with valid JSON only.${languageInstruction}`,
       },
       {
         role: 'user',

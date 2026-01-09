@@ -764,7 +764,7 @@ function InlineEditor({
 export default function HomePage() {
   const { isAuthenticated, user } = useAuth();
   const router = useRouter();
-  const { t } = useLocale();
+  const { t, language } = useLocale();
   
   // Get dynamic suggestions based on language
   const SUGGESTIONS = getSuggestions(t);
@@ -1287,6 +1287,7 @@ export default function HomePage() {
           message: messageContent, // Use the full message including attachment
           cvData: sanitizedCvData,
           conversationHistory: messages.map(m => ({ role: m.role, content: m.content })),
+          language: language, // Pass user's language preference
         });
         console.log('[Chat] Request body size:', requestBody.length, 'bytes');
       } catch (stringifyError) {
@@ -1446,6 +1447,7 @@ export default function HomePage() {
             message: messageContent, // Use the full message including attachment
             cvData: sanitizedCvData,
             conversationHistory: messages.map(m => ({ role: m.role, content: m.content })),
+            language: language, // Pass user's language preference
           }),
         });
         

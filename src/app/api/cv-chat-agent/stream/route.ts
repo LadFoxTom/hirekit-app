@@ -879,7 +879,17 @@ export async function POST(req: NextRequest) {
     const isAuthenticated = !!session?.user?.email;
     
     const body = await req.json();
-    let { message, cvData, conversationHistory } = body;
+    let { message, cvData, conversationHistory, language = 'en' } = body;
+    
+    // Language mapping for LLM
+    const languageMap: Record<string, string> = {
+      'en': 'English',
+      'nl': 'Dutch',
+      'fr': 'French',
+      'es': 'Spanish',
+      'de': 'German',
+    };
+    const responseLanguage = languageMap[language] || 'English';
 
     // Sanitize CV data - remove large base64 photo data to prevent payload issues
     // Note: Further sanitization (removing personal info) happens before sending to LLM
@@ -973,7 +983,11 @@ export async function POST(req: NextRequest) {
           maxTokens: 2000, // Ensure enough tokens for comprehensive responses
         });
 
-        const messages: BaseMessage[] = [new SystemMessage(CV_EXTRACTION_PROMPT)];
+        // Add language instruction to the prompt
+        const languageInstruction = `\n\nIMPORTANT: Always respond in ${responseLanguage}. All your responses, questions, and suggestions must be in ${responseLanguage}.`;
+        const promptWithLanguage = CV_EXTRACTION_PROMPT + languageInstruction;
+        
+        const messages: BaseMessage[] = [new SystemMessage(promptWithLanguage)];
 
         if (conversationHistory && Array.isArray(conversationHistory)) {
           for (const msg of conversationHistory.slice(-10)) {
