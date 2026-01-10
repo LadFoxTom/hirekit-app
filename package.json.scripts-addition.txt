@@ -1,0 +1,15 @@
+// Add these scripts to your package.json "scripts" section:
+
+"scripts": {
+  // ... existing scripts
+  
+  // Translation management scripts
+  "translations:validate": "node scripts/validate-translations.js",
+  "translations:find-hardcoded": "node scripts/find-hardcoded-text.js",
+  "translations:add-keys": "node scripts/add-translation-keys.js"
+}
+
+// Usage:
+// npm run translations:validate          - Check if all translations are complete
+// npm run translations:find-hardcoded    - Find hardcoded English text
+// npm run translations:add-keys          - Add new translation keys (edit script first)
