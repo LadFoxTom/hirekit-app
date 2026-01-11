@@ -221,10 +221,10 @@ export default function PricingPage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center mb-16"
             >
-              <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent leading-tight">
                 Simple, Transparent Pricing
               </h1>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto mt-4">
                 Choose the plan that works for you. Start free, upgrade when you need more.
               </p>
             </motion.div>
@@ -266,10 +266,20 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-[#111111] rounded-2xl border border-white/10 p-8 relative overflow-hidden"
+                className="bg-[#111111] rounded-2xl border border-white/10 p-8 relative overflow-hidden flex flex-col"
               >
-                <div className="relative z-10">
-                  <div className="mb-6">
+                {/* Current Plan Badge for logged-in users */}
+                {isAuthenticated && !isSubscribed && (
+                  <div className="absolute top-0 right-0">
+                    <div className="bg-emerald-500/90 text-white text-xs font-medium px-4 py-1.5 rounded-bl-xl">
+                      Your Current Plan
+                    </div>
+                  </div>
+                )}
+
+                <div className="relative z-10 flex flex-col flex-grow">
+                  {/* Header section - fixed height */}
+                  <div className="mb-6 min-h-[100px]">
                     <h3 className="text-xl font-semibold text-white mb-2">Free</h3>
                     <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-bold text-white">€0</span>
@@ -278,7 +288,8 @@ export default function PricingPage() {
                     <p className="text-gray-400 mt-2 text-sm">Perfect for getting started</p>
                   </div>
                   
-                  <ul className="space-y-3 mb-8">
+                  {/* Features list - grows to fill space */}
+                  <ul className="space-y-3 flex-grow">
                     {STRIPE_PLANS.free.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <FiCheck className="text-gray-500 mt-0.5 flex-shrink-0" size={16} />
@@ -295,12 +306,21 @@ export default function PricingPage() {
                     </li>
                   </ul>
                   
-                  <button
-                    onClick={() => router.push('/')}
-                    className="w-full bg-white/5 hover:bg-white/10 text-white py-3 px-6 rounded-xl font-medium transition-colors border border-white/10"
-                  >
-                    Get Started Free
-                  </button>
+                  {/* Button - fixed at bottom */}
+                  <div className="mt-8">
+                    {isAuthenticated && !isSubscribed ? (
+                      <div className="w-full bg-emerald-500/20 text-emerald-400 py-3 px-6 rounded-xl font-medium text-center border border-emerald-500/30">
+                        ✓ Active
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => router.push('/')}
+                        className="w-full bg-white/5 hover:bg-white/10 text-white py-3 px-6 rounded-xl font-medium transition-colors border border-white/10"
+                      >
+                        Get Started Free
+                      </button>
+                    )}
+                  </div>
                 </div>
               </motion.div>
 
@@ -309,7 +329,7 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-gradient-to-b from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/30 p-8 relative overflow-hidden"
+                className="bg-gradient-to-b from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/30 p-8 relative overflow-hidden flex flex-col"
               >
                 {/* Popular Badge */}
                 <div className="absolute top-0 right-0">
@@ -318,8 +338,9 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                <div className="relative z-10">
-                  <div className="mb-6">
+                <div className="relative z-10 flex flex-col flex-grow">
+                  {/* Header section - fixed height */}
+                  <div className="mb-6 min-h-[100px]">
                     <h3 className="text-xl font-semibold text-white mb-2 flex items-center gap-2">
                       Basic
                       <FiStar className="text-yellow-500" size={16} />
@@ -337,7 +358,8 @@ export default function PricingPage() {
                     )}
                   </div>
                   
-                  <ul className="space-y-3 mb-8">
+                  {/* Features list - grows to fill space */}
+                  <ul className="space-y-3 flex-grow">
                     {STRIPE_PLANS.basic.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <FiCheck className="text-blue-400 mt-0.5 flex-shrink-0" size={16} />
@@ -346,25 +368,28 @@ export default function PricingPage() {
                     ))}
                   </ul>
                   
-                  <button
-                    onClick={() => handleSubscribe('basic')}
-                    disabled={isLoading || isSubscribed}
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-3 px-6 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
-                  >
-                    {isLoading ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        Processing...
-                      </span>
-                    ) : isSubscribed ? (
-                      'Current Plan'
-                    ) : (
-                      'Subscribe Now'
-                    )}
-                  </button>
+                  {/* Button - fixed at bottom */}
+                  <div className="mt-8">
+                    <button
+                      onClick={() => handleSubscribe('basic')}
+                      disabled={isLoading || isSubscribed}
+                      className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-3 px-6 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
+                    >
+                      {isLoading ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Processing...
+                        </span>
+                      ) : isSubscribed ? (
+                        '✓ Current Plan'
+                      ) : (
+                        'Subscribe Now'
+                      )}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Background glow */}
