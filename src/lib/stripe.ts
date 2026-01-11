@@ -97,11 +97,18 @@ export class StripeService {
   // Create a checkout session for subscription
   static async createCheckoutSession(userId: string, priceId: string, successUrl: string, cancelUrl: string) {
     try {
+      console.log('[Stripe] Creating checkout session for user:', userId)
+      console.log('[Stripe] Price ID:', priceId)
+      
       // Get or create Stripe customer
       const user = await UserService.getUser(userId)
+      console.log('[Stripe] User found:', !!user)
+      
       let customerId = user?.subscription?.stripeCustomerId
+      console.log('[Stripe] Existing customer ID:', customerId)
 
       if (!customerId) {
+        console.log('[Stripe] Creating new Stripe customer...')
         const customer = await stripe.customers.create({
           email: user?.email || undefined,
           name: user?.name || undefined,
@@ -110,12 +117,21 @@ export class StripeService {
           }
         })
         customerId = customer.id
+        console.log('[Stripe] New customer created:', customerId)
         
         // Create subscription record
         await UserService.createSubscription(userId, customerId)
+        console.log('[Stripe] Subscription record created')
       }
 
       // Create checkout session
+      console.log('[Stripe] Creating checkout session with:', {
+        customer: customerId,
+        priceId,
+        successUrl,
+        cancelUrl
+      })
+      
       const session = await stripe.checkout.sessions.create({
         customer: customerId,
         payment_method_types: ['card'],
@@ -126,7 +142,6 @@ export class StripeService {
           },
         ],
         mode: 'subscription',
-
         success_url: successUrl,
         cancel_url: cancelUrl,
         metadata: {
@@ -134,9 +149,17 @@ export class StripeService {
         }
       })
 
+      console.log('[Stripe] Checkout session created successfully:', session.id)
       return session
     } catch (error) {
-      console.error('Error creating checkout session:', error)
+      console.error('[Stripe] Error creating checkout session:', error)
+      if (error instanceof Error) {
+        console.error('[Stripe] Error details:', {
+          name: error.name,
+          message: error.message,
+          stack: error.stack
+        })
+      }
       throw error
     }
   }
