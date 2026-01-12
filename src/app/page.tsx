@@ -1831,7 +1831,7 @@ export default function HomePage() {
               <motion.button
                 whileTap={{ scale: 0.97 }}
                 onClick={() => {
-                  setIsSidebarOpen(true);
+                  setIsSidebarOpen((prev) => !prev);
                   setActiveView('chat');
                   setIsConversationActive(false);
                 }}
@@ -1946,7 +1946,18 @@ export default function HomePage() {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed top-14 left-0 bottom-0 w-[280px] bg-[#111111] border-r border-white/5 z-40 overflow-y-auto"
             >
-              <div className="p-4">
+              <div className="p-4 space-y-4">
+                {/* Desktop close button */}
+                <div className="hidden lg:flex justify-end">
+                  <button
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                    aria-label="Close sidebar"
+                  >
+                    <FiX size={16} />
+                  </button>
+                </div>
+
                 {/* New Chat Button */}
                 <button
                   onClick={() => {
