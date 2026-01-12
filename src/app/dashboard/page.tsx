@@ -119,7 +119,7 @@ export default function DashboardPage() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const userMenuRef = useRef<HTMLDivElement>(null)
-  const subBadge = subscription?.plan === 'free' || !subscription ? 'Free' : 'Pro'
+  const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free'
 
   // Close user menu when clicking outside (works for both mouse and touch)
   useEffect(() => {

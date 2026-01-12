@@ -789,8 +789,8 @@ export default function HomePage() {
   const userMenuRef = useRef<HTMLDivElement>(null);
   
   // Subscription gating
-  const plan = subscription?.plan || 'free';
-  const isPro = plan !== 'free' && subscription?.status === 'active';
+  const plan = subscription?.status === 'active' ? (subscription?.plan || 'free') : 'free';
+  const isPro = plan !== 'free';
   const isFree = !isPro;
   const subBadge = isPro ? 'Pro' : 'Free';
   

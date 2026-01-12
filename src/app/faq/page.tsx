@@ -77,10 +77,11 @@ const faqs = [
 ];
 
 export default function FAQPage() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, subscription } = useAuth();
   const router = useRouter();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free';
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -155,7 +156,7 @@ export default function FAQPage() {
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                           <FiCreditCard size={16} />
                           <span className="flex-1 text-left">Subscription</span>
-                          <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">Pro</span>
+                          <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
                         </button>
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                           <FiSettings size={16} /> Settings
