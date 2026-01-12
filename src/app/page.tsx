@@ -1558,7 +1558,8 @@ export default function HomePage() {
   // Download PDF
   const handleDownload = async () => {
     if (!isPro) {
-      toast.error('Downloading CV is a Pro feature. Please upgrade to Pro to download.');
+      toast.error('Downloading CV is a Pro feature. Please upgrade to download.');
+      router.push('/pricing');
       return;
     }
     try {
@@ -2037,15 +2038,10 @@ export default function HomePage() {
                   </button>
                   <button 
                     onClick={() => {
-                      if (isPro) {
-                        setActiveView('editor');
-                        setIsConversationActive(true);
-                        setArtifactType('cv');
-                        setIsSidebarOpen(false);
-                      } else {
-                        router.push('/pricing');
-                        toast('Editor is a Pro feature', { icon: '💎' });
-                      }
+                      setActiveView('editor');
+                      setIsConversationActive(true);
+                      setArtifactType('cv');
+                      setIsSidebarOpen(false);
                     }}
                     className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left group"
                   >
@@ -2053,8 +2049,6 @@ export default function HomePage() {
                       <FiAward size={14} className="text-purple-400" />
                       <span className="text-sm">Editor</span>
                     </div>
-                    {!isPro && <FiLock size={12} className="text-gray-500" />}
-                    {isPro && <span className="text-[10px] px-1.5 py-0.5 bg-purple-500/20 text-purple-400 rounded font-medium">PRO</span>}
                   </button>
                 </div>
               </div>
@@ -3084,9 +3078,15 @@ export default function HomePage() {
                           <FiCopy size={16} />
                         </button>
                         <button
-                          onClick={handleDownload}
-                          disabled={isFree}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          onClick={() => {
+                            if (isFree) {
+                              toast.error('Downloading CV is a Pro feature. Please upgrade to download.');
+                              router.push('/pricing');
+                              return;
+                            }
+                            handleDownload();
+                          }}
+                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                           title={isFree ? 'Pro feature: upgrade to download' : 'Download PDF'}
                         >
                           <FiDownload size={16} />
@@ -3096,10 +3096,10 @@ export default function HomePage() {
                     {artifactType === 'letter' && (
                       <>
                         <button
-                          disabled={isFree}
                           onClick={() => {
                             if (isFree) {
                               toast.error('Copying letters is a Pro feature. Please upgrade to copy or download your letter.');
+                              router.push('/pricing');
                               return;
                             }
                             navigator.clipboard.writeText(
@@ -3107,17 +3107,17 @@ export default function HomePage() {
                             );
                             toast.success('Letter copied to clipboard');
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                           title={isFree ? 'Pro feature: upgrade to copy' : 'Copy Letter'}
                         >
                           <FiCopy size={14} />
                           <span className="hidden sm:inline">Copy</span>
                         </button>
                         <button
-                          disabled={isFree}
                           onClick={() => {
                             if (isFree) {
                               toast.error('Downloading letters is a Pro feature. Please upgrade to download.');
+                              router.push('/pricing');
                               return;
                             }
                             const content = `${letterData.opening}\n\n${letterData.body}\n\n${letterData.closing}\n\n${letterData.signature}`;
@@ -3130,7 +3130,7 @@ export default function HomePage() {
                             URL.revokeObjectURL(url);
                             toast.success('Letter downloaded');
                           }}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                           title={isFree ? 'Pro feature: upgrade to download' : 'Download'}
                         >
                           <FiDownload size={16} />
