@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/context/LocaleContext';
@@ -789,6 +790,42 @@ export default function HomePage() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Detect mobile and mount state
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+      console.log('[UserMenu] Mobile detection (home):', { width: window.innerWidth, isMobile: mobile });
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Debug: log menu state
+  useEffect(() => {
+    if (isUserMenuOpen) {
+      console.log('[UserMenu] Menu opened (home):', { isMobile, mounted, hasRef: !!dropdownRef.current });
+      if (dropdownRef.current) {
+        const rect = dropdownRef.current.getBoundingClientRect();
+        const styles = window.getComputedStyle(dropdownRef.current);
+        console.log('[UserMenu] Menu element (home):', {
+          rect: { top: rect.top, left: rect.left, width: rect.width, height: rect.height },
+          styles: {
+            display: styles.display,
+            visibility: styles.visibility,
+            opacity: styles.opacity,
+            zIndex: styles.zIndex,
+            position: styles.position
+          }
+        });
+      }
+    }
+  }, [isUserMenuOpen, isMobile, mounted]);
   
   // Subscription gating
   const plan = subscription?.status === 'active' ? (subscription?.plan || 'free') : 'free';
@@ -1917,63 +1954,128 @@ export default function HomePage() {
                   <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
-                {/* User Dropdown Menu - Mobile: Full overlay, Desktop: Dropdown */}
-                <AnimatePresence>
-                  {isUserMenuOpen && (
-                    <>
-                      {/* Mobile: Backdrop overlay */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998] sm:hidden"
-                        onClick={() => setIsUserMenuOpen(false)}
-                      />
-                      
-                      {/* Menu - Mobile: Full width from top, Desktop: Dropdown */}
-                      <motion.div
-                        ref={dropdownRef}
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
-                        className="fixed top-14 left-0 right-0 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-64 bg-[#1a1a1a] border-b sm:border border-white/10 sm:rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
-                        style={{ 
-                          maxHeight: 'calc(100vh - 56px)' // Mobile: full height minus header
-                        }}
-                      >
-                      {/* User Info */}
-                      <div className="px-4 py-3 border-b border-white/5">
-                        <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                        <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
-                      </div>
-                      
-                      {/* Menu Items */}
-                      <div className="py-2">
-                        <MenuItem icon={FiGrid} label="Dashboard" onClick={() => router.push('/dashboard')} />
-                        <MenuItem icon={FiFolder} label="My CVs" onClick={() => router.push('/dashboard?tab=cvs')} />
-                        <MenuItem icon={FiBriefcase} label="Job Applications" onClick={() => router.push('/applications')} />
-                      </div>
-                      
-                      <div className="border-t border-white/5 py-2">
-                        <MenuItem icon={FiCreditCard} label="Subscription" onClick={() => router.push('/pricing')} badge={subBadge} />
-                        <MenuItem icon={FiSettings} label="Settings" onClick={() => router.push('/settings')} />
-                        <MenuItem icon={FiHelpCircle} label="Help & Support" onClick={() => router.push('/faq')} />
-                      </div>
-                      
-                      <div className="border-t border-white/5 py-2">
-                        <MenuItem 
-                          icon={FiLogOut} 
-                          label="Sign out" 
-                          onClick={() => signOut({ callbackUrl: '/' })}
-                          variant="danger"
-                        />
-                      </div>
-                      </motion.div>
-                    </>
-                  )}
-                </AnimatePresence>
+                {/* User Dropdown Menu */}
+                {mounted && isUserMenuOpen && (
+                  <>
+                    {/* Mobile: Portal menu - ALWAYS render via portal on mobile */}
+                    {isMobile && typeof document !== 'undefined' && createPortal(
+                      <AnimatePresence mode="wait">
+                        {isUserMenuOpen && (
+                          <>
+                            <motion.div
+                              key="backdrop"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                              style={{ zIndex: 99998 }}
+                              onClick={() => {
+                                console.log('[UserMenu] Backdrop clicked (home), closing menu');
+                                setIsUserMenuOpen(false);
+                              }}
+                            />
+                            <motion.div
+                              key="menu"
+                              ref={dropdownRef}
+                              initial={{ opacity: 0, y: -20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -20 }}
+                              transition={{ duration: 0.2 }}
+                              className="fixed top-14 left-0 right-0 bottom-0 bg-[#1a1a1a] border-b border-white/10 overflow-y-auto"
+                              style={{ 
+                                zIndex: 99999,
+                                position: 'fixed',
+                                top: '56px',
+                                left: 0,
+                                right: 0,
+                                bottom: 0
+                              }}
+                              onAnimationStart={() => console.log('[UserMenu] Menu animating in (home mobile portal)')}
+                              onAnimationComplete={() => console.log('[UserMenu] Menu visible (home mobile portal)', {
+                                rect: dropdownRef.current?.getBoundingClientRect(),
+                                styles: dropdownRef.current ? window.getComputedStyle(dropdownRef.current) : null
+                              })}
+                            >
+                              {/* User Info */}
+                              <div className="px-4 py-3 border-b border-white/5">
+                                <p className="font-medium text-sm">{user?.name || 'User'}</p>
+                                <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                              </div>
+                              
+                              {/* Menu Items */}
+                              <div className="py-2">
+                                <MenuItem icon={FiGrid} label="Dashboard" onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} />
+                                <MenuItem icon={FiFolder} label="My CVs" onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} />
+                                <MenuItem icon={FiBriefcase} label="Job Applications" onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} />
+                              </div>
+                              
+                              <div className="border-t border-white/5 py-2">
+                                <MenuItem icon={FiCreditCard} label="Subscription" onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} badge={subBadge} />
+                                <MenuItem icon={FiSettings} label="Settings" onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} />
+                                <MenuItem icon={FiHelpCircle} label="Help & Support" onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} />
+                              </div>
+                              
+                              <div className="border-t border-white/5 py-2">
+                                <MenuItem 
+                                  icon={FiLogOut} 
+                                  label="Sign out" 
+                                  onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
+                                  variant="danger"
+                                />
+                              </div>
+                            </motion.div>
+                          </>
+                        )}
+                      </AnimatePresence>,
+                      document.body
+                    )}
+                    
+                    {/* Desktop: Original dropdown */}
+                    {!isMobile && (
+                      <AnimatePresence>
+                        {isUserMenuOpen && (
+                          <motion.div
+                            ref={dropdownRef}
+                            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                            transition={{ duration: 0.15 }}
+                            className="absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
+                          >
+                            {/* User Info */}
+                            <div className="px-4 py-3 border-b border-white/5">
+                              <p className="font-medium text-sm">{user?.name || 'User'}</p>
+                              <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                            </div>
+                            
+                            {/* Menu Items */}
+                            <div className="py-2">
+                              <MenuItem icon={FiGrid} label="Dashboard" onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} />
+                              <MenuItem icon={FiFolder} label="My CVs" onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} />
+                              <MenuItem icon={FiBriefcase} label="Job Applications" onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} />
+                            </div>
+                            
+                            <div className="border-t border-white/5 py-2">
+                              <MenuItem icon={FiCreditCard} label="Subscription" onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} badge={subBadge} />
+                              <MenuItem icon={FiSettings} label="Settings" onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} />
+                              <MenuItem icon={FiHelpCircle} label="Help & Support" onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} />
+                            </div>
+                            
+                            <div className="border-t border-white/5 py-2">
+                              <MenuItem 
+                                icon={FiLogOut} 
+                                label="Sign out" 
+                                onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
+                                variant="danger"
+                              />
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </>
+                )}
               </div>
             ) : (
               <div className="flex items-center gap-2">
