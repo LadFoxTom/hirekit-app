@@ -27,7 +27,6 @@ export default function PricingPage() {
   const router = useRouter()
   const { t } = useLocale()
 
-
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
     if (!isUserMenuOpen) return
@@ -168,7 +167,7 @@ export default function PricingPage() {
                     <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
                   
-                  {/* User Dropdown Menu - Mobile: Full overlay, Desktop: Dropdown */}
+                  {/* User Dropdown Menu */}
                   <AnimatePresence>
                     {isUserMenuOpen && (
                       <>
@@ -182,17 +181,14 @@ export default function PricingPage() {
                           onClick={() => setIsUserMenuOpen(false)}
                         />
                         
-                        {/* Menu - Mobile: Full width from top, Desktop: Dropdown */}
+                        {/* Menu - Desktop: Original dropdown, Mobile: Full screen */}
                         <motion.div
                           ref={dropdownRef}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.2, ease: 'easeOut' }}
-                          className="fixed top-14 left-0 right-0 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-64 bg-[#1a1a1a] border-b sm:border border-white/10 sm:rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
-                          style={{ 
-                            maxHeight: 'calc(100vh - 56px)' // Mobile: full height minus header
-                          }}
+                          initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                          transition={{ duration: 0.15 }}
+                          className="fixed top-14 left-0 right-0 bottom-0 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:bottom-auto sm:mt-2 sm:w-64 bg-[#1a1a1a] border-b sm:border sm:border-white/10 sm:rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
                         >
                           {/* User Info */}
                           <div className="px-4 py-3 border-b border-white/5">
