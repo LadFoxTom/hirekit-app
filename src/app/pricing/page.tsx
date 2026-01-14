@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
@@ -26,6 +27,17 @@ export default function PricingPage() {
   const { isAuthenticated, user, subscription } = useAuth()
   const router = useRouter()
   const { t } = useLocale()
+  const [isMobile, setIsMobile] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Detect mobile and mount state
+  useEffect(() => {
+    setMounted(true)
+    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
@@ -57,6 +69,54 @@ export default function PricingPage() {
   const currency = getUserCurrency()
   const currencySymbol = currency === 'EUR' ? '€' : '$'
   const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free'
+  
+  // Render menu content (used in both mobile portal and desktop dropdown)
+  const renderMenuContent = () => (
+    <>
+      {/* User Info */}
+      <div className="px-4 py-3 border-b border-white/5">
+        <p className="font-medium text-sm">{user?.name || 'User'}</p>
+        <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+      </div>
+      
+      {/* Menu Items */}
+      <div className="py-2">
+        <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+          <FiGrid size={16} /> Dashboard
+        </button>
+        <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+          <FiFolder size={16} /> My CVs
+        </button>
+        <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+          <FiBriefcase size={16} /> Job Applications
+        </button>
+      </div>
+      
+      <div className="border-t border-white/5 py-2">
+        <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+          <FiCreditCard size={16} />
+          <span className="flex-1 text-left">Subscription</span>
+          <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
+        </button>
+        <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+          <FiSettings size={16} /> Settings
+        </button>
+        <button onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+          <FiHelpCircle size={16} /> Help & Support
+        </button>
+      </div>
+      
+      <div className="border-t border-white/5 py-2">
+        <button 
+          onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
+          className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+        >
+          <FiLogOut size={16} /> Sign out
+        </button>
+      </div>
+    </>
+  )
+  
   // Only show savings badges when monthly is selected, to avoid overlap when switching
   const showSavingsBadges = billingInterval === 'monthly'
 
@@ -168,73 +228,56 @@ export default function PricingPage() {
                   </button>
                   
                   {/* User Dropdown Menu */}
-                  <AnimatePresence>
-                    {isUserMenuOpen && (
-                      <>
-                        {/* Mobile: Backdrop overlay */}
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998] sm:hidden"
-                          onClick={() => setIsUserMenuOpen(false)}
-                        />
-                        
-                        {/* Menu - Desktop: Original dropdown, Mobile: Full screen */}
-                        <motion.div
-                          ref={dropdownRef}
-                          initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                          transition={{ duration: 0.15 }}
-                          className="fixed top-14 left-0 right-0 bottom-0 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:bottom-auto sm:mt-2 sm:w-64 bg-[#1a1a1a] border-b sm:border sm:border-white/10 sm:rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
-                        >
-                          {/* User Info */}
-                          <div className="px-4 py-3 border-b border-white/5">
-                            <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                            <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
-                          </div>
-                          
-                          {/* Menu Items */}
-                          <div className="py-2">
-                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                              <FiGrid size={16} /> Dashboard
-                            </button>
-                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                              <FiFolder size={16} /> My CVs
-                            </button>
-                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                              <FiBriefcase size={16} /> Job Applications
-                            </button>
-                          </div>
-                          
-                          <div className="border-t border-white/5 py-2">
-                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                              <FiCreditCard size={16} />
-                              <span className="flex-1 text-left">Subscription</span>
-                              <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
-                            </button>
-                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                              <FiSettings size={16} /> Settings
-                            </button>
-                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                              <FiHelpCircle size={16} /> Help & Support
-                            </button>
-                          </div>
-                          
-                          <div className="border-t border-white/5 py-2">
-                            <button 
-                              onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                              className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+                  {mounted && (
+                    <>
+                      {/* Mobile: Portal menu */}
+                      {isMobile && createPortal(
+                        <AnimatePresence>
+                          {isUserMenuOpen && (
+                            <>
+                              <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998]"
+                                onClick={() => setIsUserMenuOpen(false)}
+                              />
+                              <motion.div
+                                ref={dropdownRef}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.2 }}
+                                className="fixed top-14 left-0 right-0 bottom-0 bg-[#1a1a1a] border-b border-white/10 overflow-y-auto z-[9999]"
+                              >
+                                {renderMenuContent()}
+                              </motion.div>
+                            </>
+                          )}
+                        </AnimatePresence>,
+                        document.body
+                      )}
+                      
+                      {/* Desktop: Original dropdown */}
+                      {!isMobile && (
+                        <AnimatePresence>
+                          {isUserMenuOpen && (
+                            <motion.div
+                              ref={dropdownRef}
+                              initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                              transition={{ duration: 0.15 }}
+                              className="absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
                             >
-                              <FiLogOut size={16} /> Sign out
-                            </button>
-                          </div>
-                        </motion.div>
-                      </>
-                    )}
-                  </AnimatePresence>
+                              {renderMenuContent()}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      )}
+                    </>
+                  )}
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
