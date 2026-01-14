@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
@@ -22,14 +23,28 @@ export default function PricingPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const { isAuthenticated, user, subscription } = useAuth()
   const router = useRouter()
   const { t } = useLocale()
 
+  // Portal mount point for dropdown (to escape header's stacking context)
+  const [portalMounted, setPortalMounted] = useState(false)
+  useEffect(() => {
+    setPortalMounted(true)
+  }, [])
+
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
+    if (!isUserMenuOpen) return
+    
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      const clickedInsideButton = userMenuRef.current?.contains(target)
+      const clickedInsideDropdown = dropdownRef.current?.contains(target)
+      
+      if (!clickedInsideButton && !clickedInsideDropdown) {
+        console.log('[UserMenu] Click outside, closing dropdown')
         setIsUserMenuOpen(false)
       }
     }
@@ -39,7 +54,7 @@ export default function PricingPage() {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('touchstart', handleClickOutside)
     }
-  }, [])
+  }, [isUserMenuOpen])
 
   // Get user's currency (default to EUR)
   const getUserCurrency = () => {
@@ -162,66 +177,67 @@ export default function PricingPage() {
                     <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
                   
-                  {/* User Dropdown Menu */}
-                  <AnimatePresence>
-                    {isUserMenuOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                        transition={{ duration: 0.15 }}
-                        className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[100]"
-                        style={{ 
-                          position: 'fixed',
-                          zIndex: 100,
-                          maxWidth: 'calc(100vw - 2rem)',
-                          minWidth: '200px'
-                        }}
-                      >
-                        {/* User Info */}
-                        <div className="px-4 py-3 border-b border-white/5">
-                          <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                          <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
-                        </div>
-                        
-                        {/* Menu Items */}
-                        <div className="py-2">
-                          <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                            <FiGrid size={16} /> Dashboard
-                          </button>
-                          <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                            <FiFolder size={16} /> My CVs
-                          </button>
-                          <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                            <FiBriefcase size={16} /> Job Applications
-                          </button>
-                        </div>
-                        
-                        <div className="border-t border-white/5 py-2">
-                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiCreditCard size={16} />
-                          <span className="flex-1 text-left">Subscription</span>
-                          <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
-                        </button>
-                          <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                            <FiSettings size={16} /> Settings
-                          </button>
-                          <button onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                            <FiHelpCircle size={16} /> Help & Support
-                          </button>
-                        </div>
-                        
-                        <div className="border-t border-white/5 py-2">
-                          <button 
-                            onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
-                          >
-                            <FiLogOut size={16} /> Sign out
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* User Dropdown Menu - rendered via Portal to escape header stacking context */}
+                  {portalMounted && ReactDOM.createPortal(
+                    <AnimatePresence>
+                      {isUserMenuOpen && (
+                        <motion.div
+                          ref={dropdownRef}
+                          initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                          transition={{ duration: 0.15 }}
+                          className="fixed top-16 left-4 right-4 sm:right-4 sm:left-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden"
+                          style={{ zIndex: 9999 }}
+                          onAnimationStart={() => console.log('[UserMenu] Dropdown animating in')}
+                          onAnimationComplete={() => console.log('[UserMenu] Dropdown visible')}
+                        >
+                          {/* User Info */}
+                          <div className="px-4 py-3 border-b border-white/5">
+                            <p className="font-medium text-sm">{user?.name || 'User'}</p>
+                            <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                          </div>
+                          
+                          {/* Menu Items */}
+                          <div className="py-2">
+                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                              <FiGrid size={16} /> Dashboard
+                            </button>
+                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                              <FiFolder size={16} /> My CVs
+                            </button>
+                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                              <FiBriefcase size={16} /> Job Applications
+                            </button>
+                          </div>
+                          
+                          <div className="border-t border-white/5 py-2">
+                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                              <FiCreditCard size={16} />
+                              <span className="flex-1 text-left">Subscription</span>
+                              <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
+                            </button>
+                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                              <FiSettings size={16} /> Settings
+                            </button>
+                            <button onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                              <FiHelpCircle size={16} /> Help & Support
+                            </button>
+                          </div>
+                          
+                          <div className="border-t border-white/5 py-2">
+                            <button 
+                              onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
+                              className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+                            >
+                              <FiLogOut size={16} /> Sign out
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>,
+                    document.body
+                  )}
                 </div>
               ) : (
                 <div className="flex items-center gap-2">

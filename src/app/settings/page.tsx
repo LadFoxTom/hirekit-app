@@ -22,6 +22,7 @@ export default function SettingsPage() {
   const [isManagingSubscription, setIsManagingSubscription] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const [activeSection, setActiveSection] = useState<'profile' | 'subscription'>('profile')
   const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free'
 
@@ -50,8 +51,15 @@ export default function SettingsPage() {
 
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
+    if (!isUserMenuOpen) return;
+    
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      const clickedInsideButton = userMenuRef.current?.contains(target)
+      const clickedInsideDropdown = dropdownRef.current?.contains(target)
+      
+      if (!clickedInsideButton && !clickedInsideDropdown) {
+        console.log('[UserMenu] Click outside, closing dropdown (settings)')
         setIsUserMenuOpen(false)
       }
     }
@@ -61,7 +69,7 @@ export default function SettingsPage() {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('touchstart', handleClickOutside)
     }
-  }, [])
+  }, [isUserMenuOpen])
 
   useEffect(() => {
     const loadUserProfile = async () => {
@@ -208,17 +216,24 @@ export default function SettingsPage() {
               <AnimatePresence>
                 {isUserMenuOpen && (
                   <motion.div
+                    ref={dropdownRef}
                     initial={{ opacity: 0, y: 8, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                        className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[100]"
-                        style={{ 
-                          position: 'fixed',
-                          zIndex: 100,
-                          maxWidth: 'calc(100vw - 2rem)',
-                          minWidth: '200px'
-                        }}
+                    className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[9999]"
+                    style={{ 
+                      position: 'fixed',
+                      zIndex: 9999,
+                      maxWidth: 'calc(100vw - 2rem)',
+                      minWidth: '200px'
+                    }}
+                    onAnimationStart={() => console.log('[UserMenu] Dropdown animating in (settings)')}
+                    onAnimationComplete={() => console.log('[UserMenu] Dropdown visible (settings)', { 
+                      rect: dropdownRef.current?.getBoundingClientRect(),
+                      display: window.getComputedStyle(dropdownRef.current!).display,
+                      visibility: window.getComputedStyle(dropdownRef.current!).visibility
+                    })}
                   >
                     {/* User Info */}
                     <div className="px-4 py-3 border-b border-white/5">

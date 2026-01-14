@@ -119,20 +119,26 @@ export default function DashboardPage() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const userMenuRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free'
 
   // Close user menu when clicking outside (works for both mouse and touch)
   useEffect(() => {
+    if (!isUserMenuOpen) return;
+    
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      const clickedInsideButton = userMenuRef.current?.contains(target)
+      const clickedInsideDropdown = dropdownRef.current?.contains(target)
+      
+      if (!clickedInsideButton && !clickedInsideDropdown) {
+        console.log('[UserMenu] Click outside, closing dropdown (dashboard)')
         setIsUserMenuOpen(false)
       }
     }
     // Listen to both mouse and touch events for better mobile support
-    if (isUserMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-      document.addEventListener('touchstart', handleClickOutside)
-    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
@@ -388,17 +394,24 @@ export default function DashboardPage() {
               <AnimatePresence>
                 {isUserMenuOpen && (
                   <motion.div
+                    ref={dropdownRef}
                     initial={{ opacity: 0, y: 8, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[100]"
+                    className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[9999]"
                     style={{ 
                       position: 'fixed',
-                      zIndex: 100,
+                      zIndex: 9999,
                       maxWidth: 'calc(100vw - 2rem)',
                       minWidth: '200px'
                     }}
+                    onAnimationStart={() => console.log('[UserMenu] Dropdown animating in (dashboard)')}
+                    onAnimationComplete={() => console.log('[UserMenu] Dropdown visible (dashboard)', { 
+                      rect: dropdownRef.current?.getBoundingClientRect(),
+                      display: window.getComputedStyle(dropdownRef.current!).display,
+                      visibility: window.getComputedStyle(dropdownRef.current!).visibility
+                    })}
                   >
                     {/* User Info */}
                     <div className="px-4 py-3 border-b border-white/5">
