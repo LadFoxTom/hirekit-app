@@ -29,18 +29,32 @@ export default function PricingPage() {
 
   // Debug: log when menu state changes
   useEffect(() => {
-    console.log('[UserMenu] State changed (pricing):', { isUserMenuOpen, hasRef: !!dropdownRef.current })
+    console.log('[UserMenu] State changed (pricing):', { isUserMenuOpen, hasRef: !!dropdownRef.current, viewportWidth: window.innerWidth })
     if (isUserMenuOpen && dropdownRef.current) {
-      const rect = dropdownRef.current.getBoundingClientRect()
-      const styles = window.getComputedStyle(dropdownRef.current)
-      console.log('[UserMenu] Dropdown element info:', {
-        rect,
-        display: styles.display,
-        visibility: styles.visibility,
-        opacity: styles.opacity,
-        zIndex: styles.zIndex,
-        position: styles.position
-      })
+      setTimeout(() => {
+        const rect = dropdownRef.current!.getBoundingClientRect()
+        const styles = window.getComputedStyle(dropdownRef.current!)
+        console.log('[UserMenu] Dropdown element info:', {
+          rect: {
+            top: rect.top,
+            left: rect.left,
+            right: rect.right,
+            bottom: rect.bottom,
+            width: rect.width,
+            height: rect.height
+          },
+          viewport: {
+            width: window.innerWidth,
+            height: window.innerHeight
+          },
+          display: styles.display,
+          visibility: styles.visibility,
+          opacity: styles.opacity,
+          zIndex: styles.zIndex,
+          position: styles.position,
+          transform: styles.transform
+        })
+      }, 100)
     }
   }, [isUserMenuOpen])
 
@@ -196,21 +210,53 @@ export default function PricingPage() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.96 }}
                         transition={{ duration: 0.15 }}
-                        className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[9999]"
+                        className="fixed left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[9999]"
                         style={{ 
                           position: 'fixed',
-                          zIndex: 9999,
+                          top: '56px', // Directly below header (h-14 = 56px)
+                          zIndex: 99999, // Higher than header's z-50
                           maxWidth: 'calc(100vw - 2rem)',
-                          minWidth: '200px'
+                          minWidth: '200px',
+                          maxHeight: 'calc(100vh - 72px)', // Ensure it doesn't go below viewport
+                          overflowY: 'auto',
+                          willChange: 'transform, opacity' // Optimize for animation
                         }}
                         onAnimationStart={() => console.log('[UserMenu] Dropdown animating in (pricing)')}
                         onAnimationComplete={() => {
-                          console.log('[UserMenu] Dropdown visible (pricing)', { 
-                            rect: dropdownRef.current?.getBoundingClientRect(),
-                            display: dropdownRef.current ? window.getComputedStyle(dropdownRef.current).display : 'null',
-                            visibility: dropdownRef.current ? window.getComputedStyle(dropdownRef.current).visibility : 'null',
-                            opacity: dropdownRef.current ? window.getComputedStyle(dropdownRef.current).opacity : 'null'
-                          });
+                          if (dropdownRef.current) {
+                            const rect = dropdownRef.current.getBoundingClientRect()
+                            const styles = window.getComputedStyle(dropdownRef.current)
+                            const isVisible = rect.top >= 0 && rect.left >= 0 && 
+                                             rect.bottom <= window.innerHeight && 
+                                             rect.right <= window.innerWidth
+                            console.log('[UserMenu] Dropdown visible (pricing)', { 
+                              rect: {
+                                top: rect.top,
+                                left: rect.left,
+                                right: rect.right,
+                                bottom: rect.bottom,
+                                width: rect.width,
+                                height: rect.height
+                              },
+                              viewport: {
+                                width: window.innerWidth,
+                                height: window.innerHeight
+                              },
+                              isVisible,
+                              display: styles.display,
+                              visibility: styles.visibility,
+                              opacity: styles.opacity,
+                              zIndex: styles.zIndex,
+                              position: styles.position
+                            });
+                            if (!isVisible) {
+                              console.warn('[UserMenu] Dropdown is outside viewport!', {
+                                top: rect.top,
+                                bottom: rect.bottom,
+                                viewportHeight: window.innerHeight
+                              })
+                            }
+                          }
                         }}
                       >
                           {/* User Info */}
