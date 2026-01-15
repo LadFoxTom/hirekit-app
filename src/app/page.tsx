@@ -785,12 +785,25 @@ export default function HomePage() {
   const [cvZoom, setCvZoom] = useState(0.75);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   
-  // Load preferred artifact type from localStorage on mount
+  // Load preferred artifact type and activate splitscreen from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const preferred = localStorage.getItem('preferredArtifactType');
+      const activateSplitscreen = localStorage.getItem('activateSplitscreen');
+      
+      if (activateSplitscreen === 'true') {
+        // Activate splitscreen view (chat overview)
+        setIsConversationActive(true);
+        setIsSidebarOpen(true);
+        setActiveView('chat');
+        localStorage.removeItem('activateSplitscreen'); // Clear after use
+      }
+      
       if (preferred === 'letter') {
         setArtifactType('letter');
+        localStorage.removeItem('preferredArtifactType'); // Clear after use
+      } else if (preferred === 'cv') {
+        setArtifactType('cv');
         localStorage.removeItem('preferredArtifactType'); // Clear after use
       }
     }

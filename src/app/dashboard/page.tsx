@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
+import { useLocale } from '@/context/LocaleContext'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -101,6 +102,7 @@ function MenuItem({
 export default function DashboardPage() {
   const { isAuthenticated, user, subscription } = useAuth()
   const router = useRouter()
+  const { t } = useLocale()
   const [savedCVs, setSavedCVs] = useState<SavedCV[]>([])
   const [savedLetters, setSavedLetters] = useState<SavedLetter[]>([])
   const [loading, setLoading] = useState(true)
@@ -192,25 +194,35 @@ export default function DashboardPage() {
         }))
       ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()).slice(0, 5)
       
+      // Calculate average score only if there are CVs
+      const averageScore = cvs.length > 0 ? 85 : 0
+      
       setStats({
         totalCVs: cvs.length,
         totalLetters: letters.length,
         totalViews,
         totalDownloads,
-        averageScore: 85,
+        averageScore,
         recentActivity: allActivity
       })
     } catch (error) {
       console.error('Error fetching saved items:', error)
-      toast.error('Failed to load saved items')
+      toast.error(t('dashboard.failed_to_load'))
     } finally {
       setLoading(false)
     }
   }
 
-  const handleCreateNewCV = () => router.push('/')
+  const handleCreateNewCV = () => {
+    // Activate splitscreen view with CV and Letter both visible
+    localStorage.setItem('activateSplitscreen', 'true')
+    localStorage.setItem('preferredArtifactType', 'cv')
+    router.push('/')
+  }
+  
   const handleCreateNewLetter = () => {
-    // Set artifact type to letter in localStorage before navigating
+    // Activate splitscreen view with CV and Letter both visible
+    localStorage.setItem('activateSplitscreen', 'true')
     localStorage.setItem('preferredArtifactType', 'letter')
     router.push('/')
   }
@@ -252,11 +264,11 @@ export default function DashboardPage() {
         } else {
           setSavedLetters(prev => prev.filter(letter => letter.id !== itemToDelete.id))
         }
-        toast.success(`${itemToDelete.type === 'cv' ? 'CV' : 'Letter'} deleted`)
+        toast.success(itemToDelete.type === 'cv' ? t('dashboard.cv_deleted') : t('dashboard.letter_deleted'))
         fetchSavedItems()
       }
     } catch (error) {
-      toast.error(`Failed to delete ${itemToDelete.type}`)
+      toast.error(t('dashboard.failed_to_delete').replace('{type}', itemToDelete.type))
     } finally {
       setItemToDelete(null)
       setShowDeleteConfirmation(false)
@@ -318,11 +330,11 @@ export default function DashboardPage() {
         }),
       })
       if (response.ok) {
-        toast.success(`${type === 'cv' ? 'CV' : 'Letter'} duplicated`)
+        toast.success(type === 'cv' ? t('dashboard.cv_duplicated') : t('dashboard.letter_duplicated'))
         fetchSavedItems()
       }
     } catch (error) {
-      toast.error('Failed to duplicate')
+      toast.error(t('dashboard.failed_to_duplicate'))
     }
   }
 
@@ -593,9 +605,9 @@ export default function DashboardPage() {
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold">Dashboard</h1>
+                <h1 className="text-3xl font-bold">{t('dashboard.title')}</h1>
                 <p className="text-gray-400 mt-1">
-                  Welcome back, {user?.name?.split(' ')[0] || 'there'}! Manage your documents.
+                  {t('dashboard.welcome_back').replace('{name}', user?.name?.split(' ')[0] || 'there')}
                 </p>
               </div>
               <div className="flex gap-3">
@@ -604,14 +616,14 @@ export default function DashboardPage() {
                   className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors"
                 >
                   <FiMail size={16} />
-                  New Letter
+                  {t('dashboard.new_letter')}
                 </button>
                 <button
                   onClick={handleCreateNewCV}
                   className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-xl text-sm font-medium transition-colors"
                 >
                   <FiPlus size={16} />
-                  New CV
+                  {t('dashboard.new_cv')}
                 </button>
               </div>
             </div>
@@ -625,10 +637,10 @@ export default function DashboardPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
           >
             {[
-              { label: 'Total CVs', value: stats.totalCVs || 0, icon: FiFileText, color: 'blue' },
-              { label: 'Total Letters', value: stats.totalLetters || 0, icon: FiMail, color: 'green' },
-              { label: 'Downloads', value: stats.totalDownloads || 0, icon: FiDownload, color: 'purple' },
-              { label: 'Avg. Score', value: `${stats.averageScore || 0}%`, icon: FiAward, color: 'yellow' },
+              { label: t('dashboard.total_cvs'), value: stats.totalCVs || 0, icon: FiFileText, color: 'blue' },
+              { label: t('dashboard.total_letters'), value: stats.totalLetters || 0, icon: FiMail, color: 'green' },
+              { label: t('dashboard.downloads'), value: stats.totalDownloads || 0, icon: FiDownload, color: 'purple' },
+              { label: t('dashboard.avg_score'), value: `${stats.averageScore || 0}%`, icon: FiAward, color: 'yellow' },
             ].map((stat, idx) => (
               <div key={idx} className="bg-[#111111] border border-white/5 rounded-xl p-5">
                 <div className="flex items-center gap-3">
@@ -659,10 +671,10 @@ export default function DashboardPage() {
                     {/* Tabs */}
                     <div className="flex gap-1 bg-white/5 p-1 rounded-lg">
                       {[
-                        { id: 'all', label: 'All' },
-                        { id: 'cvs', label: 'CVs' },
-                        { id: 'letters', label: 'Letters' },
-                        { id: 'favorites', label: 'Favorites' },
+                        { id: 'all', label: t('dashboard.all') },
+                        { id: 'cvs', label: t('dashboard.cvs') },
+                        { id: 'letters', label: t('dashboard.letters') },
+                        { id: 'favorites', label: t('dashboard.favorites') },
                       ].map(tab => (
                         <button
                           key={tab.id}
@@ -684,7 +696,7 @@ export default function DashboardPage() {
                         <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                         <input
                           type="text"
-                          placeholder="Search..."
+                          placeholder={t('dashboard.search')}
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                           className="bg-white/5 border border-white/10 rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none focus:border-blue-500 w-48"
@@ -717,16 +729,16 @@ export default function DashboardPage() {
                   ) : getFilteredItems().length === 0 ? (
                     <div className="text-center py-16">
                       <FiFileText className="mx-auto h-12 w-12 text-gray-600 mb-4" />
-                      <h3 className="text-lg font-medium mb-2">No documents found</h3>
+                      <h3 className="text-lg font-medium mb-2">{t('dashboard.no_documents')}</h3>
                       <p className="text-gray-500 mb-6">
-                        {searchQuery ? 'Try a different search term' : 'Create your first document to get started'}
+                        {searchQuery ? t('dashboard.try_different_search') : t('dashboard.create_first_document')}
                       </p>
                       {!searchQuery && (
                         <button
                           onClick={handleCreateNewCV}
                           className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-sm font-medium"
                         >
-                          <FiPlus size={16} /> Create CV
+                          <FiPlus size={16} /> {t('dashboard.create_cv')}
                         </button>
                       )}
                     </div>
@@ -804,11 +816,11 @@ export default function DashboardPage() {
               <div className="bg-[#111111] border border-white/5 rounded-xl overflow-hidden">
                 <div className="px-4 py-3 border-b border-white/5 flex items-center gap-2">
                   <FiBell className="text-blue-400" size={16} />
-                  <h3 className="font-medium">Recent Activity</h3>
+                  <h3 className="font-medium">{t('dashboard.recent_activity')}</h3>
                 </div>
                 <div className="p-4">
                   {stats.recentActivity.length === 0 ? (
-                    <p className="text-sm text-gray-500 text-center py-4">No recent activity</p>
+                    <p className="text-sm text-gray-500 text-center py-4">{t('dashboard.no_recent_activity')}</p>
                   ) : (
                     <div className="space-y-4">
                       {stats.recentActivity.map((activity, idx) => (
@@ -834,7 +846,7 @@ export default function DashboardPage() {
               {/* Quick Actions */}
               <div className="bg-[#111111] border border-white/5 rounded-xl overflow-hidden">
                 <div className="px-4 py-3 border-b border-white/5">
-                  <h3 className="font-medium text-white">Quick Actions</h3>
+                  <h3 className="font-medium text-white">{t('dashboard.quick_actions')}</h3>
                 </div>
                 <div className="p-4 space-y-2">
                   <button
@@ -842,21 +854,21 @@ export default function DashboardPage() {
                     className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl hover:border-blue-500/40 transition-colors text-left"
                   >
                     <FiPlus className="text-blue-400 flex-shrink-0" size={18} />
-                    <span className="text-sm font-medium text-white">Create New CV</span>
+                    <span className="text-sm font-medium text-white">{t('dashboard.create_new_cv')}</span>
                   </button>
                   <button
                     onClick={handleCreateNewLetter}
                     className="w-full flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/5 rounded-xl hover:border-white/10 transition-colors text-left"
                   >
                     <FiMail className="text-gray-400 flex-shrink-0" size={18} />
-                    <span className="text-sm text-gray-300">Create Cover Letter</span>
+                    <span className="text-sm text-gray-300">{t('dashboard.create_cover_letter')}</span>
                   </button>
                   <button
                     onClick={() => router.push('/pricing')}
                     className="w-full flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/5 rounded-xl hover:border-white/10 transition-colors text-left"
                   >
                     <FiCreditCard className="text-gray-400 flex-shrink-0" size={18} />
-                    <span className="text-sm text-gray-300">Upgrade Plan</span>
+                    <span className="text-sm text-gray-300">{t('dashboard.upgrade_plan')}</span>
                   </button>
                 </div>
               </div>
@@ -873,10 +885,10 @@ export default function DashboardPage() {
           setItemToDelete(null)
         }}
         onConfirm={confirmDeleteItem}
-        title={`Delete ${itemToDelete?.type === 'cv' ? 'CV' : 'Letter'}`}
-        message={`Are you sure you want to delete this ${itemToDelete?.type}? This action cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t('dashboard.delete_confirmation_title').replace('{type}', itemToDelete?.type === 'cv' ? 'CV' : 'Letter')}
+        message={t('dashboard.delete_confirmation_message').replace('{type}', itemToDelete?.type || '')}
+        confirmText={t('dashboard.delete_button')}
+        cancelText={t('dashboard.cancel')}
         type="danger"
       />
     </div>
