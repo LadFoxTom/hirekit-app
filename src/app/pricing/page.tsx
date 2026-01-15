@@ -105,8 +105,6 @@ export default function PricingPage() {
     </>
   )
   
-  // Only show savings badges when monthly is selected, to avoid overlap when switching
-  const showSavingsBadges = billingInterval === 'monthly'
 
   const getPriceForInterval = (interval: string) => {
     switch (interval) {
@@ -355,10 +353,10 @@ export default function PricingPage() {
               className="text-center mb-16"
             >
               <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent leading-tight">
-                Simple, Transparent Pricing
+                {t('pricing.badge')}
               </h1>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto mt-4">
-                Choose the plan that works for you. Start free, upgrade when you need more.
+                {t('pricing.subtitle')}
               </p>
             </motion.div>
 
@@ -371,23 +369,19 @@ export default function PricingPage() {
             >
               <div className="bg-[#1a1a1a] rounded-xl p-1 border border-white/10 flex">
                 {Object.entries(BILLING_INTERVALS).map(([interval, config]) => (
-                  <div key={interval} className="relative">
-                    <button
-                      onClick={() => setBillingInterval(interval as any)}
-                      className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all ${
-                        billingInterval === interval
-                          ? 'bg-white text-black shadow-lg'
-                          : 'text-gray-400 hover:text-white'
-                      }`}
-                    >
-                      {config.label}
-                    </button>
-                    {showSavingsBadges && 'savings' in config && config.savings && billingInterval !== interval && (
-                      <span className="absolute -top-2 -right-2 text-[10px] bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-0.5 rounded-full font-medium">
-                        -{config.savings}%
-                      </span>
-                    )}
-                  </div>
+                  <button
+                    key={interval}
+                    onClick={() => setBillingInterval(interval as any)}
+                    className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all ${
+                      billingInterval === interval
+                        ? 'bg-white text-black shadow-lg'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    {interval === 'monthly' ? t('pricing.billing.monthly') : 
+                     interval === 'quarterly' ? t('pricing.billing.quarterly') : 
+                     t('pricing.billing.yearly')}
+                  </button>
                 ))}
               </div>
             </motion.div>
@@ -405,7 +399,7 @@ export default function PricingPage() {
                 {isAuthenticated && !isSubscribed && (
                   <div className="absolute top-0 right-0">
                     <div className="bg-emerald-500/90 text-white text-xs font-medium px-4 py-1.5 rounded-bl-xl">
-                      Your Current Plan
+                      {t('pricing.current_plan')}
                     </div>
                   </div>
                 )}
@@ -413,12 +407,12 @@ export default function PricingPage() {
                 <div className="relative z-10 flex flex-col flex-grow">
                   {/* Header section - fixed height */}
                   <div className="mb-6 min-h-[100px]">
-                    <h3 className="text-xl font-semibold text-white mb-2">Free</h3>
+                    <h3 className="text-xl font-semibold text-white mb-2">{t('pricing.plan.free')}</h3>
                     <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-bold text-white">€0</span>
-                      <span className="text-gray-500">/forever</span>
+                      <span className="text-gray-500">{t('pricing.per_forever')}</span>
                     </div>
-                    <p className="text-gray-400 mt-2 text-sm">Perfect for getting started</p>
+                    <p className="text-gray-400 mt-2 text-sm">{t('pricing.perfect_starting')}</p>
                   </div>
                   
                   {/* Features list - grows to fill space */}
@@ -431,11 +425,11 @@ export default function PricingPage() {
                     ))}
                     <li className="flex items-start gap-3">
                       <FiX className="text-gray-600 mt-0.5 flex-shrink-0" size={16} />
-                      <span className="text-gray-500 text-sm">PDF export</span>
+                      <span className="text-gray-500 text-sm">{t('pricing.comparison.pdf_export')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <FiX className="text-gray-600 mt-0.5 flex-shrink-0" size={16} />
-                      <span className="text-gray-500 text-sm">AI cover letter generation</span>
+                      <span className="text-gray-500 text-sm">{t('pricing.comparison.cover_letter_generator')}</span>
                     </li>
                   </ul>
                   
@@ -443,14 +437,14 @@ export default function PricingPage() {
                   <div className="mt-8">
                     {isAuthenticated && !isSubscribed ? (
                       <div className="w-full bg-emerald-500/20 text-emerald-400 py-3 px-6 rounded-xl font-medium text-center border border-emerald-500/30">
-                        ✓ Active
+                        {t('pricing.active')}
                       </div>
                     ) : (
                       <button
                         onClick={() => router.push('/')}
                         className="w-full bg-white/5 hover:bg-white/10 text-white py-3 px-6 rounded-xl font-medium transition-colors border border-white/10"
                       >
-                        Get Started Free
+                        {t('pricing.get_started_free')}
                       </button>
                     )}
                   </div>
@@ -467,7 +461,7 @@ export default function PricingPage() {
                 {/* Popular Badge */}
                 <div className="absolute top-0 right-0">
                   <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-medium px-4 py-1.5 rounded-bl-xl">
-                    Most Popular
+                    {t('pricing.most_popular')}
                   </div>
                 </div>
 
@@ -475,7 +469,7 @@ export default function PricingPage() {
                   {/* Header section - fixed height */}
                   <div className="mb-6 min-h-[100px]">
                     <h3 className="text-xl font-semibold text-white mb-2 flex items-center gap-2">
-                      Basic
+                      {t('pricing.plan.basic')}
                       <FiStar className="text-yellow-500" size={16} />
                     </h3>
                     <div className="flex items-baseline gap-1">
@@ -514,12 +508,12 @@ export default function PricingPage() {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                           </svg>
-                          Processing...
+                          {t('pricing.processing')}
                         </span>
                       ) : isSubscribed ? (
-                        '✓ Current Plan'
+                        t('pricing.current_plan_badge')
                       ) : (
-                        'Subscribe Now'
+                        t('pricing.start_trial')
                       )}
                     </button>
                   </div>
@@ -540,19 +534,19 @@ export default function PricingPage() {
             >
               <div className="flex items-center gap-2 text-gray-400">
                 <FiShield className="text-green-500" size={18} />
-                <span className="text-sm">Secure Payment</span>
+                <span className="text-sm">{t('pricing.trust_indicators.secure_payment')}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
                 <FiClock className="text-blue-500" size={18} />
-                <span className="text-sm">Cancel Anytime</span>
+                <span className="text-sm">{t('pricing.trust_indicators.cancel_anytime')}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
                 <FiZap className="text-yellow-500" size={18} />
-                <span className="text-sm">Instant Access</span>
+                <span className="text-sm">{t('pricing.trust_indicators.instant_access')}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
                 <FiCreditCard className="text-purple-500" size={18} />
-                <span className="text-sm">Powered by Stripe</span>
+                <span className="text-sm">{t('pricing.trust_indicators.powered_by_stripe')}</span>
               </div>
             </motion.div>
 
@@ -563,49 +557,49 @@ export default function PricingPage() {
               transition={{ delay: 0.5 }}
               className="max-w-3xl mx-auto"
             >
-              <h2 className="text-2xl font-bold text-center mb-8">What's Included</h2>
+              <h2 className="text-2xl font-bold text-center mb-8">{t('pricing.comparison.title')}</h2>
               <div className="bg-[#111111] rounded-2xl border border-white/10 overflow-hidden">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-white/10">
-                      <th className="text-left p-4 text-gray-400 font-medium">Feature</th>
-                      <th className="text-center p-4 text-gray-400 font-medium">Free</th>
-                      <th className="text-center p-4 text-gray-400 font-medium">Basic</th>
+                      <th className="text-left p-4 text-gray-400 font-medium">{t('pricing.comparison.feature')}</th>
+                      <th className="text-center p-4 text-gray-400 font-medium">{t('pricing.plan.free')}</th>
+                      <th className="text-center p-4 text-gray-400 font-medium">{t('pricing.plan.basic')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
                     <tr>
-                      <td className="p-4 text-gray-300">CV Builder</td>
+                      <td className="p-4 text-gray-300">{t('pricing.comparison.cv_builder')}</td>
                       <td className="p-4 text-center"><FiCheck className="inline text-gray-500" /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
                     <tr>
-                      <td className="p-4 text-gray-300">Number of CVs</td>
+                      <td className="p-4 text-gray-300">{t('pricing.comparison.number_of_cvs')}</td>
                       <td className="p-4 text-center text-gray-500">1</td>
-                      <td className="p-4 text-center text-blue-400">Unlimited</td>
+                      <td className="p-4 text-center text-blue-400">{t('pricing.comparison.unlimited')}</td>
                     </tr>
                     <tr>
-                      <td className="p-4 text-gray-300">Templates</td>
-                      <td className="p-4 text-center text-gray-500">Basic</td>
-                      <td className="p-4 text-center text-blue-400">All 20+</td>
+                      <td className="p-4 text-gray-300">{t('pricing.comparison.templates')}</td>
+                      <td className="p-4 text-center text-gray-500">{t('pricing.comparison.basic_templates')}</td>
+                      <td className="p-4 text-center text-blue-400">{t('pricing.comparison.all_templates')}</td>
                     </tr>
                     <tr>
-                      <td className="p-4 text-gray-300">AI Chat Assistant</td>
-                      <td className="p-4 text-center text-gray-500">Limited</td>
-                      <td className="p-4 text-center text-blue-400">Unlimited</td>
+                      <td className="p-4 text-gray-300">{t('pricing.comparison.ai_chat_assistant')}</td>
+                      <td className="p-4 text-center text-gray-500">{t('pricing.comparison.limited')}</td>
+                      <td className="p-4 text-center text-blue-400">{t('pricing.comparison.unlimited')}</td>
                     </tr>
                     <tr>
-                      <td className="p-4 text-gray-300">PDF Export</td>
+                      <td className="p-4 text-gray-300">{t('pricing.comparison.pdf_export')}</td>
                       <td className="p-4 text-center"><FiX className="inline text-gray-600" /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
                     <tr>
-                      <td className="p-4 text-gray-300">Cover Letter Generator</td>
+                      <td className="p-4 text-gray-300">{t('pricing.comparison.cover_letter_generator')}</td>
                       <td className="p-4 text-center"><FiX className="inline text-gray-600" /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
                     <tr>
-                      <td className="p-4 text-gray-300">Job Matching</td>
+                      <td className="p-4 text-gray-300">{t('pricing.comparison.job_matching')}</td>
                       <td className="p-4 text-center"><FiX className="inline text-gray-600" /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
@@ -621,15 +615,15 @@ export default function PricingPage() {
               transition={{ delay: 0.6 }}
               className="text-center mt-16"
             >
-              <h2 className="text-2xl font-bold mb-4">Ready to create your professional CV?</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('pricing.cta.title')}</h2>
               <p className="text-gray-400 mb-8">
-                Join thousands of professionals who trust LadderFox for their career success.
+                {t('pricing.cta.subtitle')}
               </p>
               <button
                 onClick={() => router.push('/')}
                 className="bg-white text-black px-8 py-3 rounded-xl font-medium hover:bg-gray-100 transition-colors"
               >
-                Start Building Your CV
+                {t('pricing.cta.button')}
               </button>
             </motion.div>
           </div>
