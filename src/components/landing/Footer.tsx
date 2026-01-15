@@ -19,8 +19,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 const navigation = {
   product: [
     { nameKey: 'footer.product.cv_builder', href: '/' },
-    { nameKey: 'footer.product.letter_builder', href: '/letter' },
-    { nameKey: 'footer.product.cv_guide', href: '/cv-guide' },
+    { nameKey: 'footer.product.letter_builder', href: '/', onClick: () => localStorage.setItem('preferredArtifactType', 'letter') },
     { nameKey: 'footer.product.pricing', href: '/pricing' },
   ],
   company: [
@@ -90,6 +89,7 @@ export default function Footer() {
                 <li key={item.nameKey}>
                   <Link
                     href={item.href}
+                    onClick={item.onClick}
                     className="text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {t(item.nameKey)}

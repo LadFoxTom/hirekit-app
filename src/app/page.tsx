@@ -784,6 +784,17 @@ export default function HomePage() {
   const [artifactType, setArtifactType] = useState<ArtifactType>(null);
   const [cvZoom, setCvZoom] = useState(0.75);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  
+  // Load preferred artifact type from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const preferred = localStorage.getItem('preferredArtifactType');
+      if (preferred === 'letter') {
+        setArtifactType('letter');
+        localStorage.removeItem('preferredArtifactType'); // Clear after use
+      }
+    }
+  }, []);
   const [activeView, setActiveView] = useState<'chat' | 'editor' | 'photos' | 'templates'>('chat');
   const [photos, setPhotos] = useState<string[]>([]); // Array of photo URLs
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);

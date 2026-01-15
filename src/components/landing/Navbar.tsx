@@ -45,17 +45,8 @@ export default function Navbar() {
         name: t('nav.tools_menu'), 
         href: '#',
         dropdown: [
-          { name: t('nav.quick_cv'), href: '/quick-cv' },
           { name: t('nav.builder'), href: '/' },
-          { name: t('nav.motivational_letter_builder'), href: '/letter' }
-        ]
-      },
-      { 
-        name: t('common.guide'), 
-        href: '/cv-guide',
-        dropdown: [
-          { name: t('nav.guide'), href: '/cv-guide' },
-          { name: t('nav.letter'), href: '/letter-guide' }
+          { name: t('nav.motivational_letter_builder'), href: '/', onClick: () => localStorage.setItem('preferredArtifactType', 'letter') }
         ]
       },
       { name: t('common.pricing'), href: '/pricing' },
@@ -124,6 +115,7 @@ export default function Navbar() {
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
+                            onClick={dropdownItem.onClick}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors"
                           >
                             {dropdownItem.name}
@@ -240,8 +232,11 @@ export default function Navbar() {
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
+                            onClick={() => {
+                              if (dropdownItem.onClick) dropdownItem.onClick()
+                              setIsMenuOpen(false)
+                            }}
                             className="block px-8 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors text-sm"
-                            onClick={() => setIsMenuOpen(false)}
                           >
                             {dropdownItem.name}
                           </Link>

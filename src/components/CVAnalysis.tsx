@@ -405,7 +405,7 @@ export default function CVAnalysis({ cvData, onAnalysisComplete, className = '' 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3">
             <button
-              onClick={() => window.open('/cv-guide', '_blank')}
+              onClick={() => window.open('/faq', '_blank')}
               className="flex-1 bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-xl hover:bg-gray-200 transition-all duration-200 flex items-center justify-center border border-gray-200"
             >
               <FaEye className="mr-2" />

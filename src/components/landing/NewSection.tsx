@@ -121,7 +121,8 @@ export default function NewSection() {
                 </div>
               </div>
               <Link
-                href="/letter"
+                href="/"
+                onClick={() => localStorage.setItem('preferredArtifactType', 'letter')}
                 className="group inline-flex items-center justify-center bg-white hover:bg-gray-100 text-purple-600 font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <span>{t('landing.letter_promo.create_letter')}</span>

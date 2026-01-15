@@ -209,7 +209,11 @@ export default function DashboardPage() {
   }
 
   const handleCreateNewCV = () => router.push('/')
-  const handleCreateNewLetter = () => router.push('/letter')
+  const handleCreateNewLetter = () => {
+    // Set artifact type to letter in localStorage before navigating
+    localStorage.setItem('preferredArtifactType', 'letter')
+    router.push('/')
+  }
 
   const handleEditCV = (cv: SavedCV) => {
     const cvDataWithFlag = {
@@ -228,7 +232,8 @@ export default function DashboardPage() {
 
   const handleEditLetter = (letter: SavedLetter) => {
     localStorage.setItem('letterData', JSON.stringify(letter.content))
-    router.push('/letter')
+    localStorage.setItem('preferredArtifactType', 'letter')
+    router.push('/')
   }
 
   const handleDeleteItem = (id: string, type: 'cv' | 'letter') => {
