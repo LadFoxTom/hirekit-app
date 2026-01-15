@@ -280,7 +280,7 @@ const EnhancedCVChatInterface: React.FC<EnhancedCVChatInterfaceProps> = ({
             <div className="bg-gray-100 text-gray-900 px-4 py-2 rounded-lg">
               <div className="flex items-center space-x-2">
                 <FaSpinner className="animate-spin text-sm" />
-                <span className="text-sm">AI is thinking...</span>
+                <span className="text-sm">{t('chat.ai_thinking')}</span>
               </div>
             </div>
           </div>

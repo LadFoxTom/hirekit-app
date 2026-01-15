@@ -2214,7 +2214,7 @@ export default function HomePage() {
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiImage size={14} className="text-blue-400" />
-                    <span className="text-sm">Photos</span>
+                    <span className="text-sm">{t('common.photos')}</span>
                     {photos.length > 0 && (
                       <span className="ml-auto px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-xs rounded-full">
                         {photos.length}
@@ -2441,7 +2441,7 @@ export default function HomePage() {
                     }`}
                   >
                     <FiImage size={14} className="text-blue-400" />
-                    Photos
+                    {t('common.photos')}
                     {photos.length > 0 && (
                       <span className="ml-1 px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-xs rounded-full">
                         {photos.length}
@@ -2592,7 +2592,7 @@ export default function HomePage() {
                             className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 border border-dashed border-white/10 rounded-lg text-sm text-gray-300 hover:text-white transition-colors"
                           >
                             <FiUpload size={16} />
-                            Upload Photos
+                            {t('common.upload_photos')}
                           </button>
                           <p className="text-xs text-gray-500 mt-2 text-center">JPG, PNG up to 4MB each. You can upload multiple photos.</p>
                         </div>
@@ -2600,7 +2600,7 @@ export default function HomePage() {
                         {/* Photo Gallery */}
                         {photos.length > 0 && (
                           <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4">
-                            <h3 className="text-sm font-medium mb-3">Your Photos ({photos.length})</h3>
+                            <h3 className="text-sm font-medium mb-3">{t('common.your_photos')} ({photos.length})</h3>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                               {photos.map((photo, index) => (
                                 <div
@@ -3011,7 +3011,7 @@ export default function HomePage() {
                               ? "Processing file..." 
                               : attachedFile 
                               ? "Describe what you'd like to do..." 
-                              : "Continue the conversation..."
+                              : t('chat.continue_conversation')
                           }
                           rows={1}
                           className="flex-1 bg-transparent px-4 py-3 pr-24 resize-none focus:outline-none placeholder-gray-500 text-sm"
@@ -3409,6 +3409,7 @@ export default function HomePage() {
 
 // Message Bubble Component
 function MessageBubble({ message }: { message: Message }) {
+  const { t } = useLocale();
   const isUser = message.role === 'user';
   
   return (
@@ -3441,7 +3442,7 @@ function MessageBubble({ message }: { message: Message }) {
                 <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                 <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
-              <span className="text-sm text-gray-400">Thinking...</span>
+              <span className="text-sm text-gray-400">{t('chat.thinking')}</span>
             </div>
           ) : (
             <div className="text-sm leading-relaxed whitespace-pre-wrap">

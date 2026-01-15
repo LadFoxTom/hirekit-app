@@ -201,7 +201,7 @@ export function ChatInterface({
             <div className="max-w-[85%] sm:max-w-[80%] rounded-lg p-3 bg-gray-100 text-gray-800 rounded-bl-none">
               <div className="flex items-center space-x-2">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-                <span className="text-sm">AI is thinking...</span>
+                <span className="text-sm">{t('chat.ai_thinking')}</span>
               </div>
             </div>
           </div>

@@ -24,6 +24,9 @@
   "common.pricing": "Pricing",
   "common.faq": "FAQ",
   "common.guide": "Guide",
+  "common.photos": "Photos",
+  "common.upload_photos": "Upload Photos",
+  "common.your_photos": "Your Photos",
   
   "pricing.title": "Choose the plan that works for you",
   "pricing.subtitle": "Start free and upgrade when you need more features. No hidden fees, cancel anytime.",
@@ -739,6 +742,10 @@
   "chat.processing": "Processing",
   "chat.skip": "Skip",
   "chat.placeholder": "Type your message...",
+  "chat.thinking": "Thinking...",
+  "chat.ai_thinking": "AI is thinking...",
+  "chat.continue_conversation": "Continue the conversation...",
+  "chat.new_conversation": "New conversation",
   
   "intro.welcome": "Welcome to the Advanced CV Builder! I'll help you create a professional CV step by step. Let's start by gathering your basic information.",
   "intro.welcome_with_quick_cv": "Welcome to the Advanced CV Builder! I'll help you create a professional CV step by step. For a faster experience, try our Basic CV Builder at /quick-cv",
