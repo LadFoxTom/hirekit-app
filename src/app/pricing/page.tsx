@@ -63,43 +63,43 @@ export default function PricingPage() {
   const renderMenuContent = () => (
     <>
       {/* User Info */}
-      <div className="px-4 py-3 border-b border-white/10">
-        <p className="font-semibold text-base text-white leading-tight mb-1">{user?.name || 'User'}</p>
-        <p className="text-xs text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
+      <div className="px-3 py-2.5 border-b border-white/10">
+        <p className="font-semibold text-sm text-white leading-tight mb-0.5 truncate">{user?.name || 'User'}</p>
+        <p className="text-[11px] text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
       </div>
       
       {/* Navigation Items */}
       <div className="py-1.5">
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          className={`w-full flex items-center min-h-[44px] px-3 py-2.5 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
           style={pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
           aria-current={pathname === '/dashboard' ? 'page' : undefined}
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            <FiGrid size={20} />
+          <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <FiGrid size={18} />
           </div>
-          <span className="flex-1 text-left ml-3">{t('nav.dashboard')}</span>
+          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.dashboard')}</span>
         </button>
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} 
-          className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150"
+          className="w-full flex items-center min-h-[44px] px-3 py-2.5 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150"
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            <FiFolder size={20} />
+          <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <FiFolder size={18} />
           </div>
-          <span className="flex-1 text-left ml-3">{t('nav.my_cvs')}</span>
+          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.my_cvs')}</span>
         </button>
         <button 
           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }} 
           disabled
           aria-disabled="true"
-          className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-400 opacity-50 cursor-not-allowed"
+          className="w-full flex items-center min-h-[44px] px-3 py-2.5 text-sm font-medium text-gray-400 opacity-50 cursor-not-allowed"
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            <FiBriefcase size={20} className="opacity-50" />
+          <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <FiBriefcase size={18} className="opacity-50" />
           </div>
-          <span className="flex-1 text-left ml-3">{t('nav.job_applications')}</span>
+          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.job_applications_short')}</span>
         </button>
       </div>
       
@@ -107,37 +107,37 @@ export default function PricingPage() {
       <div className="border-t border-white/10 py-1.5">
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          className={`w-full flex items-center min-h-[44px] px-3 py-2.5 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
           style={pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
           aria-current={pathname === '/pricing' ? 'page' : undefined}
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            <FiCreditCard size={20} />
+          <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <FiCreditCard size={18} />
           </div>
-          <span className="flex-1 text-left ml-3">{t('nav.subscription')}</span>
-          <span className="ml-auto px-2.5 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full flex-shrink-0">{subBadge}</span>
+          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.subscription')}</span>
+          <span className="ml-1.5 px-1.5 py-0.5 bg-gray-700/50 text-gray-300 text-[10px] font-medium rounded-full flex-shrink-0">{subBadge}</span>
         </button>
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          className={`w-full flex items-center min-h-[44px] px-3 py-2.5 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
           style={pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
           aria-current={pathname === '/settings' ? 'page' : undefined}
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            <FiSettings size={20} />
+          <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <FiSettings size={18} />
           </div>
-          <span className="flex-1 text-left ml-3">{t('nav.settings')}</span>
+          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.settings')}</span>
         </button>
         <button 
           onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} 
-          className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
+          className={`w-full flex items-center min-h-[44px] px-3 py-2.5 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 ${pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
           style={pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
           aria-current={pathname === '/faq' ? 'page' : undefined}
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            <FiHelpCircle size={20} />
+          <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <FiHelpCircle size={18} />
           </div>
-          <span className="flex-1 text-left ml-3">{t('nav.help_support')}</span>
+          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.help_support_short')}</span>
         </button>
       </div>
       
@@ -145,12 +145,12 @@ export default function PricingPage() {
       <div className="border-t border-white/10 py-1.5">
         <button 
           onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-          className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150"
+          className="w-full flex items-center min-h-[44px] px-3 py-2.5 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150"
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            <FiLogOut size={20} />
+          <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+            <FiLogOut size={18} />
           </div>
-          <span className="flex-1 text-left ml-3">{t('nav.sign_out')}</span>
+          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.sign_out')}</span>
         </button>
       </div>
     </>
@@ -273,7 +273,7 @@ export default function PricingPage() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.96 }}
                         transition={{ duration: 0.15 }}
-                        className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
+                        className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
                       >
                         {renderMenuContent()}
                       </motion.div>

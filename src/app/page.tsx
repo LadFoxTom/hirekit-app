@@ -1967,12 +1967,12 @@ export default function HomePage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
                     >
                       {/* User Info */}
-                      <div className="px-4 py-3 border-b border-white/10">
-                        <p className="font-semibold text-base text-white leading-tight mb-1">{user?.name || 'User'}</p>
-                        <p className="text-xs text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
+                      <div className="px-3 py-2.5 border-b border-white/10">
+                        <p className="font-semibold text-sm text-white leading-tight mb-0.5 truncate">{user?.name || 'User'}</p>
+                        <p className="text-[11px] text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                       </div>
                       
                       {/* Navigation Items */}
@@ -1990,7 +1990,7 @@ export default function HomePage() {
                         />
                         <MenuItem 
                           icon={FiBriefcase} 
-                          label={t('nav.job_applications')} 
+                          label={t('nav.job_applications_short')} 
                           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
                           disabled={true}
                         />
@@ -2013,7 +2013,7 @@ export default function HomePage() {
                         />
                         <MenuItem 
                           icon={FiHelpCircle} 
-                          label={t('nav.help_support')} 
+                          label={t('nav.help_support_short')} 
                           onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
                           isActive={pathname === '/faq'}
                         />
@@ -2110,7 +2110,7 @@ export default function HomePage() {
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                       <FiBriefcase size={20} className="opacity-50" />
                     </div>
-                    <span className="flex-1 text-left ml-3">{t('nav.job_applications')}</span>
+                    <span className="flex-1 text-left ml-3">{t('nav.job_applications_short')}</span>
                   </button>
                 </div>
                 
@@ -2148,7 +2148,7 @@ export default function HomePage() {
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                       <FiHelpCircle size={20} />
                     </div>
-                    <span className="flex-1 text-left ml-3">{t('nav.help_support')}</span>
+                    <span className="flex-1 text-left ml-3">{t('nav.help_support_short')}</span>
                   </button>
                 </div>
                 
@@ -3662,7 +3662,7 @@ function MenuItem({
       aria-disabled={disabled}
       aria-current={isActive ? 'page' : undefined}
       className={`
-        w-full flex items-center min-h-[44px] px-4 py-3
+        w-full flex items-center min-h-[44px] px-3 py-2.5
         text-sm font-medium transition-all duration-150
         relative
         ${disabled 
@@ -3685,16 +3685,16 @@ function MenuItem({
       style={isActive ? { borderLeftWidth: '3px' } : undefined}
     >
       {/* Icon container - fixed width for alignment */}
-      <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-        <Icon size={20} className={disabled ? 'opacity-50' : ''} />
+      <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+        <Icon size={18} className={disabled ? 'opacity-50' : ''} />
       </div>
       
-      {/* Label - flex-grow to fill space */}
-      <span className="flex-1 text-left ml-3">{label}</span>
+      {/* Label - flex-grow to fill space with overflow handling */}
+      <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{label}</span>
       
-      {/* Badge - right-aligned */}
+      {/* Badge - right-aligned, absolute positioned to not affect width */}
       {badge && (
-        <span className="ml-auto px-2.5 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full flex-shrink-0">
+        <span className="ml-1.5 px-1.5 py-0.5 bg-gray-700/50 text-gray-300 text-[10px] font-medium rounded-full flex-shrink-0">
           {badge}
         </span>
       )}
