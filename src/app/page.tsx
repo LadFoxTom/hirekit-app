@@ -2533,16 +2533,28 @@ export default function HomePage() {
               className="h-[calc(100vh-56px)] flex"
             >
               {/* Left Pane: Chat or Editor */}
-              <div className={`flex flex-col ${isArtifactFullscreen ? 'hidden' : 'w-full lg:w-[45%]'} border-r border-white/5`}>
+              <div className={`flex flex-col ${isArtifactFullscreen ? 'hidden' : 'w-full lg:w-[45%]'}`} style={{ borderRight: '1px solid var(--border-subtle)' }}>
                 {/* View Toggle (Chat/Editor/Photos) */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+                <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => setActiveView('chat')}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                      activeView === 'chat' 
-                        ? 'bg-white/10 text-white' 
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    }`}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                    style={{
+                      backgroundColor: activeView === 'chat' ? 'var(--bg-hover)' : 'transparent',
+                      color: activeView === 'chat' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (activeView !== 'chat') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeView !== 'chat') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
                   >
                     <FiSend size={14} />
                     Chat
@@ -2550,11 +2562,23 @@ export default function HomePage() {
                   {isPro && (
                     <button
                       onClick={() => setActiveView('editor')}
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                        activeView === 'editor' 
-                          ? 'bg-white/10 text-white' 
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      }`}
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                      style={{
+                        backgroundColor: activeView === 'editor' ? 'var(--bg-hover)' : 'transparent',
+                        color: activeView === 'editor' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeView !== 'editor') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeView !== 'editor') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
                     >
                       <FiAward size={14} className="text-purple-400" />
                       Editor
@@ -2563,11 +2587,23 @@ export default function HomePage() {
                   )}
                   <button
                     onClick={() => setActiveView('photos')}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                      activeView === 'photos' 
-                        ? 'bg-white/10 text-white' 
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    }`}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                    style={{
+                      backgroundColor: activeView === 'photos' ? 'var(--bg-hover)' : 'transparent',
+                      color: activeView === 'photos' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (activeView !== 'photos') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeView !== 'photos') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
                   >
                     <FiImage size={14} className="text-blue-400" />
                     {t('common.photos')}
@@ -2579,11 +2615,23 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={() => setActiveView('templates')}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                      activeView === 'templates' 
-                        ? 'bg-white/10 text-white' 
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    }`}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                    style={{
+                      backgroundColor: activeView === 'templates' ? 'var(--bg-hover)' : 'transparent',
+                      color: activeView === 'templates' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (activeView !== 'templates') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeView !== 'templates') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
                   >
                     <FiGrid size={14} className="text-teal-400" />
                     Templates
@@ -2594,15 +2642,24 @@ export default function HomePage() {
                   /* ============ PHOTOS VIEW ============ */
                   <div className="flex-1 overflow-hidden flex flex-col">
                     {/* Photos Header */}
-                    <div className="px-4 py-3 border-b border-white/5">
+                    <div className="px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                       <div className="flex items-center justify-between">
-                        <h2 className="text-sm font-medium flex items-center gap-2">
+                        <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiImage size={16} className="text-blue-400" />
                           Photo Management
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
-                          className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                          style={{ color: 'var(--text-tertiary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title="Back to chat"
                         >
                           <FiX size={16} />
@@ -2614,11 +2671,11 @@ export default function HomePage() {
                     <div className="flex-1 overflow-y-auto p-4">
                       <div className="max-w-2xl mx-auto space-y-4">
                         {/* Photo Toggle */}
-                        <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4">
+                        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
                           <div className="flex items-center justify-between">
                             <div>
-                              <h3 className="text-sm font-medium mb-1">Show Photo on CV</h3>
-                              <p className="text-xs text-gray-500">Toggle photo visibility on your CV</p>
+                              <h3 className="text-sm font-medium mb-1" style={{ color: 'var(--text-primary)' }}>Show Photo on CV</h3>
+                              <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Toggle photo visibility on your CV</p>
                             </div>
                             <button
                               onClick={() => {
@@ -2649,8 +2706,8 @@ export default function HomePage() {
                         </div>
 
                         {/* Upload New Photo */}
-                        <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4">
-                          <h3 className="text-sm font-medium mb-3">Add New Photo</h3>
+                        <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
+                          <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-primary)' }}>Add New Photo</h3>
                           <button
                             onClick={() => {
                               const input = document.createElement('input');
@@ -2718,27 +2775,50 @@ export default function HomePage() {
                               };
                               input.click();
                             }}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 border border-dashed border-white/10 rounded-lg text-sm text-gray-300 hover:text-white transition-colors"
+                            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm transition-colors"
+                            style={{
+                              backgroundColor: 'var(--bg-tertiary)',
+                              border: '1px dashed var(--border-medium)',
+                              color: 'var(--text-secondary)',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                              e.currentTarget.style.color = 'var(--text-primary)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                              e.currentTarget.style.color = 'var(--text-secondary)';
+                            }}
                           >
                             <FiUpload size={16} />
                             {t('common.upload_photos')}
                           </button>
-                          <p className="text-xs text-gray-500 mt-2 text-center">JPG, PNG up to 4MB each. You can upload multiple photos.</p>
+                          <p className="text-xs mt-2 text-center" style={{ color: 'var(--text-tertiary)' }}>JPG, PNG up to 4MB each. You can upload multiple photos.</p>
                         </div>
 
                         {/* Photo Gallery */}
                         {photos.length > 0 && (
-                          <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4">
-                            <h3 className="text-sm font-medium mb-3">{t('common.your_photos')} ({photos.length})</h3>
+                          <div className="rounded-xl p-4" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
+                            <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-primary)' }}>{t('common.your_photos')} ({photos.length})</h3>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                               {photos.map((photo, index) => (
                                 <div
                                   key={index}
-                                  className={`relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
-                                    selectedPhotoIndex === index
-                                      ? 'border-blue-500 ring-2 ring-blue-500/20'
-                                      : 'border-white/10 hover:border-white/20'
-                                  }`}
+                                  className="relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all"
+                                  style={{
+                                    borderColor: selectedPhotoIndex === index ? '#3b82f6' : 'var(--border-medium)',
+                                    boxShadow: selectedPhotoIndex === index ? '0 0 0 2px rgba(59, 130, 246, 0.2)' : 'none',
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    if (selectedPhotoIndex !== index) {
+                                      e.currentTarget.style.borderColor = 'var(--border-strong)';
+                                    }
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    if (selectedPhotoIndex !== index) {
+                                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                                    }
+                                  }}
                                   onClick={() => {
                                     isManualSelectionRef.current = true;
                                     setSelectedPhotoIndex(index);
@@ -2805,7 +2885,7 @@ export default function HomePage() {
                               ))}
                             </div>
                             {selectedPhotoIndex !== null && (
-                              <p className="text-xs text-gray-500 mt-3 text-center">
+                              <p className="text-xs mt-3 text-center" style={{ color: 'var(--text-tertiary)' }}>
                                 Photo {selectedPhotoIndex + 1} is currently selected and will appear on your CV
                               </p>
                             )}
@@ -2814,12 +2894,12 @@ export default function HomePage() {
 
                         {/* Photo Settings */}
                         {selectedPhotoIndex !== null && photos[selectedPhotoIndex] && (
-                          <div className="bg-[#1a1a1a] border border-white/5 rounded-xl p-4 space-y-4">
-                            <h3 className="text-sm font-medium">Photo Settings</h3>
+                          <div className="rounded-xl p-4 space-y-4" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
+                            <h3 className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Photo Settings</h3>
                             
                             {/* Shape Selector */}
                             <div>
-                              <label className="text-xs text-gray-400 mb-2 block">Shape</label>
+                              <label className="text-xs mb-2 block" style={{ color: 'var(--text-tertiary)' }}>Shape</label>
                               <div className="flex gap-2">
                                 {(['circle', 'square', 'rounded'] as const).map((shape) => (
                                   <button
@@ -2833,11 +2913,24 @@ export default function HomePage() {
                                         }
                                       });
                                     }}
-                                    className={`flex-1 px-3 py-2 rounded-lg border transition-colors ${
-                                      (cvData.layout?.photoShape || 'circle') === shape
-                                        ? 'border-blue-500 bg-blue-500/10 text-blue-400'
-                                        : 'border-white/10 text-gray-400 hover:border-white/20 hover:text-white'
-                                    }`}
+                                    className="flex-1 px-3 py-2 rounded-lg border transition-colors"
+                                    style={{
+                                      borderColor: (cvData.layout?.photoShape || 'circle') === shape ? '#3b82f6' : 'var(--border-medium)',
+                                      backgroundColor: (cvData.layout?.photoShape || 'circle') === shape ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
+                                      color: (cvData.layout?.photoShape || 'circle') === shape ? '#60a5fa' : 'var(--text-tertiary)',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      if ((cvData.layout?.photoShape || 'circle') !== shape) {
+                                        e.currentTarget.style.borderColor = 'var(--border-strong)';
+                                        e.currentTarget.style.color = 'var(--text-primary)';
+                                      }
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      if ((cvData.layout?.photoShape || 'circle') !== shape) {
+                                        e.currentTarget.style.borderColor = 'var(--border-medium)';
+                                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                                      }
+                                    }}
                                   >
                                     <div className="flex items-center justify-center gap-2">
                                       {shape === 'circle' && (
@@ -2865,7 +2958,7 @@ export default function HomePage() {
                             {/* Photo Size Control */}
                             <div>
                               <div className="flex justify-between items-center mb-2">
-                                <label className="text-xs text-gray-400">Photo Size</label>
+                                <label className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Photo Size</label>
                                 <span className="text-xs text-blue-400 font-medium">{cvData.layout?.photoSize ?? 60}px</span>
                               </div>
                               <input
@@ -2883,19 +2976,20 @@ export default function HomePage() {
                                     }
                                   });
                                 }}
-                                className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                style={{ backgroundColor: 'var(--bg-tertiary)' }}
                               />
-                              <div className="flex justify-between text-xs text-gray-500 mt-1">
+                              <div className="flex justify-between text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
                                 <span>Small (40px)</span>
                                 <span>Large (120px)</span>
                               </div>
                             </div>
 
                             {/* Border Controls */}
-                            <div className="space-y-3 pt-3 border-t border-white/5">
+                            <div className="space-y-3 pt-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                               {/* Border Color */}
                               <div>
-                                <label className="text-xs text-gray-400 mb-2 block">Border Color</label>
+                                <label className="text-xs mb-2 block" style={{ color: 'var(--text-tertiary)' }}>Border Color</label>
                                 <div className="flex items-center gap-3">
                                   <input
                                     type="color"
@@ -2924,7 +3018,18 @@ export default function HomePage() {
                                       });
                                     }}
                                     placeholder="#3b82f6"
-                                    className="flex-1 px-3 py-2 bg-[#0a0a0a] border border-white/10 rounded-md text-sm font-mono text-gray-300 focus:outline-none focus:border-blue-500"
+                                    className="flex-1 px-3 py-2 rounded-md text-sm font-mono focus:outline-none"
+                                    style={{
+                                      backgroundColor: 'var(--bg-tertiary)',
+                                      border: '1px solid var(--border-medium)',
+                                      color: 'var(--text-primary)',
+                                    }}
+                                    onFocus={(e) => {
+                                      e.currentTarget.style.borderColor = '#3b82f6';
+                                    }}
+                                    onBlur={(e) => {
+                                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                                    }}
                                   />
                                 </div>
                               </div>
@@ -2932,7 +3037,7 @@ export default function HomePage() {
                               {/* Border Width */}
                               <div>
                                 <div className="flex justify-between items-center mb-2">
-                                  <label className="text-xs text-gray-400">Border Width</label>
+                                  <label className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Border Width</label>
                                   <span className="text-xs text-blue-400 font-medium">{cvData.layout?.photoBorderWidth ?? 0}px</span>
                                 </div>
                                 <input
@@ -2950,9 +3055,10 @@ export default function HomePage() {
                                       }
                                     });
                                   }}
-                                  className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                  className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                  style={{ backgroundColor: 'var(--bg-tertiary)' }}
                                 />
-                                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                <div className="flex justify-between text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
                                   <span>No Border</span>
                                   <span>Thick (8px)</span>
                                 </div>
@@ -2961,8 +3067,8 @@ export default function HomePage() {
 
                             {/* Position Controls */}
                             <div>
-                              <label className="text-xs text-gray-400 mb-2 block">Position</label>
-                              <div className="bg-[#0a0a0a] rounded-lg p-3">
+                              <label className="text-xs mb-2 block" style={{ color: 'var(--text-tertiary)' }}>Position</label>
+                              <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                                 {/* 9-point grid for positioning */}
                                 <div className="grid grid-cols-3 gap-1 mb-2">
                                   {[
@@ -2993,11 +3099,21 @@ export default function HomePage() {
                                             }
                                           });
                                         }}
-                                        className={`aspect-square rounded border transition-all ${
-                                          isSelected
-                                            ? 'border-blue-500 bg-blue-500/20'
-                                            : 'border-white/10 hover:border-white/30'
-                                        }`}
+                                        className="aspect-square rounded border transition-all"
+                                        style={{
+                                          borderColor: isSelected ? '#3b82f6' : 'var(--border-medium)',
+                                          backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.2)' : 'transparent',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                          if (!isSelected) {
+                                            e.currentTarget.style.borderColor = 'var(--border-strong)';
+                                          }
+                                        }}
+                                        onMouseLeave={(e) => {
+                                          if (!isSelected) {
+                                            e.currentTarget.style.borderColor = 'var(--border-medium)';
+                                          }
+                                        }}
                                         title={pos.label}
                                       >
                                         {isSelected && (
@@ -3011,9 +3127,9 @@ export default function HomePage() {
                                 </div>
                                 
                                 {/* Fine-tune sliders */}
-                                <div className="space-y-2 pt-2 border-t border-white/5">
+                                <div className="space-y-2 pt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                                   <div>
-                                    <div className="flex justify-between text-xs text-gray-500 mb-1">
+                                    <div className="flex justify-between text-xs mb-1" style={{ color: 'var(--text-tertiary)' }}>
                                       <span>Horizontal</span>
                                       <span>{cvData.layout?.photoPositionX ?? 50}%</span>
                                     </div>
@@ -3031,11 +3147,12 @@ export default function HomePage() {
                                           }
                                         });
                                       }}
-                                      className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                      className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                      style={{ backgroundColor: 'var(--bg-tertiary)' }}
                                     />
                                   </div>
                                   <div>
-                                    <div className="flex justify-between text-xs text-gray-500 mb-1">
+                                    <div className="flex justify-between text-xs mb-1" style={{ color: 'var(--text-tertiary)' }}>
                                       <span>Vertical</span>
                                       <span>{cvData.layout?.photoPositionY ?? 50}%</span>
                                     </div>
@@ -3053,7 +3170,8 @@ export default function HomePage() {
                                           }
                                         });
                                       }}
-                                      className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                      className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                      style={{ backgroundColor: 'var(--bg-tertiary)' }}
                                     />
                                   </div>
                                 </div>
@@ -3062,8 +3180,8 @@ export default function HomePage() {
 
                             {/* Preview */}
                             <div>
-                              <label className="text-xs text-gray-400 mb-2 block">Preview</label>
-                              <div className="bg-[#0a0a0a] rounded-lg p-4 flex justify-center">
+                              <label className="text-xs mb-2 block" style={{ color: 'var(--text-tertiary)' }}>Preview</label>
+                              <div className="rounded-lg p-4 flex justify-center" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                                 <div
                                   className={`${
                                     // Match CV photo size classes exactly - same as sidebar photo
@@ -3125,9 +3243,9 @@ export default function HomePage() {
                     </div>
 
                 {/* Input Area */}
-                <div className="border-t border-white/5 p-4">
+                <div className="p-4" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <div className="max-w-2xl mx-auto">
-                    <div className="bg-[#1a1a1a] rounded-xl border border-white/10 overflow-hidden">
+                    <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-medium)' }}>
                       {/* Textarea row with buttons */}
                       <div className="relative flex items-center">
                         <textarea
@@ -3143,8 +3261,12 @@ export default function HomePage() {
                               : t('chat.continue_conversation')
                           }
                           rows={1}
-                          className="flex-1 bg-transparent px-4 py-3 pr-24 resize-none focus:outline-none placeholder-gray-500 text-sm"
-                          style={{ minHeight: '48px', maxHeight: '120px' }}
+                          className="flex-1 bg-transparent px-4 py-3 pr-24 resize-none focus:outline-none text-sm"
+                          style={{ 
+                            minHeight: '48px', 
+                            maxHeight: '120px',
+                            color: 'var(--text-primary)',
+                          }}
                           disabled={isProcessing || isUploading}
                         />
                         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1 z-10">
@@ -3158,13 +3280,26 @@ export default function HomePage() {
                           <button
                             onClick={handleAttachmentClick}
                             disabled={isUploading || isProcessing}
-                            className={`p-2 flex items-center justify-center rounded-lg transition-colors ${
-                              isUploading 
-                                ? 'text-blue-400 animate-pulse' 
+                            className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                            style={{
+                              color: isUploading 
+                                ? '#60a5fa' 
                                 : attachedFile
-                                ? 'text-blue-400 hover:bg-white/5'
-                                : 'text-gray-400 hover:text-white hover:bg-white/5'
-                            }`}
+                                ? '#60a5fa'
+                                : 'var(--text-tertiary)',
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!isUploading && !isProcessing) {
+                                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                                e.currentTarget.style.color = attachedFile ? '#60a5fa' : 'var(--text-primary)';
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!isUploading && !isProcessing) {
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                                e.currentTarget.style.color = attachedFile ? '#60a5fa' : 'var(--text-tertiary)';
+                              }
+                            }}
                             title="Upload CV/Resume"
                           >
                             <FiPaperclip size={14} />
@@ -3172,11 +3307,25 @@ export default function HomePage() {
                           <button
                             onClick={() => handleSubmit()}
                             disabled={(!inputValue.trim() && !attachedFile) || isProcessing || isUploading}
-                            className={`p-2 flex items-center justify-center rounded-lg transition-all ${
-                              (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
-                                ? 'bg-white text-black hover:bg-gray-200'
-                                : 'bg-white/10 text-gray-500'
-                            }`}
+                            className="p-2 flex items-center justify-center rounded-lg transition-all"
+                            style={{
+                              backgroundColor: (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
+                                ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff')
+                                : 'var(--bg-hover)',
+                              color: (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
+                                ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#ffffff' : '#000000')
+                                : 'var(--text-disabled)',
+                            }}
+                            onMouseEnter={(e) => {
+                              if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
+                                e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#1d4ed8' : '#f3f4f6';
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
+                                e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff';
+                              }
+                            }}
                           >
                             <FiSend size={16} />
                           </button>
@@ -3185,16 +3334,25 @@ export default function HomePage() {
                       {/* Attached file indicator */}
                       {attachedFile && (
                         <div className="px-3 pb-2">
-                          <div className="flex items-center gap-2 px-2.5 py-2 bg-white/5 rounded-lg border border-white/10">
+                          <div className="flex items-center gap-2 px-2.5 py-2 rounded-lg" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-medium)' }}>
                             <div className="w-7 h-7 rounded-md bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center flex-shrink-0">
                               <FiFileText size={12} className="text-white" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs text-gray-300 truncate">{attachedFile.name}</p>
+                              <p className="text-xs truncate" style={{ color: 'var(--text-secondary)' }}>{attachedFile.name}</p>
                             </div>
                             <button
                               onClick={handleRemoveAttachment}
-                              className="p-1 text-gray-500 hover:text-white hover:bg-white/10 rounded transition-colors"
+                              className="p-1 rounded transition-colors"
+                              style={{ color: 'var(--text-tertiary)' }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color = 'var(--text-primary)';
+                                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = 'var(--text-tertiary)';
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                              }}
                             >
                               <FiX size={12} />
                             </button>
@@ -3209,15 +3367,24 @@ export default function HomePage() {
                   /* ============ TEMPLATES VIEW ============ */
                   <div className="flex-1 overflow-hidden flex flex-col">
                     {/* Templates Header */}
-                    <div className="px-4 py-3 border-b border-white/5">
+                    <div className="px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                       <div className="flex items-center justify-between">
-                        <h2 className="text-sm font-medium flex items-center gap-2">
+                        <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiGrid size={16} className="text-teal-400" />
                           CV Templates
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
-                          className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                          style={{ color: 'var(--text-tertiary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title="Back to chat"
                         >
                           <FiX size={16} />
@@ -3244,16 +3411,25 @@ export default function HomePage() {
                   /* ============ EDITOR VIEW ============ */
                   <div className="flex-1 overflow-hidden flex flex-col">
                     {/* Editor Header */}
-                    <div className="px-4 py-3 border-b border-white/5">
+                    <div className="px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                       <div className="flex items-center justify-between">
-                        <h2 className="text-sm font-medium flex items-center gap-2">
+                        <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiAward size={16} className="text-purple-400" />
                           CV Editor
                           <span className="text-[10px] px-1.5 py-0.5 bg-purple-500/20 text-purple-400 rounded font-medium">PRO</span>
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 rounded-lg transition-colors"
+                          style={{ color: 'var(--text-tertiary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title="Back to chat"
                         >
                           <FiX size={16} />
@@ -3282,31 +3458,57 @@ export default function HomePage() {
               </div>
 
               {/* Artifact Pane */}
-              <div className={`flex flex-col bg-[#111111] ${
+              <div className={`flex flex-col ${
                 isArtifactFullscreen ? 'w-full' : 'hidden lg:flex lg:w-[55%]'
-              }`}>
+              }`}
+              style={{ backgroundColor: 'var(--bg-secondary)' }}
+              >
                 {/* Artifact Header */}
-                <div className="h-12 border-b border-white/5 flex items-center justify-between px-4">
+                <div className="h-12 flex items-center justify-between px-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   <div className="flex items-center gap-3">
                     {/* Tab Switcher */}
                     <button
                       onClick={() => setArtifactType('cv')}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                        artifactType === 'cv' 
-                          ? 'bg-white/10 text-white' 
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      }`}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                      style={{
+                        backgroundColor: artifactType === 'cv' ? 'var(--bg-hover)' : 'transparent',
+                        color: artifactType === 'cv' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (artifactType !== 'cv') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (artifactType !== 'cv') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
                     >
                       <FiFileText size={14} />
                       <span>CV</span>
                     </button>
                     <button
                       onClick={() => setArtifactType('letter')}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                        artifactType === 'letter' 
-                          ? 'bg-white/10 text-white' 
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      }`}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                      style={{
+                        backgroundColor: artifactType === 'letter' ? 'var(--bg-hover)' : 'transparent',
+                        color: artifactType === 'letter' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (artifactType !== 'letter') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (artifactType !== 'letter') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
                     >
                       <FiMail size={14} />
                       <span>Letter</span>
@@ -3315,7 +3517,8 @@ export default function HomePage() {
                     onClick={() => {
                       toast(t('toast.jobs_coming_soon'));
                     }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors text-gray-500 cursor-not-allowed opacity-60"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors cursor-not-allowed opacity-60"
+                    style={{ color: 'var(--text-disabled)' }}
                     title={t('toast.jobs_coming_soon')}
                     >
                       <FiBriefcase size={14} />
@@ -3554,24 +3757,48 @@ function MessageBubble({ message }: { message: Message }) {
             <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-[10px] font-bold">
               LF
             </div>
-            <span className="text-xs text-gray-500">LadderFox</span>
+            <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>LadderFox</span>
           </div>
         )}
         
         {/* Message Content */}
-        <div className={`px-4 py-3 rounded-2xl ${
-          isUser 
-            ? 'bg-blue-600 text-white' 
-            : 'bg-[#1a1a1a] text-gray-100'
-        }`}>
+        <div 
+          className="px-4 py-3 rounded-2xl"
+          style={{
+            backgroundColor: isUser 
+              ? '#2563eb' 
+              : 'var(--bg-elevated)',
+            color: isUser 
+              ? '#ffffff' 
+              : 'var(--text-primary)',
+          }}
+        >
           {message.isStreaming ? (
             <div className="flex items-center gap-2">
               <div className="flex gap-1">
-                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <span 
+                  className="w-2 h-2 rounded-full animate-bounce" 
+                  style={{ 
+                    animationDelay: '0ms',
+                    backgroundColor: 'var(--text-tertiary)',
+                  }} 
+                />
+                <span 
+                  className="w-2 h-2 rounded-full animate-bounce" 
+                  style={{ 
+                    animationDelay: '150ms',
+                    backgroundColor: 'var(--text-tertiary)',
+                  }} 
+                />
+                <span 
+                  className="w-2 h-2 rounded-full animate-bounce" 
+                  style={{ 
+                    animationDelay: '300ms',
+                    backgroundColor: 'var(--text-tertiary)',
+                  }} 
+                />
               </div>
-              <span className="text-sm text-gray-400">{t('chat.thinking')}</span>
+              <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>{t('chat.thinking')}</span>
             </div>
           ) : (
             <div className="text-sm leading-relaxed whitespace-pre-wrap">
@@ -3601,7 +3828,7 @@ function FormattedMessage({ content }: { content: string }) {
         if (line.startsWith('- ') || line.startsWith('• ')) {
           return (
             <div key={idx} className="flex gap-2 ml-2">
-              <span className="text-gray-400">•</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>•</span>
               <span>{line.slice(2)}</span>
             </div>
           );

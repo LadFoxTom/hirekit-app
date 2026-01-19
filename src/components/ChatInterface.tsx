@@ -154,16 +154,16 @@ export function ChatInterface({
       <div className="flex flex-col h-96">
         <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
           <div className="flex justify-start">
-            <div className="max-w-[80%] rounded-lg p-3 bg-gray-100 text-gray-800 rounded-bl-none">
+            <div className="max-w-[80%] rounded-lg p-3 rounded-bl-none" style={{ backgroundColor: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>
               <p className="whitespace-pre-wrap">Loading chat...</p>
             </div>
           </div>
         </div>
-        <div className="border-t p-4 bg-white">
+        <div className="border-t p-4" style={{ borderColor: 'var(--border-subtle)', backgroundColor: 'var(--bg-primary)' }}>
           <div className="flex space-x-2">
-            <div className="flex-1 border p-2 rounded-md bg-gray-100 h-16"></div>
+            <div className="flex-1 border p-2 rounded-md h-16" style={{ backgroundColor: 'var(--bg-tertiary)', borderColor: 'var(--border-medium)' }}></div>
             <div className="flex flex-col space-y-2">
-              <div className="px-4 py-2 bg-gray-300 rounded-md text-white w-16 h-8"></div>
+              <div className="px-4 py-2 rounded-md w-16 h-8" style={{ backgroundColor: 'var(--bg-elevated)' }}></div>
             </div>
           </div>
         </div>
@@ -186,9 +186,17 @@ export function ChatInterface({
             <div
               className={`max-w-[85%] sm:max-w-[80%] rounded-lg p-3 sm:p-3 ${
                 message.role === 'user'
-                  ? 'bg-blue-600 text-white rounded-br-none'
-                  : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                  ? 'rounded-br-none'
+                  : 'rounded-bl-none'
               }`}
+              style={{
+                backgroundColor: message.role === 'user'
+                  ? '#2563eb'
+                  : 'var(--bg-elevated)',
+                color: message.role === 'user'
+                  ? '#ffffff'
+                  : 'var(--text-primary)',
+              }}
             >
               <p className="whitespace-pre-wrap text-sm sm:text-sm leading-relaxed break-words">
                 {message.role === 'assistant' ? t(message.content) : message.content}
@@ -198,9 +206,9 @@ export function ChatInterface({
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="max-w-[85%] sm:max-w-[80%] rounded-lg p-3 bg-gray-100 text-gray-800 rounded-bl-none">
+            <div className="max-w-[85%] sm:max-w-[80%] rounded-lg p-3 rounded-bl-none" style={{ backgroundColor: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>
               <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2" style={{ borderColor: '#2563eb' }}></div>
                 <span className="text-sm">{t('chat.ai_thinking')}</span>
               </div>
             </div>
@@ -210,7 +218,7 @@ export function ChatInterface({
       </div>
 
       {/* Mobile-Optimized Input Area (fixed at bottom) */}
-      <div className="border-t border-gray-200 bg-white">
+      <div style={{ borderTop: '1px solid var(--border-subtle)', backgroundColor: 'var(--bg-primary)' }}>
         <div className="px-2 py-3 sm:py-2">
           {/* AI Analysis Button */}
           {onAIAnalysis && messages.length > 2 && (
@@ -233,7 +241,7 @@ export function ChatInterface({
                 )}
               </button>
               {remainingTokens !== undefined && (
-                <div className="text-xs text-gray-500">
+                <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
                   {remainingTokens === Infinity ? (
                     <span className="text-green-600">Unlimited tokens (Development)</span>
                   ) : (
@@ -246,8 +254,8 @@ export function ChatInterface({
           
           {/* AI Analysis Result */}
           {aiAnalysisResult && (
-            <div className="mb-2 p-2 bg-blue-50 border border-blue-200 rounded-lg">
-              <div className="text-xs text-blue-800">
+            <div className="mb-2 p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-medium)' }}>
+              <div className="text-xs" style={{ color: 'var(--text-primary)' }}>
                 <strong>AI Analysis:</strong>
                 {aiAnalysisResult.recommendations && (
                   <div className="mt-1">
@@ -269,9 +277,23 @@ export function ChatInterface({
                value={input}
                onChange={(e) => setInput(e.target.value)}
                placeholder={t('chat.placeholder')}
-               className="flex-1 px-3 py-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm touch-manipulation"
+               className="flex-1 px-3 py-2 rounded-lg resize-none focus:outline-none text-sm touch-manipulation"
                rows={4}
-               style={{ minHeight: '80px', maxHeight: '200px' }}
+               style={{ 
+                 minHeight: '80px', 
+                 maxHeight: '200px',
+                 border: '1px solid var(--border-medium)',
+                 backgroundColor: 'var(--bg-input)',
+                 color: 'var(--text-primary)',
+               }}
+               onFocus={(e) => {
+                 e.currentTarget.style.borderColor = '#2563eb';
+                 e.currentTarget.style.boxShadow = '0 0 0 2px rgba(37, 99, 235, 0.2)';
+               }}
+               onBlur={(e) => {
+                 e.currentTarget.style.borderColor = 'var(--border-medium)';
+                 e.currentTarget.style.boxShadow = 'none';
+               }}
                onKeyDown={(e) => {
                  if (e.key === 'Enter' && !e.shiftKey) {
                    e.preventDefault()
@@ -282,7 +304,21 @@ export function ChatInterface({
              <button
                type="submit"
                disabled={!input.trim() || isLoading}
-               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+               className="px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+               style={{
+                 backgroundColor: (!input.trim() || isLoading) ? 'var(--bg-hover)' : '#2563eb',
+                 color: (!input.trim() || isLoading) ? 'var(--text-disabled)' : '#ffffff',
+               }}
+               onMouseEnter={(e) => {
+                 if (input.trim() && !isLoading) {
+                   e.currentTarget.style.backgroundColor = '#1d4ed8';
+                 }
+               }}
+               onMouseLeave={(e) => {
+                 if (input.trim() && !isLoading) {
+                   e.currentTarget.style.backgroundColor = '#2563eb';
+                 }
+               }}
              >
                {isLoading ? (
                  <FaSpinner className="animate-spin" />
@@ -295,7 +331,22 @@ export function ChatInterface({
                  type="button"
                  onClick={handleSkip}
                  disabled={isLoading}
-                 className="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                 className="px-3 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                 style={{
+                   backgroundColor: isLoading ? 'var(--bg-hover)' : 'var(--bg-elevated)',
+                   color: isLoading ? 'var(--text-disabled)' : 'var(--text-primary)',
+                   border: '1px solid var(--border-medium)',
+                 }}
+                 onMouseEnter={(e) => {
+                   if (!isLoading) {
+                     e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                   }
+                 }}
+                 onMouseLeave={(e) => {
+                   if (!isLoading) {
+                     e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                   }
+                 }}
                  title="Skip this question"
                >
                  <FaForward />
