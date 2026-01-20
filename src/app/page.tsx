@@ -2341,16 +2341,17 @@ export default function HomePage() {
               animate={{ x: 0 }}
               exit={{ x: 280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-14 right-0 bottom-0 w-[280px] z-40 overflow-y-auto lg:hidden"
+              className="fixed top-14 right-0 bottom-0 z-40 overflow-y-auto lg:hidden"
               style={{
                 backgroundColor: 'var(--bg-elevated)',
                 borderLeft: '1px solid var(--border-subtle)',
+                width: '80px',
               }}
             >
-              <div className="p-4 space-y-4">
+              <div className="p-4 space-y-2">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Select Language</h2>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Language</h2>
                   <button
                     onClick={() => setIsLanguageMenuOpen(false)}
                     className="p-2 flex items-center justify-center rounded-lg transition-colors"
@@ -2365,7 +2366,7 @@ export default function HomePage() {
                     }}
                     aria-label="Close language menu"
                   >
-                    <FiX size={20} />
+                    <FiX size={18} />
                   </button>
                 </div>
 
@@ -2389,10 +2390,9 @@ export default function HomePage() {
                           setLanguage(lang.code as any);
                           setIsLanguageMenuOpen(false);
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left"
+                        className="w-full flex items-center justify-center p-3 rounded-lg transition-colors"
                         style={{
                           backgroundColor: language === lang.code ? 'var(--bg-hover)' : 'transparent',
-                          color: 'var(--text-primary)',
                         }}
                         onMouseEnter={(e) => {
                           if (language !== lang.code) {
@@ -2404,6 +2404,7 @@ export default function HomePage() {
                             e.currentTarget.style.backgroundColor = 'transparent';
                           }
                         }}
+                        title={lang.name}
                       >
                         {flagSrc ? (
                           <img 
@@ -2411,22 +2412,18 @@ export default function HomePage() {
                             alt={`${lang.code.toUpperCase()} flag`}
                             className="rounded object-cover"
                             style={{ 
-                              width: '24px',
-                              height: '24px',
-                              minWidth: '24px',
-                              minHeight: '24px',
-                              maxWidth: '24px',
-                              maxHeight: '24px',
+                              width: '20px',
+                              height: '20px',
+                              minWidth: '20px',
+                              minHeight: '20px',
+                              maxWidth: '20px',
+                              maxHeight: '20px',
                               display: 'block',
                               flexShrink: 0
                             }}
                           />
                         ) : (
-                          <span style={{ fontSize: '24px' }}>🏳️</span>
-                        )}
-                        <span className="flex-1 text-sm font-medium">{lang.name}</span>
-                        {language === lang.code && (
-                          <span style={{ color: '#3b82f6', fontSize: '18px' }}>✓</span>
+                          <span style={{ fontSize: '20px' }}>🏳️</span>
                         )}
                       </button>
                     );
