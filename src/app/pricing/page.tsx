@@ -368,13 +368,30 @@ export default function PricingPage() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => router.push('/auth/login')}
-                    className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
+                    className="px-4 py-2 text-sm transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
                   >
                     {t('nav.sign_in')}
                   </button>
                   <button
                     onClick={() => router.push('/auth/signup')}
-                    className="px-4 py-2 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                    className="px-4 py-2 text-sm font-medium rounded-lg transition-colors"
+                    style={{ 
+                      backgroundColor: 'var(--bg-elevated)',
+                      color: 'var(--text-primary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                    }}
                   >
                     {t('nav.get_started')}
                   </button>
@@ -730,10 +747,10 @@ export default function PricingPage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center mb-16"
             >
-              <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent leading-tight">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight" style={{ color: 'var(--text-heading)' }}>
                 {t('pricing.badge')}
               </h1>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto mt-4">
+              <p className="text-lg max-w-2xl mx-auto mt-4" style={{ color: 'var(--text-secondary)' }}>
                 {t('pricing.subtitle')}
               </p>
             </motion.div>
@@ -745,16 +762,29 @@ export default function PricingPage() {
               transition={{ delay: 0.1 }}
               className="flex justify-center mb-12"
             >
-              <div className="bg-[#1a1a1a] rounded-xl p-1 border border-white/10 flex">
+              <div className="rounded-xl p-1 flex" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 {Object.entries(BILLING_INTERVALS).map(([interval, config]) => (
                   <button
                     key={interval}
                     onClick={() => setBillingInterval(interval as any)}
-                    className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all ${
-                      billingInterval === interval
-                        ? 'bg-white text-black shadow-lg'
-                        : 'text-gray-400 hover:text-white'
-                    }`}
+                    className="px-6 py-2.5 text-sm font-medium rounded-lg transition-all"
+                    style={{
+                      backgroundColor: billingInterval === interval ? 'var(--bg-elevated)' : 'transparent',
+                      color: billingInterval === interval ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      boxShadow: billingInterval === interval ? 'var(--shadow-md)' : 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (billingInterval !== interval) {
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (billingInterval !== interval) {
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
                   >
                     {interval === 'monthly' ? t('pricing.billing.monthly') : 
                      interval === 'quarterly' ? t('pricing.billing.quarterly') : 
@@ -771,12 +801,13 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-[#111111] rounded-2xl border border-white/10 p-8 relative overflow-hidden flex flex-col"
+                className="rounded-2xl p-8 relative overflow-hidden flex flex-col"
+                style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
               >
                 {/* Current Plan Badge for logged-in users */}
                 {isAuthenticated && !isSubscribed && (
                   <div className="absolute top-0 right-0">
-                    <div className="bg-emerald-500/90 text-white text-xs font-medium px-4 py-1.5 rounded-bl-xl">
+                    <div className="text-xs font-medium px-4 py-1.5 rounded-bl-xl" style={{ backgroundColor: 'rgba(34, 197, 94, 0.9)', color: '#fff' }}>
                       {t('pricing.current_plan')}
                     </div>
                   </div>
@@ -785,42 +816,55 @@ export default function PricingPage() {
                 <div className="relative z-10 flex flex-col flex-grow">
                   {/* Header section - fixed height */}
                   <div className="mb-6 min-h-[100px]">
-                    <h3 className="text-xl font-semibold text-white mb-2">{t('pricing.plan.free')}</h3>
+                    <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-heading)' }}>{t('pricing.plan.free')}</h3>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold text-white">€0</span>
-                      <span className="text-gray-500">{t('pricing.per_forever')}</span>
+                      <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>€0</span>
+                      <span style={{ color: 'var(--text-tertiary)' }}>{t('pricing.per_forever')}</span>
                     </div>
-                    <p className="text-gray-400 mt-2 text-sm">{t('pricing.perfect_starting')}</p>
+                    <p className="mt-2 text-sm" style={{ color: 'var(--text-secondary)' }}>{t('pricing.perfect_starting')}</p>
                   </div>
                   
                   {/* Features list - grows to fill space */}
                   <ul className="space-y-3 flex-grow">
                     {STRIPE_PLANS.free.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <FiCheck className="text-gray-500 mt-0.5 flex-shrink-0" size={16} />
-                        <span className="text-gray-300 text-sm">{feature}</span>
+                        <FiCheck className="mt-0.5 flex-shrink-0" size={16} style={{ color: 'var(--text-tertiary)' }} />
+                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{feature}</span>
                       </li>
                     ))}
                     <li className="flex items-start gap-3">
-                      <FiX className="text-gray-600 mt-0.5 flex-shrink-0" size={16} />
-                      <span className="text-gray-500 text-sm">{t('pricing.comparison.pdf_export')}</span>
+                      <FiX className="mt-0.5 flex-shrink-0" size={16} style={{ color: 'var(--text-disabled)' }} />
+                      <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>{t('pricing.comparison.pdf_export')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <FiX className="text-gray-600 mt-0.5 flex-shrink-0" size={16} />
-                      <span className="text-gray-500 text-sm">{t('pricing.comparison.cover_letter_generator')}</span>
+                      <FiX className="mt-0.5 flex-shrink-0" size={16} style={{ color: 'var(--text-disabled)' }} />
+                      <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>{t('pricing.comparison.cover_letter_generator')}</span>
                     </li>
                   </ul>
                   
                   {/* Button - fixed at bottom */}
                   <div className="mt-8">
                     {isAuthenticated && !isSubscribed ? (
-                      <div className="w-full bg-emerald-500/20 text-emerald-400 py-3 px-6 rounded-xl font-medium text-center border border-emerald-500/30">
+                      <div className="w-full py-3 px-6 rounded-xl font-medium text-center" style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: '#4ade80', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
                         {t('pricing.active')}
                       </div>
                     ) : (
                       <button
                         onClick={() => router.push('/')}
-                        className="w-full bg-white/5 hover:bg-white/10 text-white py-3 px-6 rounded-xl font-medium transition-colors border border-white/10"
+                        className="w-full py-3 px-6 rounded-xl font-medium transition-colors"
+                        style={{
+                          backgroundColor: 'var(--bg-tertiary)',
+                          border: '1px solid var(--border-subtle)',
+                          color: 'var(--text-primary)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                          e.currentTarget.style.borderColor = 'var(--border-medium)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                          e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                        }}
                       >
                         {t('pricing.get_started_free')}
                       </button>
@@ -834,11 +878,15 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-gradient-to-b from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/30 p-8 relative overflow-hidden flex flex-col"
+                className="rounded-2xl p-8 relative overflow-hidden flex flex-col"
+                style={{ 
+                  background: 'linear-gradient(to bottom, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1))',
+                  border: '1px solid rgba(59, 130, 246, 0.3)'
+                }}
               >
                 {/* Popular Badge */}
                 <div className="absolute top-0 right-0">
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-medium px-4 py-1.5 rounded-bl-xl">
+                  <div className="text-xs font-medium px-4 py-1.5 rounded-bl-xl" style={{ background: 'linear-gradient(to right, #3b82f6, #a855f7)', color: '#fff' }}>
                     {t('pricing.most_popular')}
                   </div>
                 </div>
@@ -846,18 +894,18 @@ export default function PricingPage() {
                 <div className="relative z-10 flex flex-col flex-grow">
                   {/* Header section - fixed height */}
                   <div className="mb-6 min-h-[100px]">
-                    <h3 className="text-xl font-semibold text-white mb-2 flex items-center gap-2">
+                    <h3 className="text-xl font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--text-heading)' }}>
                       {t('pricing.plan.basic')}
                       <FiStar className="text-yellow-500" size={16} />
                     </h3>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold text-white">{currencySymbol}{getPriceForInterval(billingInterval)}</span>
-                      <span className="text-gray-400">
+                      <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>{currencySymbol}{getPriceForInterval(billingInterval)}</span>
+                      <span style={{ color: 'var(--text-secondary)' }}>
                         /{billingInterval === 'monthly' ? 'mo' : billingInterval === 'quarterly' ? 'qtr' : 'yr'}
                       </span>
                     </div>
                     {billingInterval !== 'monthly' && (
-                      <p className="text-gray-400 mt-1 text-sm">
+                      <p className="mt-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         {currencySymbol}{getMonthlyPrice(billingInterval)}/month
                       </p>
                     )}
@@ -868,7 +916,7 @@ export default function PricingPage() {
                     {STRIPE_PLANS.basic.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <FiCheck className="text-blue-400 mt-0.5 flex-shrink-0" size={16} />
-                        <span className="text-gray-200 text-sm">{feature}</span>
+                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -878,7 +926,22 @@ export default function PricingPage() {
                     <button
                       onClick={() => handleSubscribe('basic')}
                       disabled={isLoading || isSubscribed}
-                      className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-3 px-6 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
+                      className="w-full py-3 px-6 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{
+                        background: 'linear-gradient(to right, #3b82f6, #a855f7)',
+                        color: '#fff',
+                        boxShadow: '0 10px 15px -3px rgba(59, 130, 246, 0.2)'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!e.currentTarget.disabled) {
+                          e.currentTarget.style.background = 'linear-gradient(to right, #2563eb, #9333ea)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!e.currentTarget.disabled) {
+                          e.currentTarget.style.background = 'linear-gradient(to right, #3b82f6, #a855f7)';
+                        }
+                      }}
                     >
                       {isLoading ? (
                         <span className="flex items-center justify-center gap-2">
@@ -910,19 +973,19 @@ export default function PricingPage() {
               transition={{ delay: 0.4 }}
               className="flex flex-wrap justify-center gap-8 mb-16"
             >
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
                 <FiShield className="text-green-500" size={18} />
                 <span className="text-sm">{t('pricing.trust_indicators.secure_payment')}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
                 <FiClock className="text-blue-500" size={18} />
                 <span className="text-sm">{t('pricing.trust_indicators.cancel_anytime')}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
                 <FiZap className="text-yellow-500" size={18} />
                 <span className="text-sm">{t('pricing.trust_indicators.instant_access')}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
                 <FiCreditCard className="text-purple-500" size={18} />
                 <span className="text-sm">{t('pricing.trust_indicators.powered_by_stripe')}</span>
               </div>
@@ -935,50 +998,50 @@ export default function PricingPage() {
               transition={{ delay: 0.5 }}
               className="max-w-3xl mx-auto"
             >
-              <h2 className="text-2xl font-bold text-center mb-8">{t('pricing.comparison.title')}</h2>
-              <div className="bg-[#111111] rounded-2xl border border-white/10 overflow-hidden">
+              <h2 className="text-2xl font-bold text-center mb-8" style={{ color: 'var(--text-heading)' }}>{t('pricing.comparison.title')}</h2>
+              <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-white/10">
-                      <th className="text-left p-4 text-gray-400 font-medium">{t('pricing.comparison.feature')}</th>
-                      <th className="text-center p-4 text-gray-400 font-medium">{t('pricing.plan.free')}</th>
-                      <th className="text-center p-4 text-gray-400 font-medium">{t('pricing.plan.basic')}</th>
+                    <tr style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                      <th className="text-left p-4 font-medium" style={{ color: 'var(--text-tertiary)' }}>{t('pricing.comparison.feature')}</th>
+                      <th className="text-center p-4 font-medium" style={{ color: 'var(--text-tertiary)' }}>{t('pricing.plan.free')}</th>
+                      <th className="text-center p-4 font-medium" style={{ color: 'var(--text-tertiary)' }}>{t('pricing.plan.basic')}</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
-                    <tr>
-                      <td className="p-4 text-gray-300">{t('pricing.comparison.cv_builder')}</td>
-                      <td className="p-4 text-center"><FiCheck className="inline text-gray-500" /></td>
+                  <tbody style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                    <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.cv_builder')}</td>
+                      <td className="p-4 text-center"><FiCheck className="inline" style={{ color: 'var(--text-tertiary)' }} /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
-                    <tr>
-                      <td className="p-4 text-gray-300">{t('pricing.comparison.number_of_cvs')}</td>
-                      <td className="p-4 text-center text-gray-500">1</td>
+                    <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.number_of_cvs')}</td>
+                      <td className="p-4 text-center" style={{ color: 'var(--text-tertiary)' }}>1</td>
                       <td className="p-4 text-center text-blue-400">{t('pricing.comparison.unlimited')}</td>
                     </tr>
-                    <tr>
-                      <td className="p-4 text-gray-300">{t('pricing.comparison.templates')}</td>
-                      <td className="p-4 text-center text-gray-500">{t('pricing.comparison.basic_templates')}</td>
+                    <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.templates')}</td>
+                      <td className="p-4 text-center" style={{ color: 'var(--text-tertiary)' }}>{t('pricing.comparison.basic_templates')}</td>
                       <td className="p-4 text-center text-blue-400">{t('pricing.comparison.all_templates')}</td>
                     </tr>
-                    <tr>
-                      <td className="p-4 text-gray-300">{t('pricing.comparison.ai_chat_assistant')}</td>
-                      <td className="p-4 text-center text-gray-500">{t('pricing.comparison.limited')}</td>
+                    <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.ai_chat_assistant')}</td>
+                      <td className="p-4 text-center" style={{ color: 'var(--text-tertiary)' }}>{t('pricing.comparison.limited')}</td>
                       <td className="p-4 text-center text-blue-400">{t('pricing.comparison.unlimited')}</td>
                     </tr>
-                    <tr>
-                      <td className="p-4 text-gray-300">{t('pricing.comparison.pdf_export')}</td>
-                      <td className="p-4 text-center"><FiX className="inline text-gray-600" /></td>
+                    <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.pdf_export')}</td>
+                      <td className="p-4 text-center"><FiX className="inline" style={{ color: 'var(--text-disabled)' }} /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
-                    <tr>
-                      <td className="p-4 text-gray-300">{t('pricing.comparison.cover_letter_generator')}</td>
-                      <td className="p-4 text-center"><FiX className="inline text-gray-600" /></td>
+                    <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.cover_letter_generator')}</td>
+                      <td className="p-4 text-center"><FiX className="inline" style={{ color: 'var(--text-disabled)' }} /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
-                    <tr>
-                      <td className="p-4 text-gray-300">{t('pricing.comparison.job_matching')}</td>
-                      <td className="p-4 text-center"><FiX className="inline text-gray-600" /></td>
+                    <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.job_matching')}</td>
+                      <td className="p-4 text-center"><FiX className="inline" style={{ color: 'var(--text-disabled)' }} /></td>
                       <td className="p-4 text-center"><FiCheck className="inline text-blue-400" /></td>
                     </tr>
                   </tbody>
