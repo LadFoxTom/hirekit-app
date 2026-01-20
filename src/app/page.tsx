@@ -2349,9 +2349,8 @@ export default function HomePage() {
               }}
             >
               <div className="p-4 space-y-2">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Language</h2>
+                {/* Close Button */}
+                <div className="flex items-center justify-end mb-2">
                   <button
                     onClick={() => setIsLanguageMenuOpen(false)}
                     className="p-2 flex items-center justify-center rounded-lg transition-colors"
