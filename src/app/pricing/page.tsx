@@ -231,21 +231,28 @@ export default function PricingPage() {
         <meta name="description" content="Choose the perfect plan for your CV building needs. Free plan available with premium features starting at €49.99/year." />
       </Head>
       
-      <div className="min-h-screen bg-[#0a0a0a] text-white">
-        <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
+      <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+        <Toaster position="top-center" toastOptions={{ style: { background: 'var(--bg-tertiary)', color: 'var(--text-primary)' } }} />
         
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 h-14 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50">
+        <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl z-50" style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-subtle)', opacity: 0.95 }}>
           <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between">
             {/* Left: Back & Logo */}
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.back()}
-                className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors"
+                className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                style={{ color: 'var(--text-primary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
               >
                 <FiArrowLeft size={20} />
               </button>
-              <Link href="/" className="flex items-center gap-2">
+              <Link href="/" className="flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
                   LF
                 </div>
@@ -427,7 +434,8 @@ export default function PricingPage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setIsLanguageMenuOpen(false)}
-                className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+                className="fixed inset-0 z-40 lg:hidden"
+                style={{ backgroundColor: 'var(--overlay)' }}
               />
               
               {/* Language Menu - Slide in from right */}

@@ -123,12 +123,12 @@ function MenuItem({
       
       {/* Badge - right-aligned, compact */}
       {badge && (
-        <span className="ml-1.5 px-1.5 py-0.5 bg-gray-700/50 text-gray-300 text-[10px] font-medium rounded-full flex-shrink-0">
+        <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>
           {badge}
         </span>
       )}
       
-      {external && <FiExternalLink size={14} className="ml-2 text-gray-500 flex-shrink-0" />}
+      {external && <FiExternalLink size={14} className="ml-2 flex-shrink-0" style={{ color: 'var(--text-tertiary)' }} />}
     </button>
   );
 }
@@ -428,20 +428,27 @@ export default function DashboardPage() {
   if (!isAuthenticated) return null
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+      <Toaster position="top-center" toastOptions={{ style: { background: 'var(--bg-tertiary)', color: 'var(--text-primary)' } }} />
       
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-14 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50">
+      <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl z-50" style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-subtle)', opacity: 0.95 }}>
         <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between relative">
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.push('/')}
-              className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors"
+              className="p-2 flex items-center justify-center rounded-lg transition-colors"
+              style={{ color: 'var(--text-primary)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               <FiArrowLeft size={20} />
             </button>
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
                 LF
               </div>
@@ -458,12 +465,19 @@ export default function DashboardPage() {
                   console.log('[UserMenu] toggle click (dashboard)', { wasOpen: isUserMenuOpen });
                   setIsUserMenuOpen(!isUserMenuOpen);
                 }}
-                className="flex items-center gap-2 px-3 py-2 hover:bg-white/5 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+                style={{ color: 'var(--text-primary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium">
                   {user?.name?.[0] || 'U'}
                 </div>
-                <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                <FiChevronDown size={14} className={`transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
               </button>
               
               {/* Desktop: Original dropdown (mobile menu is at root level) */}
@@ -475,13 +489,20 @@ export default function DashboardPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
-                    style={{ width: '320px', minWidth: '320px', maxWidth: '320px' }}
+                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 rounded-xl z-[9999]"
+                    style={{ 
+                      width: '320px', 
+                      minWidth: '320px', 
+                      maxWidth: '320px',
+                      backgroundColor: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-medium)',
+                      boxShadow: 'var(--shadow-lg)'
+                    }}
                   >
                     {/* User Info */}
-                    <div className="px-3 py-2.5 border-b border-white/10">
-                      <p className="font-semibold text-sm text-white leading-tight mb-0.5 truncate">{user?.name || 'User'}</p>
-                      <p className="text-[11px] text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
+                    <div className="px-3 py-2.5" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                      <p className="font-semibold text-sm leading-tight mb-0.5 truncate" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
+                      <p className="text-[11px] truncate leading-relaxed" style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                     </div>
                     
                     {/* Navigation Items */}
@@ -515,7 +536,7 @@ export default function DashboardPage() {
                     </div>
                     
                     {/* Account Items */}
-                    <div className="border-t border-white/10 py-1.5">
+                    <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                       <MenuItem 
                         icon={FiCreditCard} 
                         label={t('nav.subscription')} 
@@ -547,7 +568,7 @@ export default function DashboardPage() {
                     </div>
                     
                     {/* Action Items */}
-                    <div className="border-t border-white/10 py-1.5">
+                    <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                       <MenuItem 
                         icon={FiLogOut} 
                         label={t('nav.sign_out')} 
@@ -575,7 +596,8 @@ export default function DashboardPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsUserMenuOpen(false)}
-              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              className="fixed inset-0 z-40 lg:hidden"
+              style={{ backgroundColor: 'var(--overlay)' }}
             />
             
             {/* User Menu - Slide in from right (like hamburger from left) */}
@@ -584,87 +606,140 @@ export default function DashboardPage() {
               animate={{ x: 0 }}
               exit={{ x: 280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-14 right-0 bottom-0 w-[280px] bg-[#1a1a1a] border-l border-white/5 z-40 overflow-y-auto lg:hidden"
+              className="fixed top-14 right-0 bottom-0 w-[280px] z-40 overflow-y-auto lg:hidden"
+              style={{ 
+                backgroundColor: 'var(--bg-secondary)',
+                borderLeft: '1px solid var(--border-subtle)'
+              }}
             >
               <div className="p-4 space-y-4">
                 {/* User Info */}
-                <div className="px-4 py-3 border-b border-white/5 mb-4">
-                  <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                  <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                <div className="px-4 py-3 mb-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                  <p className="font-medium text-sm" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
+                  <p className="text-xs truncate" style={{ color: 'var(--text-tertiary)' }}>{user?.email || 'user@example.com'}</p>
                 </div>
                 
                 {/* Menu Items */}
                 <div className="space-y-1">
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiGrid size={14} className="text-gray-400" />
+                    <FiGrid size={14} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm">{t('nav.dashboard')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiFolder size={14} className="text-gray-400" />
+                    <FiFolder size={14} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiBriefcase size={14} className="text-gray-400" />
+                    <FiBriefcase size={14} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
                   </button>
                 </div>
                 
-                <div className="border-t border-white/5 pt-2 mt-2 space-y-1">
+                <div className="pt-2 mt-2 space-y-1" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }}
-                    className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <div className="flex items-center gap-3">
-                      <FiCreditCard size={14} className="text-gray-400" />
+                      <FiCreditCard size={14} style={{ color: 'var(--text-tertiary)' }} />
                       <span className="text-sm">{t('nav.subscription')}</span>
                     </div>
                     <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiSettings size={14} className="text-gray-400" />
+                    <FiSettings size={14} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm">{t('nav.settings')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiHelpCircle size={14} className="text-gray-400" />
+                    <FiHelpCircle size={14} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm">{t('nav.help_support')}</span>
                   </button>
                 </div>
                 
                 {/* Theme & Language */}
-                <div className="border-t border-white/5 pt-2 mt-2">
+                <div className="pt-2 mt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <div className="px-3 py-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-medium uppercase tracking-wider text-gray-500">Language</span>
+                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Language</span>
                       <LanguageSelector />
                     </div>
                   </div>
                   <div className="px-3 py-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-medium uppercase tracking-wider text-gray-500">Theme</span>
+                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Theme</span>
                       <ThemeSwitcher />
                     </div>
                   </div>
                 </div>
                 
-                <div className="border-t border-white/5 pt-2 mt-2">
+                <div className="pt-2 mt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: '#ef4444' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <FiLogOut size={14} />
                     <span className="text-sm">{t('nav.sign_out')}</span>
@@ -796,15 +871,26 @@ export default function DashboardPage() {
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold">{t('dashboard.title')}</h1>
-                <p className="text-gray-400 mt-1">
+                <h1 className="text-3xl font-bold" style={{ color: 'var(--text-heading)' }}>{t('dashboard.title')}</h1>
+                <p className="mt-1" style={{ color: 'var(--text-secondary)' }}>
                   {t('dashboard.welcome_back').replace('{name}', user?.name?.split(' ')[0] || 'there')}
                 </p>
               </div>
               <div className="flex gap-3">
                 <button
                   onClick={handleCreateNewLetter}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+                  style={{ 
+                    backgroundColor: 'var(--bg-tertiary)',
+                    border: '1px solid var(--border-subtle)',
+                    color: 'var(--text-primary)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                  }}
                 >
                   <FiMail size={16} />
                   {t('dashboard.new_letter')}
@@ -833,14 +919,14 @@ export default function DashboardPage() {
               { label: t('dashboard.downloads'), value: stats.totalDownloads || 0, icon: FiDownload, color: 'purple' },
               { label: t('dashboard.avg_score'), value: `${stats.averageScore || 0}%`, icon: FiAward, color: 'yellow' },
             ].map((stat, idx) => (
-              <div key={idx} className="bg-[#111111] border border-white/5 rounded-xl p-5">
+              <div key={idx} className="rounded-xl p-5" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 <div className="flex items-center gap-3">
                   <div className={`p-2 flex items-center justify-center rounded-lg bg-${stat.color}-500/10`}>
                     <stat.icon size={20} className={`text-${stat.color}-400`} />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">{typeof stat.value === 'number' && isNaN(stat.value) ? 0 : stat.value}</p>
-                    <p className="text-sm text-gray-500">{stat.label}</p>
+                    <p className="text-2xl font-bold" style={{ color: 'var(--text-heading)' }}>{typeof stat.value === 'number' && isNaN(stat.value) ? 0 : stat.value}</p>
+                    <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
                   </div>
                 </div>
               </div>
@@ -855,12 +941,12 @@ export default function DashboardPage() {
               transition={{ delay: 0.2 }}
               className="lg:col-span-2"
             >
-              <div className="bg-[#111111] border border-white/5 rounded-xl overflow-hidden">
+              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 {/* Toolbar */}
-                <div className="p-4 border-b border-white/5">
+                <div className="p-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     {/* Tabs */}
-                    <div className="flex gap-1 bg-white/5 p-1 rounded-lg">
+                    <div className="flex gap-1 p-1 rounded-lg" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                       {[
                         { id: 'all', label: t('dashboard.all') },
                         { id: 'cvs', label: t('dashboard.cvs') },
@@ -870,11 +956,25 @@ export default function DashboardPage() {
                         <button
                           key={tab.id}
                           onClick={() => setActiveTab(tab.id as any)}
-                          className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                            activeTab === tab.id
-                              ? 'bg-white text-black'
-                              : 'text-gray-400 hover:text-white'
-                          }`}
+                          className="px-4 py-2 text-sm font-medium rounded-md transition-colors"
+                          style={{
+                            ...(activeTab === tab.id ? {
+                              backgroundColor: 'var(--bg-elevated)',
+                              color: 'var(--text-primary)'
+                            } : {
+                              color: 'var(--text-tertiary)'
+                            })
+                          }}
+                          onMouseEnter={(e) => {
+                            if (activeTab !== tab.id) {
+                              e.currentTarget.style.color = 'var(--text-primary)';
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (activeTab !== tab.id) {
+                              e.currentTarget.style.color = 'var(--text-tertiary)';
+                            }
+                          }}
                         >
                           {tab.label}
                         </button>
@@ -884,27 +984,44 @@ export default function DashboardPage() {
                     {/* Search & View */}
                     <div className="flex items-center gap-2">
                       <div className="relative">
-                        <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
+                        <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2" size={16} style={{ color: 'var(--text-tertiary)' }} />
                         <input
                           type="text"
                           placeholder={t('dashboard.search')}
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
-                          className="bg-white/5 border border-white/10 rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none focus:border-blue-500 w-48"
+                          className="rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none w-48"
+                          style={{
+                            backgroundColor: 'var(--bg-tertiary)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
                         />
                       </div>
-                      <div className="flex bg-white/5 rounded-lg p-1">
+                      <div className="flex rounded-lg p-1" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
                         <button
                           onClick={() => setViewMode('list')}
-                          className={`p-2 flex items-center justify-center rounded-md ${viewMode === 'list' ? 'bg-white/10' : ''}`}
+                          className="p-2 flex items-center justify-center rounded-md"
+                          style={{
+                            backgroundColor: viewMode === 'list' ? 'var(--bg-hover)' : 'transparent'
+                          }}
                         >
-                          <FiList size={16} />
+                          <FiList size={16} style={{ color: 'var(--text-tertiary)' }} />
                         </button>
                         <button
                           onClick={() => setViewMode('grid')}
-                          className={`p-2 flex items-center justify-center rounded-md ${viewMode === 'grid' ? 'bg-white/10' : ''}`}
+                          className="p-2 flex items-center justify-center rounded-md"
+                          style={{
+                            backgroundColor: viewMode === 'grid' ? 'var(--bg-hover)' : 'transparent'
+                          }}
                         >
-                          <FiGrid size={16} />
+                          <FiGrid size={16} style={{ color: 'var(--text-tertiary)' }} />
                         </button>
                       </div>
                     </div>
@@ -919,9 +1036,9 @@ export default function DashboardPage() {
                     </div>
                   ) : getFilteredItems().length === 0 ? (
                     <div className="text-center py-16">
-                      <FiFileText className="mx-auto h-12 w-12 text-gray-600 mb-4" />
-                      <h3 className="text-lg font-medium mb-2">{t('dashboard.no_documents')}</h3>
-                      <p className="text-gray-500 mb-6">
+                      <FiFileText className="mx-auto h-12 w-12 mb-4" style={{ color: 'var(--text-tertiary)' }} />
+                      <h3 className="text-lg font-medium mb-2" style={{ color: 'var(--text-heading)' }}>{t('dashboard.no_documents')}</h3>
+                      <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
                         {searchQuery ? t('dashboard.try_different_search') : t('dashboard.create_first_document')}
                       </p>
                       {!searchQuery && (
@@ -941,19 +1058,29 @@ export default function DashboardPage() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: idx * 0.05 }}
-                          className={`bg-white/5 border border-white/5 rounded-xl p-4 hover:border-white/10 transition-colors group ${
+                          className={`rounded-xl p-4 transition-colors group ${
                             viewMode === 'grid' ? '' : 'flex items-center justify-between'
                           }`}
+                          style={{
+                            backgroundColor: 'var(--bg-tertiary)',
+                            border: '1px solid var(--border-subtle)'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-medium)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
                         >
                           <div className={viewMode === 'grid' ? 'mb-4' : 'flex-1'}>
                             <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-medium truncate">{item.title}</h3>
+                              <h3 className="font-medium truncate" style={{ color: 'var(--text-primary)' }}>{item.title}</h3>
                               {item.type === 'letter' && (
                                 <span className="text-xs bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full">Letter</span>
                               )}
                               {item.isFavorite && <FiStar className="text-yellow-400" size={14} />}
                             </div>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
                               {item.template} • {formatDate(item.updatedAt)}
                             </p>
                           </div>
@@ -961,7 +1088,16 @@ export default function DashboardPage() {
                           <div className={`flex items-center gap-1 ${viewMode === 'grid' ? 'justify-end' : ''}`}>
                             <button
                               onClick={() => item.type === 'cv' ? handleEditCV(item as SavedCV) : handleEditLetter(item as SavedLetter)}
-                              className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                              className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                              style={{ color: 'var(--text-tertiary)' }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color = 'var(--text-primary)';
+                                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = 'var(--text-tertiary)';
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                              }}
                               title="Edit"
                             >
                               <FiEdit2 size={16} />
@@ -976,11 +1112,28 @@ export default function DashboardPage() {
                                 }
                                 item.type === 'cv' ? handleDownloadCV(item as SavedCV) : handleDownloadLetter(item as SavedLetter)
                               }}
-                              className={`p-2 flex items-center justify-center rounded-lg transition-colors ${
-                                (!subscription || subscription.plan === 'free' || subscription.status !== 'active')
-                                  ? 'text-gray-600 cursor-not-allowed opacity-50'
-                                  : 'text-gray-400 hover:text-white hover:bg-white/5'
-                              }`}
+                              className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                              style={{
+                                color: (!subscription || subscription.plan === 'free' || subscription.status !== 'active')
+                                  ? 'var(--text-disabled)'
+                                  : 'var(--text-tertiary)',
+                                cursor: (!subscription || subscription.plan === 'free' || subscription.status !== 'active')
+                                  ? 'not-allowed'
+                                  : 'pointer',
+                                opacity: (!subscription || subscription.plan === 'free' || subscription.status !== 'active') ? 0.5 : 1
+                              }}
+                              onMouseEnter={(e) => {
+                                if (subscription && subscription.plan !== 'free' && subscription.status === 'active') {
+                                  e.currentTarget.style.color = 'var(--text-primary)';
+                                  e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (subscription && subscription.plan !== 'free' && subscription.status === 'active') {
+                                  e.currentTarget.style.color = 'var(--text-tertiary)';
+                                  e.currentTarget.style.backgroundColor = 'transparent';
+                                }
+                              }}
                               title={(!subscription || subscription.plan === 'free' || subscription.status !== 'active') ? 'Upgrade to download' : 'Download'}
                               disabled={!subscription || subscription.plan === 'free' || subscription.status !== 'active'}
                             >
@@ -988,14 +1141,32 @@ export default function DashboardPage() {
                             </button>
                             <button
                               onClick={() => handleDuplicate(item, item.type)}
-                              className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                              className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                              style={{ color: 'var(--text-tertiary)' }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color = 'var(--text-primary)';
+                                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = 'var(--text-tertiary)';
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                              }}
                               title="Duplicate"
                             >
                               <FiCopy size={16} />
                             </button>
                             <button
                               onClick={() => handleDeleteItem(item.id, item.type)}
-                              className="p-2 flex items-center justify-center text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                              className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                              style={{ color: 'var(--text-tertiary)' }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color = '#ef4444';
+                                e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = 'var(--text-tertiary)';
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                              }}
                               title="Delete"
                             >
                               <FiTrash2 size={16} />
@@ -1017,14 +1188,14 @@ export default function DashboardPage() {
               className="space-y-6"
             >
               {/* Recent Activity */}
-              <div className="bg-[#111111] border border-white/5 rounded-xl overflow-hidden">
-                <div className="px-4 py-3 border-b border-white/5 flex items-center gap-2">
+              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
+                <div className="px-4 py-3 flex items-center gap-2" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   <FiBell className="text-blue-400" size={16} />
                   <h3 className="font-medium">{t('dashboard.recent_activity')}</h3>
                 </div>
                 <div className="p-4">
                   {stats.recentActivity.length === 0 ? (
-                    <p className="text-sm text-gray-500 text-center py-4">{t('dashboard.no_recent_activity')}</p>
+                    <p className="text-sm text-center py-4" style={{ color: 'var(--text-tertiary)' }}>{t('dashboard.no_recent_activity')}</p>
                   ) : (
                     <div className="space-y-4">
                       {stats.recentActivity.map((activity, idx) => (
@@ -1037,8 +1208,8 @@ export default function DashboardPage() {
                             {activity.type === 'created' ? <FiPlus size={14} /> : <FiEdit2 size={14} />}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm truncate">{activity.title}</p>
-                            <p className="text-xs text-gray-500">{formatDate(activity.timestamp)}</p>
+                            <p className="text-sm truncate" style={{ color: 'var(--text-primary)' }}>{activity.title}</p>
+                            <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{formatDate(activity.timestamp)}</p>
                           </div>
                         </div>
                       ))}
