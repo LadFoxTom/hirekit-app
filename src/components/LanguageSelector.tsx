@@ -39,7 +39,11 @@ const FlagIcon: React.FC<{ code: string; className?: string }> = ({ code, classN
   )
 }
 
-export function LanguageSelector() {
+interface LanguageSelectorProps {
+  onMobileMenuOpen?: () => void
+}
+
+export function LanguageSelector({ onMobileMenuOpen }: LanguageSelectorProps = {}) {
   const { language, setLanguage, availableLanguages, isClient } = useLocale()
   const [isOpen, setIsOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
@@ -61,6 +65,19 @@ export function LanguageSelector() {
   const handleLanguageChange = (langCode: string) => {
     setLanguage(langCode as any)
     setIsOpen(false)
+    if (onMobileMenuOpen) {
+      onMobileMenuOpen()
+    }
+  }
+
+  const handleClick = () => {
+    // On mobile, open sideways menu via callback
+    if (typeof window !== 'undefined' && window.innerWidth < 1024 && onMobileMenuOpen) {
+      onMobileMenuOpen()
+    } else {
+      // On desktop, toggle dropdown
+      setIsOpen(!isOpen)
+    }
   }
 
   const currentLanguage = availableLanguages.find(lang => lang.code === language)
@@ -94,7 +111,7 @@ export function LanguageSelector() {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onTouchStart={() => setIsHovered(true)}
@@ -129,7 +146,7 @@ export function LanguageSelector() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.96 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full mt-2 rounded-xl z-[9999]"
+            className="absolute right-0 top-full mt-2 rounded-xl z-[9999] hidden lg:block"
             style={{
               backgroundColor: 'var(--bg-elevated)',
               border: '1px solid var(--border-medium)',

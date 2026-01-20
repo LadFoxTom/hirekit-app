@@ -769,7 +769,7 @@ export default function HomePage() {
   const { isAuthenticated, user, subscription } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const { t, language } = useLocale();
+  const { t, language, setLanguage, availableLanguages } = useLocale();
   
   // Debug logging
   useEffect(() => {
@@ -783,6 +783,7 @@ export default function HomePage() {
   // UI State
   const [isConversationActive, setIsConversationActive] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [isArtifactFullscreen, setIsArtifactFullscreen] = useState(false);
   const [artifactType, setArtifactType] = useState<ArtifactType>(null);
   const [cvZoom, setCvZoom] = useState(0.75);
@@ -1970,7 +1971,7 @@ export default function HomePage() {
 
           {/* Right: Language Selector, Theme Switcher & User Menu */}
           <div className="flex items-center gap-2">
-            <LanguageSelector />
+            <LanguageSelector onMobileMenuOpen={() => setIsLanguageMenuOpen(true)} />
             <ThemeSwitcher />
             {isAuthenticated ? (
               <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
@@ -2313,6 +2314,123 @@ export default function HomePage() {
                     </div>
                     <span className="flex-1 text-left ml-3">{t('nav.sign_out')}</span>
                   </button>
+                </div>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Language Menu (Mobile) - Sideways menu */}
+      <AnimatePresence>
+        {isLanguageMenuOpen && (
+          <>
+            {/* Mobile Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsLanguageMenuOpen(false)}
+              className="fixed inset-0 z-40 lg:hidden"
+              style={{ backgroundColor: 'var(--overlay)' }}
+            />
+            
+            {/* Language Menu - Slide in from right */}
+            <motion.aside
+              initial={{ x: 280 }}
+              animate={{ x: 0 }}
+              exit={{ x: 280 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-14 right-0 bottom-0 w-[280px] z-40 overflow-y-auto lg:hidden"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                borderLeft: '1px solid var(--border-subtle)',
+              }}
+            >
+              <div className="p-4 space-y-4">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Select Language</h2>
+                  <button
+                    onClick={() => setIsLanguageMenuOpen(false)}
+                    className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                    style={{ color: 'var(--text-tertiary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-tertiary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                    aria-label="Close language menu"
+                  >
+                    <FiX size={20} />
+                  </button>
+                </div>
+
+                {/* Language Options */}
+                <div className="space-y-2">
+                  {availableLanguages.map((lang) => {
+                    // Flag Icon Component (inline for this menu)
+                    const flagMap: Record<string, string> = {
+                      'en': '/flags/gb.svg',
+                      'nl': '/flags/nl.svg',
+                      'fr': '/flags/fr.svg',
+                      'es': '/flags/es.svg',
+                      'de': '/flags/de.svg'
+                    };
+                    const flagSrc = flagMap[lang.code] || '';
+                    
+                    return (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code as any);
+                          setIsLanguageMenuOpen(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left"
+                        style={{
+                          backgroundColor: language === lang.code ? 'var(--bg-hover)' : 'transparent',
+                          color: 'var(--text-primary)',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (language !== lang.code) {
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (language !== lang.code) {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }
+                        }}
+                      >
+                        {flagSrc ? (
+                          <img 
+                            src={flagSrc} 
+                            alt={`${lang.code.toUpperCase()} flag`}
+                            className="rounded object-cover"
+                            style={{ 
+                              width: '24px',
+                              height: '24px',
+                              minWidth: '24px',
+                              minHeight: '24px',
+                              maxWidth: '24px',
+                              maxHeight: '24px',
+                              display: 'block',
+                              flexShrink: 0
+                            }}
+                          />
+                        ) : (
+                          <span style={{ fontSize: '24px' }}>🏳️</span>
+                        )}
+                        <span className="flex-1 text-sm font-medium">{lang.name}</span>
+                        {language === lang.code && (
+                          <span style={{ color: '#3b82f6', fontSize: '18px' }}>✓</span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </motion.aside>
