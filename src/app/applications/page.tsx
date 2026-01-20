@@ -76,20 +76,29 @@ function MenuItem({
           ? 'opacity-50 cursor-not-allowed' 
           : 'cursor-pointer'
         }
-        ${isActive 
-          ? 'bg-white/5 border-l-3 border-blue-500' 
-          : ''
-        }
-        ${variant === 'danger' 
-          ? disabled
-            ? 'text-gray-400'
-            : 'text-gray-300 hover:bg-white/8 hover:text-white'
-          : disabled
-            ? 'text-gray-400'
-            : 'text-gray-300 hover:bg-white/5 hover:text-white'
-        }
       `}
-      style={isActive ? { borderLeftWidth: '3px' } : undefined}
+      style={{
+        ...(isActive ? { 
+          borderLeftWidth: '3px',
+          borderLeftColor: '#3b82f6',
+          backgroundColor: 'var(--bg-hover)',
+        } : {}),
+        color: disabled 
+          ? 'var(--text-disabled)'
+          : variant === 'danger'
+            ? 'var(--text-primary)'
+            : 'var(--text-primary)',
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = variant === 'danger' ? 'rgba(239, 68, 68, 0.1)' : 'var(--bg-hover)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = 'transparent';
+        }
+      }}
     >
       {/* Icon container - fixed width for alignment */}
       <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
@@ -101,12 +110,24 @@ function MenuItem({
       
       {/* Badge - right-aligned, compact */}
       {badge && (
-        <span className="ml-1.5 px-1.5 py-0.5 bg-gray-700/50 text-gray-300 text-[10px] font-medium rounded-full flex-shrink-0">
+        <span 
+          className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium rounded-full flex-shrink-0"
+          style={{
+            backgroundColor: 'var(--bg-tertiary)',
+            color: 'var(--text-secondary)',
+          }}
+        >
           {badge}
         </span>
       )}
       
-      {external && <FiExternalLink size={14} className="ml-2 text-gray-500 flex-shrink-0" />}
+      {external && (
+        <FiExternalLink 
+          size={14} 
+          className="ml-2 flex-shrink-0" 
+          style={{ color: 'var(--text-tertiary)' }}
+        />
+      )}
     </button>
   );
 }
@@ -336,12 +357,19 @@ export default function ApplicationsPage() {
                   console.log('[UserMenu] toggle click (applications)', { wasOpen: isUserMenuOpen });
                   setIsUserMenuOpen(!isUserMenuOpen);
                 }}
-                className="flex items-center gap-2 px-3 py-2 hover:bg-white/5 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+                style={{ color: 'var(--text-primary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                }}
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium">
                   {user?.name?.[0] || 'U'}
                 </div>
-                <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                <FiChevronDown size={14} className={`transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
               </button>
               
               {/* Desktop: Original dropdown (mobile menu is at root level) */}
@@ -353,13 +381,20 @@ export default function ApplicationsPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
-                    style={{ width: '320px', minWidth: '320px', maxWidth: '320px' }}
+                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 rounded-xl z-[9999]"
+                    style={{ 
+                      width: '320px', 
+                      minWidth: '320px', 
+                      maxWidth: '320px',
+                      backgroundColor: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-medium)',
+                      boxShadow: 'var(--shadow-lg)'
+                    }}
                   >
                     {/* User Info */}
-                    <div className="px-3 py-2.5 border-b border-white/10">
-                      <p className="font-semibold text-sm text-white leading-tight mb-0.5 truncate">{user?.name || 'User'}</p>
-                      <p className="text-[11px] text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
+                    <div className="px-3 py-2.5" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                      <p className="font-semibold text-sm leading-tight mb-0.5 truncate" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
+                      <p className="text-[11px] truncate leading-relaxed" style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                     </div>
                     
                     {/* Navigation Items */}
@@ -393,7 +428,7 @@ export default function ApplicationsPage() {
                     </div>
                     
                     {/* Account Items */}
-                    <div className="border-t border-white/10 py-1.5">
+                    <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                       <MenuItem 
                         icon={FiCreditCard} 
                         label={t('nav.subscription')} 
@@ -425,7 +460,7 @@ export default function ApplicationsPage() {
                     </div>
                     
                     {/* Action Items */}
-                    <div className="border-t border-white/10 py-1.5">
+                    <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                       <MenuItem 
                         icon={FiLogOut} 
                         label={t('nav.sign_out')} 
@@ -453,7 +488,8 @@ export default function ApplicationsPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsUserMenuOpen(false)}
-              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              className="fixed inset-0 z-40 lg:hidden"
+              style={{ backgroundColor: 'var(--overlay)' }}
             />
             
             {/* User Menu - Slide in from right (like hamburger from left) */}
@@ -462,90 +498,217 @@ export default function ApplicationsPage() {
               animate={{ x: 0 }}
               exit={{ x: 280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-14 right-0 bottom-0 w-[280px] bg-[#1a1a1a] border-l border-white/5 z-40 overflow-y-auto lg:hidden"
+              className="fixed top-14 right-0 bottom-0 w-[280px] z-40 overflow-y-auto lg:hidden"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                borderLeft: '1px solid var(--border-subtle)',
+              }}
             >
               <div className="p-4 space-y-4">
                 {/* User Info */}
-                <div className="px-4 py-3 border-b border-white/5 mb-4">
-                  <p className="font-medium text-sm">{user?.name || 'User'}</p>
-                  <p className="text-xs text-gray-500 truncate">{user?.email || 'user@example.com'}</p>
+                <div className="px-4 py-3 mb-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                  <p className="font-semibold text-base leading-tight mb-1" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
+                  <p className="text-xs truncate leading-relaxed" style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                 </div>
                 
-                {/* Menu Items */}
+                {/* Navigation Items */}
                 <div className="space-y-1">
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/dashboard' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/dashboard') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/dashboard') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                    aria-current={pathname === '/dashboard' ? 'page' : undefined}
                   >
-                    <FiGrid size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.dashboard')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiGrid size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.dashboard')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiFolder size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.my_cvs')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiFolder size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.my_cvs')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/applications' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/applications') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/applications') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                    aria-current={pathname === '/applications' ? 'page' : undefined}
                   >
-                    <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.job_applications')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiBriefcase size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.job_applications')}</span>
                   </button>
                 </div>
                 
-                <div className="border-t border-white/5 pt-2 mt-2 space-y-1">
+                {/* Account Items */}
+                <div className="pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }}
-                    className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/pricing' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/pricing') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/pricing') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                    aria-current={pathname === '/pricing' ? 'page' : undefined}
                   >
-                    <div className="flex items-center gap-3">
-                      <FiCreditCard size={14} className="text-gray-400" />
-                      <span className="text-sm">{t('nav.subscription')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiCreditCard size={20} />
                     </div>
-                    <span className="px-2 py-0.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-medium rounded-full">{subBadge}</span>
+                    <span className="flex-1 text-left ml-3">{t('nav.subscription')}</span>
+                    <span className="ml-auto px-2.5 py-1 text-xs font-medium rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>{subBadge}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/settings' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/settings') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/settings') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                    aria-current={pathname === '/settings' ? 'page' : undefined}
                   >
-                    <FiSettings size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.settings')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiSettings size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.settings')}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/faq' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/faq') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/faq') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                    aria-current={pathname === '/faq' ? 'page' : undefined}
                   >
-                    <FiHelpCircle size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.help_support')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiHelpCircle size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.help_support_short')}</span>
                   </button>
                 </div>
                 
                 {/* Theme & Language */}
-                <div className="border-t border-white/5 pt-2 mt-2">
-                  <div className="px-3 py-2">
+                <div className="pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                  <div className="px-4 py-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-medium uppercase tracking-wider text-gray-500">Language</span>
+                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Language</span>
                       <LanguageSelector />
                     </div>
                   </div>
-                  <div className="px-3 py-2">
+                  <div className="px-4 py-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-medium uppercase tracking-wider text-gray-500">Theme</span>
+                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Theme</span>
                       <ThemeSwitcher />
                     </div>
                   </div>
                 </div>
                 
-                <div className="border-t border-white/5 pt-2 mt-2">
+                {/* Action Items */}
+                <div className="pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiLogOut size={14} />
-                    <span className="text-sm">{t('nav.sign_out')}</span>
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiLogOut size={20} />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.sign_out')}</span>
                   </button>
                 </div>
               </div>
