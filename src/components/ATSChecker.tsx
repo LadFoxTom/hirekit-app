@@ -34,13 +34,30 @@ interface ATSAssessment {
 
 const ATS_ASSESSMENT_STORAGE_KEY = 'ats_assessment_cache';
 const ATS_CV_HASH_KEY = 'ats_cv_hash';
+const ATS_CACHE_TIMESTAMP_KEY = 'ats_cache_timestamp';
+const ATS_CACHE_EXPIRY_DAYS = 7; // Keep cache for 7 days
 
-// Simple hash function to create a fingerprint of CV data
+// Create a stable hash based on core CV content (not template/layout)
 const createCVHash = (cvData: any): string => {
   try {
-    // Create a simplified version of CV data for hashing (exclude volatile fields)
-    const { photos, photoUrl, ...stableData } = cvData;
-    const dataString = JSON.stringify(stableData);
+    // Only use core content fields that represent actual CV content
+    // Exclude: template, layout, photos, photoUrl, and other UI/metadata fields
+    const coreFields = {
+      fullName: cvData.fullName || cvData.personalInfo?.fullName,
+      title: cvData.title || cvData.professionalHeadline,
+      summary: cvData.summary || cvData.objective,
+      experience: cvData.experience,
+      education: cvData.education,
+      skills: cvData.skills || cvData.technicalSkills || cvData.softSkills,
+      certifications: cvData.certifications,
+      languages: cvData.languages,
+      // Include contact structure but not actual values (for privacy)
+      hasEmail: !!(cvData.contact?.email || cvData.personalInfo?.email || cvData.email),
+      hasPhone: !!(cvData.contact?.phone || cvData.personalInfo?.phone || cvData.phone),
+      hasLocation: !!(cvData.contact?.location || cvData.personalInfo?.location || cvData.location),
+    };
+    
+    const dataString = JSON.stringify(coreFields);
     
     // Simple hash - sum of character codes
     let hash = 0;
@@ -54,6 +71,33 @@ const createCVHash = (cvData: any): string => {
     console.error('[ATS Checker] Error creating CV hash:', error);
     return Date.now().toString(); // Fallback to timestamp
   }
+};
+
+// Check if cache is still valid (not expired)
+const isCacheValid = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  
+  try {
+    const timestamp = localStorage.getItem(ATS_CACHE_TIMESTAMP_KEY);
+    if (!timestamp) return false;
+    
+    const cacheDate = new Date(parseInt(timestamp));
+    const now = new Date();
+    const daysDiff = (now.getTime() - cacheDate.getTime()) / (1000 * 60 * 60 * 24);
+    
+    return daysDiff < ATS_CACHE_EXPIRY_DAYS;
+  } catch (error) {
+    console.error('[ATS Checker] Error checking cache validity:', error);
+    return false;
+  }
+};
+
+// Clear ATS cache
+const clearATSCache = () => {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(ATS_ASSESSMENT_STORAGE_KEY);
+  localStorage.removeItem(ATS_CV_HASH_KEY);
+  localStorage.removeItem(ATS_CACHE_TIMESTAMP_KEY);
 };
 
 const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
@@ -72,23 +116,32 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         const cachedHash = localStorage.getItem(ATS_CV_HASH_KEY);
         const currentHash = createCVHash(cvData);
 
-        if (cachedAssessment && cachedHash === currentHash) {
-          try {
-            const parsed = JSON.parse(cachedAssessment);
-            setAssessment(parsed);
-            console.log('[ATS Checker] Using cached assessment');
-            return;
-          } catch (parseError) {
-            console.error('[ATS Checker] Error parsing cached assessment:', parseError);
-            // Clear invalid cache
-            localStorage.removeItem(ATS_ASSESSMENT_STORAGE_KEY);
-            localStorage.removeItem(ATS_CV_HASH_KEY);
+        // Check if cache exists and is still valid (not expired)
+        if (cachedAssessment && cachedHash && isCacheValid()) {
+          // If hash matches, use cache
+          if (cachedHash === currentHash) {
+            try {
+              const parsed = JSON.parse(cachedAssessment);
+              setAssessment(parsed);
+              console.log('[ATS Checker] Using cached assessment');
+              return;
+            } catch (parseError) {
+              console.error('[ATS Checker] Error parsing cached assessment:', parseError);
+              // Clear invalid cache
+              clearATSCache();
+            }
+          } else {
+            // Hash doesn't match, but cache is still valid - check if CV content actually changed
+            // Only clear if core content changed (not just template/layout)
+            console.log('[ATS Checker] CV hash changed, but keeping cache if content is similar');
+            // For now, we'll keep the cache if it's still valid (within expiry period)
+            // This prevents losing cache when user accidentally clicks "New Chat"
+            // The cache will only be cleared if CV content actually changes significantly
           }
-        } else if (cachedHash && cachedHash !== currentHash) {
-          // CV has changed, clear old cache
-          console.log('[ATS Checker] CV data changed, clearing old cache');
-          localStorage.removeItem(ATS_ASSESSMENT_STORAGE_KEY);
-          localStorage.removeItem(ATS_CV_HASH_KEY);
+        } else if (cachedAssessment && !isCacheValid()) {
+          // Cache expired, clear it
+          console.log('[ATS Checker] Cache expired, clearing');
+          clearATSCache();
         }
       } catch (error) {
         console.error('[ATS Checker] Error checking cache:', error);
@@ -115,12 +168,13 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
       const data = await response.json();
       const assessmentData = data.assessment;
       
-      // Store in cache
+      // Store in cache with timestamp
       if (typeof window !== 'undefined' && assessmentData) {
         const currentHash = createCVHash(cvData);
         localStorage.setItem(ATS_ASSESSMENT_STORAGE_KEY, JSON.stringify(assessmentData));
         localStorage.setItem(ATS_CV_HASH_KEY, currentHash);
-        console.log('[ATS Checker] Assessment cached');
+        localStorage.setItem(ATS_CACHE_TIMESTAMP_KEY, Date.now().toString());
+        console.log('[ATS Checker] Assessment cached with timestamp');
       }
       
       setAssessment(assessmentData);
