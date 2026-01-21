@@ -23,20 +23,159 @@ const model = new ChatOpenAI({
 });
 
 /**
+ * Check if a string matches email format
+ */
+function isValidEmailFormat(email: string): boolean {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
+
+/**
+ * Check if a string matches professional email format (not generic providers for professionals)
+ */
+function isProfessionalEmailFormat(email: string): boolean {
+  if (!isValidEmailFormat(email)) return false;
+  const unprofessionalDomains = ['yahoo.com', 'hotmail.com', 'aol.com', 'gmail.com'];
+  const domain = email.split('@')[1]?.toLowerCase();
+  // For professionals under 40, these domains might signal age bias
+  // But we'll just check format, not domain quality
+  return true; // Format is valid, domain quality is subjective
+}
+
+/**
+ * Check if phone number has international format
+ */
+function hasInternationalFormat(phone: string): boolean {
+  // Check if starts with + or has country code pattern
+  return /^\+?\d{1,3}[\s-]?\d/.test(phone);
+}
+
+/**
+ * Sanitize CV data for LLM - remove actual contact information, keep structure
+ */
+function sanitizeCVDataForLLM(cvData: any): string {
+  try {
+    const sanitized = { ...cvData };
+    
+    // Remove actual contact data, keep structure indicators
+    if (sanitized.contact) {
+      sanitized.contact = {
+        email: sanitized.contact.email ? '[EMAIL_PROVIDED]' : '[EMAIL_MISSING]',
+        phone: sanitized.contact.phone ? '[PHONE_PROVIDED]' : '[PHONE_MISSING]',
+        location: sanitized.contact.location ? '[LOCATION_PROVIDED]' : '[LOCATION_MISSING]',
+      };
+    }
+    
+    if (sanitized.personalInfo) {
+      sanitized.personalInfo = {
+        ...sanitized.personalInfo,
+        email: sanitized.personalInfo.email ? '[EMAIL_PROVIDED]' : undefined,
+        phone: sanitized.personalInfo.phone ? '[PHONE_PROVIDED]' : undefined,
+        location: sanitized.personalInfo.location ? '[LOCATION_PROVIDED]' : undefined,
+        linkedin: sanitized.personalInfo.linkedin ? '[LINKEDIN_PROVIDED]' : undefined,
+      };
+    }
+    
+    if (sanitized.email) sanitized.email = '[EMAIL_PROVIDED]';
+    if (sanitized.phone) sanitized.phone = '[PHONE_PROVIDED]';
+    if (sanitized.location) sanitized.location = '[LOCATION_PROVIDED]';
+    
+    if (sanitized.social) {
+      sanitized.social = {
+        linkedin: sanitized.social.linkedin ? '[LINKEDIN_PROVIDED]' : undefined,
+        github: sanitized.social.github ? '[GITHUB_PROVIDED]' : undefined,
+        website: sanitized.social.website ? '[WEBSITE_PROVIDED]' : undefined,
+      };
+    }
+    
+    // Keep name structure but anonymize
+    if (sanitized.fullName) {
+      const nameParts = sanitized.fullName.split(' ');
+      sanitized.fullName = nameParts.length > 0 ? `${nameParts[0]} [LAST_NAME_PROVIDED]` : '[NAME_PROVIDED]';
+    }
+    
+    if (sanitized.personalInfo?.fullName) {
+      const nameParts = sanitized.personalInfo.fullName.split(' ');
+      sanitized.personalInfo.fullName = nameParts.length > 0 ? `${nameParts[0]} [LAST_NAME_PROVIDED]` : '[NAME_PROVIDED]';
+    }
+    
+    const jsonString = JSON.stringify(sanitized, null, 2);
+    return jsonString.slice(0, 2000) + (jsonString.length > 2000 ? '...' : '');
+  } catch (error) {
+    console.error('[ATS Assessor] Error sanitizing CV data:', error);
+    return '[CV_DATA_STRUCTURE_AVAILABLE]';
+  }
+}
+
+/**
  * Format CV data for LLM analysis - extract key information in readable format
+ * Privacy-conscious: sends availability and format indicators instead of actual contact data
  */
 function formatCVForAnalysis(cvData: any): string {
   const sections: string[] = [];
 
-  // Personal Info
-  if (cvData.fullName || cvData.personalInfo) {
-    sections.push(`## Personal Information
-- Name: ${cvData.fullName || cvData.personalInfo?.fullName || 'Not provided'}
-- Email: ${cvData.personalInfo?.email || cvData.email || 'Not provided'}
-- Phone: ${cvData.personalInfo?.phone || cvData.phone || 'Not provided'}
-- Location: ${cvData.personalInfo?.location || cvData.location || 'Not provided'}
-- LinkedIn: ${cvData.personalInfo?.linkedin || 'Not provided'}
-- Professional Headline: ${cvData.professionalHeadline || 'Not provided'}`);
+  // Personal Info - Privacy-conscious format
+  const email = cvData.personalInfo?.email || cvData.email || cvData.contact?.email;
+  const phone = cvData.personalInfo?.phone || cvData.phone || cvData.contact?.phone;
+  const location = cvData.personalInfo?.location || cvData.location || cvData.contact?.location;
+  const linkedin = cvData.personalInfo?.linkedin || cvData.social?.linkedin;
+  
+  if (cvData.fullName || cvData.personalInfo || email || phone || location) {
+    const contactInfo: string[] = [];
+    
+    // Name - we can include first name only or just indicate presence
+    if (cvData.fullName || cvData.personalInfo?.fullName) {
+      const fullName = cvData.fullName || cvData.personalInfo?.fullName;
+      // Only include first name for privacy, or just indicate presence
+      const firstName = fullName.split(' ')[0];
+      contactInfo.push(`- Name: ${firstName} [Full name provided]`);
+    } else {
+      contactInfo.push(`- Name: Not provided`);
+    }
+    
+    // Email - availability and format only
+    if (email) {
+      const isValid = isValidEmailFormat(email);
+      const isProfessional = isProfessionalEmailFormat(email);
+      contactInfo.push(`- Email: Available | Format: ${isValid ? 'Valid' : 'Invalid'} | Professional format: ${isProfessional ? 'Yes' : 'Generic domain'}`);
+    } else {
+      contactInfo.push(`- Email: Not provided`);
+    }
+    
+    // Phone - availability and format only
+    if (phone) {
+      const hasIntlFormat = hasInternationalFormat(phone);
+      contactInfo.push(`- Phone: Available | Format: ${hasIntlFormat ? 'International (+country code)' : 'Local format'}`);
+    } else {
+      contactInfo.push(`- Phone: Not provided`);
+    }
+    
+    // Location - general location only (city/region, not full address)
+    if (location) {
+      // Extract just city/region part for privacy
+      const locationParts = location.split(',').map((p: string) => p.trim());
+      const generalLocation = locationParts.slice(0, 2).join(', '); // City, Country/State
+      contactInfo.push(`- Location: ${generalLocation} [General location provided]`);
+    } else {
+      contactInfo.push(`- Location: Not provided`);
+    }
+    
+    // LinkedIn - just indicate presence
+    if (linkedin) {
+      const hasValidFormat = /linkedin\.com\/in\/[a-zA-Z0-9_-]+/i.test(linkedin);
+      contactInfo.push(`- LinkedIn: Available | Format: ${hasValidFormat ? 'Valid URL' : 'Invalid format'}`);
+    } else {
+      contactInfo.push(`- LinkedIn: Not provided`);
+    }
+    
+    // Professional Headline
+    if (cvData.professionalHeadline) {
+      contactInfo.push(`- Professional Headline: ${cvData.professionalHeadline}`);
+    } else {
+      contactInfo.push(`- Professional Headline: Not provided`);
+    }
+    
+    sections.push(`## Personal Information\n${contactInfo.join('\n')}`);
   }
 
   // Summary/Objective
@@ -121,8 +260,8 @@ Your task is to provide a comprehensive ATS assessment that evaluates both techn
 === CV CONTENT ===
 ${formattedCV}
 
-=== RAW DATA (for additional context) ===
-${JSON.stringify(cvData, null, 2).slice(0, 2000)}...
+=== RAW DATA (for additional context - sanitized for privacy) ===
+${sanitizeCVDataForLLM(cvData)}
 
 === ASSESSMENT FRAMEWORK ===
 
@@ -142,9 +281,10 @@ ${JSON.stringify(cvData, null, 2).slice(0, 2000)}...
 
 **Contact Information:**
 - Must be in main body, not headers/footers
-- Professional email format signals baseline professionalism
+- Professional email format (not generic providers like yahoo.com, hotmail.com for professionals) signals baseline professionalism
 - International phone format (+country code) signals global awareness
 - Missing or misparsed contact info = immediate disqualification
+- Note: Contact information availability and format are provided in the CV content, but actual values are not included for privacy protection
 
 **Section Headers:**
 - Standard headers (Experience, Education, Skills, Contact) are recognized
