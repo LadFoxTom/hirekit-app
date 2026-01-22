@@ -3650,7 +3650,7 @@ export default function HomePage() {
                           <button
                             onClick={() => handleSubmit()}
                             disabled={(!inputValue.trim() && !attachedFile) || isProcessing || isUploading}
-                            className="p-2 flex items-center justify-center rounded-lg transition-all"
+                            className="p-2 flex items-center justify-center rounded-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                             style={{
                               backgroundColor: (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
                                 ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff')
@@ -3669,8 +3669,22 @@ export default function HomePage() {
                                 e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff';
                               }
                             }}
+                            onFocus={(e) => {
+                              if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
+                                const isDay = document.documentElement.getAttribute('data-theme') === 'day';
+                                e.currentTarget.style.backgroundColor = isDay ? '#2563eb' : '#ffffff';
+                                e.currentTarget.style.color = isDay ? '#ffffff' : '#000000';
+                              }
+                            }}
+                            onBlur={(e) => {
+                              if ((inputValue.trim() || attachedFile) && !isProcessing && !isUploading) {
+                                const isDay = document.documentElement.getAttribute('data-theme') === 'day';
+                                e.currentTarget.style.backgroundColor = isDay ? '#2563eb' : '#ffffff';
+                                e.currentTarget.style.color = isDay ? '#ffffff' : '#000000';
+                              }
+                            }}
                           >
-                            <FiSend size={16} />
+                            <FiSend size={16} style={{ color: 'inherit' }} />
                           </button>
                         </div>
                       </div>

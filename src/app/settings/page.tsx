@@ -660,7 +660,8 @@ export default function SettingsPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsLanguageMenuOpen(false)}
-              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              className="fixed inset-0 z-40 lg:hidden"
+              style={{ backgroundColor: 'var(--overlay)' }}
             />
             
             {/* Language Menu - Slide in from right */}
@@ -669,15 +670,16 @@ export default function SettingsPage() {
               animate={{ x: 0 }}
               exit={{ x: 280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-14 right-0 bottom-0 w-[80px] z-40 overflow-y-auto lg:hidden"
-              style={{ 
-                backgroundColor: 'var(--bg-secondary)',
+              className="fixed top-14 right-0 bottom-0 z-40 overflow-y-auto lg:hidden"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
                 borderLeft: '1px solid var(--border-subtle)',
+                width: '80px',
               }}
             >
-              <div className="p-2 space-y-2">
-                {/* Close button */}
-                <div className="flex justify-end mb-2">
+              <div className="p-4 space-y-2">
+                {/* Close Button */}
+                <div className="flex items-center justify-end mb-2">
                   <button
                     onClick={() => setIsLanguageMenuOpen(false)}
                     className="p-2 flex items-center justify-center rounded-lg transition-colors"
@@ -692,12 +694,12 @@ export default function SettingsPage() {
                     }}
                     aria-label="Close language menu"
                   >
-                    <FiX size={16} />
+                    <FiX size={18} />
                   </button>
                 </div>
-                
+
                 {/* Language Options */}
-                <div className="space-y-1">
+                <div className="space-y-2">
                   {availableLanguages.map((lang) => {
                     const flagMap: Record<string, string> = {
                       'en': '/flags/gb.svg',
@@ -715,7 +717,7 @@ export default function SettingsPage() {
                           setLanguage(lang.code as any);
                           setIsLanguageMenuOpen(false);
                         }}
-                        className="w-full flex items-center justify-center p-2 transition-colors rounded-lg"
+                        className="w-full flex items-center justify-center p-3 rounded-lg transition-colors"
                         style={{
                           backgroundColor: language === lang.code ? 'var(--bg-hover)' : 'transparent',
                         }}
