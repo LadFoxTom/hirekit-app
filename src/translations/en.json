@@ -24,6 +24,7 @@
   "nav.help_support_short": "Help",
   "nav.sign_out": "Sign out",
   "nav.sign_in": "Sign in",
+  "nav.upgrade": "Upgrade",
   "nav.get_started": "Get Started",
   
   "common.pricing": "Pricing",
@@ -756,10 +757,15 @@
   "chat.ai_thinking": "AI is thinking...",
   "chat.continue_conversation": "Continue the conversation...",
   "chat.new_conversation": "New conversation",
+  "chat.questions_remaining_guest": "{{count}} question{{count, plural, =1 {} other {s}}} remaining",
+  "chat.questions_remaining_free": "{{count}} question{{count, plural, =1 {} other {s}}} remaining",
   
   "toast.jobs_coming_soon": "Jobs coming soon 🚧",
   "toast.job_applications_coming_soon": "Job Applications coming soon 🚧",
   "toast.tests_coming_soon": "Tests coming soon 🚧",
+  "toast.question_limit_guest_reached": "You've reached your limit. Please log in to ask more questions.",
+  "toast.question_limit_free_reached": "You've reached your limit (5 questions). Upgrade to Pro for unlimited chatting.",
+  "toast.download_free_account": "Downloading is only available for paid accounts. Please upgrade to download.",
   "toast.cv_updated": "CV updated",
   "toast.letter_updated": "Letter updated",
   "toast.cv_data_copied": "CV data copied!",

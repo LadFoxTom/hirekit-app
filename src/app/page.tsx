@@ -833,6 +833,11 @@ export default function HomePage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isListening, setIsListening] = useState(false);
   
+  // Question count state
+  const [questionCount, setQuestionCount] = useState(0);
+  const [questionLimit, setQuestionLimit] = useState(2); // Default for guests
+  const [questionRemaining, setQuestionRemaining] = useState(2);
+  
   // CV State
   const [cvData, setCvData] = useState<CVData>({
     template: 'modern',
@@ -992,6 +997,39 @@ export default function HomePage() {
       }));
     }
   }, [cvData.photoUrl, cvData.layout?.photoPosition]);
+
+  // Load question count on mount and when auth state changes
+  useEffect(() => {
+    const loadQuestionCount = async () => {
+      if (isAuthenticated && user?.id) {
+        try {
+          const response = await fetch('/api/user/question-count');
+          if (response.ok) {
+            const data = await response.json();
+            setQuestionCount(data.count);
+            setQuestionLimit(data.limit);
+            setQuestionRemaining(data.remaining);
+          }
+        } catch (error) {
+          console.error('Failed to load question count:', error);
+        }
+      } else {
+        // For guests, check localStorage
+        const guestKey = 'guest_question_count';
+        try {
+          const stored = localStorage.getItem(guestKey);
+          const count = stored ? parseInt(stored, 10) : 0;
+          setQuestionCount(count);
+          setQuestionLimit(2);
+          setQuestionRemaining(Math.max(0, 2 - count));
+        } catch (error) {
+          console.error('Failed to load guest question count:', error);
+        }
+      }
+    };
+    
+    loadQuestionCount();
+  }, [isAuthenticated, user?.id]);
 
   const [savedCVs, setSavedCVs] = useState<SavedCV[]>([]);
   const [currentCVId, setCurrentCVId] = useState<string | null>(null);
@@ -1298,31 +1336,52 @@ export default function HomePage() {
     e?.preventDefault();
     if ((!inputValue.trim() && !attachedFile) || isProcessing) return;
 
-    // Prompt limit for free users: max 10/day
-    const usageKey = `promptUsage_${user?.id || 'guest'}`;
-    const today = new Date().toISOString().slice(0, 10);
-    let usage = { date: today, count: 0 };
-    try {
-      const stored = localStorage.getItem(usageKey);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.date === today) {
-          usage = parsed;
-        }
+    // Check question limit before sending
+    if (questionRemaining <= 0 && !isPro) {
+      if (!isAuthenticated) {
+        toast.error(t('toast.question_limit_guest_reached'));
+        // Optionally redirect to login
+        setTimeout(() => {
+          router.push('/auth/login');
+        }, 2000);
+      } else {
+        toast.error(t('toast.question_limit_free_reached'));
+        router.push('/pricing');
       }
-    } catch (err) {
-      console.warn('Prompt usage read error', err);
-    }
-    if (isFree && usage.count >= PROMPT_LIMIT) {
-      toast.error('Daglimiet bereikt (10 prompts). Upgrade naar Pro voor onbeperkt chatten.');
       return;
     }
-    // increment usage immediately to avoid bypassing
-    try {
-      const next = { date: today, count: usage.count + 1 };
-      localStorage.setItem(usageKey, JSON.stringify(next));
-    } catch (err) {
-      console.warn('Prompt usage write error', err);
+
+    // Increment question count
+    if (isAuthenticated && user?.id) {
+      try {
+        const response = await fetch('/api/user/question-count', {
+          method: 'POST'
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setQuestionCount(data.count);
+          setQuestionRemaining(data.remaining);
+          if (data.limitReached) {
+            toast.error(t('toast.question_limit_free_reached'));
+            router.push('/pricing');
+            return;
+          }
+        }
+      } catch (error) {
+        console.error('Failed to increment question count:', error);
+      }
+    } else {
+      // For guests, track in localStorage
+      const guestKey = 'guest_question_count';
+      try {
+        const currentCount = parseInt(localStorage.getItem(guestKey) || '0', 10);
+        const newCount = currentCount + 1;
+        localStorage.setItem(guestKey, newCount.toString());
+        setQuestionCount(newCount);
+        setQuestionRemaining(Math.max(0, 2 - newCount));
+      } catch (error) {
+        console.error('Failed to update guest question count:', error);
+      }
     }
 
     // Build the message content - include attached file if present
@@ -1654,8 +1713,9 @@ export default function HomePage() {
 
   // Download PDF
   const handleDownload = async () => {
-    if (!isPro) {
-      toast.error('Downloading CV is a Pro feature. Please upgrade to download.');
+    // Block download for free accounts (not just non-pro)
+    if (!isAuthenticated || isFree) {
+      toast.error(t('toast.download_free_account'));
       router.push('/pricing');
       return;
     }
@@ -3594,6 +3654,38 @@ export default function HomePage() {
                 {/* Input Area */}
                 <div className="p-4" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <div className="max-w-2xl mx-auto">
+                    {/* Question Limit Indicator */}
+                    {!isPro && (
+                      <div className="mb-2 px-3 py-1.5 rounded-lg text-xs flex items-center justify-between" style={{ 
+                        backgroundColor: questionRemaining <= 1 ? 'rgba(239, 68, 68, 0.1)' : 'var(--bg-tertiary)',
+                        border: `1px solid ${questionRemaining <= 1 ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-subtle)'}`
+                      }}>
+                        <span style={{ color: 'var(--text-secondary)' }}>
+                          {isAuthenticated 
+                            ? t('chat.questions_remaining_free', { count: questionRemaining })
+                            : t('chat.questions_remaining_guest', { count: questionRemaining })
+                          }
+                        </span>
+                        {questionRemaining <= 1 && (
+                          <button
+                            onClick={() => {
+                              if (!isAuthenticated) {
+                                router.push('/auth/login');
+                              } else {
+                                router.push('/pricing');
+                              }
+                            }}
+                            className="ml-2 px-2 py-0.5 rounded text-xs font-medium transition-colors"
+                            style={{ 
+                              backgroundColor: 'var(--color-ladderfox-blue)',
+                              color: '#ffffff'
+                            }}
+                          >
+                            {!isAuthenticated ? t('nav.sign_in') : t('nav.upgrade')}
+                          </button>
+                        )}
+                      </div>
+                    )}
                     <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-medium)' }}>
                       {/* Textarea row with buttons */}
                       <div className="relative flex items-center">
@@ -3996,7 +4088,8 @@ export default function HomePage() {
                         <button
                           onClick={() => {
                             if (isFree) {
-                              toast.error('Downloading CV is a Pro feature. Please upgrade to download.');
+                              toast.error(t('toast.download_free_account'));
+                              router.push('/pricing');
                               router.push('/pricing');
                               return;
                             }
@@ -4048,7 +4141,8 @@ export default function HomePage() {
                         <button
                           onClick={() => {
                             if (isFree) {
-                              toast.error('Downloading letters is a Pro feature. Please upgrade to download.');
+                              toast.error(t('toast.download_free_account'));
+                              router.push('/pricing');
                               router.push('/pricing');
                               return;
                             }
