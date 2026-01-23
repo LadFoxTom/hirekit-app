@@ -1178,7 +1178,7 @@ export default function PricingPage() {
                     </tr>
                     <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>
                       <td className="p-4" style={{ color: 'var(--text-secondary)' }}>{t('pricing.comparison.number_of_cvs')}</td>
-                      <td className="p-4 text-center" style={{ color: 'var(--text-tertiary)' }}>1</td>
+                      <td className="p-4 text-center text-blue-400">{t('pricing.comparison.unlimited')}</td>
                       <td className="p-4 text-center text-blue-400">{t('pricing.comparison.unlimited')}</td>
                     </tr>
                     <tr style={{ borderTop: '1px solid var(--border-subtle)' }}>

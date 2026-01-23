@@ -11,7 +11,7 @@ export const STRIPE_PLANS = {
     name: 'Free',
     price: 0,
     features: [
-      '1 CV & 1 letter',
+      'Unlimited CVs & letters',
       '3 basic templates', 
       'Preview only (no downloads)',
       '10 chat prompts per day',
@@ -19,7 +19,7 @@ export const STRIPE_PLANS = {
       'Upgrade prompts on premium features'
     ],
     stripePriceId: null,
-    cvLimit: 1,
+    cvLimit: 1, // Note: cvLimit is still 1 in database, but users can create unlimited (just can't download)
     aiEnabled: false,
     exportEnabled: false
   },
