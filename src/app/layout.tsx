@@ -4,6 +4,9 @@ import './globals.css'
 import { Providers } from './providers'
 import { getGoogleFontsUrls } from '@/lib/fonts'
 import EnvironmentBadge from '@/components/EnvironmentBadge'
+import Hotjar from '@/components/Hotjar'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
+import ConsentBanner from '@/components/ConsentBanner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -105,12 +108,39 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-BT59N8YB46'
+  const gaEnabled = process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ENABLED === 'true'
+
   return (
     <html lang="en">
       <head>
         <meta name="theme-color" content="#2563eb" />
+        {gaEnabled && (
+          <>
+            {/* Google tag (gtag.js) - Initialize dataLayer early for Consent Mode */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                `,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className={inter.className}>
+        {gaEnabled && (
+          <GoogleAnalytics 
+            trackingId={gaId}
+            enabled={gaEnabled}
+          />
+        )}
+        <Hotjar 
+          siteId={process.env.NEXT_PUBLIC_HOTJAR_SITE_ID ? parseInt(process.env.NEXT_PUBLIC_HOTJAR_SITE_ID) : undefined}
+          enabled={process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_HOTJAR_ENABLED === 'true'}
+        />
+        <ConsentBanner />
         <Providers>
           {children}
         </Providers>
