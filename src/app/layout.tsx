@@ -1,12 +1,17 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import dynamic from 'next/dynamic'
 import './globals.css'
 import { Providers } from './providers'
 import { getGoogleFontsUrls } from '@/lib/fonts'
 import EnvironmentBadge from '@/components/EnvironmentBadge'
 import Hotjar from '@/components/Hotjar'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
-import ConsentBanner from '@/components/ConsentBanner'
+
+// Dynamically import ConsentBanner to avoid SSR issues
+const ConsentBanner = dynamic(() => import('@/components/ConsentBanner'), {
+  ssr: false,
+})
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -140,8 +145,8 @@ export default function RootLayout({
           siteId={process.env.NEXT_PUBLIC_HOTJAR_SITE_ID ? parseInt(process.env.NEXT_PUBLIC_HOTJAR_SITE_ID) : undefined}
           enabled={process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_HOTJAR_ENABLED === 'true'}
         />
-        <ConsentBanner />
         <Providers>
+          <ConsentBanner />
           {children}
         </Providers>
       </body>
