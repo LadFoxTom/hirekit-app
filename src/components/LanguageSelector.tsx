@@ -11,7 +11,22 @@ const FlagIcon: React.FC<{ code: string; className?: string }> = ({ code, classN
     'nl': '/flags/nl.svg',
     'fr': '/flags/fr.svg',
     'es': '/flags/es.svg',
-    'de': '/flags/de.svg'
+    'de': '/flags/de.svg',
+    'it': '/flags/it.svg',
+    'pl': '/flags/pl.svg',
+    'ro': '/flags/ro.svg',
+    'hu': '/flags/hu.svg',
+    'el': '/flags/gr.svg',
+    'cs': '/flags/cz.svg',
+    'pt': '/flags/pt.svg',
+    'sv': '/flags/se.svg',
+    'bg': '/flags/bg.svg',
+    'da': '/flags/dk.svg',
+    'fi': '/flags/fi.svg',
+    'sk': '/flags/sk.svg',
+    'no': '/flags/no.svg',
+    'hr': '/flags/hr.svg',
+    'sr': '/flags/rs.svg',
   }
 
   const flagSrc = flagMap[code]
@@ -151,8 +166,8 @@ export function LanguageSelector({ onMobileMenuOpen }: LanguageSelectorProps = {
               backgroundColor: 'var(--bg-elevated)',
               border: '1px solid var(--border-medium)',
               boxShadow: 'var(--shadow-lg)',
-              width: '44px',
-              minWidth: '44px',
+              width: '220px',
+              minWidth: '220px',
             }}
           >
             <div className="py-1.5 px-1.5">
@@ -160,7 +175,7 @@ export function LanguageSelector({ onMobileMenuOpen }: LanguageSelectorProps = {
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageChange(lang.code)}
-                  className="w-full flex items-center justify-center p-2 transition-colors rounded-lg"
+                  className="w-full flex items-center gap-3 px-3 py-2 transition-colors rounded-lg"
                   style={{
                     backgroundColor: language === lang.code ? 'var(--bg-hover)' : 'transparent',
                   }}
@@ -190,6 +205,12 @@ export function LanguageSelector({ onMobileMenuOpen }: LanguageSelectorProps = {
                   }}>
                     <FlagIcon code={lang.code} />
                   </div>
+                  <span
+                    className="text-sm truncate"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
+                    {lang.name}
+                  </span>
                 </button>
               ))}
             </div>
