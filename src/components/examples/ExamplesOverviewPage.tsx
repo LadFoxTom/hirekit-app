@@ -4,248 +4,40 @@ import React from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/context/LocaleContext'
 import { getProfessionsByCategory, URL_SEGMENTS, type Language } from '@/data/professions'
-import { FaFileAlt, FaArrowRight, FaBriefcase, FaUser, FaCheckCircle } from 'react-icons/fa'
+import { FaArrowRight, FaBriefcase, FaUser } from 'react-icons/fa'
 
 interface ExamplesOverviewPageProps {
   type: 'cv' | 'letter'
   language: Language
 }
 
+function getCategoryName(category: string, language: Language): string {
+  const categories: Record<string, Record<Language, string>> = {
+    healthcare: { en: 'Healthcare', nl: 'Zorg & Gezondheid', fr: 'Santé', es: 'Salud', de: 'Gesundheitswesen', it: 'Sanità', pl: 'Opieka Zdrowotna', ro: 'Sănătate', hu: 'Egészségügy', el: 'Υγεία', cs: 'Zdravotnictví', pt: 'Saúde', sv: 'Hälsovård', bg: 'Здравеопазване', da: 'Sundhedspleje', fi: 'Terveydenhuolto', sk: 'Zdravotníctvo', no: 'Helsevesen', hr: 'Zdravstvo', sr: 'Здравство' },
+    technology: { en: 'Technology', nl: 'Technologie', fr: 'Technologie', es: 'Tecnología', de: 'Technologie', it: 'Tecnologia', pl: 'Technologia', ro: 'Tehnologie', hu: 'Technológia', el: 'Τεχνολογία', cs: 'Technologie', pt: 'Tecnologia', sv: 'Teknik', bg: 'Технологии', da: 'Teknologi', fi: 'Teknologia', sk: 'Technológia', no: 'Teknologi', hr: 'Tehnologija', sr: 'Технологија' },
+    education: { en: 'Education', nl: 'Onderwijs', fr: 'Éducation', es: 'Educación', de: 'Bildung', it: 'Educazione', pl: 'Edukacja', ro: 'Educație', hu: 'Oktatás', el: 'Εκπαίδευση', cs: 'Vzdělávání', pt: 'Educação', sv: 'Utbildning', bg: 'Образование', da: 'Uddannelse', fi: 'Koulutus', sk: 'Vzdelávanie', no: 'Utdanning', hr: 'Obrazovanje', sr: 'Образовање' },
+    business: { en: 'Business', nl: 'Zakelijk', fr: 'Commerce', es: 'Negocios', de: 'Wirtschaft', it: 'Business', pl: 'Biznes', ro: 'Afaceri', hu: 'Üzlet', el: 'Επιχειρήσεις', cs: 'Podnikání', pt: 'Negócios', sv: 'Företag', bg: 'Бизнес', da: 'Forretning', fi: 'Liiketoiminta', sk: 'Podnikanie', no: 'Forretning', hr: 'Poslovanje', sr: 'Пословање' },
+    creative: { en: 'Creative', nl: 'Creatief', fr: 'Créatif', es: 'Creativo', de: 'Kreativ', it: 'Creativo', pl: 'Kreatywny', ro: 'Creativ', hu: 'Kreatív', el: 'Δημιουργικό', cs: 'Kreativní', pt: 'Criativo', sv: 'Kreativ', bg: 'Креативен', da: 'Kreativ', fi: 'Luova', sk: 'Kreatívny', no: 'Kreativ', hr: 'Kreativno', sr: 'Креативан' },
+    engineering: { en: 'Engineering', nl: 'Techniek', fr: 'Ingénierie', es: 'Ingeniería', de: 'Ingenieurwesen', it: 'Ingegneria', pl: 'Inżynieria', ro: 'Inginerie', hu: 'Mérnöki', el: 'Μηχανική', cs: 'Inženýrství', pt: 'Engenharia', sv: 'Teknik', bg: 'Инженерство', da: 'Ingeniørvidenskab', fi: 'Tekniikka', sk: 'Inžinierstvo', no: 'Ingeniørfag', hr: 'Inženjerstvo', sr: 'Инжењерство' },
+    sales: { en: 'Sales', nl: 'Verkoop', fr: 'Ventes', es: 'Ventas', de: 'Verkauf', it: 'Vendite', pl: 'Sprzedaż', ro: 'Vânzări', hu: 'Értékesítés', el: 'Πωλήσεις', cs: 'Prodej', pt: 'Vendas', sv: 'Försäljning', bg: 'Продажби', da: 'Salg', fi: 'Myynti', sk: 'Predaj', no: 'Salg', hr: 'Prodaja', sr: 'Продаја' },
+    administration: { en: 'Administration', nl: 'Administratie', fr: 'Administration', es: 'Administración', de: 'Verwaltung', it: 'Amministrazione', pl: 'Administracja', ro: 'Administrație', hu: 'Adminisztráció', el: 'Διοίκηση', cs: 'Administrace', pt: 'Administração', sv: 'Administration', bg: 'Администрация', da: 'Administration', fi: 'Hallinto', sk: 'Administrácia', no: 'Administrasjon', hr: 'Administracija', sr: 'Администрација' },
+    hospitality: { en: 'Hospitality', nl: 'Horeca', fr: 'Hôtellerie', es: 'Hostelería', de: 'Gastgewerbe', it: 'Ospitalità', pl: 'Gastronomia', ro: 'Ospitalitate', hu: 'Vendéglátás', el: 'Φιλοξενία', cs: 'Pohostinství', pt: 'Hospitalidade', sv: 'Hotell & Restaurang', bg: 'Гостоприемство', da: 'Hotel & Restaurant', fi: 'Hotelli- ja ravintola', sk: 'Pohostinnosť', no: 'Hotell & Restaurant', hr: 'Ugostiteljstvo', sr: 'Угоститељство' },
+    legal: { en: 'Legal', nl: 'Juridisch', fr: 'Juridique', es: 'Legal', de: 'Recht', it: 'Legale', pl: 'Prawo', ro: 'Legal', hu: 'Jogi', el: 'Νομικό', cs: 'Právní', pt: 'Jurídico', sv: 'Juridik', bg: 'Правен', da: 'Juridisk', fi: 'Oikeudellinen', sk: 'Právne', no: 'Juridisk', hr: 'Pravno', sr: 'Правно' }
+  };
+  return categories[category]?.[language] || category;
+}
+
 export default function ExamplesOverviewPage({ type, language }: ExamplesOverviewPageProps) {
-  const { t } = useLocale()
-  const segments = URL_SEGMENTS[language]
-  const professionsByCategory = getProfessionsByCategory(language)
+  const { t } = useLocale();
+  const segments = URL_SEGMENTS[language];
+  const professionsByCategory = getProfessionsByCategory(language);
   
   const typeName = type === 'cv' 
     ? (t('examples.cv') || 'CV')
-    : (t('examples.letter') || 'Motivational Letter')
+    : (t('examples.letter') || 'Motivational Letter');
   
-  const typeSegment = type === 'cv' ? segments.cv : segments.letter
-  
-  // Category names in different languages
-  const categoryNames: Record<string, Record<Language, string>> = {
-    healthcare: {
-      en: 'Healthcare',
-      nl: 'Zorg & Gezondheid',
-      fr: 'Santé',
-      es: 'Salud',
-      de: 'Gesundheitswesen',
-      it: 'Sanità',
-      pl: 'Opieka Zdrowotna',
-      ro: 'Sănătate',
-      hu: 'Egészségügy',
-      el: 'Υγεία',
-      cs: 'Zdravotnictví',
-      pt: 'Saúde',
-      sv: 'Hälsovård',
-      bg: 'Здравеопазване',
-      da: 'Sundhedspleje',
-      fi: 'Terveydenhuolto',
-      sk: 'Zdravotníctvo',
-      no: 'Helsevesen',
-      hr: 'Zdravstvo',
-      sr: 'Здравство'
-    },
-    technology: {
-      en: 'Technology',
-      nl: 'Technologie',
-      fr: 'Technologie',
-      es: 'Tecnología',
-      de: 'Technologie',
-      it: 'Tecnologia',
-      pl: 'Technologia',
-      ro: 'Tehnologie',
-      hu: 'Technológia',
-      el: 'Τεχνολογία',
-      cs: 'Technologie',
-      pt: 'Tecnologia',
-      sv: 'Teknik',
-      bg: 'Технологии',
-      da: 'Teknologi',
-      fi: 'Teknologia',
-      sk: 'Technológia',
-      no: 'Teknologi',
-      hr: 'Tehnologija',
-      sr: 'Технологија'
-    },
-    education: {
-      en: 'Education',
-      nl: 'Onderwijs',
-      fr: 'Éducation',
-      es: 'Educación',
-      de: 'Bildung',
-      it: 'Educazione',
-      pl: 'Edukacja',
-      ro: 'Educație',
-      hu: 'Oktatás',
-      el: 'Εκπαίδευση',
-      cs: 'Vzdělávání',
-      pt: 'Educação',
-      sv: 'Utbildning',
-      bg: 'Образование',
-      da: 'Uddannelse',
-      fi: 'Koulutus',
-      sk: 'Vzdelávanie',
-      no: 'Utdanning',
-      hr: 'Obrazovanje',
-      sr: 'Образовање'
-    },
-    business: {
-      en: 'Business',
-      nl: 'Zakelijk',
-      fr: 'Commerce',
-      es: 'Negocios',
-      de: 'Wirtschaft',
-      it: 'Business',
-      pl: 'Biznes',
-      ro: 'Afaceri',
-      hu: 'Üzlet',
-      el: 'Επιχειρήσεις',
-      cs: 'Podnikání',
-      pt: 'Negócios',
-      sv: 'Företag',
-      bg: 'Бизнес',
-      da: 'Forretning',
-      fi: 'Liiketoiminta',
-      sk: 'Podnikanie',
-      no: 'Forretning',
-      hr: 'Poslovanje',
-      sr: 'Пословање'
-    },
-    creative: {
-      en: 'Creative',
-      nl: 'Creatief',
-      fr: 'Créatif',
-      es: 'Creativo',
-      de: 'Kreativ',
-      it: 'Creativo',
-      pl: 'Kreatywny',
-      ro: 'Creativ',
-      hu: 'Kreatív',
-      el: 'Δημιουργικό',
-      cs: 'Kreativní',
-      pt: 'Criativo',
-      sv: 'Kreativ',
-      bg: 'Креативен',
-      da: 'Kreativ',
-      fi: 'Luova',
-      sk: 'Kreatívny',
-      no: 'Kreativ',
-      hr: 'Kreativno',
-      sr: 'Креативан'
-    },
-    engineering: {
-      en: 'Engineering',
-      nl: 'Techniek',
-      fr: 'Ingénierie',
-      es: 'Ingeniería',
-      de: 'Ingenieurwesen',
-      it: 'Ingegneria',
-      pl: 'Inżynieria',
-      ro: 'Inginerie',
-      hu: 'Mérnöki',
-      el: 'Μηχανική',
-      cs: 'Inženýrství',
-      pt: 'Engenharia',
-      sv: 'Teknik',
-      bg: 'Инженерство',
-      da: 'Ingeniørvidenskab',
-      fi: 'Tekniikka',
-      sk: 'Inžinierstvo',
-      no: 'Ingeniørfag',
-      hr: 'Inženjerstvo',
-      sr: 'Инжењерство'
-    },
-    sales: {
-      en: 'Sales',
-      nl: 'Verkoop',
-      fr: 'Ventes',
-      es: 'Ventas',
-      de: 'Verkauf',
-      it: 'Vendite',
-      pl: 'Sprzedaż',
-      ro: 'Vânzări',
-      hu: 'Értékesítés',
-      el: 'Πωλήσεις',
-      cs: 'Prodej',
-      pt: 'Vendas',
-      sv: 'Försäljning',
-      bg: 'Продажби',
-      da: 'Salg',
-      fi: 'Myynti',
-      sk: 'Predaj',
-      no: 'Salg',
-      hr: 'Prodaja',
-      sr: 'Продаја'
-    },
-    administration: {
-      en: 'Administration',
-      nl: 'Administratie',
-      fr: 'Administration',
-      es: 'Administración',
-      de: 'Verwaltung',
-      it: 'Amministrazione',
-      pl: 'Administracja',
-      ro: 'Administrație',
-      hu: 'Adminisztráció',
-      el: 'Διοίκηση',
-      cs: 'Administrace',
-      pt: 'Administração',
-      sv: 'Administration',
-      bg: 'Администрация',
-      da: 'Administration',
-      fi: 'Hallinto',
-      sk: 'Administrácia',
-      no: 'Administrasjon',
-      hr: 'Administracija',
-      sr: 'Администрација'
-    },
-    hospitality: {
-      en: 'Hospitality',
-      nl: 'Horeca',
-      fr: 'Hôtellerie',
-      es: 'Hostelería',
-      de: 'Gastgewerbe',
-      it: 'Ospitalità',
-      pl: 'Gastronomia',
-      ro: 'Ospitalitate',
-      hu: 'Vendéglátás',
-      el: 'Φιλοξενία',
-      cs: 'Pohostinství',
-      pt: 'Hospitalidade',
-      sv: 'Hotell & Restaurang',
-      bg: 'Гостоприемство',
-      da: 'Hotel & Restaurant',
-      fi: 'Hotelli- ja ravintola',
-      sk: 'Pohostinnosť',
-      no: 'Hotell & Restaurant',
-      hr: 'Ugostiteljstvo',
-      sr: 'Угоститељство'
-    },
-    legal: {
-      en: 'Legal',
-      nl: 'Juridisch',
-      fr: 'Juridique',
-      es: 'Legal',
-      de: 'Recht',
-      it: 'Legale',
-      pl: 'Prawo',
-      ro: 'Legal',
-      hu: 'Jogi',
-      el: 'Νομικό',
-      cs: 'Právní',
-      pt: 'Jurídico',
-      sv: 'Juridik',
-      bg: 'Правен',
-      da: 'Juridisk',
-      fi: 'Oikeudellinen',
-      sk: 'Právne',
-      no: 'Juridisk',
-      hr: 'Pravno',
-      sr: 'Правно'
-    }
-  }
-  
+  const typeSegment = type === 'cv' ? segments.cv : segments.letter;
+
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       {/* Hero Section */}
@@ -264,8 +56,7 @@ export default function ExamplesOverviewPage({ type, language }: ExamplesOvervie
           <p className="text-xl text-blue-100 max-w-3xl">
             {type === 'cv' 
               ? (t('examples.cv_overview.description') || 'Browse professional CV examples by profession. Learn what makes a great CV and get inspired to create your own.')
-              : (t('examples.letter_overview.description') || 'Browse professional motivational letter examples by profession. Learn what makes a great letter and get inspired to create your own.'))
-            }
+              : (t('examples.letter_overview.description') || 'Browse professional motivational letter examples by profession. Learn what makes a great letter and get inspired to create your own.')}
           </p>
         </div>
       </div>
@@ -324,7 +115,7 @@ export default function ExamplesOverviewPage({ type, language }: ExamplesOvervie
           <section key={category} className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <FaBriefcase className="text-blue-500" />
-              {categoryNames[category]?.[language] || category}
+              {getCategoryName(category, language)}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {professions.map(({ id, translation }) => (
