@@ -5948,6 +5948,573 @@ export const PROFESSIONS: Profession[] = [
         ]
       }
     }
+  },
+  // Technology: IT Support Specialist
+  {
+    id: 'it-support',
+    category: 'technology',
+    translations: {
+      en: {
+        name: 'IT Support Specialist',
+        slug: 'it-support',
+        description: 'IT Support Specialists provide technical assistance to users, troubleshoot hardware and software issues, and maintain computer systems and networks. They work in help desks, IT departments, and technology companies.',
+        tips: [
+          'Highlight your technical troubleshooting skills',
+          'Emphasize experience with various operating systems and software',
+          'Showcase customer service and communication abilities',
+          'Include certifications like CompTIA A+ or ITIL',
+          'Demonstrate problem-solving and analytical skills'
+        ],
+        skills: [
+          'Hardware and software troubleshooting',
+          'Network configuration and maintenance',
+          'Operating systems (Windows, macOS, Linux)',
+          'Help desk ticketing systems',
+          'Remote support tools',
+          'Customer service and communication',
+          'Documentation and knowledge base management'
+        ],
+        whyGood: [
+          'Clear structure highlighting technical competencies',
+          'Emphasizes customer service and problem-solving',
+          'Shows progression of technical skills and certifications',
+          'Demonstrates ability to work under pressure',
+          'ATS-friendly format with IT keywords'
+        ]
+      },
+      nl: {
+        name: 'IT Support Specialist',
+        slug: 'it-support',
+        description: 'IT Support Specialisten bieden technische ondersteuning aan gebruikers, lossen hardware- en softwareproblemen op en onderhouden computersystemen en netwerken. Ze werken in helpdesks, IT-afdelingen en technologiebedrijven.',
+        tips: [
+          'Benadruk je technische probleemoplossende vaardigheden',
+          'Leg nadruk op ervaring met verschillende besturingssystemen en software',
+          'Toon klantenservice en communicatieve vaardigheden',
+          'Vermeld certificeringen zoals CompTIA A+ of ITIL',
+          'Demonstreer probleemoplossende en analytische vaardigheden'
+        ],
+        skills: [
+          'Hardware- en softwareprobleemoplossing',
+          'Netwerkconfiguratie en onderhoud',
+          'Besturingssystemen (Windows, macOS, Linux)',
+          'Helpdesk ticketingsystemen',
+          'Remote support tools',
+          'Klantenservice en communicatie',
+          'Documentatie en knowledge base beheer'
+        ],
+        whyGood: [
+          'Duidelijke structuur die technische competenties benadrukt',
+          'Legt nadruk op klantenservice en probleemoplossing',
+          'Toont progressie van technische vaardigheden en certificeringen',
+          'Demonstreert vermogen om onder druk te werken',
+          'ATS-vriendelijk formaat met IT-trefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Spécialiste Support IT',
+        slug: 'specialiste-support-it',
+        description: 'Les spécialistes du support IT fournissent une assistance technique aux utilisateurs, résolvent les problèmes matériels et logiciels, et maintiennent les systèmes informatiques et réseaux. Ils travaillent dans les centres d\'aide, départements IT et entreprises technologiques.',
+        tips: [
+          'Mettez en avant vos compétences de dépannage technique',
+          'Soulignez l\'expérience avec divers systèmes d\'exploitation et logiciels',
+          'Montrez les capacités de service client et communication',
+          'Incluez certifications comme CompTIA A+ ou ITIL',
+          'Démontrez les compétences de résolution de problèmes et analytiques'
+        ],
+        skills: [
+          'Dépannage matériel et logiciel',
+          'Configuration et maintenance réseau',
+          'Systèmes d\'exploitation (Windows, macOS, Linux)',
+          'Systèmes de tickets help desk',
+          'Outils de support à distance',
+          'Service client et communication',
+          'Documentation et gestion de base de connaissances'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les compétences techniques',
+          'Met l\'accent sur le service client et la résolution de problèmes',
+          'Montre la progression des compétences techniques et certifications',
+          'Démontre la capacité à travailler sous pression',
+          'Format compatible ATS avec mots-clés IT'
+        ]
+      },
+      es: {
+        name: 'Especialista en Soporte IT',
+        slug: 'especialista-soporte-it',
+        description: 'Los especialistas en soporte IT brindan asistencia técnica a usuarios, solucionan problemas de hardware y software, y mantienen sistemas informáticos y redes. Trabajan en mesas de ayuda, departamentos IT y empresas tecnológicas.',
+        tips: [
+          'Destaca tus habilidades de resolución de problemas técnicos',
+          'Enfatiza experiencia con varios sistemas operativos y software',
+          'Muestra habilidades de servicio al cliente y comunicación',
+          'Incluye certificaciones como CompTIA A+ o ITIL',
+          'Demuestra habilidades de resolución de problemas y analíticas'
+        ],
+        skills: [
+          'Resolución de problemas de hardware y software',
+          'Configuración y mantenimiento de red',
+          'Sistemas operativos (Windows, macOS, Linux)',
+          'Sistemas de tickets de help desk',
+          'Herramientas de soporte remoto',
+          'Servicio al cliente y comunicación',
+          'Documentación y gestión de base de conocimientos'
+        ],
+        whyGood: [
+          'Estructura clara que destaca competencias técnicas',
+          'Enfatiza servicio al cliente y resolución de problemas',
+          'Muestra progresión de habilidades técnicas y certificaciones',
+          'Demuestra capacidad para trabajar bajo presión',
+          'Formato compatible con ATS con palabras clave IT'
+        ]
+      },
+      de: {
+        name: 'IT-Support-Spezialist',
+        slug: 'it-support-spezialist',
+        description: 'IT-Support-Spezialisten bieten technische Unterstützung für Benutzer, beheben Hardware- und Softwareprobleme und warten Computersysteme und Netzwerke. Sie arbeiten in Helpdesks, IT-Abteilungen und Technologieunternehmen.',
+        tips: [
+          'Heben Sie Ihre technischen Fehlerbehebungsfähigkeiten hervor',
+          'Betonen Sie Erfahrung mit verschiedenen Betriebssystemen und Software',
+          'Zeigen Sie Kundenservice- und Kommunikationsfähigkeiten',
+          'Fügen Sie Zertifizierungen wie CompTIA A+ oder ITIL hinzu',
+          'Demonstrieren Sie Problemlösungs- und analytische Fähigkeiten'
+        ],
+        skills: [
+          'Hardware- und Software-Fehlerbehebung',
+          'Netzwerkkonfiguration und -wartung',
+          'Betriebssysteme (Windows, macOS, Linux)',
+          'Helpdesk-Ticket-Systeme',
+          'Remote-Support-Tools',
+          'Kundenservice und Kommunikation',
+          'Dokumentation und Wissensdatenbankverwaltung'
+        ],
+        whyGood: [
+          'Klare Struktur, die technische Kompetenzen hervorhebt',
+          'Betont Kundenservice und Problemlösung',
+          'Zeigt Fortschritt technischer Fähigkeiten und Zertifizierungen',
+          'Demonstriert Fähigkeit, unter Druck zu arbeiten',
+          'ATS-freundliches Format mit IT-Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Specialista Supporto IT',
+        slug: 'specialista-supporto-it',
+        description: 'Gli specialisti del supporto IT forniscono assistenza tecnica agli utenti, risolvono problemi hardware e software e mantengono sistemi informatici e reti. Lavorano in help desk, dipartimenti IT e aziende tecnologiche.',
+        tips: [
+          'Evidenzia le tue capacità di risoluzione dei problemi tecnici',
+          'Enfatizza l\'esperienza con vari sistemi operativi e software',
+          'Mostra capacità di servizio clienti e comunicazione',
+          'Includi certificazioni come CompTIA A+ o ITIL',
+          'Dimostra capacità di risoluzione dei problemi e analitiche'
+        ],
+        skills: [
+          'Risoluzione dei problemi hardware e software',
+          'Configurazione e manutenzione della rete',
+          'Sistemi operativi (Windows, macOS, Linux)',
+          'Sistemi di ticketing help desk',
+          'Strumenti di supporto remoto',
+          'Servizio clienti e comunicazione',
+          'Documentazione e gestione della knowledge base'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia le competenze tecniche',
+          'Enfatizza il servizio clienti e la risoluzione dei problemi',
+          'Mostra la progressione delle competenze tecniche e certificazioni',
+          'Dimostra la capacità di lavorare sotto pressione',
+          'Formato compatibile ATS con parole chiave IT'
+        ]
+      },
+      pl: {
+        name: 'Specjalista Wsparcia IT',
+        slug: 'specjalista-wsparcia-it',
+        description: 'Specjaliści wsparcia IT zapewniają pomoc techniczną użytkownikom, rozwiązują problemy sprzętowe i programowe oraz utrzymują systemy komputerowe i sieci. Pracują w helpdeskach, działach IT i firmach technologicznych.',
+        tips: [
+          'Podkreśl swoje umiejętności rozwiązywania problemów technicznych',
+          'Podkreśl doświadczenie z różnymi systemami operacyjnymi i oprogramowaniem',
+          'Pokaż umiejętności obsługi klienta i komunikacji',
+          'Uwzględnij certyfikaty takie jak CompTIA A+ lub ITIL',
+          'Wykazuj umiejętności rozwiązywania problemów i analityczne'
+        ],
+        skills: [
+          'Rozwiązywanie problemów sprzętowych i programowych',
+          'Konfiguracja i konserwacja sieci',
+          'Systemy operacyjne (Windows, macOS, Linux)',
+          'Systemy zgłoszeń help desk',
+          'Narzędzia wsparcia zdalnego',
+          'Obsługa klienta i komunikacja',
+          'Dokumentacja i zarządzanie bazą wiedzy'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kompetencje techniczne',
+          'Podkreśla obsługę klienta i rozwiązywanie problemów',
+          'Pokazuje postęp umiejętności technicznych i certyfikatów',
+          'Wykazuje zdolność do pracy pod presją',
+          'Format przyjazny dla ATS z kluczowymi słowami IT'
+        ]
+      },
+      ro: {
+        name: 'Specialist Suport IT',
+        slug: 'specialist-suport-it',
+        description: 'Specialiștii în suport IT oferă asistență tehnică utilizatorilor, rezolvă probleme hardware și software și mențin sisteme informatice și rețele. Lucrează în help desk-uri, departamente IT și companii tehnologice.',
+        tips: [
+          'Evidențiază abilitățile tale de rezolvare a problemelor tehnice',
+          'Subliniază experiența cu diverse sisteme de operare și software',
+          'Prezintă abilități de servicii pentru clienți și comunicare',
+          'Include certificări precum CompTIA A+ sau ITIL',
+          'Demonstrează abilități de rezolvare a problemelor și analitice'
+        ],
+        skills: [
+          'Rezolvarea problemelor hardware și software',
+          'Configurarea și întreținerea rețelei',
+          'Sisteme de operare (Windows, macOS, Linux)',
+          'Sisteme de ticketing help desk',
+          'Instrumente de suport la distanță',
+          'Servicii pentru clienți și comunicare',
+          'Documentație și managementul bazei de cunoștințe'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază competențele tehnice',
+          'Subliniază serviciile pentru clienți și rezolvarea problemelor',
+          'Arată progresia abilităților tehnice și certificărilor',
+          'Demonstrează capacitatea de a lucra sub presiune',
+          'Format compatibil ATS cu cuvinte cheie IT'
+        ]
+      },
+      hu: {
+        name: 'IT Támogatási Szakértő',
+        slug: 'it-tamogatasi-szakerto',
+        description: 'Az IT támogatási szakértők technikai segítséget nyújtanak a felhasználóknak, hardver- és szoftverproblémákat oldanak meg, és karbantartják a számítógépes rendszereket és hálózatokat. Helpdeskekben, IT osztályokon és technológiai vállalatoknál dolgoznak.',
+        tips: [
+          'Hangsúlyozza technikai hibaelhárítási képességeit',
+          'Hangsúlyozza a különböző operációs rendszerekkel és szoftverekkel való tapasztalatot',
+          'Mutassa be az ügyfélszolgálati és kommunikációs képességeket',
+          'Tartalmazza a CompTIA A+ vagy ITIL tanúsítványokat',
+          'Mutassa be a problémamegoldó és elemző képességeket'
+        ],
+        skills: [
+          'Hardver- és szoftverhibaelhárítás',
+          'Hálózat konfigurálása és karbantartása',
+          'Operációs rendszerek (Windows, macOS, Linux)',
+          'Helpdesk jegykezelő rendszerek',
+          'Távoli támogatási eszközök',
+          'Ügyfélszolgálat és kommunikáció',
+          'Dokumentáció és tudásbázis kezelés'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a technikai kompetenciákat',
+          'Hangsúlyozza az ügyfélszolgálatot és problémamegoldást',
+          'Mutatja a technikai képességek és tanúsítványok fejlődését',
+          'Bemutatja a nyomás alatt dolgozni tudó képességet',
+          'ATS-barát formátum IT kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Ειδικός Υποστήριξης IT',
+        slug: 'eidikos-ypostirixis-it',
+        description: 'Οι ειδικοί υποστήριξης IT παρέχουν τεχνική βοήθεια στους χρήστες, επιλύουν προβλήματα hardware και software και συντηρούν συστήματα υπολογιστών και δίκτυα. Εργάζονται σε help desk, τμήματα IT και εταιρείες τεχνολογίας.',
+        tips: [
+          'Επισημάνετε τις τεχνικές σας ικανότητες επίλυσης προβλημάτων',
+          'Τονίστε την εμπειρία με διάφορα λειτουργικά συστήματα και λογισμικό',
+          'Παρουσιάστε ικανότητες εξυπηρέτησης πελατών και επικοινωνίας',
+          'Συμπεριλάβετε πιστοποιήσεις όπως CompTIA A+ ή ITIL',
+          'Αποδείξτε ικανότητες επίλυσης προβλημάτων και αναλυτικές'
+        ],
+        skills: [
+          'Επίλυση προβλημάτων hardware και software',
+          'Διαμόρφωση και συντήρηση δικτύου',
+          'Λειτουργικά συστήματα (Windows, macOS, Linux)',
+          'Συστήματα tickets help desk',
+          'Εργαλεία απομακρυσμένης υποστήριξης',
+          'Εξυπηρέτηση πελατών και επικοινωνία',
+          'Τεκμηρίωση και διαχείριση βάσης γνώσης'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τις τεχνικές ικανότητες',
+          'Τονίζει την εξυπηρέτηση πελατών και την επίλυση προβλημάτων',
+          'Δείχνει την πρόοδο των τεχνικών ικανοτήτων και πιστοποιήσεων',
+          'Αποδεικνύει την ικανότητα εργασίας υπό πίεση',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά IT'
+        ]
+      },
+      cs: {
+        name: 'Specialista IT Podpory',
+        slug: 'specialista-it-podpory',
+        description: 'Specialisté IT podpory poskytují technickou pomoc uživatelům, řeší problémy s hardwarem a softwarem a udržují počítačové systémy a sítě. Pracují na helpdesku, v IT odděleních a technologických společnostech.',
+        tips: [
+          'Zdůrazněte své technické schopnosti řešení problémů',
+          'Zdůrazněte zkušenosti s různými operačními systémy a softwarem',
+          'Ukažte schopnosti zákaznického servisu a komunikace',
+          'Zahrňte certifikace jako CompTIA A+ nebo ITIL',
+          'Prokažte schopnosti řešení problémů a analytické'
+        ],
+        skills: [
+          'Řešení problémů s hardwarem a softwarem',
+          'Konfigurace a údržba sítě',
+          'Operační systémy (Windows, macOS, Linux)',
+          'Systémy ticketingu help desk',
+          'Nástroje vzdálené podpory',
+          'Zákaznický servis a komunikace',
+          'Dokumentace a správa znalostní báze'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující technické kompetence',
+          'Zdůrazňuje zákaznický servis a řešení problémů',
+          'Ukazuje pokrok technických dovedností a certifikací',
+          'Prokazuje schopnost pracovat pod tlakem',
+          'Formát kompatibilní s ATS s IT klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Especialista em Suporte IT',
+        slug: 'especialista-suporte-it',
+        description: 'Especialistas em suporte IT fornecem assistência técnica a usuários, resolvem problemas de hardware e software e mantêm sistemas de computador e redes. Trabalham em help desks, departamentos de IT e empresas de tecnologia.',
+        tips: [
+          'Destaque suas habilidades de resolução de problemas técnicos',
+          'Enfatize experiência com vários sistemas operacionais e software',
+          'Mostre habilidades de atendimento ao cliente e comunicação',
+          'Inclua certificações como CompTIA A+ ou ITIL',
+          'Demonstre habilidades de resolução de problemas e analíticas'
+        ],
+        skills: [
+          'Resolução de problemas de hardware e software',
+          'Configuração e manutenção de rede',
+          'Sistemas operacionais (Windows, macOS, Linux)',
+          'Sistemas de tickets de help desk',
+          'Ferramentas de suporte remoto',
+          'Atendimento ao cliente e comunicação',
+          'Documentação e gestão de base de conhecimento'
+        ],
+        whyGood: [
+          'Estrutura clara destacando competências técnicas',
+          'Enfatiza atendimento ao cliente e resolução de problemas',
+          'Mostra progressão de habilidades técnicas e certificações',
+          'Demonstra capacidade de trabalhar sob pressão',
+          'Formato compatível com ATS com palavras-chave IT'
+        ]
+      },
+      sv: {
+        name: 'IT-supportsspecialist',
+        slug: 'it-supportsspecialist',
+        description: 'IT-supportsspecialister ger teknisk hjälp till användare, felsöker hårdvaru- och mjukvaruproblem och underhåller datorsystem och nätverk. De arbetar på helpdesk, IT-avdelningar och teknikföretag.',
+        tips: [
+          'Framhäv dina tekniska felsökningsförmågor',
+          'Betona erfarenhet med olika operativsystem och mjukvara',
+          'Visa kundservice- och kommunikationsförmågor',
+          'Inkludera certifieringar som CompTIA A+ eller ITIL',
+          'Visa problemlösnings- och analytiska förmågor'
+        ],
+        skills: [
+          'Felsökning av hårdvara och mjukvara',
+          'Nätverkskonfiguration och underhåll',
+          'Operativsystem (Windows, macOS, Linux)',
+          'Helpdesk-biljettsystem',
+          'Fjärrstödverktyg',
+          'Kundservice och kommunikation',
+          'Dokumentation och kunskapsbasförvaltning'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver tekniska kompetenser',
+          'Betonar kundservice och problemlösning',
+          'Visar progression av tekniska färdigheter och certifieringar',
+          'Visar förmåga att arbeta under press',
+          'ATS-vänligt format med IT-nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Специалист IT Поддръжка',
+        slug: 'spetsialist-it-poddrzhka',
+        description: 'Специалистите по IT поддръжка предоставят техническа помощ на потребители, решават проблеми с хардуер и софтуер и поддържат компютърни системи и мрежи. Работят в help desk, IT отдели и технологични компании.',
+        tips: [
+          'Подчертайте техническите си способности за решаване на проблеми',
+          'Акцентирайте върху опита с различни операционни системи и софтуер',
+          'Покажете способности за обслужване на клиенти и комуникация',
+          'Включете сертификати като CompTIA A+ или ITIL',
+          'Демонстрирайте способности за решаване на проблеми и аналитични'
+        ],
+        skills: [
+          'Решаване на проблеми с хардуер и софтуер',
+          'Конфигуриране и поддръжка на мрежа',
+          'Операционни системи (Windows, macOS, Linux)',
+          'Системи за билети help desk',
+          'Инструменти за отдалечена поддръжка',
+          'Обслужване на клиенти и комуникация',
+          'Документиране и управление на база знания'
+        ],
+        whyGood: [
+          'Ясна структура, подчертаваща техническите компетенции',
+          'Акцентира върху обслужването на клиенти и решаването на проблеми',
+          'Показва прогресия на техническите умения и сертификати',
+          'Демонстрира способност за работа под налягане',
+          'Формат, съвместим с ATS с IT ключови думи'
+        ]
+      },
+      da: {
+        name: 'IT-supportsspecialist',
+        slug: 'it-supportsspecialist',
+        description: 'IT-supportsspecialister giver teknisk assistance til brugere, fejlsøger hardware- og softwareproblemer og vedligeholder computersystemer og netværk. De arbejder på helpdesk, IT-afdelinger og teknologivirksomheder.',
+        tips: [
+          'Fremhæv dine tekniske fejlsøgningsfærdigheder',
+          'Fremhæv erfaring med forskellige operativsystemer og software',
+          'Vis kundeservice- og kommunikationsfærdigheder',
+          'Inkluder certificeringer som CompTIA A+ eller ITIL',
+          'Demonstrer problemløsnings- og analytiske færdigheder'
+        ],
+        skills: [
+          'Fejlsøgning af hardware og software',
+          'Netværkskonfiguration og vedligeholdelse',
+          'Operativsystemer (Windows, macOS, Linux)',
+          'Helpdesk-biljetsystemer',
+          'Fjernstøtteværktøjer',
+          'Kundeservice og kommunikation',
+          'Dokumentation og vidensbaseforvaltning'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver tekniske kompetencer',
+          'Fremhæver kundeservice og problemløsning',
+          'Vis progression af tekniske færdigheder og certificeringer',
+          'Demonstrer evne til at arbejde under pres',
+          'ATS-venligt format med IT-nøgleord'
+        ]
+      },
+      fi: {
+        name: 'IT-tuen asiantuntija',
+        slug: 'it-tuen-asiantuntija',
+        description: 'IT-tuen asiantuntijat tarjoavat teknistä tukea käyttäjille, vianetsivät laitteisto- ja ohjelmistongelmia ja ylläpitävät tietokonejärjestelmiä ja verkkoja. He työskentelevät helpdeskeissä, IT-osastoissa ja teknologiayrityksissä.',
+        tips: [
+          'Korosta tekniset vianetsintätaidot',
+          'Korosta kokemusta eri käyttöjärjestelmistä ja ohjelmistoista',
+          'Näytä asiakaspalvelu- ja viestintätaidot',
+          'Sisällytä sertifikaatit kuten CompTIA A+ tai ITIL',
+          'Näytä ongelmanratkaisu- ja analyyttiset taidot'
+        ],
+        skills: [
+          'Laitteisto- ja ohjelmistovianetsintä',
+          'Verkkokonfigurointi ja ylläpito',
+          'Käyttöjärjestelmät (Windows, macOS, Linux)',
+          'Helpdesk-tiketointijärjestelmät',
+          'Etätukityökalut',
+          'Asiakaspalvelu ja viestintä',
+          'Dokumentointi ja tietokantahallinta'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa teknisiä kompetensseja',
+          'Korostaa asiakaspalvelua ja ongelmanratkaisua',
+          'Näyttää teknisten taitojen ja sertifikaattien kehityksen',
+          'Näyttää kyvyn työskennellä paineen alla',
+          'ATS-yhteensopiva muoto IT-avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Špecialista IT Podpory',
+        slug: 'specialista-it-podpory',
+        description: 'Špecialisti IT podpory poskytujú technickú pomoc používateľom, riešia problémy s hardvérom a softvérom a udržiavajú počítačové systémy a siete. Pracujú na helpdesku, v IT oddeleniach a technologických spoločnostiach.',
+        tips: [
+          'Zdôraznite svoje technické schopnosti riešenia problémov',
+          'Zdôraznite skúsenosti s rôznymi operačnými systémami a softvérom',
+          'Ukážte schopnosti zákazníckeho servisu a komunikácie',
+          'Zahrňte certifikácie ako CompTIA A+ alebo ITIL',
+          'Preukážte schopnosti riešenia problémov a analytické'
+        ],
+        skills: [
+          'Riešenie problémov s hardvérom a softvérom',
+          'Konfigurácia a údržba siete',
+          'Operačné systémy (Windows, macOS, Linux)',
+          'Systémy ticketingu help desk',
+          'Nástroje vzdialenej podpory',
+          'Zákaznícky servis a komunikácia',
+          'Dokumentácia a správa znalostnej bázy'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca technické kompetencie',
+          'Zdôrazňuje zákaznícky servis a riešenie problémov',
+          'Ukazuje pokrok technických zručností a certifikácií',
+          'Preukazuje schopnosť pracovať pod tlakom',
+          'Formát kompatibilný s ATS s IT kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'IT-støttespesialist',
+        slug: 'it-stottespesialist',
+        description: 'IT-støttespesialister gir teknisk assistanse til brukere, feilsøker hardware- og softwareproblemer og vedlikeholder datasystemer og nettverk. De arbeider på helpdesk, IT-avdelinger og teknologiselskaper.',
+        tips: [
+          'Fremhev dine tekniske feilsøkingsferdigheter',
+          'Fremhev erfaring med ulike operativsystemer og programvare',
+          'Vis kundeservice- og kommunikasjonsferdigheter',
+          'Inkluder sertifiseringer som CompTIA A+ eller ITIL',
+          'Vis problemløsnings- og analytiske ferdigheter'
+        ],
+        skills: [
+          'Feilsøking av hardware og software',
+          'Nettverkskonfigurasjon og vedlikehold',
+          'Operativsystemer (Windows, macOS, Linux)',
+          'Helpdesk-biljettsystemer',
+          'Fjernstøtteverktøy',
+          'Kundeservice og kommunikasjon',
+          'Dokumentasjon og kunnskapsbaseforvaltning'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever tekniske kompetanser',
+          'Fremhever kundeservice og problemløsning',
+          'Vis progresjon av tekniske ferdigheter og sertifiseringer',
+          'Vis evne til å arbeide under press',
+          'ATS-vennlig format med IT-nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Specijalist IT Podrške',
+        slug: 'specijalist-it-podrske',
+        description: 'Specijalisti IT podrške pružaju tehničku pomoć korisnicima, rješavaju probleme s hardverom i softverom i održavaju računalne sustave i mreže. Rade na helpdesku, IT odjelima i tehnološkim tvrtkama.',
+        tips: [
+          'Istaknite svoje tehničke vještine rješavanja problema',
+          'Naglasite iskustvo s različitim operacijskim sustavima i softverom',
+          'Pokažite vještine korisničke službe i komunikacije',
+          'Uključite certifikate kao što su CompTIA A+ ili ITIL',
+          'Pokažite vještine rješavanja problema i analitičke'
+        ],
+        skills: [
+          'Rješavanje problema s hardverom i softverom',
+          'Konfiguracija i održavanje mreže',
+          'Operacijski sustavi (Windows, macOS, Linux)',
+          'Sustavi ticketinga help desk',
+          'Alati za daljinsku podršku',
+          'Korisnička služba i komunikacija',
+          'Dokumentacija i upravljanje bazom znanja'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe tehničke kompetencije',
+          'Naglašava korisničku službu i rješavanje problema',
+          'Pokazuje napredak tehničkih vještina i certifikata',
+          'Pokazuje sposobnost rada pod pritiskom',
+          'Format kompatibilan s ATS s IT ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Специјалиста IT Подршке',
+        slug: 'specijalista-it-podrske',
+        description: 'Специјалисти IT подршке пружају техничку помоћ корисницима, решавају проблеме са хардвером и софтвером и одржавају рачунарске системе и мреже. Раде на helpdesku, IT одељењима и технолошким компанијама.',
+        tips: [
+          'Истакните своје техничке способности решавања проблема',
+          'Нагласите искуство са различитим оперативним системима и софтвером',
+          'Покажите способности корисничке службе и комуникације',
+          'Укључите сертификате као што су CompTIA A+ или ITIL',
+          'Покажите способности решавања проблема и аналитичке'
+        ],
+        skills: [
+          'Решавање проблема са хардвером и софтвером',
+          'Конфигурација и одржавање мреже',
+          'Оперативни системи (Windows, macOS, Linux)',
+          'Системи тикетирања help desk',
+          'Алати за удаљену подршку',
+          'Корисничка служба и комуникација',
+          'Документовање и управљање базом знања'
+        ],
+        whyGood: [
+          'Јасна структура која истиче техничке компетенције',
+          'Наглашава корисничку службу и решавање проблема',
+          'Показује напредак техничких вештина и сертификата',
+          'Показује способност рада под притиском',
+          'Формат компатибилан са ATS са IT кључним речима'
+        ]
+      }
+    }
   }
   // Note: More professions can be added here with full translations
 ]
