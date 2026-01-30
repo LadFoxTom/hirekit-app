@@ -14,7 +14,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Emma van der Berg',
       title: 'Verpleegkundige',
-      summary: 'Ervaren verpleegkundige met 8+ jaar ervaring in acute zorg en patiëntenzorg. Gespecialiseerd in intensive care en spoedeisende hulp. Gepassioneerd over evidence-based zorg en continue professionele ontwikkeling.',
+      summary: 'Ervaren verpleegkundige met 8+ jaar ervaring in acute zorg en patiëntenzorg. Gespecialiseerd in intensive care en spoedeisende hulp met bewezen track record in kritische patiëntenzorg. Gepassioneerd over evidence-based zorg, patiëntveiligheid en continue professionele ontwikkeling. Sterk in multidisciplinaire samenwerking en begeleiding van collega\'s.',
       photoUrl: getPlaceholderPhoto('Emma van der Berg'),
       contact: {
         email: 'emma.vanderberg@email.nl',
@@ -29,10 +29,12 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           dates: '2020 - Heden',
           current: true,
           achievements: [
-            'Verzorging van kritisch zieke patiënten op de IC-afdeling',
-            'Beheer van beademingsapparatuur en monitoring systemen',
-            'Samenwerking met multidisciplinair team van artsen en specialisten',
-            'Begeleiding van nieuwe verpleegkundigen en stagiaires'
+            'Verzorging van gemiddeld 2-3 kritisch zieke patiënten per dienst met focus op patiëntveiligheid en kwaliteit van zorg',
+            'Beheer en monitoring van beademingsapparatuur, hemodynamische monitoring en continue dialyse voor 500+ patiënten per jaar',
+            'Samenwerking met multidisciplinair team van 15+ specialisten, resulterend in 95%+ patiënttevredenheid',
+            'Begeleiding en training van 8+ nieuwe verpleegkundigen en 12+ stagiaires, met focus op evidence-based praktijken',
+            'Implementatie van nieuwe protocollen voor medicatieveiligheid, resulterend in 30% reductie van medicatiefouten',
+            'Actieve deelname aan kwaliteitsverbeteringstrajecten en incidentanalyses'
           ]
         },
         {
@@ -41,10 +43,12 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Tilburg',
           dates: '2017 - 2020',
           achievements: [
-            'Triage en eerste opvang van spoedpatiënten',
-            'Assistentie bij medische procedures en reanimaties',
-            'Coördinatie van patiëntenzorg in drukke omgeving',
-            'Training in Advanced Life Support (ALS)'
+            'Triage en eerste opvang van 50+ spoedpatiënten per dienst volgens Manchester Triage Systeem',
+            'Assistentie bij 200+ medische procedures en 15+ reanimaties met 80%+ succespercentage',
+            'Coördinatie van patiëntenzorg in drukke omgeving met focus op efficiëntie en patiëntveiligheid',
+            'Training en certificering in Advanced Life Support (ALS) en Pediatric Advanced Life Support (PALS)',
+            'Implementatie van verbeterde triageprocessen, resulterend in 20% kortere wachttijden',
+            'Mentoring van junior verpleegkundigen in acute zorg situaties'
           ]
         }
       ],
@@ -55,28 +59,31 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           field: 'Verpleegkunde',
           dates: '2013 - 2017',
           achievements: [
-            'Diploma behaald met onderscheiding',
-            'Stage op IC-afdeling en spoedeisende hulp',
-            'Scriptie over evidence-based verpleegkundige interventies'
+            'Diploma behaald met onderscheiding (gemiddeld cijfer 8.2)',
+            'Stage op IC-afdeling (6 maanden) en spoedeisende hulp (4 maanden)',
+            'Scriptie over evidence-based verpleegkundige interventies bij sepsis patiënten (cijfer 9.0)',
+            'Vrijwilligerswerk bij lokale gezondheidsvoorlichting'
           ]
         }
       ],
       skills: {
-        technical: ['EPD systemen', 'Medicatietoediening', 'Wondverzorging', 'Beademingsapparatuur'],
-        soft: ['Empathie', 'Communicatie', 'Stressbestendigheid', 'Teamwerk', 'Kritisch denken']
+        technical: ['EPD systemen (Epic, Chipsoft)', 'Medicatietoediening (BIG geregistreerd)', 'Wondverzorging', 'Beademingsapparatuur (Ventilatoren, CPAP)', 'Hemodynamische monitoring', 'Continue dialyse', 'IV-toediening', 'Medische apparatuur'],
+        soft: ['Empathie en patiëntgerichte zorg', 'Effectieve communicatie met patiënten en families', 'Stressbestendigheid onder druk', 'Teamwerk in multidisciplinaire teams', 'Kritisch denken en besluitvorming', 'Leiderschap en mentoring', 'Conflictbeheersing']
       },
       certifications: [
         { title: 'Advanced Life Support (ALS)', institution: 'Nederlandse Reanimatieraad', year: '2021' },
-        { title: 'Intensive Care Verpleegkunde', institution: 'V&VN', year: '2020' }
+        { title: 'Intensive Care Verpleegkunde', institution: 'V&VN', year: '2020' },
+        { title: 'Pediatric Advanced Life Support (PALS)', institution: 'Nederlandse Reanimatieraad', year: '2019' },
+        { title: 'BIG Registratie Verpleegkundige', institution: 'BIG Register', year: '2017' }
       ],
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Basis)'],
-      hobbies: ['Hardlopen', 'Lezen', 'Vrijwilligerswerk', 'Koken']
+      hobbies: ['Hardlopen (marathon training)', 'Lezen (medische literatuur)', 'Vrijwilligerswerk (lokale gezondheidsvoorlichting)', 'Koken']
     },
     'software-developer': {
       template: 'modern',
       fullName: 'Lucas Jansen',
       title: 'Senior Software Developer',
-      summary: 'Ervaren full-stack developer met 10+ jaar ervaring in het bouwen van schaalbare webapplicaties en microservices. Gespecialiseerd in React, Node.js en cloud architecture. Gepassioneerd over clean code en performance optimalisatie.',
+      summary: 'Ervaren full-stack developer met 10+ jaar ervaring in het bouwen van schaalbare webapplicaties en microservices. Gespecialiseerd in React, Node.js, TypeScript en cloud architecture (AWS, Azure). Gepassioneerd over clean code, performance optimalisatie en agile development. Bewezen track record in het leiden van development teams en het implementeren van complexe systemen met hoge beschikbaarheid.',
       photoUrl: getPlaceholderPhoto('Lucas Jansen'),
       contact: {
         email: 'lucas.jansen@email.nl',
@@ -93,10 +100,13 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           dates: '2020 - Heden',
           current: true,
           achievements: [
-            'Leiding aan team van 6 developers voor betalingssysteem met 2M+ gebruikers',
-            'Architectuur en implementatie van microservices infrastructuur',
-            'Serverkosten met 35% verlaagd door optimalisatie',
-            'Mentoring van junior developers'
+            'Leiding aan team van 6 developers voor betalingssysteem met 2M+ maandelijkse actieve gebruikers en 99.9% uptime',
+            'Architectuur en implementatie van microservices infrastructuur met 15+ services, resulterend in 40% snellere deployment cycles',
+            'Serverkosten met 35% verlaagd door optimalisatie van database queries en implementatie van caching strategieën',
+            'Mentoring van 8+ junior developers en code reviews voor 200+ pull requests per maand',
+            'Implementatie van CI/CD pipelines met Docker en Kubernetes, resulterend in 50% reductie in deployment tijd',
+            'Ontwikkeling van RESTful API\'s en GraphQL endpoints die 10M+ requests per dag verwerken',
+            'Technische besluitvorming en architectuur reviews voor kritieke systemen'
           ]
         },
         {
@@ -105,10 +115,13 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2017 - 2020',
           achievements: [
-            'Ontwikkeling van React en Angular applicaties',
-            'Samenwerking met UX designers voor responsive interfaces',
-            'Database schema design en optimalisatie',
-            'E-commerce platform gebouwd dat conversie met 28% verhoogde'
+            'Ontwikkeling van React en Angular applicaties voor 50K+ gebruikers met focus op performance en gebruikerservaring',
+            'Samenwerking met UX designers voor responsive interfaces, resulterend in 25% verbetering in mobile gebruik',
+            'Database schema design en optimalisatie van PostgreSQL databases, resulterend in 60% snellere query performance',
+            'E-commerce platform gebouwd dat conversie met 28% verhoogde en €2M+ extra omzet genereerde',
+            'Implementatie van real-time features met WebSockets voor live chat functionaliteit',
+            'Code reviews en pair programming sessies met team van 5 developers',
+            'Agile development met Scrum methodologie en dagelijkse stand-ups'
           ]
         }
       ],
@@ -122,8 +135,8 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'PostgreSQL', 'AWS', 'Docker', 'Kubernetes'],
-        soft: ['Probleemoplossend denken', 'Teamleiderschap', 'Agile/Scrum', 'Code reviews']
+        technical: ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'AWS (EC2, S3, Lambda)', 'Azure', 'Docker', 'Kubernetes', 'GraphQL', 'RESTful APIs', 'Git', 'CI/CD'],
+        soft: ['Probleemoplossend denken', 'Teamleiderschap', 'Agile/Scrum', 'Code reviews', 'Technische documentatie', 'Mentoring', 'Architectuur design', 'Performance optimalisatie']
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Programmeren', 'Gaming', 'Fietsen', 'Open source bijdragen']
@@ -132,7 +145,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Sophie de Vries',
       title: 'Docent Basisonderwijs',
-      summary: 'Gepassioneerde basisschooldocent met 7 jaar ervaring in het lesgeven aan kinderen van 6-12 jaar. Gespecialiseerd in differentiatie en inclusief onderwijs. Focus op het creëren van een positieve leeromgeving.',
+      summary: 'Gepassioneerde basisschooldocent met 7 jaar ervaring in het lesgeven aan kinderen van 6-12 jaar. Gespecialiseerd in differentiatie, inclusief onderwijs en curriculum ontwikkeling. Focus op het creëren van een positieve leeromgeving met bewezen resultaten in leerling engagement en academische prestaties. Ervaring met educatieve technologie en moderne lesmethoden.',
       photoUrl: getPlaceholderPhoto('Sophie de Vries'),
       contact: {
         email: 'sophie.devries@email.nl',
@@ -147,10 +160,14 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           dates: '2019 - Heden',
           current: true,
           achievements: [
-            'Lesgeven aan groep van 25 leerlingen',
-            'Ontwikkeling van gepersonaliseerde lesplannen',
-            'Samenwerking met ouders en zorgteam',
-            'Organisatie van schoolactiviteiten en excursies'
+            'Lesgeven aan groep van 25 leerlingen met focus op differentiatie en inclusief onderwijs',
+            'Ontwikkeling van gepersonaliseerde lesplannen resulterend in 15% verbetering in leerling prestaties',
+            'Samenwerking met ouders en zorgteam voor 8+ leerlingen met speciale onderwijsbehoeften',
+            'Organisatie van 12+ schoolactiviteiten en excursies per jaar met 95%+ deelname',
+            'Implementatie van educatieve technologie (tablets, digitale borden) in dagelijkse lessen',
+            'Mentoring van 3+ stagiaires en nieuwe collega\'s in lesmethoden en klasmanagement',
+            'Ontwikkeling van curriculum materiaal voor rekenen en taal, gebruikt door 5+ collega\'s',
+            'Leerling engagement verhoogd met 25% door interactieve lesmethoden en gamification'
           ]
         },
         {
@@ -159,9 +176,12 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2016 - 2019',
           achievements: [
-            'Lesgeven aan beginnende lezers',
-            'Implementatie van nieuwe lesmethoden',
-            'Begeleiding van stagiaires'
+            'Lesgeven aan groep van 22 beginnende lezers met focus op fonemisch bewustzijn en leesstrategieën',
+            'Implementatie van nieuwe lesmethoden (Veilig Leren Lezen) resulterend in 90%+ leesniveau behaald',
+            'Begeleiding van 4+ stagiaires in lesgeven en klasmanagement technieken',
+            'Organisatie van leesactiviteiten en voorleesmomenten, resulterend in verhoogde leesmotivatie',
+            'Samenwerking met logopedisten voor leerlingen met taal- en spraakproblemen',
+            'Ouders betrokken bij leesontwikkeling door wekelijkse updates en tips'
           ]
         }
       ],
@@ -171,12 +191,12 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           degree: 'PABO - Bachelor Leraar Basisonderwijs',
           field: 'Onderwijs',
           dates: '2012 - 2016',
-          achievements: ['Diploma behaald', 'Stage op verschillende basisscholen']
+          achievements: ['Diploma behaald met gemiddeld cijfer 7.8', 'Stage op 3 verschillende basisscholen (groep 1-2, 5-6, 7-8)', 'Scriptie over effectieve differentiatie in de klas (cijfer 8.5)', 'Vrijwilligerswerk bij buitenschoolse opvang']
         }
       ],
       skills: {
-        technical: ['Lesmethoden', 'Klassenmanagement', 'ICT in onderwijs', 'Differentiatie'],
-        soft: ['Geduld', 'Creativiteit', 'Communicatie', 'Empathie', 'Organisatie']
+        technical: ['Lesmethoden (Veilig Leren Lezen, Rekenen)', 'Klassenmanagement', 'ICT in onderwijs (digibord, tablets)', 'Differentiatie technieken', 'Leerlingvolgsystemen (CITO)', 'Curriculum ontwikkeling', 'Beoordeling en evaluatie'],
+        soft: ['Geduld en begrip', 'Creativiteit in lesgeven', 'Effectieve communicatie met ouders en leerlingen', 'Empathie voor verschillende leerstijlen', 'Organisatie en planning', 'Teamwerk met collega\'s', 'Probleemoplossend denken', 'Leiderschap in schoolprojecten']
       },
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Lezen', 'Handwerken', 'Wandelen', 'Vrijwilligerswerk']
@@ -185,7 +205,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Daan Bakker',
       title: 'Registeraccountant',
-      summary: 'Ervaren accountant met 12+ jaar ervaring in financiële controle, belastingadvies en bedrijfsadvisering. Gespecialiseerd in MKB en internationale bedrijven. Gepassioneerd over financiële transparantie en compliance.',
+      summary: 'Ervaren Registeraccountant (RA) met 12+ jaar ervaring in financiële controle, belastingadvies en bedrijfsadvisering. Gespecialiseerd in MKB en internationale bedrijven met bewezen track record in complexe financiële analyses en compliance. Gepassioneerd over financiële transparantie, risicobeheer en het helpen van bedrijven bij strategische besluitvorming.',
       photoUrl: getPlaceholderPhoto('Daan Bakker'),
       contact: {
         email: 'daan.bakker@email.nl',
@@ -200,10 +220,13 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           dates: '2018 - Heden',
           current: true,
           achievements: [
-            'Financiële controles voor MKB en grote ondernemingen',
-            'Belastingadvies en planning',
-            'Begeleiding van klanten bij overnames en fusies',
-            'Leiding aan team van 4 junior accountants'
+            'Financiële controles voor 50+ MKB en grote ondernemingen met omzet van €5M-€500M per jaar',
+            'Belastingadvies en planning resulterend in gemiddeld €200K+ belastingbesparing per klant per jaar',
+            'Begeleiding van 15+ klanten bij overnames en fusies met totale transactiewaarde van €150M+',
+            'Leiding aan team van 4 junior accountants met focus op kennisoverdracht en kwaliteitsborging',
+            'Implementatie van IFRS standaarden voor 20+ internationale bedrijven',
+            'Financiële analyses en due diligence onderzoeken voor investeerders en banken',
+            'Klanttevredenheid van 95%+ door proactieve advisering en snelle respons tijden'
           ]
         },
         {
@@ -212,9 +235,12 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2011 - 2018',
           achievements: [
-            'Jaarrekeningen en belastingaangiftes',
-            'Financiële analyses en rapportages',
-            'Klantadvisering over fiscale optimalisatie'
+            'Voorbereiding van 100+ jaarrekeningen en belastingaangiftes voor diverse bedrijven',
+            'Financiële analyses en rapportages voor management en stakeholders met focus op KPI\'s',
+            'Klantadvisering over fiscale optimalisatie resulterend in gemiddeld 15% belastingbesparing',
+            'Samenwerking met belastingautoriteiten bij controles en bezwaarschriften',
+            'Training en begeleiding van junior accountants in accountancy praktijken',
+            'Implementatie van nieuwe accounting software (SAP, Exact) voor 10+ klanten'
           ]
         }
       ],
@@ -228,8 +254,8 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
         }
       ],
       skills: {
-        technical: ['Excel', 'SAP', 'IFRS', 'Belastingwetgeving', 'Financiële analyse'],
-        soft: ['Analytisch denken', 'Precisie', 'Communicatie', 'Klantgerichtheid']
+        technical: ['Excel (geavanceerd)', 'SAP', 'IFRS en Nederlandse GAAP', 'Belastingwetgeving (Nederlands en internationaal)', 'Financiële analyse en modellering', 'Due diligence', 'Audit technieken', 'Accounting software (Exact, AFAS)', 'Power BI'],
+        soft: ['Analytisch denken en probleemoplossing', 'Precisie en aandacht voor detail', 'Effectieve communicatie met klanten en stakeholders', 'Klantgerichtheid en service excellence', 'Teamleiderschap en mentoring', 'Projectmanagement', 'Risicobeheer', 'Strategisch denken']
       },
       certifications: [
         { title: 'Registeraccountant (RA)', institution: 'NBA', year: '2011' }
@@ -241,7 +267,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Lisa Meijer',
       title: 'Marketing Manager',
-      summary: 'Strategische marketing professional met 9 jaar ervaring in digitale marketing, brand management en campagne ontwikkeling. Gespecialiseerd in B2B marketing en data-driven besluitvorming. Gepassioneerd over groei en innovatie.',
+      summary: 'Strategische marketing professional met 9 jaar ervaring in digitale marketing, brand management en campagne ontwikkeling. Gespecialiseerd in B2B marketing en data-driven besluitvorming met bewezen track record in lead generatie, ROI optimalisatie en teamleiderschap. Gepassioneerd over groei, innovatie en het bouwen van sterke merken. Ervaring met marketing automation, SEO/SEM en content marketing.',
       photoUrl: getPlaceholderPhoto('Lisa Meijer'),
       contact: {
         email: 'lisa.meijer@email.nl',
@@ -257,10 +283,14 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           dates: '2020 - Heden',
           current: true,
           achievements: [
-            'Ontwikkeling en uitvoering van marketingstrategie',
-            'Leiding aan team van 5 marketing professionals',
-            'Groei van lead generatie met 150% in 2 jaar',
-            'Budgetbeheer van €500K+ per jaar'
+            'Ontwikkeling en uitvoering van omni-channel marketingstrategie resulterend in 150% groei in lead generatie in 2 jaar',
+            'Leiding aan team van 5 marketing professionals met focus op performance marketing en content creatie',
+            'Budgetbeheer van €500K+ per jaar met gemiddeld 3.5x ROI op marketing investeringen',
+            'Implementatie van marketing automation (HubSpot, Marketo) resulterend in 40% efficiëntie verbetering',
+            'Ontwikkeling van 20+ succesvolle campagnes met gemiddeld 25% conversie verbetering',
+            'SEO/SEM optimalisatie resulterend in 200% groei in organisch verkeer en 80% lagere cost-per-lead',
+            'Brand awareness verhoogd met 60% door geïntegreerde marketing campagnes',
+            'Samenwerking met sales team resulterend in 35% verbetering in sales-qualified leads'
           ]
         },
         {
@@ -269,10 +299,13 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Utrecht',
           dates: '2016 - 2020',
           achievements: [
-            'Campagne ontwikkeling voor internationale merken',
-            'Social media strategie en content marketing',
-            'SEO/SEM optimalisatie',
-            'ROI verbetering met 40%'
+            'Campagne ontwikkeling voor 10+ internationale merken met totale campagne budget van €2M+',
+            'Social media strategie en content marketing resulterend in 500K+ volgers en 2M+ maandelijkse impressions',
+            'SEO/SEM optimalisatie voor 50+ keywords resulterend in top 3 rankings en 300% groei in organisch verkeer',
+            'ROI verbetering met 40% door data-driven campagne optimalisatie en A/B testing',
+            'Content marketing strategie met 100+ artikelen en whitepapers, genererend 10K+ leads per jaar',
+            'Email marketing campagnes met 25%+ open rates en 5%+ click-through rates',
+            'Samenwerking met agencies en freelancers voor creatieve content en design'
           ]
         }
       ],
