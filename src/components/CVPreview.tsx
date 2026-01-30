@@ -3,6 +3,7 @@
 import type { FC } from 'react'
 import type { CVData } from '@/types/cv'
 import { CV_TEMPLATES } from '@/types/cv'
+import { getSafePhotoUrl } from '@/lib/image-utils'
 import { 
   FaLinkedin, FaGithub, FaGlobe, FaTwitter, FaInstagram, 
   FaPhone, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaUserTie, FaInfoCircle, FaBriefcase, FaBuilding, FaHistory, FaChartLine, FaGraduationCap, FaBook, FaSchool, FaUniversity, FaTools, FaCogs, FaCode, FaCheck, FaLanguage, FaCommentDots, FaCertificate, FaAward, FaTrophy, FaMedal, FaProjectDiagram, FaFolder, FaTasks, FaHeart, FaSmile, FaHiking, FaMusic, FaCamera
@@ -210,10 +211,8 @@ const CVPreviewComponent: FC<CVPreviewProps> = ({ data, isPreview = false, pageC
   }
   
   // Determine photo position based on layout
-  // If photo exists but position is 'none' or undefined, default to 'left' to ensure visibility
-  const photoPosition = data.photoUrl && (!data.layout?.photoPosition || data.layout?.photoPosition === 'none')
-    ? 'left'
-    : (data.layout?.photoPosition || 'none')
+  // Respect 'none' value explicitly - don't override it even if photoUrl exists
+  const photoPosition = data.layout?.photoPosition || 'none'
 
   // Determine if we should show icons
   const showIcons = data.layout?.showIcons !== undefined ? data.layout.showIcons : true
@@ -585,7 +584,7 @@ const CVPreviewComponent: FC<CVPreviewProps> = ({ data, isPreview = false, pageC
               style={{ borderColor: styles.primaryColor }}
             >
               <img 
-                src={data.photoUrl} 
+                src={getSafePhotoUrl(data.photoUrl)} 
                 alt={data.fullName} 
                 className="w-full h-full object-cover" 
                 style={{
@@ -753,7 +752,7 @@ const CVPreviewComponent: FC<CVPreviewProps> = ({ data, isPreview = false, pageC
               style={{ borderColor: styles.primaryColor }}
             >
               <img 
-                src={data.photoUrl} 
+                src={getSafePhotoUrl(data.photoUrl)} 
                 alt={data.fullName} 
                 className="w-full h-full object-cover" 
                 style={{
@@ -793,7 +792,7 @@ const CVPreviewComponent: FC<CVPreviewProps> = ({ data, isPreview = false, pageC
                 style={{ borderColor: styles.secondaryColor }}
               >
                 <img 
-                  src={data.photoUrl} 
+                  src={getSafePhotoUrl(data.photoUrl)} 
                   alt={data.fullName} 
                   className="w-full h-full object-cover" 
                   style={{
@@ -852,7 +851,7 @@ const CVPreviewComponent: FC<CVPreviewProps> = ({ data, isPreview = false, pageC
                 style={{ borderColor: styles.secondaryColor }}
               >
                 <img 
-                  src={data.photoUrl} 
+                  src={getSafePhotoUrl(data.photoUrl)} 
                   alt={data.fullName} 
                   className="w-full h-full object-cover" 
                   style={{

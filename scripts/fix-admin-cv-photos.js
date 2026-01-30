@@ -10,15 +10,18 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-// Use a CORS-friendly placeholder service or remove photoUrl
-// Option 1: Use ui-avatars.com (CORS-friendly)
-// Option 2: Use a data URI placeholder
-// Option 3: Remove photoUrl entirely
-
+// Generate a data URI placeholder photo (CORS-friendly, no external requests)
 function getPlaceholderPhoto(fullName) {
-  // Use ui-avatars.com which is CORS-friendly
-  const name = fullName ? encodeURIComponent(fullName.split(' ')[0]) : 'User';
-  return `https://ui-avatars.com/api/?name=${name}&size=200&background=random&color=fff&bold=true`;
+  const name = fullName ? fullName.split(' ')[0] : 'User';
+  const initial = name.charAt(0).toUpperCase();
+  const color = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+  
+  const svg = `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="${color}"/>
+    <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">${initial}</text>
+  </svg>`;
+  
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 }
 
 async function fixAdminCVPhotos() {
@@ -55,8 +58,8 @@ async function fixAdminCVPhotos() {
           ? JSON.parse(cv.content) 
           : cv.content;
         
-        // Check if it has a randomuser.me photo URL
-        if (content.photoUrl && content.photoUrl.includes('randomuser.me')) {
+        // Check if it has an external photo URL (randomuser.me, ui-avatars.com, etc.)
+        if (content.photoUrl && (content.photoUrl.includes('randomuser.me') || content.photoUrl.includes('ui-avatars.com') || content.photoUrl.startsWith('http'))) {
           // Replace with placeholder
           const newPhotoUrl = getPlaceholderPhoto(content.fullName);
           content.photoUrl = newPhotoUrl;

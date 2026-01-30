@@ -1,9 +1,9 @@
 import { CVData } from '@/types/cv'
+import { generatePlaceholderPhoto } from '@/lib/image-utils'
 
 // Helper function to generate CORS-friendly placeholder photos
 function getPlaceholderPhoto(fullName: string): string {
-  const name = fullName ? encodeURIComponent(fullName.split(' ')[0]) : 'User';
-  return `https://ui-avatars.com/api/?name=${name}&size=200&background=random&color=fff&bold=true`;
+  return generatePlaceholderPhoto(fullName);
 }
 
 // Generate example CV data for each profession

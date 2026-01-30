@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import type { CVData } from '@/types/cv'
 import { CV_TEMPLATES } from '@/types/cv'
+import { getSafePhotoUrl } from '@/lib/image-utils'
 import { 
   FaLinkedin, FaGithub, FaGlobe, FaTwitter, FaInstagram, 
   FaPhone, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaUserTie, FaInfoCircle, FaBriefcase, FaBuilding, FaHistory, FaChartLine, FaGraduationCap, FaBook, FaSchool, FaUniversity, FaTools, FaCogs, FaCode, FaCheck, FaLanguage, FaCommentDots, FaCertificate, FaAward, FaTrophy, FaMedal, FaProjectDiagram, FaFolder, FaTasks, FaHeart, FaSmile, FaHiking, FaMusic, FaCamera
@@ -287,7 +288,7 @@ const CVPreviewServer: FC<CVPreviewServerProps> = memo(({ data, isPreview = fals
           {data.photoUrl && (
             <div className="w-24 h-24 rounded-full overflow-hidden border-2 shadow-md mb-4" style={{ borderColor: styles.primaryColor }}>
               <img 
-                src={data.photoUrl} 
+                src={getSafePhotoUrl(data.photoUrl)} 
                 alt={data.fullName} 
                 className="w-full h-full object-cover" 
                 style={{
@@ -328,7 +329,7 @@ const CVPreviewServer: FC<CVPreviewServerProps> = memo(({ data, isPreview = fals
             {data.photoUrl && photoPosition === 'left' && (
               <div className="flex-shrink-0 w-24 h-24 rounded-full overflow-hidden mr-4 border shadow-sm" style={{ borderColor: styles.secondaryColor }}>
                 <img 
-                  src={data.photoUrl} 
+                  src={getSafePhotoUrl(data.photoUrl)} 
                   alt={data.fullName} 
                   className="w-full h-full object-cover" 
                   style={{
@@ -357,7 +358,7 @@ const CVPreviewServer: FC<CVPreviewServerProps> = memo(({ data, isPreview = fals
             {data.photoUrl && photoPosition === 'right' && (
               <div className="flex-shrink-0 w-24 h-24 rounded-full overflow-hidden ml-4 border shadow-sm" style={{ borderColor: styles.secondaryColor }}>
                 <img 
-                  src={data.photoUrl} 
+                  src={getSafePhotoUrl(data.photoUrl)} 
                   alt={data.fullName} 
                   className="w-full h-full object-cover" 
                   style={{
