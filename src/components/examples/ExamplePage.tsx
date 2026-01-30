@@ -410,8 +410,8 @@ export default function ExamplePage({ professionId, type, language }: ExamplePag
               <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
                 {t('examples.preview.title') || 'Example Preview'}
               </h2>
-              <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)' }}>
-                <div className="max-w-4xl mx-auto" style={{ transform: 'scale(0.85)', transformOrigin: 'top center' }}>
+              <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)', maxHeight: '800px', overflowY: 'auto' }}>
+                <div className="max-w-4xl mx-auto" style={{ transform: 'scale(0.9)', transformOrigin: 'top center' }}>
                   <CVPreviewServer data={getExampleCV(professionId, language === 'nl' || language === 'en' ? language : 'nl')} isPreview={true} />
                 </div>
               </div>
