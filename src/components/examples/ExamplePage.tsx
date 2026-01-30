@@ -16,6 +16,8 @@ import {
   FiClipboard, FiCreditCard, FiSettings, FiHelpCircle, FiLogOut, FiEye
 } from 'react-icons/fi'
 import { FaCheckCircle, FaArrowRight, FaFileAlt, FaUser } from 'react-icons/fa'
+import { CVPreviewServer } from '@/components/CVPreviewServer'
+import { getExampleCV } from '@/data/exampleCVs'
 
 interface ExamplePageProps {
   professionId: string
@@ -402,21 +404,32 @@ export default function ExamplePage({ professionId, type, language }: ExamplePag
             </div>
           </section>
           
-          {/* Visual Preview Placeholder */}
-          <section className="rounded-lg p-8 mb-8" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
-            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              {t('examples.preview.title') || 'Example Preview'}
-            </h2>
-            <div className="rounded-lg p-12 text-center border-2 border-dashed" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}>
-              <FaFileAlt className="mx-auto text-6xl mb-4" style={{ color: 'var(--text-tertiary)' }} />
-              <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
-                {t('examples.preview.placeholder') || 'CV/Letter preview image will be displayed here'}
-              </p>
-              <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                {t('examples.preview.note') || 'This is a placeholder. In production, you would show an actual template preview.'}
-              </p>
-            </div>
-          </section>
+          {/* Visual Preview */}
+          {type === 'cv' && (
+            <section className="rounded-lg p-8 mb-8" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
+              <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+                {t('examples.preview.title') || 'Example Preview'}
+              </h2>
+              <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)' }}>
+                <div className="max-w-4xl mx-auto" style={{ transform: 'scale(0.85)', transformOrigin: 'top center' }}>
+                  <CVPreviewServer data={getExampleCV(professionId, language === 'nl' || language === 'en' ? language : 'nl')} isPreview={true} />
+                </div>
+              </div>
+            </section>
+          )}
+          {type === 'letter' && (
+            <section className="rounded-lg p-8 mb-8" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
+              <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
+                {t('examples.preview.title') || 'Example Preview'}
+              </h2>
+              <div className="rounded-lg p-12 text-center border-2 border-dashed" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}>
+                <FaFileAlt className="mx-auto text-6xl mb-4" style={{ color: 'var(--text-tertiary)' }} />
+                <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
+                  {t('examples.preview.placeholder') || 'Letter preview will be displayed here'}
+                </p>
+              </div>
+            </section>
+          )}
           
           {/* CTA Section */}
           <section className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-8 text-center">
