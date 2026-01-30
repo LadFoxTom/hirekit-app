@@ -329,7 +329,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       template: 'modern',
       fullName: 'Noah Smit',
       title: 'Grafisch Ontwerper',
-      summary: 'Creatieve grafisch ontwerper met 6 jaar ervaring in branding, webdesign en print design. Gespecialiseerd in visuele identiteit en user experience design. Gepassioneerd over minimalisme en functioneel design.',
+      summary: 'Creatieve grafisch ontwerper met 6 jaar ervaring in branding, webdesign en print design. Gespecialiseerd in visuele identiteit, user experience design en digitale producten. Gepassioneerd over minimalisme, functioneel design en het creëren van betekenisvolle visuele ervaringen. Bewezen track record in award-winnende designs en succesvolle brand campagnes.',
       photoUrl: getPlaceholderPhoto('Noah Smit'),
       contact: {
         email: 'noah.smit@email.nl',
@@ -345,10 +345,14 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           dates: '2021 - Heden',
           current: true,
           achievements: [
-            'Ontwerp van visuele identiteiten voor 20+ merken',
-            'Webdesign en UI/UX voor digitale producten',
-            'Leiding aan creatief team van 3 designers',
-            'Winnende designs voor 5 design awards'
+            'Ontwerp van visuele identiteiten voor 20+ merken in diverse sectoren (tech, retail, hospitality)',
+            'Webdesign en UI/UX voor 15+ digitale producten met focus op gebruikerservaring en conversie',
+            'Leiding aan creatief team van 3 designers met focus op kwaliteit, creativiteit en klanttevredenheid',
+            'Winnende designs voor 5 design awards (Dutch Design Awards, Awwwards)',
+            'Ontwikkeling van design systems en style guides voor enterprise klanten',
+            'Samenwerking met developers voor implementatie van designs in code',
+            'Client presentaties en pitch decks resulterend in 80%+ win rate voor nieuwe projecten',
+            'Portfolio met 50+ succesvolle projecten en 95%+ klanttevredenheid'
           ]
         },
         {
@@ -357,9 +361,12 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2018 - 2021',
           achievements: [
-            'Print design voor brochures en magazines',
-            'Branding en logo ontwerp',
-            'Samenwerking met klanten en accountmanagers'
+            'Print design voor 30+ brochures, magazines en marketing materialen met focus op visuele impact',
+            'Branding en logo ontwerp voor 15+ bedrijven, resulterend in sterke merkidentiteit',
+            'Samenwerking met 20+ klanten en accountmanagers voor projecten van concept tot uitvoering',
+            'Ontwikkeling van packaging designs voor retail producten',
+            'Fotografie en beeldbewerking voor marketing campagnes',
+            'Drukwerkbegeleiding en kwaliteitscontrole voor print projecten'
           ]
         }
       ],
