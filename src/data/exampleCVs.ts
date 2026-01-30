@@ -79,7 +79,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Basis)'],
       hobbies: ['Hardlopen (marathon training)', 'Lezen (medische literatuur)', 'Vrijwilligerswerk (lokale gezondheidsvoorlichting)', 'Koken']
     },
-    'software-developer': {
+    \'software-developer': {
       template: 'modern',
       fullName: 'Lucas Jansen',
       title: 'Senior Software Developer',
@@ -148,7 +148,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       summary: 'Gepassioneerde basisschooldocent met 7 jaar ervaring in het lesgeven aan kinderen van 6-12 jaar. Gespecialiseerd in differentiatie, inclusief onderwijs en curriculum ontwikkeling. Focus op het creëren van een positieve leeromgeving met bewezen resultaten in leerling engagement en academische prestaties. Ervaring met educatieve technologie en moderne lesmethoden.',
       photoUrl: getPlaceholderPhoto('Sophie de Vries'),
       contact: {
-        email: 'sophie.devries@email.nl',
+        email: \'sophie.devries@email.nl',
         phone: '+31 6 34567890',
         location: 'Den Haag, Nederland'
       },
@@ -457,7 +457,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Leiding aan infrastructurele projecten van €10M+',
             'Technisch ontwerp en engineering',
             'Coördinatie met aannemers en stakeholders',
@@ -465,7 +465,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ontwerp en ontwikkeling van infrastructurele projecten met waarde van €10M+',
             'Leiding aan team van 5 engineers met focus op kwaliteit en veiligheid',
             'Implementatie van nieuwe technologieën resulterend in 30% kostenbesparing'
-          ]]
+          ]
         },
         {
           title: 'Ingenieur',
@@ -512,7 +512,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Fietsen', 'Fotografie', 'Lezen', 'Reizen']
     },
-    'sales-representative': {
+    \'sales-representative': {
       template: 'modern',
       fullName: 'Max van Leeuwen',
       title: 'Account Manager',
@@ -585,17 +585,13 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2019 - Heden',
           current: true,
-          achievements: [[
-            'Leiding aan keukenbrigade van 8 koks',
-            'Ontwikkeling van seizoensmenu\',
-            ',
-            ',
-            ',
-            ',
+          achievements: [
             'Leiding aan keuken team van 8+ koks met focus op kwaliteit en efficiëntie',
-            'Ontwikkeling van seizoensmenu's met focus op lokale ingrediënten en duurzaamheid',
-            'Kostenbeheer resulterend in 20% verbetering in food cost percentage'
-          ]]
+            'Ontwikkeling van seizoensmenu\'s met focus op lokale ingrediënten en duurzaamheid',
+            'Kostenbeheer resulterend in 20% verbetering in food cost percentage',
+            'Training en ontwikkeling van junior koks in culinaire technieken',
+            'Gastentevredenheid van 4.5+ sterren door consistente kwaliteit en innovatie'
+          ]
         },
         {
           title: 'Sous Chef',
@@ -660,7 +656,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Den Haag',
           dates: '2018 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Begeleiding van M&A transacties tot €50M',
             'Contractonderhandelingen en due diligence',
             'Geschilbeslechting en arbitrage',
@@ -668,7 +664,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Behandeling van 50+ juridische zaken per jaar met 85%+ succespercentage',
             'Advies en ondersteuning bij M&A transacties met totale waarde van €100M+',
             'Voorbereiding van 100+ contracten en juridische documenten'
-          ]]
+          ]
         },
         {
           title: 'Advocaat',
@@ -734,7 +730,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Ontwikkeling van ML modellen voor voorspellingen',
             'Data pipeline engineering en ETL processen',
             'Presentatie van insights aan stakeholders',
@@ -742,7 +738,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ontwikkeling van machine learning modellen voor 10+ business cases',
             'Data analyse van datasets met 1M+ records resulterend in actionable insights',
             'Implementatie van predictive analytics resulterend in 25% verbetering in forecasting'
-          ]]
+          ]
         },
         {
           title: 'Data Scientist',
@@ -790,7 +786,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Utrecht',
           dates: '2015 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Zorg voor 2000+ patiënten',
             'Preventieve zorg en gezondheidsvoorlichting',
             'Chronische ziektebeheer (diabetes, hypertensie)',
@@ -798,7 +794,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Behandeling van gemiddeld 30+ patiënten per dag met focus op kwaliteit van zorg',
             'Samenwerking met multidisciplinair team voor complexe medische cases',
             'Implementatie van evidence-based behandelprotocollen'
-          ]]
+          ]
         },
         {
           title: 'Arts-assistent',
@@ -863,7 +859,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Medicatiebeoordeling en -advies',
             'Farmaceutische patiëntenzorg',
             'Samenwerking met huisartsen en specialisten',
@@ -871,7 +867,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Dagelijkse medicatiebeoordeling voor 100+ patiënten met focus op veiligheid',
             'Farmaceutische zorg en medicatiebeoordeling resulterend in 30% reductie van medicatiefouten',
             'Samenwerking met huisartsen en specialisten voor optimale medicatie'
-          ]]
+          ]
         },
         {
           title: 'Apotheker in opleiding',
@@ -936,7 +932,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Eindhoven',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Eerste en tweede lijns support voor 500+ gebruikers',
             'Systeembeheer en onderhoud',
             'Implementatie van nieuwe IT systemen',
@@ -944,7 +940,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ondersteuning van 200+ gebruikers met gemiddeld 95%+ oplossingspercentage',
             'Resolutie van 50+ IT tickets per week met focus op snelle response tijden',
             'Implementatie van nieuwe systemen en software voor 50+ gebruikers'
-          ]]
+          ]
         },
         {
           title: 'IT Support Medewerker',
@@ -999,7 +995,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       summary: 'Gerenommeerde hoogleraar met 15+ jaar ervaring in onderzoek en onderwijs. Gespecialiseerd in sociale psychologie en gedragswetenschappen. Gepassioneerd over wetenschappelijk onderzoek en kennisoverdracht. met bewezen track record in onderzoek en onderwijs.',
       photoUrl: getPlaceholderPhoto('Prof. Dr. Sarah van der Meer'),
       contact: {
-        email: 'sarah.vandermeer@email.nl',
+        email: \'sarah.vandermeer@email.nl',
         phone: '+31 6 09876543',
         location: 'Amsterdam, Nederland'
       },
@@ -1010,7 +1006,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2016 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Onderwijs aan bachelor en master studenten',
             'Leiding aan onderzoeksgroep van 8 onderzoekers',
             '30+ wetenschappelijke publicaties',
@@ -1018,7 +1014,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Onderwijs aan 200+ studenten per jaar met focus op interactief leren',
             'Publicatie van 15+ peer-reviewed artikelen in toonaangevende journals',
             'Begeleiding van 10+ promovendi en onderzoekers'
-          ]]
+          ]
         },
         {
           title: 'Universitair Docent',
@@ -1048,7 +1044,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Goed)'],
       hobbies: ['Lezen', 'Schrijven', 'Wandelen', 'Muziek']
     },
-    'school-counselor': {
+    \'school-counselor': {
       template: 'modern',
       fullName: 'Iris van der Wal',
       title: 'Schooldecaan',
@@ -1066,7 +1062,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Groningen',
           dates: '2019 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Begeleiding van 300+ leerlingen per jaar',
             'Studie- en loopbaanadvies',
             'Organisatie van voorlichtingsactiviteiten',
@@ -1074,7 +1070,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Begeleiding van 100+ leerlingen per jaar bij studiekeuze en persoonlijke ontwikkeling',
             'Organisatie van 20+ loopbaanoriëntatie activiteiten per jaar',
             'Samenwerking met ouders, docenten en externe partijen voor leerlingbegeleiding'
-          ]]
+          ]
         },
         {
           title: 'Decaan',
@@ -1136,7 +1132,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Financiële modellen en forecasting',
             'Due diligence voor M&A transacties',
             'Risicoanalyse en -beheer',
@@ -1144,7 +1140,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Financiële analyses en forecasting voor bedrijven met omzet van €50M+',
             'Ontwikkeling van financiële modellen voor strategische besluitvorming',
             'Risicoanalyse en due diligence onderzoeken voor investeerders'
-          ]]
+          ]
         },
         {
           title: 'Financieel Analist',
@@ -1207,15 +1203,15 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Portret- en bruiloftsfotografie',
             'Commerciële opdrachten voor merken',
             '100+ tevreden klanten',
             'Publicaties in verschillende magazines',
             'Fotografie voor 50+ evenementen en commerciële projecten per jaar',
-            'Portfolio met 200+ gepubliceerde foto's in magazines en online media',
+            'Portfolio met 200+ gepubliceerde foto\'s in magazines en online media',
             'Samenwerking met 30+ klanten voor branding en marketing fotografie'
-          ]]
+          ]
         },
         {
           title: 'Fotograaf',
@@ -1277,7 +1273,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Utrecht',
           dates: '2021 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Content strategie en creatie voor 20+ merken',
             'Campagne ontwikkeling en copywriting',
             'Social media content en storytelling',
@@ -1285,7 +1281,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Schrijven van 100+ marketing teksten per jaar voor diverse kanalen',
             'Content strategie ontwikkeling resulterend in 40% verhoogde engagement',
             'Samenwerking met marketing teams voor geïntegreerde campagnes'
-          ]]
+          ]
         },
         {
           title: 'Copywriter',
@@ -1347,7 +1343,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Veldhoven',
           dates: '2018 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Ontwerp en ontwikkeling van precisie componenten',
             'CAD/CAM engineering en prototyping',
             'Kwaliteitscontrole en testing',
@@ -1355,7 +1351,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ontwerp en ontwikkeling van mechanische systemen voor 10+ projecten',
             'CAD/CAM engineering en prototyping voor productontwikkeling',
             'Projectmanagement van engineering projecten met waarde van €5M+'
-          ]]
+          ]
         },
         {
           title: 'Mechanical Engineer',
@@ -1417,7 +1413,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Rotterdam',
           dates: '2019 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Leiding aan infrastructurele projecten van €15M+',
             'Planning en uitvoering van wegen- en waterbouwprojecten',
             'Coördinatie met aannemers en stakeholders',
@@ -1425,7 +1421,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ontwerp en ontwikkeling van infrastructurele projecten met waarde van €20M+',
             'Projectmanagement van bouwprojecten binnen budget en deadline',
             'Kwaliteitsborging en veiligheidscompliance voor alle projecten'
-          ]]
+          ]
         },
         {
           title: 'Civiel Ingenieur',
@@ -1476,7 +1472,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       summary: 'Resultaatgerichte account manager met 6 jaar ervaring in B2B account management en klantrelaties. Gespecialiseerd in enterprise accounts en complexe sales. Gepassioneerd over het helpen van klanten bij succes. met bewezen track record in account groei en klantrelatiebeheer.',
       photoUrl: getPlaceholderPhoto('Sanne van der Pol'),
       contact: {
-        email: 'sanne.vanderpol@email.nl',
+        email: \'sanne.vanderpol@email.nl',
         phone: '+31 6 32109876',
         location: 'Amsterdam, Nederland',
         linkedin: 'linkedin.com/in/sannevanderpol'
@@ -1488,7 +1484,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Beheer van portefeuille van 40+ enterprise klanten',
             'Jaarlijkse omzet van €1.8M+',
             'Uitbreiding van klantrelaties en upselling',
@@ -1496,7 +1492,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Beheer van portfolio van 25+ enterprise accounts met totale waarde van €2M+',
             'Account groei van gemiddeld 35% per jaar door proactieve relatiebeheer',
             'Ontwikkeling van accountstrategieën resulterend in 40% verhoogde customer lifetime value'
-          ]]
+          ]
         },
         {
           title: 'Account Manager',
@@ -1612,7 +1608,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Utrecht',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Leiding aan administratief team van 8 medewerkers',
             'HR ondersteuning en recruitment',
             'Facility management en inkoop',
@@ -1620,7 +1616,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Leiding aan administratief team van 8+ medewerkers',
             'Beheer van kantoorfaciliteiten voor 50+ medewerkers',
             'Implementatie van process verbeteringen resulterend in 30% efficiëntie verhoging'
-          ]]
+          ]
         },
         {
           title: 'Office Coordinator',
@@ -1682,7 +1678,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2018 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Ondersteuning van CEO en directie',
             'Complexe agenda beheer en reisplanning',
             'Organisatie van board meetings en events',
@@ -1690,7 +1686,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ondersteuning van 3+ C-level executives met focus op efficiëntie',
             'Coördinatie van 20+ executive meetings en evenementen per maand',
             'Voorbereiding van 30+ presentaties en rapporten per maand'
-          ]]
+          ]
         },
         {
           title: 'Management Assistant',
@@ -1752,7 +1748,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2019 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Leiding aan team van 50+ medewerkers',
             'Omzetoptimalisatie en budgetbeheer',
             'Gastenservice en tevredenheid',
@@ -1760,7 +1756,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Leiding aan team van 25+ medewerkers met focus op gastenservice',
             'Beheer van hotel met 80+ kamers en gemiddeld 70% bezettingsgraad',
             'Implementatie van service verbeteringen resulterend in 4.5+ sterren rating'
-          ]]
+          ]
         },
         {
           title: 'Front Office Manager',
@@ -1822,7 +1818,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Leiding aan team van 20+ medewerkers',
             'Dagelijkse operaties en service management',
             'Gastenservice en tevredenheid',
@@ -1830,7 +1826,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Leiding aan team van 15+ medewerkers met focus op gastenservice',
             'Beheer van restaurant met 60+ covers en gemiddeld 200 covers per dag',
             'Implementatie van service verbeteringen resulterend in 4.5+ sterren rating'
-          ]]
+          ]
         },
         {
           title: 'Floor Manager',
@@ -1892,7 +1888,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Den Haag',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Juridische ondersteuning aan advocaten',
             'Documentbeheer en -onderzoek',
             'Contracten opstellen en beoordelen',
@@ -1900,7 +1896,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ondersteuning bij 100+ juridische zaken per jaar',
             'Voorbereiding van 200+ juridische documenten en contracten',
             'Juridisch onderzoek en documentatie voor advocaten'
-          ]]
+          ]
         },
         {
           title: 'Paralegal',
@@ -1962,7 +1958,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
           location: 'Amsterdam',
           dates: '2020 - Heden',
           current: true,
-          achievements: [[
+          achievements: [
             'Juridische administratie en documentbeheer',
             'Klantcommunicatie en -ondersteuning',
             'Planning en agenda beheer',
@@ -1970,7 +1966,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
             'Ondersteuning bij 80+ juridische zaken per jaar',
             'Voorbereiding van 150+ juridische documenten en administratie',
             'Juridisch onderzoek en documentatie voor juridisch team'
-          ]]
+          ]
         },
         {
           title: 'Administratief Medewerker',
