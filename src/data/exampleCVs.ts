@@ -79,7 +79,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Basis)'],
       hobbies: ['Hardlopen (marathon training)', 'Lezen (medische literatuur)', 'Vrijwilligerswerk (lokale gezondheidsvoorlichting)', 'Koken']
     },
-    \'software-developer': {
+    'software-developer': {
       template: 'modern',
       fullName: 'Lucas Jansen',
       title: 'Senior Software Developer',
@@ -148,7 +148,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       summary: 'Gepassioneerde basisschooldocent met 7 jaar ervaring in het lesgeven aan kinderen van 6-12 jaar. Gespecialiseerd in differentiatie, inclusief onderwijs en curriculum ontwikkeling. Focus op het creëren van een positieve leeromgeving met bewezen resultaten in leerling engagement en academische prestaties. Ervaring met educatieve technologie en moderne lesmethoden.',
       photoUrl: getPlaceholderPhoto('Sophie de Vries'),
       contact: {
-        email: \'sophie.devries@email.nl',
+        email: 'sophie.devries@email.nl',
         phone: '+31 6 34567890',
         location: 'Den Haag, Nederland'
       },
@@ -512,7 +512,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)'],
       hobbies: ['Fietsen', 'Fotografie', 'Lezen', 'Reizen']
     },
-    \'sales-representative': {
+    'sales-representative': {
       template: 'modern',
       fullName: 'Max van Leeuwen',
       title: 'Account Manager',
@@ -995,7 +995,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       summary: 'Gerenommeerde hoogleraar met 15+ jaar ervaring in onderzoek en onderwijs. Gespecialiseerd in sociale psychologie en gedragswetenschappen. Gepassioneerd over wetenschappelijk onderzoek en kennisoverdracht. met bewezen track record in onderzoek en onderwijs.',
       photoUrl: getPlaceholderPhoto('Prof. Dr. Sarah van der Meer'),
       contact: {
-        email: \'sarah.vandermeer@email.nl',
+        email: 'sarah.vandermeer@email.nl',
         phone: '+31 6 09876543',
         location: 'Amsterdam, Nederland'
       },
@@ -1044,7 +1044,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       languages: ['Nederlands (Moedertaal)', 'Engels (Vloeiend)', 'Duits (Goed)'],
       hobbies: ['Lezen', 'Schrijven', 'Wandelen', 'Muziek']
     },
-    \'school-counselor': {
+    'school-counselor': {
       template: 'modern',
       fullName: 'Iris van der Wal',
       title: 'Schooldecaan',
@@ -1472,7 +1472,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       summary: 'Resultaatgerichte account manager met 6 jaar ervaring in B2B account management en klantrelaties. Gespecialiseerd in enterprise accounts en complexe sales. Gepassioneerd over het helpen van klanten bij succes. met bewezen track record in account groei en klantrelatiebeheer.',
       photoUrl: getPlaceholderPhoto('Sanne van der Pol'),
       contact: {
-        email: \'sanne.vanderpol@email.nl',
+        email: 'sanne.vanderpol@email.nl',
         phone: '+31 6 32109876',
         location: 'Amsterdam, Nederland',
         linkedin: 'linkedin.com/in/sannevanderpol'
