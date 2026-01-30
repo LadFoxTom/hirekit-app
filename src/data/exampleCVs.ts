@@ -1,5 +1,11 @@
 import { CVData } from '@/types/cv'
 
+// Helper function to generate CORS-friendly placeholder photos
+function getPlaceholderPhoto(fullName: string): string {
+  const name = fullName ? encodeURIComponent(fullName.split(' ')[0]) : 'User';
+  return `https://ui-avatars.com/api/?name=${name}&size=200&background=random&color=fff&bold=true`;
+}
+
 // Generate example CV data for each profession
 // Each profession gets a unique fictional person with photo
 export function getExampleCV(professionId: string, language: string = 'nl'): CVData {
@@ -9,7 +15,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Emma van der Berg',
       title: 'Verpleegkundige',
       summary: 'Ervaren verpleegkundige met 8+ jaar ervaring in acute zorg en patiëntenzorg. Gespecialiseerd in intensive care en spoedeisende hulp. Gepassioneerd over evidence-based zorg en continue professionele ontwikkeling.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/32.jpg',
+      photoUrl: getPlaceholderPhoto('Emma van der Berg'),
       contact: {
         email: 'emma.vanderberg@email.nl',
         phone: '+31 6 12345678',
@@ -71,7 +77,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Lucas Jansen',
       title: 'Senior Software Developer',
       summary: 'Ervaren full-stack developer met 10+ jaar ervaring in het bouwen van schaalbare webapplicaties en microservices. Gespecialiseerd in React, Node.js en cloud architecture. Gepassioneerd over clean code en performance optimalisatie.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/45.jpg',
+      photoUrl: getPlaceholderPhoto('Lucas Jansen'),
       contact: {
         email: 'lucas.jansen@email.nl',
         phone: '+31 6 23456789',
@@ -127,7 +133,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Sophie de Vries',
       title: 'Docent Basisonderwijs',
       summary: 'Gepassioneerde basisschooldocent met 7 jaar ervaring in het lesgeven aan kinderen van 6-12 jaar. Gespecialiseerd in differentiatie en inclusief onderwijs. Focus op het creëren van een positieve leeromgeving.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/28.jpg',
+      photoUrl: getPlaceholderPhoto('Sophie de Vries'),
       contact: {
         email: 'sophie.devries@email.nl',
         phone: '+31 6 34567890',
@@ -180,7 +186,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Daan Bakker',
       title: 'Registeraccountant',
       summary: 'Ervaren accountant met 12+ jaar ervaring in financiële controle, belastingadvies en bedrijfsadvisering. Gespecialiseerd in MKB en internationale bedrijven. Gepassioneerd over financiële transparantie en compliance.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/67.jpg',
+      photoUrl: getPlaceholderPhoto('Daan Bakker'),
       contact: {
         email: 'daan.bakker@email.nl',
         phone: '+31 6 45678901',
@@ -236,7 +242,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Lisa Meijer',
       title: 'Marketing Manager',
       summary: 'Strategische marketing professional met 9 jaar ervaring in digitale marketing, brand management en campagne ontwikkeling. Gespecialiseerd in B2B marketing en data-driven besluitvorming. Gepassioneerd over groei en innovatie.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/41.jpg',
+      photoUrl: getPlaceholderPhoto('Lisa Meijer'),
       contact: {
         email: 'lisa.meijer@email.nl',
         phone: '+31 6 56789012',
@@ -291,7 +297,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Noah Smit',
       title: 'Grafisch Ontwerper',
       summary: 'Creatieve grafisch ontwerper met 6 jaar ervaring in branding, webdesign en print design. Gespecialiseerd in visuele identiteit en user experience design. Gepassioneerd over minimalisme en functioneel design.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/52.jpg',
+      photoUrl: getPlaceholderPhoto('Noah Smit'),
       contact: {
         email: 'noah.smit@email.nl',
         phone: '+31 6 67890123',
@@ -345,7 +351,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Eva Mulder',
       title: 'Management Assistent',
       summary: 'Proactieve management assistent met 8 jaar ervaring in administratieve ondersteuning, planning en klantenservice. Gespecialiseerd in efficiënte workflow management en executive support. Gepassioneerd over organisatie en service excellence.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/35.jpg',
+      photoUrl: getPlaceholderPhoto('Eva Mulder'),
       contact: {
         email: 'eva.mulder@email.nl',
         phone: '+31 6 78901234',
@@ -398,7 +404,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Thomas de Wit',
       title: 'Ingenieur',
       summary: 'Ervaren ingenieur met 11 jaar ervaring in projectmanagement, technisch ontwerp en kwaliteitscontrole. Gespecialiseerd in infrastructurele projecten en duurzame oplossingen. Gepassioneerd over innovatie en technische excellentie.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/38.jpg',
+      photoUrl: getPlaceholderPhoto('Thomas de Wit'),
       contact: {
         email: 'thomas.dewit@email.nl',
         phone: '+31 6 89012345',
@@ -454,7 +460,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Max van Leeuwen',
       title: 'Account Manager',
       summary: 'Resultaatgerichte sales professional met 7 jaar ervaring in B2B verkoop en account management. Gespecialiseerd in lange termijn klantrelaties en complexe sales cycles. Gepassioneerd over het helpen van klanten bij het bereiken van hun doelen.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/61.jpg',
+      photoUrl: getPlaceholderPhoto('Max van Leeuwen'),
       contact: {
         email: 'max.vanleeuwen@email.nl',
         phone: '+31 6 90123456',
@@ -509,7 +515,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Anna van Dijk',
       title: 'Hoofdchef',
       summary: 'Creatieve chef met 10 jaar ervaring in fine dining en restaurant management. Gespecialiseerd in moderne Europese keuken en seizoensgebonden ingrediënten. Gepassioneerd over culinaire innovatie en teamontwikkeling.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/47.jpg',
+      photoUrl: getPlaceholderPhoto('Anna van Dijk'),
       contact: {
         email: 'anna.vandijk@email.nl',
         phone: '+31 6 01234567',
@@ -565,7 +571,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Julia Hendriks',
       title: 'Advocaat',
       summary: 'Ervaren advocaat met 9 jaar ervaring in corporate law en contractenrecht. Gespecialiseerd in M&A transacties en commerciële geschillen. Gepassioneerd over juridische excellentie en klantgerichtheid.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/39.jpg',
+      photoUrl: getPlaceholderPhoto('Julia Hendriks'),
       contact: {
         email: 'julia.hendriks@email.nl',
         phone: '+31 6 12345098',
@@ -621,7 +627,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Ruben Visser',
       title: 'Data Scientist',
       summary: 'Data scientist met 6 jaar ervaring in machine learning, predictive analytics en data engineering. Gespecialiseerd in Python, SQL en cloud platforms. Gepassioneerd over het omzetten van data in actionable insights.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/43.jpg',
+      photoUrl: getPlaceholderPhoto('Ruben Visser'),
       contact: {
         email: 'ruben.visser@email.nl',
         phone: '+31 6 23450987',
@@ -675,7 +681,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Dr. Bas van den Berg',
       title: 'Huisarts',
       summary: 'Ervaren huisarts met 12 jaar ervaring in eerstelijns gezondheidszorg. Gespecialiseerd in preventieve zorg en chronische ziektebeheer. Gepassioneerd over patiëntgerichte zorg en continue medische educatie.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/55.jpg',
+      photoUrl: getPlaceholderPhoto('Dr. Bas van den Berg'),
       contact: {
         email: 'bas.vandenberg@email.nl',
         phone: '+31 6 34509876',
@@ -731,7 +737,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Marieke van der Laan',
       title: 'Apotheker',
       summary: 'Ervaren apotheker met 8 jaar ervaring in community pharmacy en medicatiebeheer. Gespecialiseerd in farmaceutische zorg en medicatiebeoordeling. Gepassioneerd over patiëntveiligheid en medicatieoptimalisatie.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+      photoUrl: getPlaceholderPhoto('Marieke van der Laan'),
       contact: {
         email: 'marieke.vanderlaan@email.nl',
         phone: '+31 6 45098765',
@@ -787,7 +793,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Kevin de Boer',
       title: 'IT Support Specialist',
       summary: 'Technische IT support specialist met 5 jaar ervaring in helpdesk support, systeembeheer en troubleshooting. Gespecialiseerd in Windows en Linux systemen. Gepassioneerd over probleemoplossing en klanttevredenheid.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/49.jpg',
+      photoUrl: getPlaceholderPhoto('Kevin de Boer'),
       contact: {
         email: 'kevin.deboer@email.nl',
         phone: '+31 6 50987654',
@@ -844,7 +850,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Prof. Dr. Sarah van der Meer',
       title: 'Hoogleraar',
       summary: 'Gerenommeerde hoogleraar met 15+ jaar ervaring in onderzoek en onderwijs. Gespecialiseerd in sociale psychologie en gedragswetenschappen. Gepassioneerd over wetenschappelijk onderzoek en kennisoverdracht.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/50.jpg',
+      photoUrl: getPlaceholderPhoto('Prof. Dr. Sarah van der Meer'),
       contact: {
         email: 'sarah.vandermeer@email.nl',
         phone: '+31 6 09876543',
@@ -897,7 +903,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Iris van der Wal',
       title: 'Schooldecaan',
       summary: 'Ervaren schooldecaan met 7 jaar ervaring in studie- en loopbaanbegeleiding. Gespecialiseerd in het ondersteunen van leerlingen bij studiekeuze en persoonlijke ontwikkeling. Gepassioneerd over het helpen van jongeren bij het bereiken van hun potentieel.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/33.jpg',
+      photoUrl: getPlaceholderPhoto('Iris van der Wal'),
       contact: {
         email: 'iris.vanderwal@email.nl',
         phone: '+31 6 98765432',
@@ -950,7 +956,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Dennis van der Veen',
       title: 'Financieel Analist',
       summary: 'Analytische financieel analist met 6 jaar ervaring in financiële analyse, forecasting en risicobeheer. Gespecialiseerd in corporate finance en investment analysis. Gepassioneerd over data-driven besluitvorming.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/56.jpg',
+      photoUrl: getPlaceholderPhoto('Dennis van der Veen'),
       contact: {
         email: 'dennis.vanderveen@email.nl',
         phone: '+31 6 87654321',
@@ -1003,7 +1009,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Fleur van der Berg',
       title: 'Fotograaf',
       summary: 'Creatieve professionele fotograaf met 8 jaar ervaring in portret-, bruilofts- en commerciële fotografie. Gespecialiseerd in natuurlijk licht en storytelling. Gepassioneerd over het vastleggen van authentieke momenten.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/46.jpg',
+      photoUrl: getPlaceholderPhoto('Fleur van der Berg'),
       contact: {
         email: 'fleur.vanderberg@email.nl',
         phone: '+31 6 76543210',
@@ -1057,7 +1063,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Roos van der Laan',
       title: 'Copywriter',
       summary: 'Creatieve copywriter met 5 jaar ervaring in content marketing, advertising en brand storytelling. Gespecialiseerd in digitale content en social media. Gepassioneerd over het creëren van overtuigende verhalen die resulteren.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/42.jpg',
+      photoUrl: getPlaceholderPhoto('Roos van der Laan'),
       contact: {
         email: 'roos.vanderlaan@email.nl',
         phone: '+31 6 65432109',
@@ -1110,7 +1116,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Joris van der Meulen',
       title: 'Werktuigbouwkundig Ingenieur',
       summary: 'Ervaren werktuigbouwkundig ingenieur met 9 jaar ervaring in productontwikkeling en machine design. Gespecialiseerd in CAD/CAM en prototyping. Gepassioneerd over innovatie en technische oplossingen.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/59.jpg',
+      photoUrl: getPlaceholderPhoto('Joris van der Meulen'),
       contact: {
         email: 'joris.vandermeulen@email.nl',
         phone: '+31 6 54321098',
@@ -1163,7 +1169,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Marijn van der Steen',
       title: 'Civiel Ingenieur',
       summary: 'Ervaren civiel ingenieur met 10 jaar ervaring in infrastructurele projecten en bouwmanagement. Gespecialiseerd in bruggen en wegenbouw. Gepassioneerd over duurzame infrastructuur en veiligheid.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/48.jpg',
+      photoUrl: getPlaceholderPhoto('Marijn van der Steen'),
       contact: {
         email: 'marijn.vandersteen@email.nl',
         phone: '+31 6 43210987',
@@ -1216,7 +1222,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Sanne van der Pol',
       title: 'Account Manager',
       summary: 'Resultaatgerichte account manager met 6 jaar ervaring in B2B account management en klantrelaties. Gespecialiseerd in enterprise accounts en complexe sales. Gepassioneerd over het helpen van klanten bij succes.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/40.jpg',
+      photoUrl: getPlaceholderPhoto('Sanne van der Pol'),
       contact: {
         email: 'sanne.vanderpol@email.nl',
         phone: '+31 6 32109876',
@@ -1271,7 +1277,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Tim van der Zee',
       title: 'Winkelmanager',
       summary: 'Ervaren winkelmanager met 8 jaar ervaring in retail management en klantenservice. Gespecialiseerd in teamleiderschap en omzetoptimalisatie. Gepassioneerd over klanttevredenheid en operationele excellentie.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/57.jpg',
+      photoUrl: getPlaceholderPhoto('Tim van der Zee'),
       contact: {
         email: 'tim.vanderzee@email.nl',
         phone: '+31 6 21098765',
@@ -1324,7 +1330,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Lotte van der Heijden',
       title: 'Kantoor Manager',
       summary: 'Proactieve kantoor manager met 7 jaar ervaring in office management, HR en administratie. Gespecialiseerd in efficiënte workflow en teamcoördinatie. Gepassioneerd over het creëren van een positieve werkomgeving.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/36.jpg',
+      photoUrl: getPlaceholderPhoto('Lotte van der Heijden'),
       contact: {
         email: 'lotte.vanderheijden@email.nl',
         phone: '+31 6 10987654',
@@ -1377,7 +1383,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Niels van der Vliet',
       title: 'Executive Assistant',
       summary: 'Ervaren executive assistant met 9 jaar ervaring in executive support en administratieve coördinatie. Gespecialiseerd in C-level ondersteuning en complexe planning. Gepassioneerd over efficiency en discretie.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/54.jpg',
+      photoUrl: getPlaceholderPhoto('Niels van der Vliet'),
       contact: {
         email: 'niels.vandervliet@email.nl',
         phone: '+31 6 09876543',
@@ -1430,7 +1436,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Femke van der Berg',
       title: 'Hotel Manager',
       summary: 'Ervaren hotel manager met 10 jaar ervaring in hospitality management en gastenservice. Gespecialiseerd in luxury hotels en operationele excellentie. Gepassioneerd over het creëren van onvergetelijke gastenervaringen.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/38.jpg',
+      photoUrl: getPlaceholderPhoto('Femke van der Berg'),
       contact: {
         email: 'femke.vanderberg@email.nl',
         phone: '+31 6 98765432',
@@ -1483,7 +1489,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Jeroen van der Molen',
       title: 'Restaurant Manager',
       summary: 'Ervaren restaurant manager met 8 jaar ervaring in restaurant management en gastenservice. Gespecialiseerd in fine dining en teamleiderschap. Gepassioneerd over culinaire excellentie en gasttevredenheid.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/60.jpg',
+      photoUrl: getPlaceholderPhoto('Jeroen van der Molen'),
       contact: {
         email: 'jeroen.vandermolen@email.nl',
         phone: '+31 6 87654321',
@@ -1536,7 +1542,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Maud van der Linden',
       title: 'Paralegal',
       summary: 'Ervaren paralegal met 6 jaar ervaring in juridische ondersteuning en documentbeheer. Gespecialiseerd in corporate law en contractenrecht. Gepassioneerd over precisie en juridische excellentie.',
-      photoUrl: 'https://randomuser.me/api/portraits/women/37.jpg',
+      photoUrl: getPlaceholderPhoto('Maud van der Linden'),
       contact: {
         email: 'maud.vanderlinden@email.nl',
         phone: '+31 6 76543210',
@@ -1589,7 +1595,7 @@ export function getExampleCV(professionId: string, language: string = 'nl'): CVD
       fullName: 'Rick van der Hoek',
       title: 'Juridisch Medewerker',
       summary: 'Proactieve juridisch medewerker met 5 jaar ervaring in juridische administratie en ondersteuning. Gespecialiseerd in documentbeheer en klantcommunicatie. Gepassioneerd over efficiëntie en service.',
-      photoUrl: 'https://randomuser.me/api/portraits/men/51.jpg',
+      photoUrl: getPlaceholderPhoto('Rick van der Hoek'),
       contact: {
         email: 'rick.vanderhoek@email.nl',
         phone: '+31 6 65432109',
