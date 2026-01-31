@@ -1,8 +1,58 @@
 import { MetadataRoute } from 'next'
+import { PROFESSIONS, URL_SEGMENTS, type Language } from '@/data/professions'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || 'https://www.ladderfox.com'
   const currentDate = new Date()
+
+  // Generate example pages for all languages and professions
+  const examplePages: MetadataRoute.Sitemap = []
+  const languages: Language[] = ['en', 'nl', 'fr', 'es', 'de', 'it', 'pl', 'ro', 'hu', 'el', 'cs', 'pt', 'sv', 'bg', 'da', 'fi', 'sk', 'no', 'hr', 'sr']
+  
+  languages.forEach(language => {
+    const segments = URL_SEGMENTS[language]
+    
+    // Add overview pages
+    examplePages.push({
+      url: `${baseUrl}/${segments.examples}`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    })
+    examplePages.push({
+      url: `${baseUrl}/${segments.examples}/${segments.cv}`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    })
+    examplePages.push({
+      url: `${baseUrl}/${segments.examples}/${segments.letter}`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    })
+    
+    // Add individual profession pages
+    PROFESSIONS.forEach(profession => {
+      const translation = profession.translations[language] || profession.translations.en
+      
+      // CV example page
+      examplePages.push({
+        url: `${baseUrl}/${segments.examples}/${segments.cv}/${translation.slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      })
+      
+      // Letter example page
+      examplePages.push({
+        url: `${baseUrl}/${segments.examples}/${segments.letter}/${translation.slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      })
+    })
+  })
 
   return [
     {
@@ -107,5 +157,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.4,
     },
+    // Add all example pages for all languages
+    ...examplePages,
   ]
 } 
