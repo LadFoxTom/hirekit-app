@@ -1298,6 +1298,10 @@
       "key_5": "Închidere profesională cu un apel la acțiune",
       "intro_3": "Diferite profesii necesită abordări diferite. Explorează exemplele de mai jos pentru a înțelege cum să-ți adaptezi scrisoarea pentru domeniul tău specific."
     },
-    "view_example": "Vezi exemplu"
+    "view_example": "Vezi exemplu",
+    "under_construction": {
+      "badge": "În construcție",
+      "message": "Lucrăm activ la extinderea acestei secțiuni cu exemple mai detaliate. Revino curând pentru actualizări!"
+    }
   }
 }

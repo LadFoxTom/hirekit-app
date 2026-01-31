@@ -1243,7 +1243,11 @@
       "key_5": "Professioneller Abschluss mit einem Aufruf zum Handeln",
       "intro_3": "Verschiedene Berufe erfordern unterschiedliche Ansätze. Erkunden Sie die Beispiele unten, um zu verstehen, wie Sie Ihr Schreiben für Ihr spezifisches Feld anpassen können."
     },
-    "view_example": "Beispiel anzeigen"
+    "view_example": "Beispiel anzeigen",
+    "under_construction": {
+      "badge": "In Bearbeitung",
+      "message": "Wir arbeiten aktiv daran, diesen Bereich mit mehr detaillierten Beispielen zu erweitern. Schauen Sie bald wieder vorbei!"
+    }
   },
   "intro.account_data_loaded": "Großartig! Ich habe Ihre Kontoinformationen geladen. Lassen Sie uns mit Ihren grundlegenden Details beginnen, Ihren Lebenslauf zu erstellen.",
   "intro.account_data_no": "Nein, ich beginne neu",

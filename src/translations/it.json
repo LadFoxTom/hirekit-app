@@ -1298,6 +1298,10 @@
       "key_5": "Chiusura professionale con una call to action",
       "intro_3": "Professioni diverse richiedono approcci diversi. Esplora gli esempi qui sotto per capire come adattare la tua lettera al tuo campo specifico."
     },
-    "view_example": "Visualizza Esempio"
+    "view_example": "Visualizza Esempio",
+    "under_construction": {
+      "badge": "In costruzione",
+      "message": "Stiamo lavorando attivamente per espandere questa sezione con più esempi dettagliati. Torna presto per gli aggiornamenti!"
+    }
   }
 } 

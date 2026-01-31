@@ -1211,7 +1211,11 @@
       "key_5": "Professionele afsluiting met een call-to-action",
       "intro_3": "Verschillende beroepen vereisen verschillende benaderingen. Verken de voorbeelden hieronder om te begrijpen hoe je je brief kunt aanpassen voor jouw specifieke vakgebied."
     },
-    "view_example": "Bekijk Voorbeeld"
+    "view_example": "Bekijk Voorbeeld",
+    "under_construction": {
+      "badge": "In ontwikkeling",
+      "message": "We werken actief aan het uitbreiden van deze sectie met meer gedetailleerde voorbeelden. Kom binnenkort terug voor updates!"
+    }
   },
   "completion.basic_success": "🎉 Gefeliciteerd! Uw basis CV is compleet en klaar voor sollicitaties. U heeft nu een professioneel CV met alle essentiële informatie. Gebruik de optimalisatiesuggesties hieronder om het verder te verbeteren of ga verder met geavanceerde functies.",
   "completion.success_enhanced": "🎉 Uitstekend! Uw professionele CV is klaar. Hier is wat u nu kunt doen:",

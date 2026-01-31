@@ -1233,7 +1233,11 @@
       "key_5": "Professional closing with a call to action",
       "intro_3": "Different professions require different approaches. Explore the examples below to understand how to tailor your letter for your specific field."
     },
-    "view_example": "View Example"
+    "view_example": "Ver ejemplo",
+    "under_construction": {
+      "badge": "En construcción",
+      "message": "Estamos trabajando activamente en expandir esta sección con más ejemplos detallados. ¡Vuelve pronto para actualizaciones!"
+    }
   },
   "intro.account_data_loaded": "¡Genial! He cargado tu información de cuenta. Comencemos a construir tu CV con tus datos básicos.",
   "intro.account_data_no": "No, empezaré desde cero",

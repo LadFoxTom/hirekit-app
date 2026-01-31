@@ -13,7 +13,8 @@ import { signOut } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 import { 
   FiArrowLeft, FiChevronDown, FiGrid, FiFolder, FiBriefcase, 
-  FiClipboard, FiCreditCard, FiSettings, FiHelpCircle, FiLogOut, FiEye
+  FiClipboard, FiCreditCard, FiSettings, FiHelpCircle, FiLogOut, FiEye,
+  FiTool
 } from 'react-icons/fi'
 import { FaArrowRight, FaBriefcase, FaUser } from 'react-icons/fa'
 
@@ -338,6 +339,40 @@ export default function ExamplesOverviewPage({ type, language }: ExamplesOvervie
                 ? (t('examples.cv_overview.description') || 'Browse professional CV examples by profession. Learn what makes a great CV and get inspired to create your own.')
                 : (t('examples.letter_overview.description') || 'Browse professional motivational letter examples by profession. Learn what makes a great letter and get inspired to create your own.')}
             </p>
+            
+            {/* Under Construction Banner */}
+            <div 
+              className="mt-6 inline-flex items-center gap-3 px-4 py-3 rounded-xl"
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%)',
+                border: '1px solid rgba(251, 191, 36, 0.3)',
+                backdropFilter: 'blur(8px)'
+              }}
+            >
+              <div 
+                className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ 
+                  background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+                  boxShadow: '0 2px 8px rgba(251, 191, 36, 0.3)'
+                }}
+              >
+                <FiTool className="text-white" size={16} />
+              </div>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                <span 
+                  className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded"
+                  style={{ 
+                    backgroundColor: 'rgba(251, 191, 36, 0.2)',
+                    color: '#b45309'
+                  }}
+                >
+                  {t('examples.under_construction.badge') || 'Under Construction'}
+                </span>
+                <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  {t('examples.under_construction.message') || "We're actively working on expanding this section with more detailed examples. Check back soon for updates!"}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         

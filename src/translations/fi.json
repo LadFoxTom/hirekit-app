@@ -1298,6 +1298,10 @@
       "key_5": "Ammattimainen päätös toimintakehotuksella",
       "intro_3": "Eri ammatit vaativat erilaisia lähestymistapoja. Tutustu alla oleviin esimerkkeihin ymmärtääksesi, miten räätälöidä kirjeesi erityiselle alallesi."
     },
-    "view_example": "Näytä esimerkki"
+    "view_example": "Näytä esimerkki",
+    "under_construction": {
+      "badge": "Rakenteilla",
+      "message": "Työskentelemme aktiivisesti tämän osion laajentamiseksi yksityiskohtaisemmilla esimerkeillä. Palaa pian päivityksien pariin!"
+    }
   }
 }

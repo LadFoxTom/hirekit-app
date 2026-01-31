@@ -1298,6 +1298,10 @@
       "key_5": "Professionell avslutning med en uppmaning till handling",
       "intro_3": "Olika yrken kräver olika tillvägagångssätt. Utforska exemplen nedan för att förstå hur du anpassar ditt brev för ditt specifika område."
     },
-    "view_example": "Visa exempel"
+    "view_example": "Visa exempel",
+    "under_construction": {
+      "badge": "Under uppbyggnad",
+      "message": "Vi arbetar aktivt med att utöka denna sektion med mer detaljerade exempel. Kom tillbaka snart för uppdateringar!"
+    }
   }
 }

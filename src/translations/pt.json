@@ -1298,6 +1298,10 @@
       "key_5": "Fechamento profissional com uma chamada para ação",
       "intro_3": "Diferentes profissões requerem abordagens diferentes. Explore os exemplos abaixo para entender como adaptar sua carta para sua área específica."
     },
-    "view_example": "Ver Exemplo"
+    "view_example": "Ver Exemplo",
+    "under_construction": {
+      "badge": "Em construção",
+      "message": "Estamos trabalhando ativamente para expandir esta seção com mais exemplos detalhados. Volte em breve para atualizações!"
+    }
   }
 }

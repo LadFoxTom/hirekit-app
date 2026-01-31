@@ -1298,6 +1298,10 @@
       "key_5": "Professionel afslutning med en opfordring til handling",
       "intro_3": "Forskellige professioner kræver forskellige tilgange. Udforsk eksemplerne nedenfor for at forstå, hvordan du tilpasser dit brev til dit specifikke felt."
     },
-    "view_example": "Se eksempel"
+    "view_example": "Se eksempel",
+    "under_construction": {
+      "badge": "Under opbygning",
+      "message": "Vi arbejder aktivt på at udvide denne sektion med mere detaljerede eksempler. Kom snart tilbage for opdateringer!"
+    }
   }
 }

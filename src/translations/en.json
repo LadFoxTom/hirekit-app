@@ -1372,6 +1372,10 @@
       "key_5": "Professional closing with a call to action",
       "intro_3": "Different professions require different approaches. Explore the examples below to understand how to tailor your letter for your specific field."
     },
-    "view_example": "View Example"
+    "view_example": "View Example",
+    "under_construction": {
+      "badge": "Under Construction",
+      "message": "We're actively working on expanding this section with more detailed examples. Check back soon for updates!"
+    }
   }
 } 
