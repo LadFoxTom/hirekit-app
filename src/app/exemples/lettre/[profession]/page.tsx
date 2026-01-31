@@ -4,6 +4,9 @@ import ExamplePage from '@/components/examples/ExamplePage'
 import { getProfession, getProfessionIdFromSlug, PROFESSIONS } from '@/data/professions'
 import type { Language } from '@/data/professions'
 
+// Force dynamic rendering to speed up build time
+export const dynamic = 'force-dynamic'
+
 interface PageProps {
   params: {
     profession: string
@@ -43,16 +46,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export async function generateStaticParams() {
-  const language: Language = 'fr'
-  
-  return PROFESSIONS.map((prof) => {
-    const translation = prof.translations[language] || prof.translations.en
-    return {
-      profession: translation.slug
-    }
-  })
-}
+// Removed generateStaticParams to use dynamic rendering instead
+// This prevents generating 33+ static pages during build, reducing build time from 20+ minutes to ~2-3 minutes
+// export async function generateStaticParams() {
+//   const language: Language = 'fr'
+//   
+//   return PROFESSIONS.map((prof) => {
+//     const translation = prof.translations[language] || prof.translations.en
+//     return {
+//       profession: translation.slug
+//     }
+//   })
+// }
 
 export default function FrenchLetterExamplePage({ params }: PageProps) {
   const language: Language = 'fr'

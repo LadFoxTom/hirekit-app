@@ -5,9 +5,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || 'https://www.ladderfox.com'
   const currentDate = new Date()
 
-  // Generate example pages for all languages and professions
+  // Generate example pages for main languages and professions
   const examplePages: MetadataRoute.Sitemap = []
-  const languages: Language[] = ['en', 'nl', 'fr', 'es', 'de', 'it', 'pl', 'ro', 'hu', 'el', 'cs', 'pt', 'sv', 'bg', 'da', 'fi', 'sk', 'no', 'hr', 'sr']
+  const languages: Language[] = ['en', 'nl', 'fr', 'es', 'de'] // Only main languages
   
   languages.forEach(language => {
     const segments = URL_SEGMENTS[language]

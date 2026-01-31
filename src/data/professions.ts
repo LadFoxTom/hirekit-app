@@ -52,141 +52,155 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Nurse',
         slug: 'nurse',
-        description: 'Nursing is a profession focused on patient care, health promotion, and supporting individuals and families through health challenges. Nurses work in various settings including hospitals, clinics, community health centers, and home care.',
+        description: 'Nursing is a profession focused on patient care, health promotion, and supporting individuals and families through health challenges. In the UK, nurses must be registered with the NMC (Nursing and Midwifery Council), while US nurses require state licensure. Nurses work in various settings including hospitals, clinics, community health centers, and home care.',
         tips: [
-          'Highlight your clinical experience and patient care skills',
-          'Emphasize certifications and continuing education',
-          'Showcase your ability to work in team environments',
-          'Include any specialized training or areas of expertise',
-          'Demonstrate empathy and communication skills'
+          'Include your NMC registration number (UK) or state license number (US) prominently',
+          'Highlight quantifiable achievements and patient outcomes',
+          'Emphasize certifications like ACLS, PALS, or specialty certifications',
+          'No photo required - focus on skills and experience',
+          'Keep resume to 1-2 pages maximum, focus on recent relevant experience',
+          'Include continuing education credits and professional development'
         ],
         skills: [
           'Patient assessment and care planning',
-          'Medication administration',
+          'Medication administration and IV therapy',
           'Wound care and dressing changes',
           'Patient education and health promotion',
-          'Electronic health records (EHR) systems',
+          'Electronic health records (EHR) systems - Epic, Cerner, or NHS systems',
           'Critical thinking and clinical judgment',
-          'Interdisciplinary collaboration'
+          'Interdisciplinary collaboration',
+          'NMC registration (UK) or State licensure (US)'
         ],
         whyGood: [
-          'Clear structure that highlights clinical competencies',
-          'Emphasizes patient-centered care approach',
-          'Shows progression of responsibilities and skills',
-          'Demonstrates commitment to professional development',
-          'ATS-friendly format ensures visibility to recruiters'
+          'ATS-optimized format ensures visibility to NHS and US healthcare recruiters',
+          'Highlights clinical competencies and measurable outcomes',
+          'Shows progression of responsibilities aligned with UK/US healthcare standards',
+          'Demonstrates commitment to continuing professional development',
+          'Format compatible with UK and US recruitment systems'
         ]
       },
       nl: {
         name: 'Verpleegkundige',
         slug: 'verpleegkundige',
-        description: 'Verpleegkunde is een beroep gericht op patiëntenzorg, gezondheidsbevordering en het ondersteunen van individuen en gezinnen bij gezondheidsuitdagingen. Verpleegkundigen werken in verschillende settings zoals ziekenhuizen, klinieken, gezondheidscentra en thuiszorg.',
+        description: 'Verpleegkunde is een beroep gericht op patiëntenzorg, gezondheidsbevordering en het ondersteunen van individuen en gezinnen bij gezondheidsuitdagingen. In Nederland moeten verpleegkundigen geregistreerd staan in het BIG-register. Verpleegkundigen werken in verschillende settings zoals ziekenhuizen, klinieken, gezondheidscentra en thuiszorg.',
         tips: [
-          'Benadruk je klinische ervaring en patiëntenzorg vaardigheden',
-          'Leg nadruk op certificeringen en bijscholing',
-          'Toon je vermogen om in teamverband te werken',
-          'Vermeld gespecialiseerde training of expertisegebieden',
-          'Demonstreer empathie en communicatieve vaardigheden'
+          'Vermeld je BIG-registratienummer prominent op je CV',
+          'Benadruk ervaring met Nederlandse zorgsystemen en EPD-systemen',
+          'Leg nadruk op certificeringen zoals ACLS, PALS en specialisaties',
+          'Foto is gebruikelijk maar niet verplicht - kies voor professionele uitstraling',
+          'Vermeld VOG (Verklaring Omtrent Gedrag) indien beschikbaar',
+          'Toon ervaring met Nederlandse zorgstandaarden en protocollen',
+          'Vermeld bijscholing en permanente educatie volgens BIG-vereisten'
         ],
         skills: [
-          'Patiëntbeoordeling en zorgplanning',
-          'Medicatietoediening',
+          'Patiëntbeoordeling en zorgplanning volgens Nederlandse protocollen',
+          'Medicatietoediening en medicatiebewaking',
           'Wondverzorging en verbandwisselingen',
           'Patiëntenvoorlichting en gezondheidsbevordering',
-          'Elektronische patiëntendossiers (EPD) systemen',
+          'Elektronische patiëntendossiers (EPD) - ChipSoft, Epic, of ZorgDomein',
           'Kritisch denken en klinisch oordeel',
-          'Interdisciplinaire samenwerking'
+          'Interdisciplinaire samenwerking',
+          'BIG-registratie en VOG'
         ],
         whyGood: [
-          'Duidelijke structuur die klinische competenties benadrukt',
-          'Legt nadruk op patiëntgerichte zorgbenadering',
-          'Toont progressie van verantwoordelijkheden en vaardigheden',
-          'Demonstreert toewijding aan professionele ontwikkeling',
-          'ATS-vriendelijk formaat zorgt voor zichtbaarheid bij recruiters'
+          'Voldoet aan Nederlandse CV-standaarden met BIG-registratie',
+          'Benadrukt ervaring met Nederlandse zorgsystemen en EPD',
+          'Toont kennis van Nederlandse zorgprotocollen en -standaarden',
+          'Demonstreert compliance met BIG-vereisten en permanente educatie',
+          'Format geschikt voor Nederlandse ziekenhuizen en zorginstellingen'
         ]
       },
       fr: {
         name: 'Infirmier/Infirmière',
         slug: 'infirmier',
-        description: 'Les soins infirmiers sont une profession axée sur les soins aux patients, la promotion de la santé et le soutien aux individus et aux familles face aux défis de santé. Les infirmiers travaillent dans divers contextes, notamment les hôpitaux, les cliniques, les centres de santé communautaires et les soins à domicile.',
+        description: 'Les soins infirmiers sont une profession axée sur les soins aux patients, la promotion de la santé et le soutien aux individus et aux familles face aux défis de santé. En France, les infirmiers doivent être titulaires d\'un Diplôme d\'État d\'Infirmier et être inscrits à l\'Ordre National des Infirmiers. Les infirmiers travaillent dans divers contextes, notamment les hôpitaux, les cliniques, les centres de santé communautaires et les soins à domicile.',
         tips: [
-          'Mettez en avant votre expérience clinique et vos compétences en soins aux patients',
-          'Soulignez les certifications et la formation continue',
-          'Montrez votre capacité à travailler en équipe',
-          'Incluez toute formation spécialisée ou domaines d\'expertise',
-          'Démontrez l\'empathie et les compétences en communication'
+          'Mettez en avant votre Diplôme d\'État d\'Infirmier et votre numéro ADELI',
+          'Soulignez votre inscription à l\'Ordre National des Infirmiers',
+          'Photo sur le CV est courante mais pas toujours obligatoire',
+          'Mettez l\'accent sur la formation continue (DPC - Développement Professionnel Continu)',
+          'Expérience avec les systèmes français (DMP, logiciels hospitaliers français)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Format Europass peut être utilisé mais format français classique est préféré'
         ],
         skills: [
-          'Évaluation des patients et planification des soins',
-          'Administration de médicaments',
+          'Évaluation des patients et planification des soins selon protocoles français',
+          'Administration de médicaments et surveillance',
           'Soins des plaies et changements de pansements',
           'Éducation des patients et promotion de la santé',
-          'Systèmes de dossiers de santé électroniques (DSE)',
+          'Systèmes de dossiers de santé électroniques (DSE) - DMP, logiciels hospitaliers français',
           'Pensée critique et jugement clinique',
-          'Collaboration interdisciplinaire'
+          'Collaboration interdisciplinaire',
+          'Diplôme d\'État et inscription à l\'Ordre National des Infirmiers'
         ],
         whyGood: [
-          'Structure claire qui met en évidence les compétences cliniques',
-          'Met l\'accent sur l\'approche de soins centrés sur le patient',
-          'Montre la progression des responsabilités et des compétences',
-          'Démontre l\'engagement envers le développement professionnel',
-          'Format compatible ATS garantit la visibilité auprès des recruteurs'
+          'Respecte les standards français avec Diplôme d\'État et numéro ADELI',
+          'Met en avant l\'expérience avec les systèmes de santé français',
+          'Démontre la connaissance des protocoles et standards français',
+          'Montre la conformité avec les exigences de l\'Ordre National des Infirmiers',
+          'Format adapté aux hôpitaux et établissements de santé français'
         ]
       },
       es: {
         name: 'Enfermero/Enfermera',
         slug: 'enfermero',
-        description: 'La enfermería es una profesión centrada en el cuidado del paciente, la promoción de la salud y el apoyo a individuos y familias ante desafíos de salud. Los enfermeros trabajan en diversos entornos, incluyendo hospitales, clínicas, centros de salud comunitarios y atención domiciliaria.',
+        description: 'La enfermería es una profesión centrada en el cuidado del paciente, la promoción de la salud y el apoyo a individuos y familias ante desafíos de salud. En España, los enfermeros deben estar titulados (Título de Enfermería) y colegiados en el Colegio Oficial de Enfermería de su comunidad autónoma. Los enfermeros trabajan en diversos entornos, incluyendo hospitales, clínicas, centros de salud comunitarios y atención domiciliaria.',
         tips: [
-          'Destaca tu experiencia clínica y habilidades de cuidado al paciente',
-          'Enfatiza certificaciones y educación continua',
-          'Muestra tu capacidad para trabajar en entornos de equipo',
-          'Incluye cualquier formación especializada o áreas de experiencia',
-          'Demuestra empatía y habilidades de comunicación'
+          'Destaca tu Título de Enfermería y número de colegiado',
+          'Menciona tu colegiación en el Colegio Oficial de Enfermería correspondiente',
+          'Foto en el CV es común y recomendable en España',
+          'Enfatiza la formación continuada según normativa española',
+          'Experiencia con sistemas españoles (Historia Clínica Digital, sistemas hospitalarios)',
+          'Domino del español esencial - menciona tu nivel si no eres nativo',
+          'Incluye habilidades blandas y personalidad - valoradas en el mercado español'
         ],
         skills: [
-          'Evaluación del paciente y planificación de cuidados',
-          'Administración de medicamentos',
+          'Evaluación del paciente y planificación de cuidados según protocolos españoles',
+          'Administración de medicamentos y seguimiento',
           'Cuidado de heridas y cambios de vendajes',
           'Educación del paciente y promoción de la salud',
-          'Sistemas de registros de salud electrónicos (EHR)',
+          'Sistemas de registros de salud electrónicos (EHR) - Historia Clínica Digital, sistemas hospitalarios españoles',
           'Pensamiento crítico y juicio clínico',
-          'Colaboración interdisciplinaria'
+          'Colaboración interdisciplinaria',
+          'Título de Enfermería y colegiación'
         ],
         whyGood: [
-          'Estructura clara que destaca las competencias clínicas',
-          'Enfatiza el enfoque de atención centrada en el paciente',
-          'Muestra la progresión de responsabilidades y habilidades',
-          'Demuestra compromiso con el desarrollo profesional',
-          'Formato compatible con ATS asegura visibilidad para reclutadores'
+          'Cumple con los estándares españoles con Título y colegiación',
+          'Destaca experiencia con sistemas de salud españoles',
+          'Muestra conocimiento de protocolos y estándares españoles',
+          'Demuestra cumplimiento con requisitos del Colegio Oficial',
+          'Formato adecuado para hospitales y centros de salud españoles'
         ]
       },
       de: {
         name: 'Krankenschwester/Pfleger',
         slug: 'krankenschwester',
-        description: 'Die Pflege ist ein Beruf, der sich auf Patientenversorgung, Gesundheitsförderung und die Unterstützung von Einzelpersonen und Familien bei gesundheitlichen Herausforderungen konzentriert. Pflegekräfte arbeiten in verschiedenen Einrichtungen, einschließlich Krankenhäusern, Kliniken, Gemeindegesundheitszentren und häuslicher Pflege.',
+        description: 'Die Pflege ist ein Beruf, der sich auf Patientenversorgung, Gesundheitsförderung und die Unterstützung von Einzelpersonen und Familien bei gesundheitlichen Herausforderungen konzentriert. In Deutschland müssen Pflegekräfte ein Staatsexamen absolvieren und benötigen oft eine Anerkennung ihrer Qualifikationen. Pflegekräfte arbeiten in verschiedenen Einrichtungen, einschließlich Krankenhäusern, Kliniken, Gemeindegesundheitszentren und häuslicher Pflege.',
         tips: [
-          'Heben Sie Ihre klinische Erfahrung und Patientenversorgungsfähigkeiten hervor',
-          'Betonen Sie Zertifizierungen und Weiterbildung',
-          'Zeigen Sie Ihre Fähigkeit, in Teamumgebungen zu arbeiten',
-          'Fügen Sie spezialisierte Schulungen oder Fachgebiete hinzu',
-          'Demonstrieren Sie Empathie und Kommunikationsfähigkeiten'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihr Staatsexamen und die Anerkennung Ihrer Qualifikationen',
+          'Geburtsdatum, Nationalität und Familienstand sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie Fortbildung und Weiterbildung nach deutschen Standards',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Zeigen Sie Deutschkenntnisse auf B2/C1-Niveau',
+          'Chronologisches Format ist bevorzugt (chronologischer Lebenslauf)'
         ],
         skills: [
-          'Patientenbewertung und Versorgungsplanung',
-          'Medikamentenverabreichung',
+          'Patientenbewertung und Versorgungsplanung nach deutschen Standards',
+          'Medikamentenverabreichung und Dokumentation',
           'Wundversorgung und Verbandswechsel',
           'Patientenaufklärung und Gesundheitsförderung',
-          'Elektronische Gesundheitsakten (EHR) Systeme',
+          'Elektronische Gesundheitsakten (EHR) - SAP, Orbis oder andere deutsche Systeme',
           'Kritisches Denken und klinische Urteilsfähigkeit',
-          'Interdisziplinäre Zusammenarbeit'
+          'Interdisziplinäre Zusammenarbeit',
+          'Staatsexamen und Anerkennung der Qualifikationen'
         ],
         whyGood: [
-          'Klare Struktur, die klinische Kompetenzen hervorhebt',
-          'Betont patientenzentrierten Versorgungsansatz',
-          'Zeigt Fortschritt von Verantwortlichkeiten und Fähigkeiten',
-          'Demonstriert Engagement für berufliche Entwicklung',
-          'ATS-freundliches Format gewährleistet Sichtbarkeit für Personalvermittler'
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Gesundheitssystemen und Protokollen',
+          'Zeigt Kenntnisse deutscher Pflegestandards und -richtlinien',
+          'Demonstriert Compliance mit deutschen Anerkennungsverfahren',
+          'Format geeignet für deutsche Krankenhäuser und Pflegeeinrichtungen'
         ]
       },
       it: {
@@ -619,142 +633,152 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Software Developer',
         slug: 'software-developer',
-        description: 'Software developers design, build, and maintain applications and systems. They work with programming languages, frameworks, and tools to create solutions that meet business and user needs.',
+        description: 'Software developers design, build, and maintain applications and systems. In the UK, developers often work with NHS systems, fintech, and government projects, while US developers focus on Silicon Valley tech stacks, cloud services, and enterprise solutions. They work with programming languages, frameworks, and tools to create solutions that meet business and user needs.',
         tips: [
-          'Highlight your technical skills and programming languages',
-          'Showcase projects and their impact',
-          'Emphasize problem-solving abilities',
-          'Include relevant certifications and education',
-          'Demonstrate collaboration and teamwork'
+          'NO photo on CV/resume - focus on technical portfolio and GitHub profile',
+          'Highlight quantifiable achievements (performance improvements, user metrics)',
+          'Showcase open-source contributions and side projects',
+          'Emphasize cloud certifications (AWS, Azure, GCP) and modern frameworks',
+          'Include relevant certifications (Scrum Master, ITIL for enterprise roles)',
+          'Demonstrate experience with CI/CD pipelines and DevOps practices',
+          'Show problem-solving through code examples and technical blog posts'
         ],
         skills: [
-          'Programming languages (JavaScript, Python, Java, etc.)',
-          'Software development methodologies (Agile, Scrum)',
-          'Version control systems (Git)',
-          'Database design and management',
-          'API development and integration',
-          'Testing and debugging',
-          'Code review and collaboration'
+          'Programming languages (JavaScript/TypeScript, Python, Java, Go, Rust)',
+          'Software development methodologies (Agile, Scrum, Kanban)',
+          'Version control systems (Git, GitHub, GitLab)',
+          'Cloud platforms (AWS, Azure, GCP) and containerization (Docker, Kubernetes)',
+          'API development and integration (REST, GraphQL)',
+          'Testing frameworks (Jest, pytest, JUnit) and CI/CD (Jenkins, GitHub Actions)',
+          'Database design (SQL, NoSQL) and caching strategies'
         ],
         whyGood: [
-          'Clear technical skills section',
-          'Project portfolio demonstrates practical experience',
-          'Shows continuous learning and adaptation',
-          'ATS-friendly keywords for technical roles',
-          'Highlights both technical and soft skills'
+          'ATS-optimized for tech recruiters and hiring platforms (LinkedIn, Indeed)',
+          'Highlights modern tech stack and cloud-native development',
+          'Shows continuous learning through certifications and contributions',
+          'Format compatible with UK/US tech recruitment systems',
+          'Demonstrates both technical depth and business impact'
         ]
       },
       nl: {
         name: 'Software Ontwikkelaar',
         slug: 'software-ontwikkelaar',
-        description: 'Software ontwikkelaars ontwerpen, bouwen en onderhouden applicaties en systemen. Ze werken met programmeertalen, frameworks en tools om oplossingen te creëren die voldoen aan bedrijfs- en gebruikersbehoeften.',
+        description: 'Software ontwikkelaars ontwerpen, bouwen en onderhouden applicaties en systemen. In Nederland werken ontwikkelaars vaak met Nederlandse bedrijven, fintech, e-commerce en zorgsystemen. Ze werken met programmeertalen, frameworks en tools om oplossingen te creëren die voldoen aan bedrijfs- en gebruikersbehoeften.',
         tips: [
-          'Benadruk je technische vaardigheden en programmeertalen',
-          'Toon projecten en hun impact',
-          'Leg nadruk op probleemoplossend vermogen',
-          'Vermeld relevante certificeringen en opleiding',
-          'Demonstreer samenwerking en teamwork'
+          'Foto is optioneel in Nederlandse tech sector - focus op portfolio',
+          'Benadruk ervaring met Nederlandse IT-infrastructuur en systemen',
+          'Toon kennis van Nederlandse privacywetgeving (AVG/GDPR)',
+          'Vermeld certificeringen zoals ITIL, PRINCE2, Scrum Master',
+          'Ervaring met Nederlandse cloud providers of AWS/Azure',
+          'Engels is vaak werktaal - vermeld beide talen',
+          'GitHub/GitLab portfolio en open-source bijdragen'
         ],
         skills: [
-          'Programmeertalen (JavaScript, Python, Java, etc.)',
-          'Software ontwikkelingsmethodologieën (Agile, Scrum)',
-          'Versiebeheersystemen (Git)',
-          'Database ontwerp en beheer',
-          'API ontwikkeling en integratie',
-          'Testen en debuggen',
-          'Code review en samenwerking'
+          'Programmeertalen (JavaScript/TypeScript, Python, Java, PHP)',
+          'Software ontwikkelingsmethodologieën (Agile, Scrum, Kanban)',
+          'Versiebeheersystemen (Git, GitLab, GitHub)',
+          'Cloud platforms (AWS, Azure, Google Cloud) en containerization',
+          'API ontwikkeling en integratie (REST, GraphQL)',
+          'Database ontwerp (MySQL, PostgreSQL, MongoDB)',
+          'Nederlandse IT-certificeringen (ITIL, PRINCE2) en AVG-kennis'
         ],
         whyGood: [
-          'Duidelijke technische vaardigheden sectie',
-          'Projectportfolio toont praktische ervaring',
-          'Toont continu leren en aanpassing',
-          'ATS-vriendelijke zoekwoorden voor technische rollen',
-          'Benadrukt zowel technische als zachte vaardigheden'
+          'Voldoet aan Nederlandse tech CV-standaarden',
+          'Benadrukt ervaring met Nederlandse IT-ecosysteem',
+          'Toont kennis van Nederlandse privacy- en databeschermingswetgeving',
+          'Format geschikt voor Nederlandse tech bedrijven en scale-ups',
+          'Demonstreert zowel technische vaardigheden als zakelijke impact'
         ]
       },
       // Add other languages for software developer...
       fr: {
         name: 'Développeur Logiciel',
         slug: 'developpeur-logiciel',
-        description: 'Les développeurs logiciels conçoivent, construisent et maintiennent des applications et systèmes. Ils travaillent avec des langages de programmation, frameworks et outils pour créer des solutions qui répondent aux besoins des entreprises et des utilisateurs.',
+        description: 'Les développeurs logiciels conçoivent, construisent et maintiennent des applications et systèmes. En France, les développeurs travaillent souvent avec des entreprises françaises, des startups tech, et des systèmes gouvernementaux. Ils travaillent avec des langages de programmation, frameworks et outils pour créer des solutions qui répondent aux besoins des entreprises et des utilisateurs.',
         tips: [
-          'Mettez en avant vos compétences techniques et langages de programmation',
-          'Présentez des projets et leur impact',
-          'Soulignez vos capacités de résolution de problèmes',
-          'Incluez les certifications et formations pertinentes',
-          'Démontrez la collaboration et le travail d\'équipe'
+          'Photo sur le CV est optionnelle dans le secteur tech français',
+          'Mettez en avant votre diplôme (École d\'ingénieur, Master)',
+          'Expérience avec les systèmes français et réglementation RGPD',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Certifications cloud (AWS, Azure) et frameworks modernes',
+          'Portfolio GitHub/GitLab et contributions open-source',
+          'Connaissance de la réglementation française (RGPD, CNIL)'
         ],
         skills: [
-          'Langages de programmation (JavaScript, Python, Java, etc.)',
-          'Méthodologies de développement logiciel (Agile, Scrum)',
-          'Systèmes de contrôle de version (Git)',
-          'Conception et gestion de bases de données',
-          'Développement et intégration d\'API',
-          'Tests et débogage',
-          'Revue de code et collaboration'
+          'Langages de programmation (JavaScript/TypeScript, Python, Java, PHP)',
+          'Méthodologies de développement logiciel (Agile, Scrum, Kanban)',
+          'Systèmes de contrôle de version (Git, GitLab, GitHub)',
+          'Cloud platforms (AWS, Azure, OVH) et containerization',
+          'Développement et intégration d\'API (REST, GraphQL)',
+          'Conception et gestion de bases de données (PostgreSQL, MySQL)',
+          'Tests automatisés et CI/CD (Jenkins, GitLab CI)'
         ],
         whyGood: [
-          'Section claire des compétences techniques',
-          'Portfolio de projets démontre une expérience pratique',
-          'Montre un apprentissage et une adaptation continus',
-          'Mots-clés compatibles ATS pour les rôles techniques',
-          'Met en évidence les compétences techniques et relationnelles'
+          'Respecte les standards français avec diplôme et certifications',
+          'Met en avant l\'expérience avec l\'écosystème tech français',
+          'Démontre la connaissance de la réglementation française (RGPD)',
+          'Format adapté aux entreprises tech françaises et startups',
+          'Montre à la fois compétences techniques et impact business'
         ]
       },
       es: {
         name: 'Desarrollador de Software',
         slug: 'desarrollador-software',
-        description: 'Los desarrolladores de software diseñan, construyen y mantienen aplicaciones y sistemas. Trabajan con lenguajes de programación, frameworks y herramientas para crear soluciones que satisfagan las necesidades empresariales y de usuarios.',
+        description: 'Los desarrolladores de software diseñan, construyen y mantienen aplicaciones y sistemas. En España, los desarrolladores trabajan a menudo con empresas españolas, fintech, e-commerce y startups tecnológicas. Trabajan con lenguajes de programación, frameworks y herramientas para crear soluciones que satisfagan las necesidades empresariales y de usuarios.',
         tips: [
-          'Destaca tus habilidades técnicas y lenguajes de programación',
-          'Muestra proyectos y su impacto',
-          'Enfatiza habilidades de resolución de problemas',
-          'Incluye certificaciones y educación relevantes',
-          'Demuestra colaboración y trabajo en equipo'
+          'Foto en el CV es común en el sector tech español',
+          'Destaca tu título universitario (Grado/Máster en Informática)',
+          'Experiencia con sistemas españoles y regulación RGPD',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Certificaciones cloud (AWS, Azure) y frameworks modernos',
+          'Portfolio GitHub/GitLab y contribuciones open-source',
+          'Conocimiento de la regulación española (RGPD, LOPD)'
         ],
         skills: [
-          'Lenguajes de programación (JavaScript, Python, Java, etc.)',
-          'Metodologías de desarrollo de software (Agile, Scrum)',
-          'Sistemas de control de versiones (Git)',
-          'Diseño y gestión de bases de datos',
-          'Desarrollo e integración de API',
-          'Pruebas y depuración',
-          'Revisión de código y colaboración'
+          'Lenguajes de programación (JavaScript/TypeScript, Python, Java, PHP)',
+          'Metodologías de desarrollo de software (Agile, Scrum, Kanban)',
+          'Sistemas de control de versiones (Git, GitLab, GitHub)',
+          'Cloud platforms (AWS, Azure, Google Cloud) y containerization',
+          'Desarrollo e integración de API (REST, GraphQL)',
+          'Diseño y gestión de bases de datos (PostgreSQL, MySQL)',
+          'Tests automáticos y CI/CD (Jenkins, GitLab CI)'
         ],
         whyGood: [
-          'Sección clara de habilidades técnicas',
-          'Portafolio de proyectos demuestra experiencia práctica',
-          'Muestra aprendizaje y adaptación continuos',
-          'Palabras clave compatibles con ATS para roles técnicos',
-          'Destaca habilidades técnicas y blandas'
+          'Cumple con los estándares españoles con título y certificaciones',
+          'Destaca experiencia con ecosistema tech español',
+          'Muestra conocimiento de regulación española (RGPD, LOPD)',
+          'Formato adecuado para empresas tech españolas y startups',
+          'Demuestra tanto habilidades técnicas como impacto empresarial'
         ]
       },
       de: {
         name: 'Softwareentwickler',
         slug: 'softwareentwickler',
-        description: 'Softwareentwickler entwerfen, bauen und warten Anwendungen und Systeme. Sie arbeiten mit Programmiersprachen, Frameworks und Tools, um Lösungen zu erstellen, die Geschäfts- und Benutzeranforderungen erfüllen.',
+        description: 'Softwareentwickler entwerfen, bauen und warten Anwendungen und Systeme. In Deutschland arbeiten Entwickler oft mit deutschen Unternehmen, Automobilindustrie, enge Zusammenarbeit mit SAP-Systemen, und Industrie 4.0 Projekten. Sie arbeiten mit Programmiersprachen, Frameworks und Tools, um Lösungen zu erstellen, die Geschäfts- und Benutzeranforderungen erfüllen.',
         tips: [
-          'Heben Sie Ihre technischen Fähigkeiten und Programmiersprachen hervor',
-          'Zeigen Sie Projekte und deren Auswirkungen',
-          'Betonen Sie Problemlösungsfähigkeiten',
-          'Fügen Sie relevante Zertifizierungen und Ausbildung hinzu',
-          'Demonstrieren Sie Zusammenarbeit und Teamarbeit'
+          'Lebenslauf muss ein professionelles Foto enthalten (auch in Tech-Sektor)',
+          'Vermelden Sie Ihre Ausbildung (Hochschule, Universität, Ausbildung)',
+          'Geburtsdatum, Nationalität sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie SAP-Kenntnisse und deutsche IT-Standards',
+          'Zeigen Sie Deutschkenntnisse auf B2+ Niveau (für technische Kommunikation)',
+          'Blue Card visa requirements voor non-EU kandidaten',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Programmiersprachen (JavaScript, Python, Java, etc.)',
-          'Softwareentwicklungsmethodologien (Agile, Scrum)',
-          'Versionskontrollsysteme (Git)',
-          'Datenbankdesign und -verwaltung',
-          'API-Entwicklung und Integration',
-          'Tests und Debugging',
-          'Code-Review und Zusammenarbeit'
+          'Programmiersprachen (JavaScript/TypeScript, Python, Java, C++)',
+          'Softwareentwicklungsmethodologien (Agile, Scrum, Kanban)',
+          'Versionskontrollsysteme (Git, GitLab, GitHub)',
+          'SAP-Systeme und deutsche ERP-Lösungen',
+          'Cloud platforms (AWS, Azure, Google Cloud)',
+          'API-Entwicklung und Integration (REST, GraphQL)',
+          'Datenbankdesign (PostgreSQL, MySQL, SAP HANA)'
         ],
         whyGood: [
-          'Klare Sektion für technische Fähigkeiten',
-          'Projektportfolio zeigt praktische Erfahrung',
-          'Zeigt kontinuierliches Lernen und Anpassung',
-          'ATS-freundliche Schlüsselwörter für technische Rollen',
-          'Hebt sowohl technische als auch soziale Fähigkeiten hervor'
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen IT-Systemen und SAP',
+          'Zeigt Kenntnisse deutscher IT-Standards und Datenschutz (DSGVO)',
+          'Format geeignet für deutsche Tech-Unternehmen und Industrie',
+          'Demonstriert sowohl technische Fähigkeiten als auch Geschäftsimpact'
         ]
       },
       // For brevity, I'll add minimal translations for remaining languages
@@ -1187,141 +1211,152 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Teacher',
         slug: 'teacher',
-        description: 'Teachers educate and inspire students across various subjects and age groups. They develop lesson plans, assess student progress, and create engaging learning environments that foster academic and personal growth.',
+        description: 'Teachers educate and inspire students across various subjects and age groups. In the UK, teachers must have QTS (Qualified Teacher Status) and a DBS check, while US teachers require state teaching licensure and background checks. They develop lesson plans, assess student progress, and create engaging learning environments that foster academic and personal growth.',
         tips: [
-          'Highlight your teaching certifications and qualifications',
-          'Emphasize classroom management and student engagement strategies',
-          'Showcase innovative teaching methods and curriculum development',
-          'Include professional development and continuing education',
-          'Demonstrate impact through student outcomes and achievements'
+          'Include QTS number (UK) or state teaching license number (US) prominently',
+          'NO photo on CV/resume - focus on qualifications and experience',
+          'Highlight DBS check (UK) or background check clearance (US)',
+          'Emphasize experience with national curriculum (UK) or Common Core/state standards (US)',
+          'Showcase Ofsted inspection experience (UK) or state evaluation experience (US)',
+          'Include experience with school management systems (SIMS, Bromcom - UK)',
+          'Demonstrate continuing professional development (CPD) and training'
         ],
         skills: [
-          'Curriculum development and lesson planning',
-          'Classroom management and discipline',
-          'Student assessment and evaluation',
-          'Differentiated instruction techniques',
-          'Educational technology integration',
-          'Parent and community communication',
-          'Special education and inclusive practices'
+          'Curriculum development aligned with national/state standards',
+          'Classroom management and behavior strategies',
+          'Student assessment and data-driven instruction',
+          'Educational technology integration (interactive whiteboards, LMS)',
+          'Special educational needs (SEN) and inclusive practices',
+          'QTS registration (UK) or State teaching license (US)',
+          'DBS clearance (UK) or Background check (US)'
         ],
         whyGood: [
-          'Clear structure highlighting educational qualifications',
-          'Emphasizes teaching experience and student outcomes',
-          'Shows commitment to professional development',
-          'Demonstrates ability to adapt to diverse learning needs',
-          'ATS-friendly format with relevant educational keywords'
+          'Meets UK/US teaching CV standards with proper credentials',
+          'ATS-optimized for school recruiters and education authorities',
+          'Highlights compliance with safeguarding requirements',
+          'Shows knowledge of national/state curriculum standards',
+          'Format compatible with UK/US education recruitment systems'
         ]
       },
       nl: {
         name: 'Leraar',
         slug: 'leraar',
-        description: 'Leraren onderwijzen en inspireren studenten in verschillende vakken en leeftijdsgroepen. Ze ontwikkelen lesplannen, beoordelen de voortgang van studenten en creëren boeiende leeromgevingen die academische en persoonlijke groei bevorderen.',
+        description: 'Leraren onderwijzen en inspireren studenten in verschillende vakken en leeftijdsgroepen. In Nederland moeten leraren een onderwijsbevoegdheid hebben en geregistreerd staan in het register leraar. VOG (Verklaring Omtrent Gedrag) is verplicht voor alle onderwijsmedewerkers. Ze ontwikkelen lesplannen, beoordelen de voortgang van studenten en creëren boeiende leeromgevingen die academische en persoonlijke groei bevorderen.',
         tips: [
-          'Benadruk je onderwijsbevoegdheden en kwalificaties',
-          'Leg nadruk op klasmanagement en strategieën voor betrokkenheid van studenten',
-          'Toon innovatieve lesmethoden en curriculumontwikkeling',
-          'Vermeld professionele ontwikkeling en bijscholing',
-          'Demonstreer impact door studentresultaten en prestaties'
+          'Vermeld je onderwijsbevoegdheid en registratie in register leraar prominent',
+          'VOG (Verklaring Omtrent Gedrag) is verplicht - vermeld deze',
+          'Foto is gebruikelijk op Nederlandse onderwijs CV\'s',
+          'Toon kennis van Nederlandse kerndoelen en eindtermen',
+          'Ervaring met Nederlandse schoolsystemen (ParnasSys, Magister, Somtoday)',
+          'Vermeld bijscholing en permanente educatie',
+          'Kennis van passend onderwijs en inclusief onderwijs'
         ],
         skills: [
-          'Curriculumontwikkeling en lesplanning',
-          'Klasmanagement en discipline',
-          'Studentbeoordeling en evaluatie',
-          'Gedifferentieerde instructietechnieken',
-          'Integratie van onderwijstechnologie',
-          'Communicatie met ouders en gemeenschap',
-          'Speciaal onderwijs en inclusieve praktijken'
+          'Curriculumontwikkeling volgens Nederlandse kerndoelen en eindtermen',
+          'Klasmanagement en pedagogische vaardigheden',
+          'Studentbeoordeling en formatieve evaluatie',
+          'Integratie van onderwijstechnologie (digiborden, digitale leermiddelen)',
+          'Passend onderwijs en inclusieve praktijken',
+          'Onderwijsbevoegdheid en registratie in register leraar',
+          'VOG en kennis van Nederlandse onderwijswetgeving'
         ],
         whyGood: [
-          'Duidelijke structuur die onderwijsbevoegdheden benadrukt',
-          'Legt nadruk op onderwijservaring en studentresultaten',
-          'Toont toewijding aan professionele ontwikkeling',
-          'Demonstreert vermogen om zich aan te passen aan diverse leerbehoeften',
-          'ATS-vriendelijk formaat met relevante onderwijszoekwoorden'
+          'Voldoet aan Nederlandse onderwijs CV-standaarden met bevoegdheid en VOG',
+          'Benadrukt ervaring met Nederlandse onderwijssystemen en -methoden',
+          'Toont kennis van Nederlandse kerndoelen en passend onderwijs',
+          'Demonstreert compliance met register leraar en VOG-vereisten',
+          'Format geschikt voor Nederlandse scholen en onderwijsorganisaties'
         ]
       },
       fr: {
         name: 'Enseignant',
         slug: 'enseignant',
-        description: 'Les enseignants éduquent et inspirent les élèves dans diverses matières et groupes d\'âge. Ils développent des plans de cours, évaluent les progrès des élèves et créent des environnements d\'apprentissage engageants qui favorisent la croissance académique et personnelle.',
+        description: 'Les enseignants éduquent et inspirent les élèves dans diverses matières et groupes d\'âge. En France, les enseignants doivent être titulaires du CAPES (Certificat d\'Aptitude au Professorat de l\'Enseignement du Second degré) ou de l\'Agrégation, obtenus via un concours. Ils développent des plans de cours, évaluent les progrès des élèves et créent des environnements d\'apprentissage engageants qui favorisent la croissance académique et personnelle.',
         tips: [
-          'Mettez en avant vos certifications et qualifications d\'enseignement',
-          'Soulignez les stratégies de gestion de classe et d\'engagement des élèves',
-          'Présentez des méthodes d\'enseignement innovantes et le développement de programmes',
-          'Incluez le développement professionnel et la formation continue',
-          'Démontrez l\'impact grâce aux résultats et réalisations des élèves'
+          'Mettez en avant votre CAPES ou Agrégation et numéro de concours',
+          'Photo sur le CV est courante pour les enseignants en France',
+          'Mentionnez votre titularisation (affectation définitive)',
+          'Expérience avec les programmes français (socle commun, programmes nationaux)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Connaissance du système éducatif français et réformes',
+          'Formation continue et développement professionnel'
         ],
         skills: [
-          'Développement de programmes et planification de cours',
-          'Gestion de classe et discipline',
-          'Évaluation et notation des élèves',
-          'Techniques d\'instruction différenciée',
-          'Intégration de la technologie éducative',
-          'Communication avec les parents et la communauté',
-          'Éducation spécialisée et pratiques inclusives'
+          'Développement de programmes selon programmes nationaux français',
+          'Gestion de classe et pédagogie différenciée',
+          'Évaluation et notation selon système français',
+          'Intégration de la technologie éducative (TNI, ENT)',
+          'Éducation inclusive et adaptation scolaire',
+          'CAPES ou Agrégation et titularisation',
+          'Connaissance du système éducatif français et réformes'
         ],
         whyGood: [
-          'Structure claire mettant en évidence les qualifications éducatives',
-          'Met l\'accent sur l\'expérience d\'enseignement et les résultats des élèves',
-          'Montre l\'engagement envers le développement professionnel',
-          'Démontre la capacité à s\'adapter aux divers besoins d\'apprentissage',
-          'Format compatible ATS avec mots-clés éducatifs pertinents'
+          'Respecte les standards français avec CAPES/Agrégation',
+          'Met en avant l\'expérience avec le système éducatif français',
+          'Démontre la connaissance des programmes nationaux français',
+          'Montre la conformité avec les exigences du concours et titularisation',
+          'Format adapté aux établissements scolaires français'
         ]
       },
       es: {
         name: 'Profesor',
         slug: 'profesor',
-        description: 'Los profesores educan e inspiran a estudiantes en diversas materias y grupos de edad. Desarrollan planes de lección, evalúan el progreso de los estudiantes y crean entornos de aprendizaje atractivos que fomentan el crecimiento académico y personal.',
+        description: 'Los profesores educan e inspiran a estudiantes en diversas materias y grupos de edad. En España, los profesores deben estar titulados y haber superado las Oposiciones (examen estatal) para el sector público, o tener el CAP (Certificado de Aptitud Pedagógica) para el sector privado. Desarrollan planes de lección, evalúan el progreso de los estudiantes y crean entornos de aprendizaje atractivos que fomentan el crecimiento académico y personal.',
         tips: [
-          'Destaca tus certificaciones y calificaciones de enseñanza',
-          'Enfatiza estrategias de gestión del aula y participación estudiantil',
-          'Muestra métodos de enseñanza innovadores y desarrollo curricular',
-          'Incluye desarrollo profesional y educación continua',
-          'Demuestra impacto a través de resultados y logros estudiantiles'
+          'Destaca tu título universitario y Oposiciones (si aplica)',
+          'Menciona tu CAP (Certificado de Aptitud Pedagógica)',
+          'Foto en el CV es común y recomendable en España',
+          'Enfatiza experiencia con sistema educativo español (LOMLOE)',
+          'Formación continuada según normativa española',
+          'Experiencia con sistemas españoles (Agora, ClickEdu)',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo'
         ],
         skills: [
-          'Desarrollo curricular y planificación de lecciones',
-          'Gestión del aula y disciplina',
-          'Evaluación y calificación de estudiantes',
-          'Técnicas de instrucción diferenciada',
-          'Integración de tecnología educativa',
-          'Comunicación con padres y comunidad',
-          'Educación especial y prácticas inclusivas'
+          'Desarrollo curricular según LOMLOE y estándares españoles',
+          'Gestión del aula y competencias pedagógicas',
+          'Evaluación y calificación según sistema español',
+          'Integración de tecnología educativa (pizarras digitales, plataformas)',
+          'Educación inclusiva y atención a la diversidad',
+          'Título universitario, CAP y Oposiciones (si aplica)',
+          'Conocimiento del sistema educativo español y normativa'
         ],
         whyGood: [
-          'Estructura clara que destaca calificaciones educativas',
-          'Enfatiza experiencia docente y resultados estudiantiles',
-          'Muestra compromiso con el desarrollo profesional',
-          'Demuestra capacidad para adaptarse a diversas necesidades de aprendizaje',
-          'Formato compatible con ATS con palabras clave educativas relevantes'
+          'Cumple con los estándares españoles con título y CAP/Oposiciones',
+          'Destaca experiencia con sistema educativo español',
+          'Muestra conocimiento de LOMLOE y estándares educativos españoles',
+          'Demuestra cumplimiento con requisitos de Oposiciones o CAP',
+          'Formato adecuado para colegios e institutos españoles'
         ]
       },
       de: {
         name: 'Lehrer',
         slug: 'lehrer',
-        description: 'Lehrer erziehen und inspirieren Schüler in verschiedenen Fächern und Altersgruppen. Sie entwickeln Unterrichtspläne, bewerten den Fortschritt der Schüler und schaffen ansprechende Lernumgebungen, die akademisches und persönliches Wachstum fördern.',
+        description: 'Lehrer erziehen und inspirieren Schüler in verschiedenen Fächern und Altersgruppen. In Deutschland müssen Lehrer ein Staatsexamen absolvieren und ein Referendariat durchlaufen. Viele Lehrer haben Verbeamtung (Beamtenstatus). Sie entwickeln Unterrichtspläne, bewerten den Fortschritt der Schüler und schaffen ansprechende Lernumgebungen, die akademisches und persönliches Wachstum fördern.',
         tips: [
-          'Heben Sie Ihre Lehrzertifizierungen und Qualifikationen hervor',
-          'Betonen Sie Strategien für Klassenmanagement und Schülerengagement',
-          'Zeigen Sie innovative Lehrmethoden und Lehrplanentwicklung',
-          'Fügen Sie berufliche Entwicklung und Weiterbildung hinzu',
-          'Demonstrieren Sie Wirkung durch Schülerergebnisse und Leistungen'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihr Staatsexamen und Referendariat',
+          'Geburtsdatum, Nationalität und Familienstand sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie Ihre Fächerkombination und Schulform (Gymnasium, Realschule, etc.)',
+          'Verbeamtung (Beamtenstatus) falls zutreffend',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Zeigen Sie Deutschkenntnisse auf C1-Niveau (für Unterricht)',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Lehrplanentwicklung und Unterrichtsplanung',
-          'Klassenmanagement und Disziplin',
-          'Schülerbewertung und -evaluierung',
-          'Differenzierte Unterrichtstechniken',
-          'Integration von Bildungstechnologie',
-          'Kommunikation mit Eltern und Gemeinschaft',
-          'Sonderpädagogik und inklusive Praktiken'
+          'Lehrplanentwicklung nach deutschen Bildungsstandards',
+          'Klassenmanagement und pädagogische Kompetenzen',
+          'Schülerbewertung und kompetenzorientierte Bewertung',
+          'Integration von Bildungstechnologie (interaktive Whiteboards, LMS)',
+          'Inklusive Pädagogik und Sonderpädagogik',
+          'Staatsexamen, Referendariat und Verbeamtung (falls zutreffend)',
+          'Kenntnisse deutscher Schulgesetze und Bildungsstandards'
         ],
         whyGood: [
-          'Klare Struktur, die pädagogische Qualifikationen hervorhebt',
-          'Betont Unterrichtserfahrung und Schülerergebnisse',
-          'Zeigt Engagement für berufliche Entwicklung',
-          'Demonstriert Fähigkeit, sich an vielfältige Lernbedürfnisse anzupassen',
-          'ATS-freundliches Format mit relevanten Bildungsschlüsselwörtern'
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Schulsystemen und -methoden',
+          'Zeigt Kenntnisse deutscher Bildungsstandards und Lehrpläne',
+          'Demonstriert Compliance mit deutschen Lehrerausbildungsanforderungen',
+          'Format geeignet für deutsche Schulen und Bildungsbehörden'
         ]
       },
       it: { name: 'Insegnante', slug: 'insegnante', description: 'Gli insegnanti educano e ispirano gli studenti in varie materie e fasce d\'età. Sviluppano piani di lezione, valutano i progressi degli studenti e creano ambienti di apprendimento coinvolgenti che favoriscono la crescita accademica e personale.', tips: ['Evidenzia le tue certificazioni e qualifiche di insegnamento', 'Enfatizza strategie di gestione della classe e coinvolgimento degli studenti', 'Mostra metodi di insegnamento innovativi e sviluppo del curriculum', 'Includi sviluppo professionale e formazione continua', 'Dimostra l\'impatto attraverso risultati e risultati degli studenti'], skills: ['Sviluppo del curriculum e pianificazione delle lezioni', 'Gestione della classe e disciplina', 'Valutazione e valutazione degli studenti', 'Tecniche di istruzione differenziata', 'Integrazione della tecnologia educativa', 'Comunicazione con genitori e comunità', 'Educazione speciale e pratiche inclusive'], whyGood: ['Struttura chiara che evidenzia le qualifiche educative', 'Enfatizza l\'esperienza di insegnamento e i risultati degli studenti', 'Mostra impegno per lo sviluppo professionale', 'Dimostra la capacità di adattarsi a diverse esigenze di apprendimento', 'Formato compatibile con ATS con parole chiave educative rilevanti'] },
@@ -1348,141 +1383,151 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Accountant',
         slug: 'accountant',
-        description: 'Accountants manage financial records, prepare tax returns, and ensure compliance with financial regulations. They analyze financial data to help businesses make informed decisions and maintain accurate financial reporting.',
+        description: 'Accountants manage financial records, prepare tax returns, and ensure compliance with financial regulations. In the UK, accountants typically hold ACCA, CIMA, or ACA qualifications, while US accountants require CPA (Certified Public Accountant) licensure by state. They analyze financial data to help businesses make informed decisions and maintain accurate financial reporting.',
         tips: [
-          'Highlight your accounting certifications (CPA, ACCA, etc.)',
-          'Emphasize experience with accounting software and systems',
-          'Showcase knowledge of tax regulations and compliance',
-          'Include experience with financial analysis and reporting',
-          'Demonstrate attention to detail and accuracy'
+          'Include ACCA/CIMA/ACA membership number (UK) or CPA license number (US)',
+          'NO photo on CV/resume - focus on credentials and experience',
+          'Highlight experience with UK GAAP (UK) or US GAAP (US)',
+          'Emphasize knowledge of FCA regulations (UK) or SEC/IRS requirements (US)',
+          'Showcase experience with accounting software (Sage, Xero - UK) or (QuickBooks, NetSuite - US)',
+          'Include experience with tax systems (HMRC - UK) or (IRS - US)',
+          'Demonstrate continuing professional development (CPD) credits'
         ],
         skills: [
-          'Financial accounting and bookkeeping',
-          'Tax preparation and planning',
-          'Financial statement analysis',
-          'Accounting software (QuickBooks, SAP, etc.)',
-          'Audit and compliance procedures',
-          'Budgeting and forecasting',
-          'Regulatory compliance and reporting'
+          'Financial accounting and bookkeeping (UK GAAP/US GAAP)',
+          'Tax preparation and planning (UK tax code/US tax code)',
+          'Financial statement analysis and reporting',
+          'Accounting software (Sage, Xero, SAP - UK) or (QuickBooks, NetSuite, SAP - US)',
+          'Audit and compliance procedures (UK audit standards/US audit standards)',
+          'Regulatory compliance (FCA - UK) or (SEC, IRS - US)',
+          'ACCA/CIMA/ACA (UK) or CPA license (US)'
         ],
         whyGood: [
-          'Clear structure highlighting accounting qualifications',
-          'Emphasizes technical skills and certifications',
-          'Shows experience with relevant accounting software',
-          'Demonstrates knowledge of financial regulations',
-          'ATS-friendly format with industry-specific keywords'
+          'Meets UK/US accounting CV standards with proper credentials',
+          'ATS-optimized for accounting firms and finance recruiters',
+          'Highlights compliance with UK/US financial regulations',
+          'Shows knowledge of country-specific accounting standards',
+          'Format compatible with UK/US finance recruitment systems'
         ]
       },
       nl: {
         name: 'Accountant',
         slug: 'accountant',
-        description: 'Accountants beheren financiële administraties, bereiden belastingaangiften voor en zorgen voor naleving van financiële regelgeving. Ze analyseren financiële gegevens om bedrijven te helpen weloverwogen beslissingen te nemen en nauwkeurige financiële rapportage te behouden.',
+        description: 'Accountants beheren financiële administraties, bereiden belastingaangiften voor en zorgen voor naleving van financiële regelgeving. In Nederland moeten accountants geregistreerd staan bij de NBA (Nederlandse Beroepsorganisatie van Accountants) met een AA (Accountant-Administratieconsulent) of RA (Registeraccountant) titel. Ze analyseren financiële gegevens om bedrijven te helpen weloverwogen beslissingen te nemen en nauwkeurige financiële rapportage te behouden.',
         tips: [
-          'Benadruk je accountancycertificeringen (CPA, ACCA, etc.)',
-          'Leg nadruk op ervaring met boekhoudsoftware en systemen',
-          'Toon kennis van belastingregelgeving en naleving',
-          'Vermeld ervaring met financiële analyse en rapportage',
-          'Demonstreer aandacht voor detail en nauwkeurigheid'
+          'Vermeld je NBA-registratie en AA/RA titel prominent',
+          'Foto is gebruikelijk op Nederlandse accountancy CV\'s',
+          'Toon kennis van Nederlandse belastingwetgeving en BTW',
+          'Ervaring met Nederlandse boekhoudsoftware (AFAS, Exact, SAP)',
+          'WFT (Wet Financiële Toezicht) diploma\'s indien van toepassing',
+          'Kennis van Nederlandse jaarrekeningrichtlijnen en IFRS',
+          'Vermeld permanente educatie volgens NBA-vereisten'
         ],
         skills: [
-          'Financiële boekhouding en administratie',
-          'Belastingvoorbereiding en -planning',
-          'Financiële overzichtsanalyse',
-          'Boekhoudsoftware (QuickBooks, SAP, etc.)',
-          'Audit- en nalevingsprocedures',
-          'Begroting en prognose',
-          'Regelgevingsnaleving en rapportage'
+          'Financiële boekhouding en administratie (Nederlandse richtlijnen)',
+          'Belastingvoorbereiding en -planning (Nederlandse belastingwetgeving)',
+          'Financiële overzichtsanalyse en jaarrekeningen',
+          'Boekhoudsoftware (AFAS, Exact, SAP, QuickBooks)',
+          'Audit- en nalevingsprocedures (Nederlandse auditstandaarden)',
+          'Regelgevingsnaleving (AFM, DNB) en rapportage',
+          'NBA-registratie, AA/RA titel en WFT-diploma\'s'
         ],
         whyGood: [
-          'Duidelijke structuur die accountancykwalificaties benadrukt',
-          'Legt nadruk op technische vaardigheden en certificeringen',
-          'Toont ervaring met relevante boekhoudsoftware',
-          'Demonstreert kennis van financiële regelgeving',
-          'ATS-vriendelijk formaat met branchespecifieke zoekwoorden'
+          'Voldoet aan Nederlandse accountancy CV-standaarden met NBA en AA/RA',
+          'Benadrukt ervaring met Nederlandse boekhoudsystemen en -wetgeving',
+          'Toont kennis van Nederlandse belastingwetgeving en BTW',
+          'Demonstreert compliance met NBA-vereisten en permanente educatie',
+          'Format geschikt voor Nederlandse accountantskantoren en bedrijven'
         ]
       },
       fr: {
         name: 'Comptable',
         slug: 'comptable',
-        description: 'Les comptables gèrent les registres financiers, préparent les déclarations fiscales et assurent la conformité aux réglementations financières. Ils analysent les données financières pour aider les entreprises à prendre des décisions éclairées et maintenir une comptabilité financière précise.',
+        description: 'Les comptables gèrent les registres financiers, préparent les déclarations fiscales et assurent la conformité aux réglementations financières. En France, les comptables doivent être titulaires d\'un diplôme (DCG, DSCG) et être inscrits à l\'Ordre des Experts-Comptables. Ils analysent les données financières pour aider les entreprises à prendre des décisions éclairées et maintenir une comptabilité financière précise.',
         tips: [
-          'Mettez en avant vos certifications comptables (CPA, ACCA, etc.)',
-          'Soulignez l\'expérience avec les logiciels et systèmes comptables',
-          'Présentez la connaissance des réglementations fiscales et de la conformité',
-          'Incluez l\'expérience en analyse et reporting financier',
-          'Démontrez l\'attention aux détails et la précision'
+          'Mettez en avant votre diplôme (DCG, DSCG) et inscription à l\'Ordre des Experts-Comptables',
+          'Photo sur le CV est courante pour les comptables en France',
+          'Expérience avec les logiciels comptables français (Cegid, Sage, EBP)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Connaissance de la réglementation fiscale française et TVA',
+          'Expérience avec les déclarations fiscales françaises (TVA, IS, etc.)',
+          'Formation continue et développement professionnel'
         ],
         skills: [
-          'Comptabilité financière et tenue de livres',
-          'Préparation et planification fiscale',
-          'Analyse des états financiers',
-          'Logiciels comptables (QuickBooks, SAP, etc.)',
-          'Procédures d\'audit et de conformité',
-          'Budgétisation et prévisions',
-          'Conformité réglementaire et reporting'
+          'Comptabilité financière et tenue de livres (normes françaises)',
+          'Préparation et planification fiscale (réglementation fiscale française)',
+          'Analyse des états financiers et comptes annuels',
+          'Logiciels comptables (Cegid, Sage, EBP, SAP)',
+          'Procédures d\'audit et de conformité (normes françaises)',
+          'Conformité réglementaire (AMF, ACPR) et reporting',
+          'Diplôme DCG/DSCG et inscription à l\'Ordre des Experts-Comptables'
         ],
         whyGood: [
-          'Structure claire mettant en évidence les qualifications comptables',
-          'Met l\'accent sur les compétences techniques et les certifications',
-          'Montre l\'expérience avec les logiciels comptables pertinents',
-          'Démontre la connaissance des réglementations financières',
-          'Format compatible ATS avec mots-clés spécifiques à l\'industrie'
+          'Respecte les standards français avec diplôme et inscription à l\'Ordre',
+          'Met en avant l\'expérience avec les systèmes comptables français',
+          'Démontre la connaissance de la réglementation fiscale française',
+          'Montre la conformité avec les exigences de l\'Ordre des Experts-Comptables',
+          'Format adapté aux cabinets comptables et entreprises françaises'
         ]
       },
       es: {
         name: 'Contador',
         slug: 'contador',
-        description: 'Los contadores gestionan registros financieros, preparan declaraciones de impuestos y aseguran el cumplimiento de las regulaciones financieras. Analizan datos financieros para ayudar a las empresas a tomar decisiones informadas y mantener informes financieros precisos.',
+        description: 'Los contadores gestionan registros financieros, preparan declaraciones de impuestos y aseguran el cumplimiento de las regulaciones financieras. En España, los contadores deben estar titulados y a menudo colegiados en el Colegio de Economistas o tener certificaciones ICAC. Analizan datos financieros para ayudar a las empresas a tomar decisiones informadas y mantener informes financieros precisos.',
         tips: [
-          'Destaca tus certificaciones contables (CPA, ACCA, etc.)',
-          'Enfatiza experiencia con software y sistemas contables',
-          'Muestra conocimiento de regulaciones fiscales y cumplimiento',
-          'Incluye experiencia con análisis y reportes financieros',
-          'Demuestra atención al detalle y precisión'
+          'Destaca tu título universitario y colegiación (si aplica)',
+          'Foto en el CV es común y recomendable en España',
+          'Experiencia con software contable español (A3, ContaPlus, SAP)',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Conocimiento de la regulación fiscal española e IVA',
+          'Experiencia con declaraciones fiscales españolas (IVA, IS, etc.)',
+          'Formación continuada según normativa española'
         ],
         skills: [
-          'Contabilidad financiera y teneduría de libros',
-          'Preparación y planificación fiscal',
-          'Análisis de estados financieros',
-          'Software contable (QuickBooks, SAP, etc.)',
-          'Procedimientos de auditoría y cumplimiento',
-          'Presupuestación y pronósticos',
-          'Cumplimiento regulatorio y reportes'
+          'Contabilidad financiera y teneduría de libros (normas españolas)',
+          'Preparación y planificación fiscal (regulación fiscal española)',
+          'Análisis de estados financieros y cuentas anuales',
+          'Software contable (A3, ContaPlus, SAP, QuickBooks)',
+          'Procedimientos de auditoría y cumplimiento (normas españolas)',
+          'Cumplimiento regulatorio (CNMV, Banco de España) y reportes',
+          'Título universitario, colegiación y certificaciones ICAC'
         ],
         whyGood: [
-          'Estructura clara que destaca calificaciones contables',
-          'Enfatiza habilidades técnicas y certificaciones',
-          'Muestra experiencia con software contable relevante',
-          'Demuestra conocimiento de regulaciones financieras',
-          'Formato compatible con ATS con palabras clave específicas de la industria'
+          'Cumple con los estándares españoles con título y colegiación',
+          'Destaca experiencia con sistemas contables españoles',
+          'Muestra conocimiento de regulación fiscal española',
+          'Demuestra cumplimiento con requisitos del Colegio de Economistas',
+          'Formato adecuado para despachos contables y empresas españolas'
         ]
       },
       de: {
         name: 'Buchhalter',
         slug: 'buchhalter',
-        description: 'Buchhalter verwalten Finanzunterlagen, erstellen Steuererklärungen und stellen die Einhaltung der Finanzvorschriften sicher. Sie analysieren Finanzdaten, um Unternehmen bei fundierten Entscheidungen zu helfen und genaue Finanzberichterstattung aufrechtzuerhalten.',
+        description: 'Buchhalter verwalten Finanzunterlagen, erstellen Steuererklärungen und stellen die Einhaltung der Finanzvorschriften sicher. In Deutschland können Buchhalter Steuerberater (Steuerberaterprüfung) oder Wirtschaftsprüfer (Wirtschaftsprüferprüfung) sein, mit IHK-Zertifizierungen. Sie analysieren Finanzdaten, um Unternehmen bei fundierten Entscheidungen zu helfen und genaue Finanzberichterstattung aufrechtzuerhalten.',
         tips: [
-          'Heben Sie Ihre Buchhaltungszertifizierungen hervor (CPA, ACCA, etc.)',
-          'Betonen Sie Erfahrung mit Buchhaltungssoftware und -systemen',
-          'Zeigen Sie Kenntnisse der Steuervorschriften und Compliance',
-          'Fügen Sie Erfahrung mit Finanzanalyse und Berichterstattung hinzu',
-          'Demonstrieren Sie Aufmerksamkeit für Details und Genauigkeit'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihre Qualifikation (Steuerberater, Wirtschaftsprüfer, IHK-Zertifikat)',
+          'Geburtsdatum, Nationalität sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie Erfahrung mit deutschen Buchhaltungssoftware (DATEV, Lexware, SAP)',
+          'Zeigen Sie Deutschkenntnisse auf B2+ Niveau (für Finanzkommunikation)',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Finanzbuchhaltung und Buchführung',
-          'Steuervorbereitung und -planung',
-          'Analyse von Jahresabschlüssen',
-          'Buchhaltungssoftware (QuickBooks, SAP, etc.)',
-          'Audit- und Compliance-Verfahren',
-          'Budgetierung und Prognose',
-          'Regulatorische Compliance und Berichterstattung'
+          'Finanzbuchhaltung und Buchführung (HGB, IFRS)',
+          'Steuervorbereitung und -planung (deutsches Steuerrecht)',
+          'Analyse von Jahresabschlüssen und Bilanzierung',
+          'Buchhaltungssoftware (DATEV, Lexware, SAP, QuickBooks)',
+          'Audit- und Compliance-Verfahren (deutsche Prüfungsstandards)',
+          'Regulatorische Compliance (BaFin) und Berichterstattung',
+          'Steuerberaterprüfung, Wirtschaftsprüferprüfung oder IHK-Zertifikat'
         ],
         whyGood: [
-          'Klare Struktur, die Buchhaltungsqualifikationen hervorhebt',
-          'Betont technische Fähigkeiten und Zertifizierungen',
-          'Zeigt Erfahrung mit relevanter Buchhaltungssoftware',
-          'Demonstriert Kenntnisse der Finanzvorschriften',
-          'ATS-freundliches Format mit branchenspezifischen Schlüsselwörtern'
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Buchhaltungssystemen und -vorschriften',
+          'Zeigt Kenntnisse deutscher Steuervorschriften und HGB',
+          'Demonstriert Compliance mit deutschen Qualifikationsanforderungen',
+          'Format geeignet für deutsche Steuerberatungs- und Wirtschaftsprüfungsgesellschaften'
         ]
       },
       it: { name: 'Contabile', slug: 'contabile', description: '', tips: [], skills: [], whyGood: [] },
@@ -1509,85 +1554,91 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Marketing Manager',
         slug: 'marketing-manager',
-        description: 'Marketing managers develop and execute marketing strategies to promote products and services. They oversee campaigns, analyze market trends, manage budgets, and coordinate with various teams to achieve business objectives.',
+        description: 'Marketing managers develop and execute marketing strategies to promote products and services. In the UK, marketing managers work with GDPR compliance and UK market dynamics, while US marketing managers focus on CCPA compliance, US market trends, and American consumer behavior. They oversee campaigns, analyze market trends, manage budgets, and coordinate with various teams to achieve business objectives.',
         tips: [
-          'Highlight your marketing campaigns and their results',
-          'Emphasize experience with digital marketing tools and platforms',
-          'Showcase data analysis and ROI measurement skills',
-          'Include experience with brand management and positioning',
-          'Demonstrate leadership and team management abilities'
+          'NO photo on CV/resume - focus on campaign results and achievements',
+          'Highlight quantifiable campaign metrics (ROI, conversion rates, revenue impact)',
+          'Emphasize GDPR compliance experience (UK) or CCPA/privacy compliance (US)',
+          'Showcase experience with market-specific platforms (UK: LinkedIn, Facebook) or (US: Google Ads, Meta)',
+          'Include certifications (Google Ads, HubSpot, Facebook Blueprint)',
+          'Demonstrate knowledge of UK/US consumer behavior and market trends',
+          'Show experience with analytics tools (Google Analytics, Adobe Analytics)'
         ],
         skills: [
-          'Strategic marketing planning',
-          'Digital marketing (SEO, SEM, social media)',
-          'Campaign management and execution',
-          'Market research and analysis',
+          'Strategic marketing planning and brand positioning',
+          'Digital marketing (SEO, SEM, PPC, social media, email marketing)',
+          'Campaign management and multi-channel execution',
+          'Market research and consumer behavior analysis',
           'Budget management and ROI optimization',
-          'Brand development and positioning',
-          'Team leadership and collaboration'
+          'Marketing automation (HubSpot, Marketo, Salesforce Marketing Cloud)',
+          'GDPR compliance (UK) or CCPA/privacy compliance (US)'
         ],
         whyGood: [
-          'Clear structure highlighting marketing achievements',
-          'Emphasizes measurable results and campaign performance',
-          'Shows expertise in digital marketing channels',
-          'Demonstrates strategic thinking and leadership',
-          'ATS-friendly format with marketing-specific keywords'
+          'Meets UK/US marketing CV standards with quantifiable results',
+          'ATS-optimized for marketing agencies and brand recruiters',
+          'Highlights compliance with data protection regulations',
+          'Shows knowledge of UK/US market dynamics and platforms',
+          'Format compatible with UK/US marketing recruitment systems'
         ]
       },
       nl: {
         name: 'Marketing Manager',
         slug: 'marketing-manager',
-        description: 'Marketing managers ontwikkelen en voeren marketingstrategieën uit om producten en diensten te promoten. Ze beheren campagnes, analyseren markttrends, beheren budgetten en coördineren met verschillende teams om bedrijfsdoelstellingen te bereiken.',
+        description: 'Marketing managers ontwikkelen en voeren marketingstrategieën uit om producten en diensten te promoten. In Nederland werken marketing managers met AVG/GDPR compliance, Nederlandse marktdynamiek en lokale consumentengedrag. Ze beheren campagnes, analyseren markttrends, beheren budgetten en coördineren met verschillende teams om bedrijfsdoelstellingen te bereiken.',
         tips: [
-          'Benadruk je marketingcampagnes en hun resultaten',
-          'Leg nadruk op ervaring met digitale marketingtools en platforms',
-          'Toon data-analyse en ROI-meetvaardigheden',
-          'Vermeld ervaring met merkmanagement en positionering',
-          'Demonstreer leiderschaps- en teammanagementvaardigheden'
+          'Foto is optioneel in Nederlandse marketing sector - focus op resultaten',
+          'Benadruk meetbare campagnemetrics (ROI, conversiepercentages, omzetimpact)',
+          'Toon kennis van AVG/GDPR compliance en Nederlandse privacywetgeving',
+          'Ervaring met Nederlandse marketing platforms (LinkedIn, Facebook, Google Ads)',
+          'Vermeld certificeringen (Google Ads, HubSpot, Facebook Blueprint)',
+          'Kennis van Nederlandse consumentengedrag en markttrends',
+          'Nederlands en Engels vaak beide vereist - vermeld beide talen'
         ],
         skills: [
-          'Strategische marketingplanning',
-          'Digitale marketing (SEO, SEM, social media)',
-          'Campagnemanagement en -uitvoering',
-          'Marktonderzoek en -analyse',
+          'Strategische marketingplanning en merkpositionering',
+          'Digitale marketing (SEO, SEM, PPC, social media, email marketing)',
+          'Campagnemanagement en multi-channel uitvoering',
+          'Marktonderzoek en consumentengedrag analyse',
           'Budgetbeheer en ROI-optimalisatie',
-          'Merkenontwikkeling en positionering',
-          'Teamleiderschap en samenwerking'
+          'Marketing automation (HubSpot, Marketo, Salesforce Marketing Cloud)',
+          'AVG/GDPR compliance en kennis van Nederlandse privacywetgeving'
         ],
         whyGood: [
-          'Duidelijke structuur die marketingprestaties benadrukt',
-          'Legt nadruk op meetbare resultaten en campagneprestaties',
-          'Toont expertise in digitale marketingkanalen',
-          'Demonstreert strategisch denken en leiderschap',
-          'ATS-vriendelijk formaat met marketingspecifieke zoekwoorden'
+          'Voldoet aan Nederlandse marketing CV-standaarden met meetbare resultaten',
+          'Benadrukt ervaring met Nederlandse markt en marketing platforms',
+          'Toont kennis van AVG/GDPR en Nederlandse privacywetgeving',
+          'Demonstreert begrip van Nederlandse consumentengedrag',
+          'Format geschikt voor Nederlandse marketing bureaus en merken'
         ]
       },
       fr: {
         name: 'Responsable Marketing',
         slug: 'responsable-marketing',
-        description: 'Les responsables marketing développent et exécutent des stratégies marketing pour promouvoir des produits et services. Ils supervisent les campagnes, analysent les tendances du marché, gèrent les budgets et coordonnent avec diverses équipes pour atteindre les objectifs commerciaux.',
+        description: 'Les responsables marketing développent et exécutent des stratégies marketing pour promouvoir des produits et services. En France, les responsables marketing travaillent avec la conformité RGPD, la dynamique du marché français et le comportement des consommateurs français. Ils supervisent les campagnes, analysent les tendances du marché, gèrent les budgets et coordonnent avec diverses équipes pour atteindre les objectifs commerciaux.',
         tips: [
-          'Mettez en avant vos campagnes marketing et leurs résultats',
-          'Soulignez l\'expérience avec les outils et plateformes de marketing numérique',
-          'Présentez les compétences en analyse de données et mesure du ROI',
-          'Incluez l\'expérience en gestion de marque et positionnement',
-          'Démontrez les capacités de leadership et de gestion d\'équipe'
+          'Photo sur le CV est optionnelle dans le secteur marketing français',
+          'Mettez en avant vos campagnes marketing avec résultats quantifiables (ROI, taux de conversion)',
+          'Expérience avec les plateformes marketing françaises (LinkedIn, Facebook, Google Ads)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Connaissance de la conformité RGPD et réglementation française',
+          'Certifications (Google Ads, HubSpot, Facebook Blueprint)',
+          'Expérience avec le comportement des consommateurs français'
         ],
         skills: [
-          'Planification marketing stratégique',
-          'Marketing numérique (SEO, SEM, réseaux sociaux)',
-          'Gestion et exécution de campagnes',
-          'Recherche et analyse de marché',
+          'Planification marketing stratégique et positionnement de marque',
+          'Marketing numérique (SEO, SEM, PPC, réseaux sociaux, email marketing)',
+          'Gestion et exécution de campagnes multi-canaux',
+          'Recherche et analyse de marché et comportement consommateur',
           'Gestion budgétaire et optimisation du ROI',
-          'Développement et positionnement de marque',
-          'Leadership d\'équipe et collaboration'
+          'Marketing automation (HubSpot, Marketo, Salesforce Marketing Cloud)',
+          'Conformité RGPD et connaissance de la réglementation française'
         ],
         whyGood: [
-          'Structure claire mettant en évidence les réalisations marketing',
-          'Met l\'accent sur les résultats mesurables et la performance des campagnes',
-          'Montre l\'expertise dans les canaux de marketing numérique',
-          'Démontre la pensée stratégique et le leadership',
-          'Format compatible ATS avec mots-clés spécifiques au marketing'
+          'Respecte les standards français avec résultats quantifiables',
+          'Met en avant l\'expérience avec le marché français et plateformes',
+          'Démontre la connaissance de la conformité RGPD',
+          'Montre la compréhension du comportement des consommateurs français',
+          'Format adapté aux agences marketing et marques françaises'
         ]
       },
       es: {
@@ -4256,141 +4307,151 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Data Scientist',
         slug: 'data-scientist',
-        description: 'Data scientists analyze complex data sets to extract insights and inform business decisions. They use statistical methods, machine learning, and programming to solve problems and create predictive models.',
+        description: 'Data scientists analyze complex data sets to extract insights and inform business decisions. In the UK, data scientists work with NHS data, fintech, and government analytics, while US data scientists focus on Silicon Valley tech companies, healthcare analytics, and enterprise AI solutions. They use statistical methods, machine learning, and programming to solve problems and create predictive models.',
         tips: [
-          'Highlight your technical skills and programming languages',
-          'Emphasize experience with data analysis and machine learning',
-          'Showcase projects and their business impact',
-          'Include experience with data visualization tools',
-          'Demonstrate statistical and analytical capabilities'
+          'NO photo on CV/resume - focus on technical portfolio and GitHub',
+          'Highlight quantifiable business impact (revenue increase, cost reduction, accuracy improvements)',
+          'Showcase machine learning models and their performance metrics',
+          'Emphasize cloud ML platforms (AWS SageMaker, Azure ML, GCP AI Platform)',
+          'Include relevant certifications (AWS ML Specialty, Google Cloud ML Engineer)',
+          'Demonstrate experience with GDPR/data privacy compliance (UK/EU) or HIPAA (US healthcare)',
+          'Show publications, Kaggle competitions, or open-source contributions'
         ],
         skills: [
-          'Data analysis and statistical modeling',
-          'Programming (Python, R, SQL)',
-          'Machine learning and AI',
-          'Data visualization (Tableau, Power BI)',
-          'Big data technologies (Hadoop, Spark)',
-          'Database management and querying',
-          'Business intelligence and reporting'
+          'Data analysis and statistical modeling (Python, R, SQL)',
+          'Machine learning frameworks (scikit-learn, TensorFlow, PyTorch)',
+          'Big data technologies (Hadoop, Spark, Databricks)',
+          'Cloud ML platforms (AWS SageMaker, Azure ML, GCP AI Platform)',
+          'Data visualization (Tableau, Power BI, D3.js)',
+          'Database management (PostgreSQL, MongoDB, Snowflake)',
+          'GDPR/HIPAA compliance and data privacy regulations'
         ],
         whyGood: [
-          'Clear structure highlighting technical expertise',
-          'Emphasizes data-driven results and impact',
-          'Shows proficiency with relevant tools and technologies',
-          'Demonstrates analytical and problem-solving skills',
-          'ATS-friendly format with data science keywords'
+          'ATS-optimized for tech recruiters and data science hiring platforms',
+          'Highlights modern ML stack and cloud-native analytics',
+          'Shows business impact through quantifiable metrics',
+          'Format compatible with UK/US tech recruitment systems',
+          'Demonstrates both technical depth and business acumen'
         ]
       },
       nl: {
         name: 'Data Scientist',
         slug: 'data-scientist',
-        description: 'Data scientists analyseren complexe datasets om inzichten te extraheren en bedrijfsbeslissingen te informeren. Ze gebruiken statistische methoden, machine learning en programmeren om problemen op te lossen en voorspellende modellen te creëren.',
+        description: 'Data scientists analyseren complexe datasets om inzichten te extraheren en bedrijfsbeslissingen te informeren. In Nederland werken data scientists vaak met Nederlandse bedrijven, fintech, e-commerce en zorgdata. Ze gebruiken statistische methoden, machine learning en programmeren om problemen op te lossen en voorspellende modellen te creëren.',
         tips: [
-          'Benadruk je technische vaardigheden en programmeertalen',
-          'Leg nadruk op ervaring met data-analyse en machine learning',
-          'Toon projecten en hun bedrijfsimpact',
-          'Vermeld ervaring met datavisualisatietools',
-          'Demonstreer statistische en analytische capaciteiten'
+          'Foto is optioneel in Nederlandse tech sector - focus op portfolio',
+          'Benadruk ervaring met Nederlandse data-infrastructuur en systemen',
+          'Toon kennis van AVG/GDPR en Nederlandse privacywetgeving',
+          'Vermeld certificeringen zoals AWS ML, Google Cloud ML Engineer',
+          'Ervaring met Nederlandse cloud providers of AWS/Azure',
+          'Engels is vaak werktaal - vermeld beide talen',
+          'GitHub portfolio met data science projecten en notebooks'
         ],
         skills: [
-          'Data-analyse en statistische modellering',
-          'Programmeren (Python, R, SQL)',
-          'Machine learning en AI',
-          'Datavisualisatie (Tableau, Power BI)',
-          'Big data-technologieën (Hadoop, Spark)',
-          'Databasebeheer en querying',
-          'Business intelligence en rapportage'
+          'Data-analyse en statistische modellering (Python, R, SQL)',
+          'Machine learning frameworks (scikit-learn, TensorFlow, PyTorch)',
+          'Big data-technologieën (Hadoop, Spark, Databricks)',
+          'Cloud ML platforms (AWS SageMaker, Azure ML, Google Cloud AI)',
+          'Datavisualisatie (Tableau, Power BI, Python visualization libraries)',
+          'Databasebeheer (PostgreSQL, MongoDB, Snowflake)',
+          'AVG/GDPR compliance en Nederlandse privacyregelgeving'
         ],
         whyGood: [
-          'Duidelijke structuur die technische expertise benadrukt',
-          'Legt nadruk op data-gedreven resultaten en impact',
-          'Toont vaardigheid met relevante tools en technologieën',
-          'Demonstreert analytische en probleemoplossende vaardigheden',
-          'ATS-vriendelijk formaat met data science-zoekwoorden'
+          'Voldoet aan Nederlandse tech CV-standaarden',
+          'Benadrukt ervaring met Nederlandse data-ecosysteem',
+          'Toont kennis van Nederlandse privacy- en databeschermingswetgeving',
+          'Format geschikt voor Nederlandse tech bedrijven en scale-ups',
+          'Demonstreert zowel technische vaardigheden als zakelijke impact'
         ]
       },
       fr: {
         name: 'Scientifique des Données',
         slug: 'scientifique-donnees',
-        description: 'Les scientifiques des données analysent des ensembles de données complexes pour extraire des informations et éclairer les décisions commerciales. Ils utilisent des méthodes statistiques, l\'apprentissage automatique et la programmation pour résoudre des problèmes et créer des modèles prédictifs.',
+        description: 'Les scientifiques des données analysent des ensembles de données complexes pour extraire des informations et éclairer les décisions commerciales. En France, les data scientists travaillent souvent avec des entreprises françaises, des startups tech, et des systèmes gouvernementaux. Ils utilisent des méthodes statistiques, l\'apprentissage automatique et la programmation pour résoudre des problèmes et créer des modèles prédictifs.',
         tips: [
-          'Mettez en avant vos compétences techniques et langages de programmation',
-          'Soulignez l\'expérience en analyse de données et apprentissage automatique',
-          'Présentez des projets et leur impact commercial',
-          'Incluez l\'expérience avec les outils de visualisation de données',
-          'Démontrez les capacités statistiques et analytiques'
+          'Photo sur le CV est optionnelle dans le secteur tech français',
+          'Mettez en avant votre diplôme (École d\'ingénieur, Master en Data Science)',
+          'Expérience avec les systèmes français et réglementation RGPD',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Certifications cloud ML (AWS, Azure) et frameworks modernes',
+          'Portfolio GitHub avec projets data science et notebooks',
+          'Connaissance de la réglementation française (RGPD, CNIL)'
         ],
         skills: [
-          'Analyse de données et modélisation statistique',
-          'Programmation (Python, R, SQL)',
-          'Apprentissage automatique et IA',
-          'Visualisation de données (Tableau, Power BI)',
-          'Technologies big data (Hadoop, Spark)',
-          'Gestion et interrogation de bases de données',
-          'Business intelligence et reporting'
+          'Analyse de données et modélisation statistique (Python, R, SQL)',
+          'Apprentissage automatique et IA (scikit-learn, TensorFlow, PyTorch)',
+          'Technologies big data (Hadoop, Spark, Databricks)',
+          'Cloud ML platforms (AWS SageMaker, Azure ML, Google Cloud AI)',
+          'Visualisation de données (Tableau, Power BI, Python libraries)',
+          'Gestion et interrogation de bases de données (PostgreSQL, MongoDB)',
+          'RGPD compliance et réglementation française sur les données'
         ],
         whyGood: [
-          'Structure claire mettant en évidence l\'expertise technique',
-          'Met l\'accent sur les résultats et l\'impact axés sur les données',
-          'Montre la maîtrise des outils et technologies pertinents',
-          'Démontre les compétences analytiques et de résolution de problèmes',
-          'Format compatible ATS avec mots-clés de science des données'
+          'Respecte les standards français avec diplôme et certifications',
+          'Met en avant l\'expérience avec l\'écosystème data français',
+          'Démontre la connaissance de la réglementation française (RGPD)',
+          'Format adapté aux entreprises tech françaises et startups',
+          'Montre à la fois compétences techniques et impact business'
         ]
       },
       es: {
         name: 'Científico de Datos',
         slug: 'cientifico-datos',
-        description: 'Los científicos de datos analizan conjuntos de datos complejos para extraer información e informar decisiones comerciales. Utilizan métodos estadísticos, aprendizaje automático y programación para resolver problemas y crear modelos predictivos.',
+        description: 'Los científicos de datos analizan conjuntos de datos complejos para extraer información e informar decisiones comerciales. En España, los data scientists trabajan a menudo con empresas españolas, fintech, e-commerce y startups tecnológicas. Utilizan métodos estadísticos, aprendizaje automático y programación para resolver problemas y crear modelos predictivos.',
         tips: [
-          'Destaca tus habilidades técnicas y lenguajes de programación',
-          'Enfatiza experiencia con análisis de datos y aprendizaje automático',
-          'Muestra proyectos y su impacto comercial',
-          'Incluye experiencia con herramientas de visualización de datos',
-          'Demuestra capacidades estadísticas y analíticas'
+          'Foto en el CV es común en el sector tech español',
+          'Destaca tu título universitario (Grado/Máster en Data Science, Matemáticas, Informática)',
+          'Experiencia con sistemas españoles y regulación RGPD',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Certificaciones cloud ML (AWS, Azure) y frameworks modernos',
+          'Portfolio GitHub con proyectos data science y notebooks',
+          'Conocimiento de la regulación española (RGPD, LOPD)'
         ],
         skills: [
-          'Análisis de datos y modelado estadístico',
-          'Programación (Python, R, SQL)',
-          'Aprendizaje automático e IA',
-          'Visualización de datos (Tableau, Power BI)',
-          'Tecnologías de big data (Hadoop, Spark)',
-          'Gestión y consulta de bases de datos',
-          'Inteligencia empresarial y reportes'
+          'Análisis de datos y modelado estadístico (Python, R, SQL)',
+          'Aprendizaje automático e IA (scikit-learn, TensorFlow, PyTorch)',
+          'Tecnologías de big data (Hadoop, Spark, Databricks)',
+          'Cloud ML platforms (AWS SageMaker, Azure ML, Google Cloud AI)',
+          'Visualización de datos (Tableau, Power BI, Python libraries)',
+          'Gestión y consulta de bases de datos (PostgreSQL, MongoDB)',
+          'RGPD compliance y regulación española sobre datos'
         ],
         whyGood: [
-          'Estructura clara que destaca experiencia técnica',
-          'Enfatiza resultados e impacto basados en datos',
-          'Muestra competencia con herramientas y tecnologías relevantes',
-          'Demuestra habilidades analíticas y de resolución de problemas',
-          'Formato compatible con ATS con palabras clave de ciencia de datos'
+          'Cumple con los estándares españoles con título y certificaciones',
+          'Destaca experiencia con ecosistema data español',
+          'Muestra conocimiento de regulación española (RGPD, LOPD)',
+          'Formato adecuado para empresas tech españolas y startups',
+          'Demuestra tanto habilidades técnicas como impacto empresarial'
         ]
       },
       de: {
         name: 'Datenwissenschaftler',
         slug: 'datenwissenschaftler',
-        description: 'Datenwissenschaftler analysieren komplexe Datensätze, um Erkenntnisse zu gewinnen und Geschäftsentscheidungen zu informieren. Sie verwenden statistische Methoden, maschinelles Lernen und Programmierung, um Probleme zu lösen und prädiktive Modelle zu erstellen.',
+        description: 'Datenwissenschaftler analysieren komplexe Datensätze, um Erkenntnisse zu gewinnen und Geschäftsentscheidungen zu informieren. In Deutschland arbeiten Data Scientists oft mit deutschen Unternehmen, Automobilindustrie, Industrie 4.0 Projekten, und enge Zusammenarbeit mit SAP Analytics. Sie verwenden statistische Methoden, maschinelles Lernen und Programmierung, um Probleme zu lösen und prädiktive Modelle zu erstellen.',
         tips: [
-          'Heben Sie Ihre technischen Fähigkeiten und Programmiersprachen hervor',
-          'Betonen Sie Erfahrung mit Datenanalyse und maschinellem Lernen',
-          'Zeigen Sie Projekte und deren Geschäftsauswirkungen',
-          'Fügen Sie Erfahrung mit Datenvisualisierungstools hinzu',
-          'Demonstrieren Sie statistische und analytische Fähigkeiten'
+          'Lebenslauf muss ein professionelles Foto enthalten (auch in Tech-Sektor)',
+          'Vermelden Sie Ihre Ausbildung (Hochschule, Universität, Master in Data Science)',
+          'Geburtsdatum, Nationalität sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie SAP Analytics Cloud und deutsche Data-Governance-Standards',
+          'Zeigen Sie Deutschkenntnisse auf B2+ Niveau (für technische Kommunikation)',
+          'Blue Card visa requirements voor non-EU kandidaten',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Datenanalyse und statistische Modellierung',
-          'Programmierung (Python, R, SQL)',
-          'Maschinelles Lernen und KI',
-          'Datenvisualisierung (Tableau, Power BI)',
-          'Big-Data-Technologien (Hadoop, Spark)',
-          'Datenbankverwaltung und Abfragen',
-          'Business Intelligence und Berichterstattung'
+          'Datenanalyse und statistische Modellierung (Python, R, SQL)',
+          'Maschinelles Lernen und KI (scikit-learn, TensorFlow, PyTorch)',
+          'Big-Data-Technologien (Hadoop, Spark, Databricks)',
+          'SAP Analytics Cloud und deutsche BI-Lösungen',
+          'Cloud ML platforms (AWS SageMaker, Azure ML, Google Cloud AI)',
+          'Datenbankverwaltung (PostgreSQL, MySQL, SAP HANA)',
+          'DSGVO compliance und deutsche Datenschutzbestimmungen'
         ],
         whyGood: [
-          'Klare Struktur, die technische Expertise hervorhebt',
-          'Betont datengetriebene Ergebnisse und Auswirkungen',
-          'Zeigt Beherrschung relevanter Tools und Technologien',
-          'Demonstriert analytische und Problemlösungsfähigkeiten',
-          'ATS-freundliches Format mit Data-Science-Schlüsselwörtern'
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Data-Systems und SAP',
+          'Zeigt Kenntnisse deutscher Data-Governance-Standards und DSGVO',
+          'Format geeignet für deutsche Tech-Unternehmen und Industrie',
+          'Demonstriert sowohl technische Fähigkeiten als auch Geschäftsimpact'
         ]
       },
       it: {
@@ -4823,141 +4884,154 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Doctor',
         slug: 'doctor',
-        description: 'Doctors diagnose and treat medical conditions, provide preventive care, and guide patients through health challenges. They work in hospitals, clinics, private practices, and specialized medical facilities.',
+        description: 'Doctors diagnose and treat medical conditions, provide preventive care, and guide patients through health challenges. In the UK, doctors must be registered with the GMC (General Medical Council), while US physicians require state medical licensure and board certification. Doctors work in hospitals, clinics, private practices, and specialized medical facilities.',
         tips: [
-          'Highlight your medical education and board certifications',
-          'Emphasize clinical experience and patient outcomes',
-          'Showcase specialized training and areas of expertise',
-          'Include research publications and medical achievements',
-          'Demonstrate commitment to continuing medical education'
+          'Include GMC registration number (UK) or medical license number and DEA number (US)',
+          'Highlight board certifications (e.g., ABMS, Royal Colleges)',
+          'No photo on CV/resume - focus on credentials and achievements',
+          'Emphasize measurable patient outcomes and quality metrics',
+          'Include medical school, residency, and fellowship training',
+          'List research publications with impact factors and citations',
+          'Highlight continuing medical education (CME) credits and certifications'
         ],
         skills: [
-          'Medical diagnosis and treatment planning',
-          'Patient consultation and examination',
-          'Surgical procedures (if applicable)',
-          'Medical record documentation',
-          'Interdisciplinary team collaboration',
-          'Medical research and evidence-based practice',
-          'Patient communication and empathy'
+          'Medical diagnosis and evidence-based treatment planning',
+          'Patient consultation, examination, and differential diagnosis',
+          'Surgical/procedural skills (specialty-specific)',
+          'Electronic medical records (EMR) - Epic, Cerner, NHS systems',
+          'Clinical research and academic publications',
+          'Interdisciplinary team leadership and collaboration',
+          'GMC registration (UK) or State medical license + Board certification (US)'
         ],
         whyGood: [
-          'Clear structure highlighting medical qualifications',
-          'Emphasizes clinical expertise and patient care',
-          'Shows progression of medical training and specialization',
-          'Demonstrates commitment to medical excellence',
-          'ATS-friendly format with medical keywords'
+          'Meets UK/US medical CV standards with proper credentials',
+          'ATS-optimized for NHS Trusts, hospital systems, and medical recruiters',
+          'Highlights clinical outcomes and evidence-based practice',
+          'Shows progression through medical training pathway',
+          'Format compatible with UK and US medical recruitment systems'
         ]
       },
       nl: {
         name: 'Arts',
         slug: 'arts',
-        description: 'Artsen diagnosticeren en behandelen medische aandoeningen, bieden preventieve zorg en begeleiden patiënten bij gezondheidsuitdagingen. Ze werken in ziekenhuizen, klinieken, privépraktijken en gespecialiseerde medische faciliteiten.',
+        description: 'Artsen diagnosticeren en behandelen medische aandoeningen, bieden preventieve zorg en begeleiden patiënten bij gezondheidsuitdagingen. In Nederland moeten artsen geregistreerd staan in het BIG-register met een AGB-code. Ze werken in ziekenhuizen, klinieken, privépraktijken en gespecialiseerde medische faciliteiten.',
         tips: [
-          'Benadruk je medische opleiding en certificeringen',
-          'Leg nadruk op klinische ervaring en patiëntresultaten',
-          'Toon gespecialiseerde training en expertisegebieden',
-          'Vermeld onderzoekspublicaties en medische prestaties',
-          'Demonstreer toewijding aan voortgezette medische opleiding'
+          'Vermeld je BIG-registratienummer en AGB-code prominent',
+          'Benadruk je specialisatie-opleiding en erkende specialismen',
+          'Foto is gebruikelijk op Nederlandse medische CV\'s',
+          'Vermeld lidmaatschap van beroepsverenigingen (KNMG, specialistenverenigingen)',
+          'Toon kennis van Nederlandse zorgstandaarden en richtlijnen',
+          'Vermeld herregistratie en permanente nascholing',
+          'Publicaties in Nederlandse of internationale medische tijdschriften'
         ],
         skills: [
-          'Medische diagnose en behandelplanning',
-          'Patiëntconsultatie en onderzoek',
-          'Chirurgische procedures (indien van toepassing)',
-          'Medische dossiers documentatie',
-          'Interdisciplinaire team samenwerking',
-          'Medisch onderzoek en evidence-based praktijk',
-          'Patiëntcommunicatie en empathie'
+          'Medische diagnose en behandelplanning volgens NHG-standaarden',
+          'Patiëntconsultatie en lichamelijk onderzoek',
+          'Specialistische procedures (indien van toepassing)',
+          'Elektronische patiëntendossiers (EPD) - ChipSoft HiX, Epic',
+          'Interdisciplinaire samenwerking binnen Nederlandse zorgsysteem',
+          'Medisch wetenschappelijk onderzoek',
+          'BIG-registratie, AGB-code en specialistenregistratie'
         ],
         whyGood: [
-          'Duidelijke structuur die medische kwalificaties benadrukt',
-          'Legt nadruk op klinische expertise en patiëntenzorg',
-          'Toont progressie van medische training en specialisatie',
-          'Demonstreert toewijding aan medische excellentie',
-          'ATS-vriendelijk formaat met medische trefwoorden'
+          'Voldoet aan Nederlandse medische CV-standaarden met BIG en AGB',
+          'Benadrukt ervaring met Nederlandse zorgsystemen en protocollen',
+          'Toont kennis van NHG-standaarden en zorgverzekeringssysteem',
+          'Demonstreert compliance met herregistratie-eisen',
+          'Format geschikt voor Nederlandse ziekenhuizen en medische organisaties'
         ]
       },
       fr: {
         name: 'Médecin',
         slug: 'medecin',
-        description: 'Les médecins diagnostiquent et traitent les affections médicales, fournissent des soins préventifs et guident les patients face aux défis de santé. Ils travaillent dans les hôpitaux, cliniques, cabinets privés et établissements médicaux spécialisés.',
+        description: 'Les médecins diagnostiquent et traitent les affections médicales, fournissent des soins préventifs et guident les patients face aux défis de santé. En France, les médecins doivent être titulaires d\'un diplôme d\'État de docteur en médecine et être inscrits à l\'Ordre National des Médecins avec un numéro RPPS. Ils travaillent dans les hôpitaux, cliniques, cabinets privés et établissements médicaux spécialisés.',
         tips: [
-          'Mettez en avant votre formation médicale et certifications',
-          'Soulignez l\'expérience clinique et les résultats des patients',
-          'Montrez la formation spécialisée et domaines d\'expertise',
-          'Incluez publications de recherche et réalisations médicales',
-          'Démontrez l\'engagement envers la formation médicale continue'
+          'Mettez en avant votre diplôme d\'État de docteur en médecine et numéro RPPS',
+          'Soulignez votre inscription à l\'Ordre National des Médecins',
+          'Mentionnez votre spécialité (DES - Diplôme d\'Études Spécialisées)',
+          'Photo sur le CV est courante pour les médecins en France',
+          'Mettez l\'accent sur la formation continue (DPC - Développement Professionnel Continu)',
+          'Expérience avec les systèmes français (DMP, logiciels hospitaliers français)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Incluez publications de recherche et réalisations médicales'
         ],
         skills: [
-          'Diagnostic médical et planification du traitement',
+          'Diagnostic médical et planification du traitement selon protocoles français',
           'Consultation et examen des patients',
-          'Procédures chirurgicales (le cas échéant)',
-          'Documentation des dossiers médicaux',
-          'Collaboration d\'équipe interdisciplinaire',
+          'Procédures chirurgicales spécialisées (selon spécialité)',
+          'Systèmes de dossiers médicaux électroniques - DMP, logiciels hospitaliers français',
+          'Collaboration d\'équipe interdisciplinaire dans système de santé français',
           'Recherche médicale et pratique fondée sur des preuves',
-          'Communication avec les patients et empathie'
+          'Diplôme d\'État de docteur en médecine, numéro RPPS et inscription à l\'Ordre'
         ],
         whyGood: [
-          'Structure claire mettant en évidence les qualifications médicales',
-          'Met l\'accent sur l\'expertise clinique et les soins aux patients',
-          'Montre la progression de la formation médicale et spécialisation',
-          'Démontre l\'engagement envers l\'excellence médicale',
-          'Format compatible ATS avec mots-clés médicaux'
+          'Respecte les standards français avec diplôme d\'État et numéro RPPS',
+          'Met en avant l\'expérience avec les systèmes de santé français',
+          'Démontre la connaissance des protocoles et standards français',
+          'Montre la conformité avec les exigences de l\'Ordre National des Médecins',
+          'Format adapté aux hôpitaux et établissements de santé français'
         ]
       },
       es: {
         name: 'Médico',
         slug: 'medico',
-        description: 'Los médicos diagnostican y tratan condiciones médicas, brindan atención preventiva y guían a los pacientes a través de desafíos de salud. Trabajan en hospitales, clínicas, consultorios privados e instalaciones médicas especializadas.',
+        description: 'Los médicos diagnostican y tratan condiciones médicas, brindan atención preventiva y guían a los pacientes a través de desafíos de salud. En España, los médicos deben estar titulados (Título de Licenciado/Grado en Medicina) y colegiados en el Colegio Oficial de Médicos de su comunidad autónoma. Trabajan en hospitales, clínicas, consultorios privados e instalaciones médicas especializadas.',
         tips: [
-          'Destaca tu educación médica y certificaciones',
-          'Enfatiza experiencia clínica y resultados del paciente',
-          'Muestra formación especializada y áreas de experiencia',
-          'Incluye publicaciones de investigación y logros médicos',
-          'Demuestra compromiso con la educación médica continua'
+          'Destaca tu Título de Licenciado/Grado en Medicina y número de colegiado',
+          'Menciona tu colegiación en el Colegio Oficial de Médicos correspondiente',
+          'Foto en el CV es común y recomendable en España',
+          'Enfatiza tu especialización (MIR - Médico Interno Residente)',
+          'Formación continuada según normativa española (acreditación)',
+          'Experiencia con sistemas españoles (Historia Clínica Digital, sistemas hospitalarios)',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Incluye publicaciones de investigación y logros médicos'
         ],
         skills: [
-          'Diagnóstico médico y planificación del tratamiento',
+          'Diagnóstico médico y planificación del tratamiento según protocolos españoles',
           'Consulta y examen del paciente',
-          'Procedimientos quirúrgicos (si corresponde)',
-          'Documentación de registros médicos',
-          'Colaboración en equipo interdisciplinario',
+          'Procedimientos quirúrgicos especializados (según especialidad)',
+          'Sistemas de registros médicos electrónicos - Historia Clínica Digital, sistemas hospitalarios españoles',
+          'Colaboración en equipo interdisciplinario en sistema de salud español',
           'Investigación médica y práctica basada en evidencia',
-          'Comunicación con pacientes y empatía'
+          'Título de Medicina, colegiación y especialización MIR'
         ],
         whyGood: [
-          'Estructura clara que destaca las calificaciones médicas',
-          'Enfatiza la experiencia clínica y la atención al paciente',
-          'Muestra la progresión de la formación médica y especialización',
-          'Demuestra compromiso con la excelencia médica',
-          'Formato compatible con ATS con palabras clave médicas'
+          'Cumple con los estándares españoles con Título y colegiación',
+          'Destaca experiencia con sistemas de salud españoles',
+          'Muestra conocimiento de protocolos y estándares médicos españoles',
+          'Demuestra cumplimiento con requisitos del Colegio Oficial de Médicos',
+          'Formato adecuado para hospitales y centros de salud españoles'
         ]
       },
       de: {
         name: 'Arzt',
         slug: 'arzt',
-        description: 'Ärzte diagnostizieren und behandeln medizinische Erkrankungen, bieten präventive Versorgung und begleiten Patienten bei gesundheitlichen Herausforderungen. Sie arbeiten in Krankenhäusern, Kliniken, Privatpraxen und spezialisierten medizinischen Einrichtungen.',
+        description: 'Ärzte diagnostizieren und behandeln medizinische Erkrankungen, bieten präventive Versorgung und begleiten Patienten bei gesundheitlichen Herausforderungen. In Deutschland müssen Ärzte eine Approbation besitzen und sind bei der Ärztekammer registriert. Sie arbeiten in Krankenhäusern, Kliniken, Privatpraxen und spezialisierten medizinischen Einrichtungen.',
         tips: [
-          'Heben Sie Ihre medizinische Ausbildung und Zertifizierungen hervor',
-          'Betonen Sie klinische Erfahrung und Patientenergebnisse',
-          'Zeigen Sie spezialisierte Ausbildung und Fachgebiete',
-          'Fügen Sie Forschungsveröffentlichungen und medizinische Leistungen hinzu',
-          'Demonstrieren Sie Engagement für kontinuierliche medizinische Ausbildung'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihre Approbation und Ärztekammer-Registrierung',
+          'Geburtsdatum, Nationalität und Familienstand sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie Ihre Facharztausbildung und Spezialisierung',
+          'Fortbildung und Weiterbildung nach deutschen Standards (CME-Punkte)',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Zeigen Sie Deutschkenntnisse auf C1-Niveau (für medizinische Kommunikation)',
+          'Chronologisches Format ist bevorzugt (chronologischer Lebenslauf)'
         ],
         skills: [
-          'Medizinische Diagnose und Behandlungsplanung',
+          'Medizinische Diagnose und Behandlungsplanung nach deutschen Leitlinien',
           'Patientenberatung und Untersuchung',
-          'Chirurgische Eingriffe (falls zutreffend)',
-          'Medizinische Aktenführung',
-          'Interdisziplinäre Teamzusammenarbeit',
+          'Chirurgische Eingriffe und Facharztkompetenzen (nach Spezialisierung)',
+          'Elektronische Gesundheitsakten (EHR) - SAP, Orbis oder andere deutsche Systeme',
+          'Interdisziplinäre Teamzusammenarbeit im deutschen Gesundheitssystem',
           'Medizinische Forschung und evidenzbasierte Praxis',
-          'Patientenkommunikation und Empathie'
+          'Approbation, Ärztekammer-Registrierung und Facharztanerkennung'
         ],
         whyGood: [
-          'Klare Struktur, die medizinische Qualifikationen hervorhebt',
-          'Betont klinische Expertise und Patientenversorgung',
-          'Zeigt Fortschritt der medizinischen Ausbildung und Spezialisierung',
-          'Demonstriert Engagement für medizinische Exzellenz',
-          'ATS-freundliches Format mit medizinischen Schlüsselwörtern'
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Gesundheitssystemen und Protokollen',
+          'Zeigt Kenntnisse deutscher medizinischer Leitlinien und Standards',
+          'Demonstriert Compliance mit deutschen Approbations- und Weiterbildungsanforderungen',
+          'Format geeignet für deutsche Krankenhäuser und medizinische Einrichtungen'
         ]
       },
       it: {
@@ -5390,137 +5464,147 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Pharmacist',
         slug: 'pharmacist',
-        description: 'Pharmacists dispense medications, provide pharmaceutical care, and offer health advice to patients. They ensure safe and effective medication use and work in pharmacies, hospitals, and healthcare facilities.',
+        description: 'Pharmacists dispense medications, provide pharmaceutical care, and offer health advice to patients. In the UK, pharmacists must be registered with the GPhC (General Pharmaceutical Council), while US pharmacists require state licensure and NABP certification. They ensure safe and effective medication use and work in pharmacies, hospitals, and healthcare facilities.',
         tips: [
-          'Highlight your pharmacy education and licensure',
-          'Emphasize medication management and patient counseling experience',
-          'Showcase knowledge of drug interactions and safety protocols',
-          'Include experience with insurance and prescription processing',
-          'Demonstrate commitment to patient health and safety'
+          'Include GPhC registration number (UK) or state pharmacy license number (US)',
+          'Highlight NABP e-Profile ID and NPI number (US)',
+          'No photo required - focus on credentials and experience',
+          'Emphasize medication therapy management (MTM) and clinical services',
+          'Showcase knowledge of formulary systems and insurance protocols',
+          'Include experience with pharmacy software systems (Pharmacy Manager, etc.)',
+          'Demonstrate continuing education credits (CE) and certifications'
         ],
         skills: [
-          'Medication dispensing and verification',
-          'Patient counseling and medication therapy management',
-          'Drug interaction screening',
-          'Prescription processing and insurance billing',
-          'Pharmaceutical inventory management',
-          'Compounding and sterile preparation',
-          'Health screening and immunizations'
+          'Medication dispensing, verification, and counseling',
+          'Medication therapy management (MTM) and clinical services',
+          'Drug interaction screening and medication reconciliation',
+          'Prescription processing and insurance billing (UK: NHS, US: Medicare/Medicaid)',
+          'Pharmaceutical inventory management and controlled substance handling',
+          'Compounding and sterile preparation (USP 797/800 compliance)',
+          'GPhC registration (UK) or State pharmacy license + NABP certification (US)'
         ],
         whyGood: [
-          'Clear structure highlighting pharmaceutical expertise',
-          'Emphasizes patient care and medication safety',
-          'Shows knowledge of pharmaceutical regulations',
-          'Demonstrates commitment to healthcare excellence',
-          'ATS-friendly format with pharmacy keywords'
+          'Meets UK/US pharmacy CV standards with proper credentials',
+          'ATS-optimized for NHS Trusts, retail chains, and hospital pharmacy recruiters',
+          'Highlights clinical pharmacy services and patient care outcomes',
+          'Shows knowledge of UK/US pharmaceutical regulations and standards',
+          'Format compatible with UK and US pharmacy recruitment systems'
         ]
       },
       nl: {
         name: 'Apotheker',
         slug: 'apotheker',
-        description: 'Apothekers verstrekken medicijnen, bieden farmaceutische zorg en geven gezondheidsadvies aan patiënten. Ze zorgen voor veilig en effectief medicijngebruik en werken in apotheken, ziekenhuizen en zorginstellingen.',
+        description: 'Apothekers verstrekken medicijnen, bieden farmaceutische zorg en geven gezondheidsadvies aan patiënten. In Nederland moeten apothekers geregistreerd staan in het BIG-register en lid zijn van de KNMP (Koninklijke Nederlandse Maatschappij ter bevordering der Pharmacie). Ze zorgen voor veilig en effectief medicijngebruik en werken in apotheken, ziekenhuizen en zorginstellingen.',
         tips: [
-          'Benadruk je apothekersopleiding en licentie',
-          'Leg nadruk op medicatiebeheer en patiëntadvieservaring',
-          'Toon kennis van geneesmiddelinteracties en veiligheidsprotocollen',
-          'Vermeld ervaring met verzekeringen en receptverwerking',
-          'Demonstreer toewijding aan patiëntgezondheid en veiligheid'
+          'Vermeld je BIG-registratienummer en AGB-code prominent',
+          'Benadruk lidmaatschap van KNMP en eventuele specialisaties',
+          'Foto is gebruikelijk op Nederlandse apothekers CV\'s',
+          'Toon kennis van Nederlandse geneesmiddelenwetgeving en -regelgeving',
+          'Vermeld ervaring met Zorgverzekeringswet en farmaceutische zorg',
+          'Ervaring met Nederlandse apotheeksystemen (ProAct, FarmaPro)',
+          'Vermeld permanente educatie volgens BIG-vereisten'
         ],
         skills: [
-          'Medicatieverstrekking en verificatie',
-          'Patiëntadvies en medicatietherapiebeheer',
-          'Geneesmiddelinteractiescreening',
-          'Receptverwerking en verzekeringsfacturering',
-          'Farmaceutisch voorraadbeheer',
-          'Bereiden en steriele bereiding',
-          'Gezondheidsscreening en vaccinaties'
+          'Medicatieverstrekking en verificatie volgens Nederlandse protocollen',
+          'Patiëntadvies en medicatietherapiebeheer (MTM)',
+          'Geneesmiddelinteractiescreening en medicatiebewaking',
+          'Receptverwerking en zorgverzekeringsfacturering',
+          'Farmaceutisch voorraadbeheer en opiaatregistratie',
+          'Bereiden en steriele bereiding volgens GMP-richtlijnen',
+          'BIG-registratie, AGB-code en KNMP-lidmaatschap'
         ],
         whyGood: [
-          'Duidelijke structuur die farmaceutische expertise benadrukt',
-          'Legt nadruk op patiëntenzorg en medicatieveiligheid',
-          'Toont kennis van farmaceutische regelgeving',
-          'Demonstreert toewijding aan zorg excellentie',
-          'ATS-vriendelijk formaat met apotheek trefwoorden'
+          'Voldoet aan Nederlandse apothekers CV-standaarden met BIG en AGB',
+          'Benadrukt ervaring met Nederlandse apotheeksystemen en zorgverzekering',
+          'Toont kennis van Nederlandse geneesmiddelenwetgeving en KNMP-richtlijnen',
+          'Demonstreert compliance met BIG-vereisten en permanente educatie',
+          'Format geschikt voor Nederlandse apotheken en ziekenhuisapotheken'
         ]
       },
       fr: {
         name: 'Pharmacien',
         slug: 'pharmacien',
-        description: 'Les pharmaciens délivrent des médicaments, fournissent des soins pharmaceutiques et offrent des conseils de santé aux patients. Ils assurent une utilisation sûre et efficace des médicaments et travaillent dans les pharmacies, hôpitaux et établissements de santé.',
+        description: 'Les pharmaciens délivrent des médicaments, fournissent des soins pharmaceutiques et offrent des conseils de santé aux patients. En France, les pharmaciens doivent être titulaires d\'un diplôme d\'État de docteur en pharmacie et être inscrits à l\'Ordre National des Pharmaciens avec un numéro RPPS. Ils assurent une utilisation sûre et efficace des médicaments et travaillent dans les pharmacies, hôpitaux et établissements de santé.',
         tips: [
-          'Mettez en avant votre formation pharmaceutique et licence',
-          'Soulignez l\'expérience en gestion des médicaments et conseil aux patients',
-          'Montrez la connaissance des interactions médicamenteuses et protocoles de sécurité',
-          'Incluez l\'expérience avec les assurances et traitement des ordonnances',
-          'Démontrez l\'engagement envers la santé et la sécurité des patients'
+          'Mettez en avant votre diplôme d\'État de docteur en pharmacie et numéro RPPS',
+          'Soulignez votre inscription à l\'Ordre National des Pharmaciens',
+          'Photo sur le CV est courante pour les pharmaciens en France',
+          'Mettez l\'accent sur la formation continue (DPC - Développement Professionnel Continu)',
+          'Expérience avec les systèmes français (logiciels de pharmacie français)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Connaissance de la réglementation pharmaceutique française et sécurité du médicament'
         ],
         skills: [
-          'Délivrance et vérification des médicaments',
-          'Conseil aux patients et gestion de la thérapie médicamenteuse',
-          'Dépistage des interactions médicamenteuses',
-          'Traitement des ordonnances et facturation d\'assurance',
-          'Gestion des stocks pharmaceutiques',
-          'Préparation et préparation stérile',
-          'Dépistage de santé et vaccinations'
+          'Délivrance et vérification des médicaments selon protocoles français',
+          'Conseil pharmaceutique et suivi pharmaceutique des patients',
+          'Dépistage des interactions médicamenteuses et pharmacovigilance',
+          'Traitement des ordonnances et facturation (système de remboursement français)',
+          'Gestion des stocks pharmaceutiques et traçabilité',
+          'Préparation magistrale et préparation stérile (bonnes pratiques)',
+          'Diplôme d\'État de docteur en pharmacie, numéro RPPS et inscription à l\'Ordre'
         ],
         whyGood: [
-          'Structure claire mettant en évidence l\'expertise pharmaceutique',
-          'Met l\'accent sur les soins aux patients et la sécurité des médicaments',
-          'Montre la connaissance des réglementations pharmaceutiques',
-          'Démontre l\'engagement envers l\'excellence des soins de santé',
-          'Format compatible ATS avec mots-clés pharmaceutiques'
+          'Respecte les standards français avec diplôme d\'État et numéro RPPS',
+          'Met en avant l\'expérience avec les systèmes pharmaceutiques français',
+          'Démontre la connaissance de la réglementation pharmaceutique française',
+          'Montre la conformité avec les exigences de l\'Ordre National des Pharmaciens',
+          'Format adapté aux pharmacies et établissements de santé français'
         ]
       },
       es: {
         name: 'Farmacéutico',
         slug: 'farmaceutico',
-        description: 'Los farmacéuticos dispensan medicamentos, brindan atención farmacéutica y ofrecen consejos de salud a los pacientes. Aseguran el uso seguro y efectivo de medicamentos y trabajan en farmacias, hospitales e instalaciones de salud.',
+        description: 'Los farmacéuticos dispensan medicamentos, brindan atención farmacéutica y ofrecen consejos de salud a los pacientes. En España, los farmacéuticos deben estar titulados (Título de Licenciado/Grado en Farmacia) y colegiados en el Colegio Oficial de Farmacéuticos de su comunidad autónoma. Aseguran el uso seguro y efectivo de medicamentos y trabajan en farmacias, hospitales e instalaciones de salud.',
         tips: [
-          'Destaca tu educación farmacéutica y licencia',
-          'Enfatiza experiencia en gestión de medicamentos y asesoramiento al paciente',
-          'Muestra conocimiento de interacciones farmacológicas y protocolos de seguridad',
-          'Incluye experiencia con seguros y procesamiento de recetas',
-          'Demuestra compromiso con la salud y seguridad del paciente'
+          'Destaca tu Título de Licenciado/Grado en Farmacia y número de colegiado',
+          'Menciona tu colegiación en el Colegio Oficial de Farmacéuticos correspondiente',
+          'Foto en el CV es común y recomendable en España',
+          'Enfatiza la formación continuada según normativa española',
+          'Experiencia con sistemas españoles (sistemas de farmacia españoles)',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Conocimiento de la regulación farmacéutica española y seguridad del medicamento'
         ],
         skills: [
-          'Dispensación y verificación de medicamentos',
-          'Asesoramiento al paciente y gestión de terapia farmacológica',
-          'Detección de interacciones farmacológicas',
-          'Procesamiento de recetas y facturación de seguros',
-          'Gestión de inventario farmacéutico',
-          'Preparación y preparación estéril',
-          'Detección de salud e inmunizaciones'
+          'Dispensación y verificación de medicamentos según protocolos españoles',
+          'Asesoramiento farmacéutico y seguimiento farmacoterapéutico',
+          'Detección de interacciones farmacológicas y farmacovigilancia',
+          'Procesamiento de recetas y facturación (sistema de receta electrónica español)',
+          'Gestión de inventario farmacéutico y trazabilidad',
+          'Preparación magistral y preparación estéril (buenas prácticas)',
+          'Título de Farmacia, colegiación y formación continuada'
         ],
         whyGood: [
-          'Estructura clara que destaca la experiencia farmacéutica',
-          'Enfatiza la atención al paciente y seguridad de medicamentos',
-          'Muestra conocimiento de regulaciones farmacéuticas',
-          'Demuestra compromiso con la excelencia en salud',
-          'Formato compatible con ATS con palabras clave farmacéuticas'
+          'Cumple con los estándares españoles con Título y colegiación',
+          'Destaca experiencia con sistemas farmacéuticos españoles',
+          'Muestra conocimiento de regulaciones farmacéuticas españolas',
+          'Demuestra cumplimiento con requisitos del Colegio Oficial de Farmacéuticos',
+          'Formato adecuado para farmacias y hospitales españoles'
         ]
       },
       de: {
         name: 'Apotheker',
         slug: 'apotheker',
-        description: 'Apotheker geben Medikamente ab, bieten pharmazeutische Betreuung und geben Gesundheitsberatung für Patienten. Sie gewährleisten sichere und wirksame Medikamentenanwendung und arbeiten in Apotheken, Krankenhäusern und Gesundheitseinrichtungen.',
+        description: 'Apotheker geben Medikamente ab, bieten pharmazeutische Betreuung und geben Gesundheitsberatung für Patienten. In Deutschland müssen Apotheker eine Approbation besitzen und sind bei der Apothekerkammer registriert. Sie gewährleisten sichere und wirksame Medikamentenanwendung und arbeiten in Apotheken, Krankenhäusern und Gesundheitseinrichtungen.',
         tips: [
-          'Heben Sie Ihre pharmazeutische Ausbildung und Lizenz hervor',
-          'Betonen Sie Erfahrung in Arzneimittelverwaltung und Patientenberatung',
-          'Zeigen Sie Kenntnisse über Arzneimittelwechselwirkungen und Sicherheitsprotokolle',
-          'Fügen Sie Erfahrung mit Versicherungen und Rezeptverarbeitung hinzu',
-          'Demonstrieren Sie Engagement für Patientengesundheit und Sicherheit'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihre Approbation und Apothekerkammer-Registrierung',
+          'Geburtsdatum, Nationalität und Familienstand sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie Fortbildung und Weiterbildung nach deutschen Standards',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Zeigen Sie Deutschkenntnisse auf C1-Niveau (für pharmazeutische Kommunikation)',
+          'Chronologisches Format ist bevorzugt (chronologischer Lebenslauf)'
         ],
         skills: [
-          'Arzneimittelabgabe und Verifizierung',
-          'Patientenberatung und Arzneimitteltherapiemanagement',
-          'Arzneimittelwechselwirkungs-Screening',
-          'Rezeptverarbeitung und Versicherungsabrechnung',
-          'Pharmazeutisches Bestandsmanagement',
-          'Zubereitung und sterile Herstellung',
-          'Gesundheitsscreening und Impfungen'
+          'Arzneimittelabgabe und Verifizierung nach deutschen Leitlinien',
+          'Pharmazeutische Beratung und Arzneimitteltherapiemanagement',
+          'Arzneimittelwechselwirkungs-Screening und Pharmakovigilanz',
+          'Rezeptverarbeitung und Abrechnung (deutsches Gesundheitssystem)',
+          'Pharmazeutisches Bestandsmanagement und Betäubungsmittelbuchführung',
+          'Rezeptur und sterile Herstellung (GMP-Richtlinien)',
+          'Approbation und Apothekerkammer-Registrierung'
         ],
         whyGood: [
-          'Klare Struktur, die pharmazeutische Expertise hervorhebt',
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
           'Betont Patientenversorgung und Arzneimittelsicherheit',
           'Zeigt Kenntnisse pharmazeutischer Vorschriften',
           'Demonstriert Engagement für Exzellenz im Gesundheitswesen',
@@ -5957,135 +6041,152 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'IT Support Specialist',
         slug: 'it-support',
-        description: 'IT Support Specialists provide technical assistance to users, troubleshoot hardware and software issues, and maintain computer systems and networks. They work in help desks, IT departments, and technology companies.',
+        description: 'IT Support Specialists provide technical assistance to users, troubleshoot hardware and software issues, and maintain computer systems and networks. In the UK, IT support often works with NHS systems and government IT, while US IT support focuses on enterprise solutions, cloud services, and help desk operations. They work in help desks, IT departments, and technology companies.',
         tips: [
-          'Highlight your technical troubleshooting skills',
-          'Emphasize experience with various operating systems and software',
-          'Showcase customer service and communication abilities',
-          'Include certifications like CompTIA A+ or ITIL',
-          'Demonstrate problem-solving and analytical skills'
+          'NO photo on CV/resume - focus on technical certifications and experience',
+          'Highlight ITIL Foundation certification (very common in UK)',
+          'Emphasize experience with enterprise ticketing systems (ServiceNow, Jira, Zendesk)',
+          'Showcase quantifiable metrics (ticket resolution times, customer satisfaction scores)',
+          'Include relevant certifications (CompTIA A+, Network+, Security+, Microsoft 365)',
+          'Demonstrate experience with cloud platforms (Office 365, Google Workspace)',
+          'Show knowledge of security best practices and compliance'
         ],
         skills: [
-          'Hardware and software troubleshooting',
-          'Network configuration and maintenance',
-          'Operating systems (Windows, macOS, Linux)',
-          'Help desk ticketing systems',
-          'Remote support tools',
-          'Customer service and communication',
-          'Documentation and knowledge base management'
+          'Hardware and software troubleshooting (Windows, macOS, Linux)',
+          'Network configuration and maintenance (TCP/IP, DNS, DHCP)',
+          'Enterprise ticketing systems (ServiceNow, Jira, Zendesk, Freshdesk)',
+          'Remote support tools (TeamViewer, Remote Desktop, VPN)',
+          'Cloud platforms (Microsoft 365, Google Workspace, Azure AD)',
+          'ITIL Foundation and service management best practices',
+          'CompTIA A+/Network+/Security+ or Microsoft certifications'
         ],
         whyGood: [
-          'Clear structure highlighting technical competencies',
-          'Emphasizes customer service and problem-solving',
-          'Shows progression of technical skills and certifications',
-          'Demonstrates ability to work under pressure',
-          'ATS-friendly format with IT keywords'
+          'ATS-optimized for IT support recruiters and help desk hiring',
+          'Highlights enterprise IT experience and certifications',
+          'Shows customer service excellence through metrics',
+          'Format compatible with UK/US IT recruitment systems',
+          'Demonstrates both technical depth and service orientation'
         ]
       },
       nl: {
         name: 'IT Support Specialist',
         slug: 'it-support',
-        description: 'IT Support Specialisten bieden technische ondersteuning aan gebruikers, lossen hardware- en softwareproblemen op en onderhouden computersystemen en netwerken. Ze werken in helpdesks, IT-afdelingen en technologiebedrijven.',
+        description: 'IT Support Specialisten bieden technische ondersteuning aan gebruikers, lossen hardware- en softwareproblemen op en onderhouden computersystemen en netwerken. In Nederland werken IT support specialisten vaak met Nederlandse bedrijven, zorgsystemen en enterprise IT-omgevingen. Ze werken in helpdesks, IT-afdelingen en technologiebedrijven.',
         tips: [
-          'Benadruk je technische probleemoplossende vaardigheden',
-          'Leg nadruk op ervaring met verschillende besturingssystemen en software',
-          'Toon klantenservice en communicatieve vaardigheden',
-          'Vermeld certificeringen zoals CompTIA A+ of ITIL',
-          'Demonstreer probleemoplossende en analytische vaardigheden'
+          'Foto is optioneel in Nederlandse IT sector - focus op certificeringen',
+          'Benadruk ITIL Foundation certificering (veel gevraagd in Nederland)',
+          'Toon ervaring met Nederlandse IT-infrastructuur en systemen',
+          'Vermeld certificeringen zoals CompTIA A+, Microsoft 365, Google Workspace',
+          'Ervaring met Nederlandse helpdesk systemen (TOPdesk, OTRS)',
+          'Nederlands en Engels vaak beide vereist - vermeld beide talen',
+          'Kennis van AVG/GDPR en Nederlandse privacywetgeving'
         ],
         skills: [
-          'Hardware- en softwareprobleemoplossing',
-          'Netwerkconfiguratie en onderhoud',
-          'Besturingssystemen (Windows, macOS, Linux)',
-          'Helpdesk ticketingsystemen',
-          'Remote support tools',
-          'Klantenservice en communicatie',
-          'Documentatie en knowledge base beheer'
+          'Hardware- en softwareprobleemoplossing (Windows, macOS, Linux)',
+          'Netwerkconfiguratie en onderhoud (TCP/IP, DNS, DHCP)',
+          'Enterprise ticketingsystemen (TOPdesk, OTRS, ServiceNow, Jira)',
+          'Remote support tools (TeamViewer, Remote Desktop, VPN)',
+          'Cloud platforms (Microsoft 365, Google Workspace, Azure AD)',
+          'ITIL Foundation en service management best practices',
+          'Nederlandse IT-certificeringen (ITIL, PRINCE2) en AVG-kennis'
         ],
         whyGood: [
-          'Duidelijke structuur die technische competenties benadrukt',
-          'Legt nadruk op klantenservice en probleemoplossing',
-          'Toont progressie van technische vaardigheden en certificeringen',
-          'Demonstreert vermogen om onder druk te werken',
-          'ATS-vriendelijk formaat met IT-trefwoorden'
+          'Voldoet aan Nederlandse IT CV-standaarden',
+          'Benadrukt ervaring met Nederlandse IT-ecosysteem',
+          'Toont kennis van Nederlandse privacy- en databeschermingswetgeving',
+          'Format geschikt voor Nederlandse IT-bedrijven en enterprise organisaties',
+          'Demonstreert zowel technische vaardigheden als service excellence'
         ]
       },
       fr: {
         name: 'Spécialiste Support IT',
         slug: 'specialiste-support-it',
-        description: 'Les spécialistes du support IT fournissent une assistance technique aux utilisateurs, résolvent les problèmes matériels et logiciels, et maintiennent les systèmes informatiques et réseaux. Ils travaillent dans les centres d\'aide, départements IT et entreprises technologiques.',
+        description: 'Les spécialistes du support IT fournissent une assistance technique aux utilisateurs, résolvent les problèmes matériels et logiciels, et maintiennent les systèmes informatiques et réseaux. En France, les spécialistes support IT travaillent souvent avec des entreprises françaises, systèmes gouvernementaux et environnements IT d\'entreprise. Ils travaillent dans les centres d\'aide, départements IT et entreprises technologiques.',
         tips: [
-          'Mettez en avant vos compétences de dépannage technique',
-          'Soulignez l\'expérience avec divers systèmes d\'exploitation et logiciels',
-          'Montrez les capacités de service client et communication',
-          'Incluez certifications comme CompTIA A+ ou ITIL',
-          'Démontrez les compétences de résolution de problèmes et analytiques'
+          'Photo sur le CV est optionnelle dans le secteur IT français',
+          'Mettez en avant votre diplôme (BTS, DUT, Licence Pro, Master)',
+          'ITIL Foundation certification très appréciée en France',
+          'Expérience avec les systèmes français et réglementation RGPD',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Certifications Microsoft 365, Google Workspace, CompTIA',
+          'Connaissance de la réglementation française (RGPD, CNIL)'
         ],
         skills: [
-          'Dépannage matériel et logiciel',
-          'Configuration et maintenance réseau',
-          'Systèmes d\'exploitation (Windows, macOS, Linux)',
-          'Systèmes de tickets help desk',
-          'Outils de support à distance',
-          'Service client et communication',
-          'Documentation et gestion de base de connaissances'
+          'Dépannage matériel et logiciel (Windows, macOS, Linux)',
+          'Configuration et maintenance réseau (TCP/IP, DNS, DHCP)',
+          'Systèmes de tickets help desk (GLPI, OTRS, ServiceNow, Jira)',
+          'Outils de support à distance (TeamViewer, Remote Desktop, VPN)',
+          'Cloud platforms (Microsoft 365, Google Workspace, Azure AD)',
+          'ITIL Foundation et bonnes pratiques de service management',
+          'Certifications IT françaises et connaissance RGPD'
         ],
         whyGood: [
-          'Structure claire mettant en évidence les compétences techniques',
-          'Met l\'accent sur le service client et la résolution de problèmes',
-          'Montre la progression des compétences techniques et certifications',
-          'Démontre la capacité à travailler sous pression',
-          'Format compatible ATS avec mots-clés IT'
+          'Respecte les standards français avec diplôme et certifications',
+          'Met en avant l\'expérience avec l\'écosystème IT français',
+          'Démontre la connaissance de la réglementation française (RGPD)',
+          'Format adapté aux entreprises IT françaises et organisations',
+          'Montre à la fois compétences techniques et service client'
         ]
       },
       es: {
         name: 'Especialista en Soporte IT',
         slug: 'especialista-soporte-it',
-        description: 'Los especialistas en soporte IT brindan asistencia técnica a usuarios, solucionan problemas de hardware y software, y mantienen sistemas informáticos y redes. Trabajan en mesas de ayuda, departamentos IT y empresas tecnológicas.',
+        description: 'Los especialistas en soporte IT brindan asistencia técnica a usuarios, solucionan problemas de hardware y software, y mantienen sistemas informáticos y redes. En España, los especialistas soporte IT trabajan a menudo con empresas españolas, sistemas gubernamentales y entornos IT empresariales. Trabajan en mesas de ayuda, departamentos IT y empresas tecnológicas.',
         tips: [
-          'Destaca tus habilidades de resolución de problemas técnicos',
-          'Enfatiza experiencia con varios sistemas operativos y software',
-          'Muestra habilidades de servicio al cliente y comunicación',
-          'Incluye certificaciones como CompTIA A+ o ITIL',
-          'Demuestra habilidades de resolución de problemas y analíticas'
+          'Foto en el CV es común en el sector IT español',
+          'Destaca tu título universitario (Grado/Máster, FP Superior)',
+          'Certificación ITIL Foundation muy valorada en España',
+          'Experiencia con sistemas españoles y regulación RGPD',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Certificaciones Microsoft 365, Google Workspace, CompTIA',
+          'Conocimiento de la regulación española (RGPD, LOPD)'
         ],
         skills: [
-          'Resolución de problemas de hardware y software',
-          'Configuración y mantenimiento de red',
-          'Sistemas operativos (Windows, macOS, Linux)',
-          'Sistemas de tickets de help desk',
-          'Herramientas de soporte remoto',
-          'Servicio al cliente y comunicación',
-          'Documentación y gestión de base de conocimientos'
+          'Resolución de problemas de hardware y software (Windows, macOS, Linux)',
+          'Configuración y mantenimiento de red (TCP/IP, DNS, DHCP)',
+          'Sistemas de tickets de help desk (GLPI, OTRS, ServiceNow, Jira)',
+          'Herramientas de soporte remoto (TeamViewer, Remote Desktop, VPN)',
+          'Cloud platforms (Microsoft 365, Google Workspace, Azure AD)',
+          'ITIL Foundation y mejores prácticas de service management',
+          'Certificaciones IT españolas y conocimiento RGPD'
         ],
         whyGood: [
-          'Estructura clara que destaca competencias técnicas',
-          'Enfatiza servicio al cliente y resolución de problemas',
-          'Muestra progresión de habilidades técnicas y certificaciones',
-          'Demuestra capacidad para trabajar bajo presión',
-          'Formato compatible con ATS con palabras clave IT'
+          'Cumple con los estándares españoles con título y certificaciones',
+          'Destaca experiencia con ecosistema IT español',
+          'Muestra conocimiento de regulación española (RGPD, LOPD)',
+          'Formato adecuado para empresas IT españolas y organizaciones',
+          'Demuestra tanto habilidades técnicas como servicio al cliente'
         ]
       },
       de: {
         name: 'IT-Support-Spezialist',
         slug: 'it-support-spezialist',
-        description: 'IT-Support-Spezialisten bieten technische Unterstützung für Benutzer, beheben Hardware- und Softwareprobleme und warten Computersysteme und Netzwerke. Sie arbeiten in Helpdesks, IT-Abteilungen und Technologieunternehmen.',
+        description: 'IT-Support-Spezialisten bieten technische Unterstützung für Benutzer, beheben Hardware- und Softwareprobleme und warten Computersysteme und Netzwerke. In Deutschland arbeiten IT-Support-Spezialisten oft mit deutschen Unternehmen, Automobilindustrie, enge Zusammenarbeit mit SAP-Systemen, und Industrie 4.0 IT-Umgebungen. Sie arbeiten in Helpdesks, IT-Abteilungen und Technologieunternehmen.',
         tips: [
-          'Heben Sie Ihre technischen Fehlerbehebungsfähigkeiten hervor',
-          'Betonen Sie Erfahrung mit verschiedenen Betriebssystemen und Software',
-          'Zeigen Sie Kundenservice- und Kommunikationsfähigkeiten',
-          'Fügen Sie Zertifizierungen wie CompTIA A+ oder ITIL hinzu',
-          'Demonstrieren Sie Problemlösungs- und analytische Fähigkeiten'
+          'Lebenslauf muss ein professionelles Foto enthalten (auch in IT-Sektor)',
+          'Vermelden Sie Ihre Ausbildung (Ausbildung, Hochschule, Universität)',
+          'Geburtsdatum, Nationalität sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie ITIL Foundation und deutsche IT-Standards',
+          'Zeigen Sie Deutschkenntnisse auf B2+ Niveau (für technische Kommunikation)',
+          'Blue Card visa requirements voor non-EU kandidaten',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Hardware- und Software-Fehlerbehebung',
-          'Netzwerkkonfiguration und -wartung',
-          'Betriebssysteme (Windows, macOS, Linux)',
-          'Helpdesk-Ticket-Systeme',
-          'Remote-Support-Tools',
-          'Kundenservice und Kommunikation',
-          'Dokumentation und Wissensdatenbankverwaltung'
+          'Hardware- und Software-Fehlerbehebung (Windows, macOS, Linux)',
+          'Netzwerkkonfiguration und -wartung (TCP/IP, DNS, DHCP)',
+          'Helpdesk-Ticket-Systeme (OTRS, ServiceNow, Jira, SAP Solution Manager)',
+          'Remote-Support-Tools (TeamViewer, Remote Desktop, VPN)',
+          'Cloud platforms (Microsoft 365, Google Workspace, Azure AD)',
+          'ITIL Foundation und Service-Management-Best-Practices',
+          'Deutsche IT-Zertifizierungen und DSGVO-Kenntnisse'
         ],
+        whyGood: [
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen IT-Systemen und SAP',
+          'Zeigt Kenntnisse deutscher IT-Standards und Datenschutz (DSGVO)',
+          'Format geeignet für deutsche IT-Unternehmen und Industrie',
+          'Demonstriert sowohl technische Fähigkeiten als auch Service-Orientierung'
+        ]
         whyGood: [
           'Klare Struktur, die technische Kompetenzen hervorhebt',
           'Betont Kundenservice und Problemlösung',
@@ -6524,138 +6625,152 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Professor',
         slug: 'professor',
-        description: 'Professors teach at universities and colleges, conduct research, publish academic work, and mentor students. They work in higher education institutions and contribute to academic knowledge in their field.',
+        description: 'Professors teach at universities and colleges, conduct research, publish academic work, and mentor students. In the UK, professors work within the REF (Research Excellence Framework) system and often hold HEA (Higher Education Academy) fellowship, while US professors work in tenure-track positions with emphasis on research, teaching, and service. They work in higher education institutions and contribute to academic knowledge in their field.',
         tips: [
-          'Highlight your academic qualifications and degrees',
-          'Emphasize research publications and academic achievements',
-          'Showcase teaching experience and student mentorship',
-          'Include conference presentations and academic service',
-          'Demonstrate expertise in your field of study'
+          'NO photo on CV/resume - focus on academic credentials and publications',
+          'Include PhD and postdoctoral experience prominently',
+          'Highlight REF impact (UK) or research metrics (US - h-index, citations)',
+          'Emphasize grant funding (UKRI, Wellcome Trust - UK) or (NSF, NIH - US)',
+          'Showcase HEA fellowship (UK) or teaching awards (US)',
+          'Include journal impact factors and publication venues',
+          'Demonstrate international collaboration and conference presentations'
         ],
         skills: [
-          'Academic research and publication',
-          'Curriculum development and course design',
-          'Student instruction and mentorship',
-          'Grant writing and research funding',
-          'Academic writing and peer review',
-          'Conference presentations and public speaking',
-          'Departmental service and committee work'
+          'Academic research and peer-reviewed publication (high-impact journals)',
+          'Grant writing and research funding (UKRI, NSF, NIH, ERC)',
+          'Curriculum development and innovative teaching methods',
+          'Student supervision (PhD, Master\'s, undergraduate)',
+          'Academic writing, peer review, and editorial work',
+          'HEA fellowship (UK) or Teaching excellence (US)',
+          'REF submission experience (UK) or Tenure portfolio (US)'
         ],
         whyGood: [
-          'Clear structure highlighting academic credentials',
-          'Emphasizes research contributions and publications',
-          'Shows progression of academic career',
-          'Demonstrates commitment to education and scholarship',
-          'ATS-friendly format with academic keywords'
+          'Meets UK/US academic CV standards with proper credentials',
+          'ATS-optimized for university recruiters and academic search committees',
+          'Highlights research excellence through metrics and impact',
+          'Shows progression through academic ranks and achievements',
+          'Format compatible with UK/US higher education recruitment'
         ]
       },
       nl: {
         name: 'Hoogleraar',
         slug: 'hoogleraar',
-        description: 'Hoogleraren geven les aan universiteiten en hogescholen, doen onderzoek, publiceren academisch werk en begeleiden studenten. Ze werken in instellingen voor hoger onderwijs en dragen bij aan academische kennis in hun vakgebied.',
+        description: 'Hoogleraren geven les aan universiteiten en hogescholen, doen onderzoek, publiceren academisch werk en begeleiden studenten. In Nederland werken hoogleraren binnen het Nederlandse onderzoekssysteem met NWO (Nederlandse Organisatie voor Wetenschappelijk Onderzoek) en ERC (European Research Council) subsidies. Ze werken in instellingen voor hoger onderwijs en dragen bij aan academische kennis in hun vakgebied.',
         tips: [
-          'Benadruk je academische kwalificaties en graden',
-          'Leg nadruk op onderzoekspublicaties en academische prestaties',
-          'Toon onderwijservaring en studentbegeleiding',
-          'Vermeld conferentiepresentaties en academische dienstverlening',
-          'Demonstreer expertise in je vakgebied'
+          'Foto is gebruikelijk op Nederlandse academische CV\'s',
+          'Vermeld je promotie (PhD) en postdoc ervaring prominent',
+          'Benadruk NWO, ERC of andere onderzoekssubsidies',
+          'Toon impact van onderzoek (citaties, h-index, impact factor)',
+          'Ervaring met Nederlandse universitaire systemen en procedures',
+          'Vermeld begeleiding van promovendi en masterstudenten',
+          'Nederlands en Engels vaak beide vereist - vermeld beide talen'
         ],
         skills: [
-          'Academisch onderzoek en publicatie',
-          'Curriculumontwikkeling en cursusontwerp',
-          'Studenteninstructie en begeleiding',
-          'Subsidieaanvragen en onderzoeksfinanciering',
-          'Academisch schrijven en peer review',
-          'Conferentiepresentaties en publiek spreken',
-          'Departementale dienstverlening en commissiewerk'
+          'Academisch onderzoek en peer-reviewed publicaties (high-impact journals)',
+          'Subsidieaanvragen en onderzoeksfinanciering (NWO, ERC, Horizon Europe)',
+          'Curriculumontwikkeling en innovatieve onderwijsmethoden',
+          'Studentenbegeleiding (PhD, Master, Bachelor)',
+          'Academisch schrijven, peer review en redactiewerk',
+          'Promotie (PhD) en universitair docent/hoogleraar positie',
+          'Kennis van Nederlandse onderzoeks- en onderwijssystemen'
         ],
         whyGood: [
-          'Duidelijke structuur die academische kwalificaties benadrukt',
-          'Legt nadruk op onderzoeksbijdragen en publicaties',
-          'Toont progressie van academische carrière',
-          'Demonstreert toewijding aan onderwijs en wetenschap',
-          'ATS-vriendelijk formaat met academische trefwoorden'
+          'Voldoet aan Nederlandse academische CV-standaarden',
+          'Benadrukt ervaring met Nederlandse onderzoeks-ecosysteem',
+          'Toont kennis van NWO en ERC subsidieprocedures',
+          'Format geschikt voor Nederlandse universiteiten en hogescholen',
+          'Demonstreert zowel onderzoeks- als onderwijsexcellentie'
         ]
       },
       fr: {
         name: 'Professeur',
         slug: 'professeur',
-        description: 'Les professeurs enseignent dans les universités et collèges, mènent des recherches, publient des travaux académiques et encadrent les étudiants. Ils travaillent dans des établissements d\'enseignement supérieur et contribuent aux connaissances académiques dans leur domaine.',
+        description: 'Les professeurs enseignent dans les universités et collèges, mènent des recherches, publient des travaux académiques et encadrent les étudiants. En France, les professeurs doivent avoir un Doctorat et souvent une HDR (Habilitation à Diriger des Recherches). Ils travaillent dans des établissements d\'enseignement supérieur et contribuent aux connaissances académiques dans leur domaine.',
         tips: [
-          'Mettez en avant vos qualifications académiques et diplômes',
-          'Soulignez les publications de recherche et réalisations académiques',
-          'Montrez l\'expérience d\'enseignement et mentorat étudiant',
-          'Incluez présentations de conférences et service académique',
-          'Démontrez l\'expertise dans votre domaine d\'étude'
+          'Mettez en avant votre Doctorat et HDR (Habilitation à Diriger des Recherches)',
+          'Photo sur le CV est courante pour les professeurs en France',
+          'Soulignez les subventions ANR (Agence Nationale de la Recherche) ou ERC',
+          'Expérience avec le système français (CNRS, universités françaises)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Publications dans revues à comité de lecture et impact factor',
+          'Encadrement de doctorants et participation à jurys de thèse'
         ],
         skills: [
-          'Recherche académique et publication',
+          'Recherche académique et publication (revues à comité de lecture)',
+          'Subventions de recherche (ANR, ERC, Horizon Europe)',
           'Développement de curriculum et conception de cours',
-          'Instruction et mentorat des étudiants',
-          'Rédaction de subventions et financement de recherche',
-          'Rédaction académique et évaluation par les pairs',
-          'Présentations de conférences et prise de parole en public',
-          'Service départemental et travail de comité'
+          'Encadrement de doctorants et étudiants (Master, Licence)',
+          'Rédaction académique, évaluation par les pairs et éditorial',
+          'Doctorat, HDR et position de professeur des universités',
+          'Connaissance du système académique français et évaluations HCERES'
         ],
         whyGood: [
-          'Structure claire mettant en évidence les qualifications académiques',
-          'Met l\'accent sur les contributions à la recherche et publications',
-          'Montre la progression de la carrière académique',
-          'Démontre l\'engagement envers l\'éducation et la recherche',
-          'Format compatible ATS avec mots-clés académiques'
+          'Respecte les standards français avec Doctorat et HDR',
+          'Met en avant l\'expérience avec le système académique français',
+          'Démontre la connaissance des procédures ANR et ERC',
+          'Montre la conformité avec les exigences du système universitaire français',
+          'Format adapté aux universités et établissements d\'enseignement supérieur français'
         ]
       },
       es: {
         name: 'Profesor',
         slug: 'profesor',
-        description: 'Los profesores enseñan en universidades y colegios, realizan investigaciones, publican trabajos académicos y orientan a estudiantes. Trabajan en instituciones de educación superior y contribuyen al conocimiento académico en su campo.',
+        description: 'Los profesores enseñan en universidades y colegios, realizan investigaciones, publican trabajos académicos y orientan a estudiantes. En España, los profesores deben tener un Doctorado y a menudo una Acreditación (ANECA) para acceder a plazas de profesor titular o catedrático. Trabajan en instituciones de educación superior y contribuyen al conocimiento académico en su campo.',
         tips: [
-          'Destaca tus calificaciones académicas y títulos',
-          'Enfatiza publicaciones de investigación y logros académicos',
-          'Muestra experiencia docente y mentoría estudiantil',
-          'Incluye presentaciones en conferencias y servicio académico',
-          'Demuestra experiencia en tu campo de estudio'
+          'Destaca tu Doctorado y Acreditación ANECA (si aplica)',
+          'Foto en el CV es común y recomendable en España',
+          'Enfatiza subvenciones de investigación (proyectos nacionales, ERC, Horizon Europe)',
+          'Experiencia con sistema universitario español y evaluaciones',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Publicaciones en revistas indexadas (JCR, Scopus) y factor de impacto',
+          'Dirección de tesis doctorales y participación en tribunales'
         ],
         skills: [
-          'Investigación académica y publicación',
+          'Investigación académica y publicación (revistas indexadas, JCR, Scopus)',
+          'Subvenciones de investigación (proyectos nacionales, ERC, Horizon Europe)',
           'Desarrollo de currículo y diseño de cursos',
-          'Instrucción y mentoría estudiantil',
-          'Redacción de subvenciones y financiamiento de investigación',
-          'Escritura académica y revisión por pares',
-          'Presentaciones en conferencias y oratoria',
-          'Servicio departamental y trabajo en comités'
+          'Dirección de doctorandos y estudiantes (Master, Grado)',
+          'Escritura académica, revisión por pares y trabajo editorial',
+          'Doctorado, Acreditación ANECA y posición de profesor',
+          'Conocimiento del sistema universitario español y evaluaciones'
         ],
         whyGood: [
-          'Estructura clara que destaca credenciales académicas',
-          'Enfatiza contribuciones de investigación y publicaciones',
-          'Muestra progresión de carrera académica',
-          'Demuestra compromiso con educación y erudición',
-          'Formato compatible con ATS con palabras clave académicas'
+          'Cumple con los estándares españoles con Doctorado y Acreditación',
+          'Destaca experiencia con sistema académico español',
+          'Muestra conocimiento de procedimientos de subvención españoles',
+          'Demuestra cumplimiento con requisitos del sistema universitario español',
+          'Formato adecuado para universidades españolas'
         ]
       },
       de: {
         name: 'Professor',
         slug: 'professor',
-        description: 'Professoren unterrichten an Universitäten und Hochschulen, führen Forschungen durch, veröffentlichen akademische Arbeiten und betreuen Studenten. Sie arbeiten in Hochschuleinrichtungen und tragen zum akademischen Wissen in ihrem Bereich bei.',
+        description: 'Professoren unterrichten an Universitäten und Hochschulen, führen Forschungen durch, veröffentlichen akademische Arbeiten und betreuen Studenten. In Deutschland müssen Professoren eine Habilitation absolvieren und werden oft verbeamtet. Sie arbeiten in Hochschuleinrichtungen und tragen zum akademischen Wissen in ihrem Bereich bei.',
         tips: [
-          'Heben Sie Ihre akademischen Qualifikationen und Abschlüsse hervor',
-          'Betonen Sie Forschungsveröffentlichungen und akademische Leistungen',
-          'Zeigen Sie Unterrichtserfahrung und Studentenbetreuung',
-          'Fügen Sie Konferenzpräsentationen und akademischen Service hinzu',
-          'Demonstrieren Sie Expertise in Ihrem Studienbereich'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihre Promotion (PhD) und Habilitation',
+          'Geburtsdatum, Nationalität sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie DFG (Deutsche Forschungsgemeinschaft) oder ERC Subventionen',
+          'Verbeamtung (Beamtenstatus) falls zutreffend',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Zeigen Sie Deutschkenntnisse auf C1-Niveau (für Unterricht)',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Akademische Forschung und Veröffentlichung',
-          'Lehrplanentwicklung und Kursgestaltung',
-          'Studentenunterricht und Betreuung',
-          'Antragstellung und Forschungsfinanzierung',
-          'Akademisches Schreiben und Peer-Review',
-          'Konferenzpräsentationen und öffentliches Sprechen',
-          'Abteilungsservice und Ausschussarbeit'
+          'Akademische Forschung und Veröffentlichung (peer-reviewed journals)',
+          'Antragstellung und Forschungsfinanzierung (DFG, ERC, Horizon Europe)',
+          'Lehrplanentwicklung und innovative Lehrmethoden',
+          'Betreuung von Doktoranden, Master- und Bachelorstudenten',
+          'Akademisches Schreiben, Peer-Review und Redaktionsarbeit',
+          'Promotion (PhD), Habilitation und Professur',
+          'Kenntnisse deutscher Hochschulsysteme und Evaluationsverfahren'
         ],
         whyGood: [
-          'Klare Struktur, die akademische Qualifikationen hervorhebt',
-          'Betont Forschungsbeiträge und Veröffentlichungen',
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Hochschulsystemen',
+          'Zeigt Kenntnisse deutscher Forschungsförderung (DFG, ERC)',
+          'Demonstriert Compliance mit deutschen Habilitationsanforderungen',
+          'Format geeignet für deutsche Universitäten und Hochschulen'
           'Zeigt Fortschritt der akademischen Karriere',
           'Demonstriert Engagement für Bildung und Wissenschaft',
           'ATS-freundliches Format mit akademischen Schlüsselwörtern'
@@ -7091,141 +7206,151 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'School Counselor',
         slug: 'school-counselor',
-        description: 'School counselors provide academic, career, and personal guidance to students. They help students navigate challenges, develop social skills, and plan for their future education and career paths.',
+        description: 'School counselors provide academic, career, and personal guidance to students. In the UK, school counselors must have appropriate qualifications and DBS check, while US school counselors require state licensure (LPC, LCSW) and often a Master\'s in School Counseling. They help students navigate challenges, develop social skills, and plan for their future education and career paths.',
         tips: [
-          'Highlight your counseling degree and certifications',
-          'Emphasize experience with student support and crisis intervention',
-          'Showcase knowledge of career planning and academic guidance',
-          'Include experience with diverse student populations',
-          'Demonstrate strong communication and empathy skills'
+          'Include counseling license number (US) or professional registration (UK)',
+          'NO photo on CV/resume - focus on qualifications and experience',
+          'Highlight DBS check (UK) or background check clearance (US)',
+          'Emphasize safeguarding training (UK) or mandated reporter training (US)',
+          'Showcase experience with national curriculum guidance (UK) or college counseling (US)',
+          'Include experience with student information systems (SIMS, PowerSchool)',
+          'Demonstrate knowledge of mental health support and referral pathways'
         ],
         skills: [
-          'Individual and group counseling',
-          'Academic and career planning',
-          'Crisis intervention and prevention',
-          'Student assessment and evaluation',
-          'Parent and teacher consultation',
-          'Program development and implementation',
-          'Mental health support and referrals'
+          'Individual and group counseling (evidence-based approaches)',
+          'Academic and career planning (UCAS guidance - UK, College counseling - US)',
+          'Crisis intervention and safeguarding protocols',
+          'Student assessment and mental health screening',
+          'Parent and teacher consultation and collaboration',
+          'Program development (PSHE - UK, SEL programs - US)',
+          'State counseling license (US) or Professional registration (UK)'
         ],
         whyGood: [
-          'Clear structure highlighting counseling qualifications',
-          'Emphasizes student support and positive outcomes',
-          'Shows progression of counseling experience',
-          'Demonstrates commitment to student wellbeing',
-          'ATS-friendly format with counseling keywords'
+          'Meets UK/US school counseling CV standards with proper credentials',
+          'ATS-optimized for school recruiters and education authorities',
+          'Highlights compliance with safeguarding and child protection requirements',
+          'Shows knowledge of national/state guidance systems',
+          'Format compatible with UK/US education recruitment systems'
         ]
       },
       nl: {
         name: 'Schoolcounselor',
         slug: 'schoolcounselor',
-        description: 'Schoolcounselors bieden academische, carrière- en persoonlijke begeleiding aan studenten. Ze helpen studenten bij het navigeren door uitdagingen, ontwikkelen van sociale vaardigheden en plannen voor hun toekomstige opleiding en carrièrepaden.',
+        description: 'Schoolcounselors bieden academische, carrière- en persoonlijke begeleiding aan studenten. In Nederland moeten schoolcounselors een relevante masteropleiding hebben (bijv. Onderwijskunde, Psychologie) en VOG (Verklaring Omtrent Gedrag) bezitten. Ze helpen studenten bij het navigeren door uitdagingen, ontwikkelen van sociale vaardigheden en plannen voor hun toekomstige opleiding en carrièrepaden.',
         tips: [
-          'Benadruk je counseling diploma en certificeringen',
-          'Leg nadruk op ervaring met studentenondersteuning en crisisinterventie',
-          'Toon kennis van loopbaanplanning en academische begeleiding',
-          'Vermeld ervaring met diverse studentenpopulaties',
-          'Demonstreer sterke communicatie- en empathievaardigheden'
+          'Vermeld je masteropleiding en relevante certificeringen prominent',
+          'VOG (Verklaring Omtrent Gedrag) is verplicht - vermeld deze',
+          'Foto is gebruikelijk op Nederlandse onderwijs CV\'s',
+          'Toon kennis van passend onderwijs en inclusieve begeleiding',
+          'Ervaring met Nederlandse schoolsystemen (ParnasSys, Magister)',
+          'Kennis van Nederlandse studiekeuze- en loopbaanbegeleidingssystemen',
+          'Vermeld bijscholing in counseling en mentale gezondheid'
         ],
         skills: [
-          'Individuele en groepsbegeleiding',
-          'Academische en loopbaanplanning',
+          'Individuele en groepsbegeleiding (evidence-based methoden)',
+          'Academische en loopbaanplanning (studiekeuze, profielkeuze)',
           'Crisisinterventie en preventie',
-          'Studentbeoordeling en evaluatie',
-          'Ouder- en leraarsconsultatie',
-          'Programmaontwikkeling en implementatie',
-          'Geestelijke gezondheidsondersteuning en doorverwijzingen'
+          'Studentbeoordeling en mentale gezondheidsscreening',
+          'Ouder- en leraarsconsultatie en samenwerking',
+          'Programmaontwikkeling (mentorlessen, LOB-programma\'s)',
+          'Masteropleiding, VOG en kennis van Nederlandse onderwijswetgeving'
         ],
         whyGood: [
-          'Duidelijke structuur die counseling kwalificaties benadrukt',
-          'Legt nadruk op studentenondersteuning en positieve resultaten',
-          'Toont progressie van counseling ervaring',
-          'Demonstreert toewijding aan studentenwelzijn',
-          'ATS-vriendelijk formaat met counseling trefwoorden'
+          'Voldoet aan Nederlandse onderwijs CV-standaarden met bevoegdheid en VOG',
+          'Benadrukt ervaring met Nederlandse onderwijssystemen en -methoden',
+          'Toont kennis van passend onderwijs en inclusieve begeleiding',
+          'Demonstreert compliance met VOG-vereisten en beroepscode',
+          'Format geschikt voor Nederlandse scholen en onderwijsorganisaties'
         ]
       },
       fr: {
         name: 'Conseiller d\'orientation',
         slug: 'conseiller-orientation',
-        description: 'Les conseillers d\'orientation fournissent des conseils académiques, professionnels et personnels aux étudiants. Ils aident les étudiants à naviguer dans les défis, à développer des compétences sociales et à planifier leur future éducation et leurs parcours professionnels.',
+        description: 'Les conseillers d\'orientation fournissent des conseils académiques, professionnels et personnels aux étudiants. En France, les conseillers d\'orientation doivent avoir un Master en psychologie, sciences de l\'éducation ou orientation, et souvent un concours (conseiller d\'orientation-psychologue). Ils aident les étudiants à naviguer dans les défis, à développer des compétences sociales et à planifier leur future éducation et leurs parcours professionnels.',
         tips: [
-          'Mettez en avant votre diplôme en conseil et certifications',
-          'Soulignez l\'expérience avec le soutien aux étudiants et l\'intervention en cas de crise',
-          'Présentez la connaissance de la planification de carrière et de l\'orientation académique',
-          'Incluez l\'expérience avec des populations étudiantes diverses',
-          'Démontrez de solides compétences en communication et empathie'
+          'Mettez en avant votre Master et concours de conseiller d\'orientation-psychologue',
+          'Photo sur le CV est courante pour les conseillers en France',
+          'Expérience avec le système éducatif français et Parcoursup',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Connaissance de la réglementation française sur l\'orientation',
+          'Formation continue et développement professionnel',
+          'Expérience avec systèmes français (ENT, logiciels d\'orientation)'
         ],
         skills: [
-          'Conseil individuel et de groupe',
-          'Planification académique et de carrière',
+          'Conseil individuel et de groupe (approches evidence-based)',
+          'Planification académique et orientation (Parcoursup, choix d\'études)',
           'Intervention et prévention de crise',
-          'Évaluation et notation des étudiants',
+          'Évaluation psychologique et orientation professionnelle',
           'Consultation avec les parents et les enseignants',
-          'Développement et mise en œuvre de programmes',
-          'Soutien en santé mentale et références'
+          'Développement et mise en œuvre de programmes d\'orientation',
+          'Master en psychologie/éducation, concours et connaissance du système français'
         ],
         whyGood: [
-          'Structure claire mettant en évidence les qualifications en conseil',
-          'Met l\'accent sur le soutien aux étudiants et les résultats positifs',
-          'Montre la progression de l\'expérience en conseil',
-          'Démontre l\'engagement envers le bien-être des étudiants',
-          'Format compatible ATS avec mots-clés de conseil'
+          'Respecte les standards français avec Master et concours',
+          'Met en avant l\'expérience avec le système éducatif français',
+          'Démontre la connaissance de Parcoursup et procédures d\'orientation',
+          'Montre la conformité avec les exigences du système français',
+          'Format adapté aux établissements scolaires français'
         ]
       },
       es: {
         name: 'Consejero Escolar',
         slug: 'consejero-escolar',
-        description: 'Los consejeros escolares brindan orientación académica, profesional y personal a los estudiantes. Ayudan a los estudiantes a navegar desafíos, desarrollar habilidades sociales y planificar su futura educación y trayectorias profesionales.',
+        description: 'Los consejeros escolares brindan orientación académica, profesional y personal a los estudiantes. En España, los consejeros escolares deben tener un Máster en Orientación Educativa o Psicología Educativa, y a menudo están colegiados. Ayudan a los estudiantes a navegar desafíos, desarrollar habilidades sociales y planificar su futura educación y trayectorias profesionales.',
         tips: [
-          'Destaca tu título en consejería y certificaciones',
-          'Enfatiza experiencia con apoyo estudiantil e intervención en crisis',
-          'Muestra conocimiento de planificación de carrera y orientación académica',
-          'Incluye experiencia con poblaciones estudiantiles diversas',
-          'Demuestra fuertes habilidades de comunicación y empatía'
+          'Destaca tu Máster en Orientación Educativa o Psicología Educativa',
+          'Menciona tu colegiación si aplica',
+          'Foto en el CV es común y recomendable en España',
+          'Experiencia con sistema educativo español (LOMLOE)',
+          'Formación continuada según normativa española',
+          'Experiencia con sistemas españoles (Agora, ClickEdu)',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo'
         ],
         skills: [
-          'Consejería individual y grupal',
-          'Planificación académica y de carrera',
+          'Consejería individual y grupal (métodos evidence-based)',
+          'Planificación académica y orientación (elección de estudios, PAU)',
           'Intervención y prevención de crisis',
-          'Evaluación y calificación de estudiantes',
+          'Evaluación psicológica y orientación profesional',
           'Consultoría con padres y maestros',
-          'Desarrollo e implementación de programas',
-          'Apoyo en salud mental y referencias'
+          'Desarrollo e implementación de programas de orientación',
+          'Máster en Orientación Educativa, colegiación y conocimiento del sistema español'
         ],
         whyGood: [
-          'Estructura clara que destaca calificaciones en consejería',
-          'Enfatiza apoyo estudiantil y resultados positivos',
-          'Muestra progresión de experiencia en consejería',
-          'Demuestra compromiso con el bienestar estudiantil',
-          'Formato compatible con ATS con palabras clave de consejería'
+          'Cumple con los estándares españoles con Máster y colegiación',
+          'Destaca experiencia con sistema educativo español',
+          'Muestra conocimiento de LOMLOE y procedimientos de orientación',
+          'Demuestra cumplimiento con requisitos del sistema español',
+          'Formato adecuado para colegios e institutos españoles'
         ]
       },
       de: {
         name: 'Schulberater',
         slug: 'schulberater',
-        description: 'Schulberater bieten akademische, berufliche und persönliche Beratung für Schüler. Sie helfen Schülern, Herausforderungen zu bewältigen, soziale Fähigkeiten zu entwickeln und ihre zukünftige Ausbildung und Karrierewege zu planen.',
+        description: 'Schulberater bieten akademische, berufliche und persönliche Beratung für Schüler. In Deutschland müssen Schulberater oft eine Ausbildung oder Master in Psychologie, Pädagogik oder Beratung haben, und arbeiten innerhalb des deutschen Schulsystems. Sie helfen Schülern, Herausforderungen zu bewältigen, soziale Fähigkeiten zu entwickeln und ihre zukünftige Ausbildung und Karrierewege zu planen.',
         tips: [
-          'Heben Sie Ihren Beratungsabschluss und Zertifizierungen hervor',
-          'Betonen Sie Erfahrung mit Schülerunterstützung und Krisenintervention',
-          'Zeigen Sie Kenntnisse in Karriereplanung und akademischer Beratung',
-          'Fügen Sie Erfahrung mit vielfältigen Schülerpopulationen hinzu',
-          'Demonstrieren Sie starke Kommunikations- und Empathiefähigkeiten'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihre Ausbildung oder Master (Psychologie, Pädagogik, Beratung)',
+          'Geburtsdatum, Nationalität sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie Erfahrung mit deutschen Schulsystemen und Beratungsmethoden',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Zeigen Sie Deutschkenntnisse auf C1-Niveau (für Beratung)',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Einzel- und Gruppenberatung',
-          'Akademische und Karriereplanung',
+          'Einzel- und Gruppenberatung (evidence-based Methoden)',
+          'Akademische und Karriereplanung (Studienwahl, Berufsorientierung)',
           'Krisenintervention und Prävention',
-          'Schülerbewertung und -evaluierung',
-          'Beratung mit Eltern und Lehrern',
-          'Programmentwicklung und -umsetzung',
-          'Unterstützung der psychischen Gesundheit und Überweisungen'
+          'Schülerbewertung und psychologische Diagnostik',
+          'Beratung mit Eltern und Lehrern und Zusammenarbeit',
+          'Programmentwicklung und -umsetzung (Berufsorientierung)',
+          'Ausbildung/Master in Psychologie/Pädagogik/Beratung und Kenntnisse deutscher Schulsysteme'
         ],
         whyGood: [
-          'Klare Struktur, die Beratungsqualifikationen hervorhebt',
-          'Betont Schülerunterstützung und positive Ergebnisse',
-          'Zeigt Fortschritt der Beratungserfahrung',
-          'Demonstriert Engagement für das Wohlbefinden der Schüler',
-          'ATS-freundliches Format mit Beratungsschlüsselwörtern'
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Schulsystemen und Beratungsmethoden',
+          'Zeigt Kenntnisse deutscher Bildungsstandards und Beratungsverfahren',
+          'Demonstriert Compliance mit deutschen Ausbildungsanforderungen',
+          'Format geeignet für deutsche Schulen und Bildungsbehörden'
         ]
       },
       it: {
@@ -7658,135 +7783,152 @@ export const PROFESSIONS: Profession[] = [
       en: {
         name: 'Financial Analyst',
         slug: 'financial-analyst',
-        description: 'Financial analysts evaluate investment opportunities, analyze financial data, and provide recommendations to help businesses and individuals make informed financial decisions.',
+        description: 'Financial analysts evaluate investment opportunities, analyze financial data, and provide recommendations to help businesses and individuals make informed financial decisions. In the UK, financial analysts work with FCA-regulated markets and often hold CFA or similar qualifications, while US analysts require Series 7/63 licenses for securities work and knowledge of SEC regulations.',
         tips: [
-          'Highlight your finance or accounting degree',
-          'Emphasize analytical skills and financial modeling experience',
-          'Showcase proficiency with financial software and tools',
-          'Include certifications like CFA or CPA',
-          'Demonstrate quantitative analysis capabilities'
+          'Include CFA charter (if applicable) or Series 7/63 license numbers (US)',
+          'NO photo on CV/resume - focus on credentials and achievements',
+          'Highlight experience with UK financial markets (UK) or US markets (US)',
+          'Emphasize knowledge of FCA regulations (UK) or SEC/CFTC regulations (US)',
+          'Showcase proficiency with Bloomberg, Reuters, or financial data platforms',
+          'Include quantifiable investment performance or analysis impact',
+          'Demonstrate continuing education and professional development'
         ],
         skills: [
-          'Financial modeling and analysis',
-          'Investment research and evaluation',
-          'Risk assessment and management',
-          'Excel and financial software proficiency',
-          'Financial reporting and forecasting',
-          'Market research and trend analysis',
-          'Presentation and communication skills'
+          'Financial modeling and valuation (DCF, LBO, M&A models)',
+          'Investment research and equity/fixed income analysis',
+          'Risk assessment and portfolio management',
+          'Excel, Bloomberg, Reuters, and financial software proficiency',
+          'Financial reporting and forecasting (UK GAAP/US GAAP)',
+          'Market research and macroeconomic analysis',
+          'CFA charter (UK/US) or Series 7/63 licenses (US)'
         ],
         whyGood: [
-          'Clear structure highlighting analytical expertise',
-          'Emphasizes quantitative skills and achievements',
-          'Shows progression of financial analysis experience',
-          'Demonstrates commitment to professional development',
-          'ATS-friendly format with finance keywords'
+          'Meets UK/US financial analyst CV standards with proper credentials',
+          'ATS-optimized for investment banks and finance recruiters',
+          'Highlights compliance with FCA (UK) or SEC (US) regulations',
+          'Shows knowledge of UK/US financial markets and instruments',
+          'Format compatible with UK/US finance recruitment systems'
         ]
       },
       nl: {
         name: 'Financieel Analist',
         slug: 'financieel-analist',
-        description: 'Financieel analisten evalueren investeringsmogelijkheden, analyseren financiële gegevens en geven aanbevelingen om bedrijven en individuen te helpen weloverwogen financiële beslissingen te nemen.',
+        description: 'Financieel analisten evalueren investeringsmogelijkheden, analyseren financiële gegevens en geven aanbevelingen om bedrijven en individuen te helpen weloverwogen financiële beslissingen te nemen. In Nederland moeten financieel analisten vaak WFT (Wet Financiële Toezicht) diploma\'s hebben en kennis van AFM (Autoriteit Financiële Markten) regelgeving. Ze werken met Nederlandse en internationale financiële markten.',
         tips: [
-          'Benadruk je financiële of accountancy diploma',
-          'Leg nadruk op analytische vaardigheden en financiële modelleringservaring',
-          'Toon vaardigheid met financiële software en tools',
-          'Vermeld certificeringen zoals CFA of CPA',
-          'Demonstreer kwantitatieve analysevaardigheden'
+          'Vermeld je WFT-diploma\'s prominent (Wft Basis, Wft Vermogen)',
+          'Foto is gebruikelijk op Nederlandse financiële CV\'s',
+          'Toon kennis van AFM-regelgeving en Nederlandse financiële markten',
+          'Ervaring met Nederlandse beurs (Euronext Amsterdam) en financiële instrumenten',
+          'Vermeld certificeringen zoals CFA, FRM indien van toepassing',
+          'Kennis van Nederlandse belastingwetgeving voor investeringen',
+          'Nederlands en Engels vaak beide vereist - vermeld beide talen'
         ],
         skills: [
-          'Financiële modellering en analyse',
-          'Investeringsonderzoek en evaluatie',
-          'Risicobeoordeling en -beheer',
-          'Excel en financiële softwarevaardigheid',
-          'Financiële rapportage en prognoses',
-          'Marktonderzoek en trendanalyse',
-          'Presentatie- en communicatievaardigheden'
+          'Financiële modellering en waardering (DCF, LBO, M&A modellen)',
+          'Investeringsonderzoek en equity/fixed income analyse',
+          'Risicobeoordeling en portefeuillebeheer',
+          'Excel, Bloomberg, Reuters en financiële software',
+          'Financiële rapportage en prognoses (Nederlandse richtlijnen)',
+          'Marktonderzoek en macro-economische analyse',
+          'WFT-diploma\'s, CFA (indien van toepassing) en kennis van AFM-regelgeving'
         ],
         whyGood: [
-          'Duidelijke structuur die analytische expertise benadrukt',
-          'Legt nadruk op kwantitatieve vaardigheden en prestaties',
-          'Toont progressie van financiële analyse-ervaring',
-          'Demonstreert toewijding aan professionele ontwikkeling',
-          'ATS-vriendelijk formaat met financiële trefwoorden'
+          'Voldoet aan Nederlandse financiële CV-standaarden met WFT en certificeringen',
+          'Benadrukt ervaring met Nederlandse financiële markten en -systemen',
+          'Toont kennis van AFM-regelgeving en Nederlandse financiële wetgeving',
+          'Demonstreert compliance met WFT-vereisten',
+          'Format geschikt voor Nederlandse banken, vermogensbeheerders en financiële instellingen'
         ]
       },
       fr: {
         name: 'Analyste Financier',
         slug: 'analyste-financier',
-        description: 'Les analystes financiers évaluent les opportunités d\'investissement, analysent les données financières et fournissent des recommandations pour aider les entreprises et les particuliers à prendre des décisions financières éclairées.',
+        description: 'Les analystes financiers évaluent les opportunités d\'investissement, analysent les données financières et fournissent des recommandations pour aider les entreprises et les particuliers à prendre des décisions financières éclairées. En France, les analystes financiers travaillent avec les marchés régulés par l\'AMF (Autorité des Marchés Financiers) et doivent souvent avoir des certifications spécifiques.',
         tips: [
-          'Mettez en avant votre diplôme en finance ou comptabilité',
-          'Soulignez les compétences analytiques et l\'expérience en modélisation financière',
-          'Présentez la maîtrise des logiciels et outils financiers',
-          'Incluez des certifications comme CFA ou CPA',
-          'Démontrez les capacités d\'analyse quantitative'
+          'Mettez en avant votre diplôme (Master en Finance, Grande École)',
+          'Photo sur le CV est courante pour les analystes financiers en France',
+          'Expérience avec les marchés financiers français (Euronext Paris)',
+          'Maîtrise du français essentielle - mentionnez votre niveau si non-natif',
+          'Connaissance de la réglementation AMF et des marchés français',
+          'Certifications CFA, FRM indiquées',
+          'Expérience avec Bloomberg, Reuters, of financiële data platforms'
         ],
         skills: [
-          'Modélisation et analyse financière',
-          'Recherche et évaluation d\'investissements',
+          'Modélisation et analyse financière (DCF, LBO, M&A modèles)',
+          'Recherche et évaluation d\'investissements (actions, obligations)',
           'Évaluation et gestion des risques',
-          'Maîtrise d\'Excel et des logiciels financiers',
-          'Rapports financiers et prévisions',
-          'Recherche de marché et analyse de tendances',
-          'Compétences en présentation et communication'
+          'Maîtrise d\'Excel, Bloomberg, Reuters et logiciels financiers',
+          'Rapports financiers et prévisions (normes françaises)',
+          'Recherche de marché et analyse macroéconomique',
+          'Diplôme en Finance, certifications CFA/FRM et connaissance de l\'AMF'
         ],
         whyGood: [
-          'Structure claire mettant en évidence l\'expertise analytique',
-          'Met l\'accent sur les compétences quantitatives et les réalisations',
-          'Montre la progression de l\'expérience en analyse financière',
-          'Démontre l\'engagement envers le développement professionnel',
-          'Format compatible ATS avec mots-clés financiers'
+          'Respecte les standards français avec diplôme en Finance',
+          'Met en avant l\'expérience avec les marchés financiers français',
+          'Démontre la connaissance de la réglementation AMF',
+          'Montre la conformité avec les exigences du secteur financier français',
+          'Format adapté aux banques, sociétés de gestion et institutions financières françaises'
         ]
       },
       es: {
         name: 'Analista Financiero',
         slug: 'analista-financiero',
-        description: 'Los analistas financieros evalúan oportunidades de inversión, analizan datos financieros y brindan recomendaciones para ayudar a empresas e individuos a tomar decisiones financieras informadas.',
+        description: 'Los analistas financieros evalúan oportunidades de inversión, analizan datos financieros y brindan recomendaciones para ayudar a empresas e individuos a tomar decisiones financieras informadas. En España, los analistas financieros trabajan con mercados regulados por la CNMV (Comisión Nacional del Mercado de Valores) y deben tener conocimientos específicos de la regulación española.',
         tips: [
-          'Destaca tu título en finanzas o contabilidad',
-          'Enfatiza habilidades analíticas y experiencia en modelado financiero',
-          'Muestra competencia con software y herramientas financieras',
-          'Incluye certificaciones como CFA o CPA',
-          'Demuestra capacidades de análisis cuantitativo'
+          'Destaca tu título universitario (Grado/Máster en Finanzas, Economía)',
+          'Foto en el CV es común y recomendable en España',
+          'Experiencia con mercados financieros españoles (BME, Bolsa de Madrid)',
+          'Dominio del español esencial - menciona tu nivel si no eres nativo',
+          'Conocimiento de la regulación CNMV y mercados españoles',
+          'Certificaciones CFA, FRM indicadas',
+          'Experiencia con Bloomberg, Reuters o plataformas de datos financieros'
         ],
         skills: [
-          'Modelado y análisis financiero',
-          'Investigación y evaluación de inversiones',
+          'Modelado y análisis financiero (DCF, LBO, M&A modelos)',
+          'Investigación y evaluación de inversiones (acciones, bonos)',
           'Evaluación y gestión de riesgos',
-          'Competencia en Excel y software financiero',
-          'Informes financieros y pronósticos',
-          'Investigación de mercado y análisis de tendencias',
-          'Habilidades de presentación y comunicación'
+          'Competencia en Excel, Bloomberg, Reuters y software financiero',
+          'Informes financieros y pronósticos (normas españolas)',
+          'Investigación de mercado y análisis macroeconómico',
+          'Título en Finanzas, certificaciones CFA/FRM y conocimiento de CNMV'
         ],
         whyGood: [
-          'Estructura clara que destaca experiencia analítica',
-          'Enfatiza habilidades cuantitativas y logros',
-          'Muestra progresión de experiencia en análisis financiero',
-          'Demuestra compromiso con el desarrollo profesional',
-          'Formato compatible con ATS con palabras clave financieras'
+          'Cumple con los estándares españoles con título en Finanzas',
+          'Destaca experiencia con mercados financieros españoles',
+          'Muestra conocimiento de regulación CNMV',
+          'Demuestra cumplimiento con requisitos del sector financiero español',
+          'Formato adecuado para bancos, gestoras y instituciones financieras españolas'
         ]
       },
       de: {
         name: 'Finanzanalyst',
         slug: 'finanzanalyst',
-        description: 'Finanzanalysten bewerten Anlagemöglichkeiten, analysieren Finanzdaten und geben Empfehlungen, um Unternehmen und Privatpersonen bei fundierten Finanzentscheidungen zu helfen.',
+        description: 'Finanzanalysten bewerten Anlagemöglichkeiten, analysieren Finanzdaten und geben Empfehlungen, um Unternehmen und Privatpersonen bei fundierten Finanzentscheidungen zu helfen. In Deutschland arbeiten Finanzanalysten mit BaFin (Bundesanstalt für Finanzdienstleistungsaufsicht) regulierten Märkten und müssen oft spezifische Qualifikationen haben.',
         tips: [
-          'Heben Sie Ihren Abschluss in Finanzen oder Rechnungswesen hervor',
-          'Betonen Sie analytische Fähigkeiten und Erfahrung in der Finanzmodellierung',
-          'Zeigen Sie Kompetenz mit Finanzsoftware und -tools',
-          'Fügen Sie Zertifizierungen wie CFA oder CPA hinzu',
-          'Demonstrieren Sie quantitative Analysefähigkeiten'
+          'Lebenslauf muss ein professionelles Foto enthalten (Standard in Deutschland)',
+          'Vermelden Sie Ihre Ausbildung (Hochschule, Universität, Master in Finance)',
+          'Geburtsdatum, Nationalität sind üblich auf deutschen Lebensläufen',
+          'Betonen Sie Erfahrung mit deutschen Finanzmärkten (XETRA, Frankfurt)',
+          'Zeigen Sie Deutschkenntnisse auf B2+ Niveau (für Finanzkommunikation)',
+          'Referenzen (Referenzen) sollten am Ende des Lebenslaufs aufgeführt werden',
+          'Chronologisches Format ist bevorzugt'
         ],
         skills: [
-          'Finanzmodellierung und -analyse',
-          'Anlageforschung und -bewertung',
-          'Risikobewertung und -management',
-          'Excel- und Finanzsoftwarekompetenz',
-          'Finanzberichterstattung und Prognosen',
-          'Marktforschung und Trendanalyse',
-          'Präsentations- und Kommunikationsfähigkeiten'
+          'Finanzmodellierung und -analyse (DCF, LBO, M&A Modelle)',
+          'Anlageforschung und -bewertung (Aktien, Anleihen)',
+          'Risikobewertung und Portfoliomanagement',
+          'Excel, Bloomberg, Reuters und Finanzsoftwarekompetenz',
+          'Finanzberichterstattung und Prognosen (HGB, IFRS)',
+          'Marktforschung und makroökonomische Analyse',
+          'Abschluss in Finance, CFA/FRM Zertifizierungen und BaFin-Kenntnisse'
         ],
+        whyGood: [
+          'Erfüllt deutsche Lebenslauf-Standards mit Foto und vollständigen Angaben',
+          'Betont Erfahrung mit deutschen Finanzmärkten und -systemen',
+          'Zeigt Kenntnisse deutscher Finanzvorschriften und BaFin',
+          'Demonstriert Compliance mit deutschen Qualifikationsanforderungen',
+          'Format geeignet für deutsche Banken, Vermögensverwalter und Finanzinstitute'
+        ]
         whyGood: [
           'Klare Struktur, die analytische Expertise hervorhebt',
           'Betont quantitative Fähigkeiten und Leistungen',

@@ -82,8 +82,11 @@ export function generateExamplePaths(): Array<{
     type: 'cv' | 'letter'
   }> = []
   
+  // Only generate paths for main languages
+  const mainLanguages: Language[] = ['en', 'nl', 'fr', 'es', 'de']
+  
   for (const profession of PROFESSIONS) {
-    for (const language of Object.keys(URL_SEGMENTS) as Language[]) {
+    for (const language of mainLanguages) {
       const translation = profession.translations[language] || profession.translations.en
       paths.push(
         {
