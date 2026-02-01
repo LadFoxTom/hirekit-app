@@ -3,9 +3,10 @@
 
 /* Custom Quill styles */
 .quill {
-  background-color: white;
+  background-color: var(--editor-bg);
   border-radius: 0.375rem;
   margin-bottom: 1rem;
+  border: 1px solid var(--editor-toolbar-border);
 }
 
 .ql-container {
@@ -14,13 +15,16 @@
   min-height: 150px;
   max-height: 400px;
   overflow-y: auto;
+  background-color: var(--editor-bg);
+  color: var(--editor-text);
+  border-color: var(--editor-toolbar-border);
 }
 
 .ql-toolbar {
   border-top-left-radius: 0.375rem;
   border-top-right-radius: 0.375rem;
-  background-color: #f8fafc;
-  border-color: #e2e8f0;
+  background-color: var(--editor-toolbar-bg);
+  border-color: var(--editor-toolbar-border);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -32,10 +36,12 @@
   font-size: 1rem;
   line-height: 1.5;
   padding: 1rem;
+  color: var(--editor-text);
 }
 
 .ql-editor p {
   margin-bottom: 0.5rem;
+  color: var(--editor-text);
 }
 
 .ql-editor ul,
@@ -46,20 +52,39 @@
 
 .ql-editor li {
   margin-bottom: 0.25rem;
+  color: var(--editor-text);
 }
 
 .ql-editor h2 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #1e293b;
+  color: var(--editor-heading);
 }
 
 .ql-editor h3 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  color: #334155;
+  color: var(--editor-heading);
+}
+
+/* Placeholder styling */
+.ql-editor.ql-blank::before {
+  color: var(--placeholder-color);
+}
+
+/* Toolbar icons and buttons */
+.ql-snow .ql-stroke {
+  stroke: var(--editor-icon);
+}
+
+.ql-snow .ql-fill {
+  fill: var(--editor-icon);
+}
+
+.ql-snow .ql-picker-label {
+  color: var(--editor-icon);
 }
 
 /* Hover states */
@@ -77,7 +102,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-  color: #2563eb;
+  color: var(--editor-icon-active);
 }
 
 .ql-snow.ql-toolbar button:hover .ql-fill,
@@ -94,7 +119,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill {
-  fill: #2563eb;
+  fill: var(--editor-icon-active);
 }
 
 .ql-snow.ql-toolbar button:hover .ql-stroke,
@@ -111,7 +136,17 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke {
-  stroke: #2563eb;
+  stroke: var(--editor-icon-active);
+}
+
+/* Dropdown menus */
+.ql-snow .ql-picker-options {
+  background-color: var(--editor-toolbar-bg);
+  border-color: var(--editor-toolbar-border);
+}
+
+.ql-snow .ql-picker-options .ql-picker-item {
+  color: var(--editor-text);
 }
 
 /* Section-specific styles */
@@ -128,8 +163,8 @@
 
 [data-section="experience"] .ql-editor h3,
 [data-section="education"] .ql-editor h3 {
-  color: #1e40af;
-  border-bottom: 1px solid #e2e8f0;
+  color: var(--editor-icon-active);
+  border-bottom: 1px solid var(--editor-toolbar-border);
   padding-bottom: 0.5rem;
 }
 

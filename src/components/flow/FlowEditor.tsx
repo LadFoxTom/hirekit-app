@@ -429,7 +429,7 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
       {/* Main Flow Area */}
       <div className="flex-1 flex flex-col min-h-0">
         {/* Toolbar */}
-        <div className="bg-white border-b border-gray-200 p-4 flex-shrink-0">
+        <div className="p-4 flex-shrink-0" style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-medium)' }}>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               {/* View Mode Indicator */}
@@ -445,14 +445,20 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
               
               <button
                 onClick={toggleSidebar}
-                className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-2 rounded-md transition-colors"
+                style={{ 
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-primary)'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 title="Toggle Node Palette"
                 disabled={viewMode}
               >
                 <PanelLeft size={16} />
               </button>
               
-              <div className="h-4 w-px bg-gray-300" />
+              <div className="h-4 w-px" style={{ backgroundColor: 'var(--border-medium)' }} />
               
               <button
                 type="button"
@@ -471,9 +477,10 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
                 disabled={viewMode}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-md transition-colors ${
                   viewMode 
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                    ? 'cursor-not-allowed' 
                     : 'bg-green-600 text-white hover:bg-green-700'
                 }`}
+                style={viewMode ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-disabled)' } : undefined}
               >
                 <Plus size={16} />
                 <span>New Flow</span>
@@ -496,9 +503,10 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
                 disabled={viewMode}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-md transition-colors ${
                   viewMode 
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                    ? 'cursor-not-allowed' 
                     : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
+                style={viewMode ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-disabled)' } : undefined}
               >
                 <Eye size={16} />
                 <span>Load Flow</span>
@@ -510,9 +518,10 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
                 disabled={viewMode}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-md transition-colors ${
                   viewMode 
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                    ? 'cursor-not-allowed' 
                     : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
+                style={viewMode ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-disabled)' } : undefined}
               >
                 <Save size={16} />
                 <span>Save</span>
@@ -528,9 +537,10 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
               
               <label className={`flex items-center space-x-1 px-3 py-2 rounded-md transition-colors ${
                 viewMode 
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                  ? 'cursor-not-allowed' 
                   : 'bg-purple-600 text-white hover:bg-purple-700 cursor-pointer'
-              }`}>
+              }`}
+              style={viewMode ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-disabled)' } : undefined}>
                 <Upload size={16} />
                 <span>Import</span>
                 <input
@@ -556,7 +566,13 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
               
               <button
                 onClick={toggleChatTest}
-                className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-2 rounded-md transition-colors"
+                style={{ 
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-primary)'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 title="Test Chat Flow"
               >
                 <MessageSquare size={16} />
@@ -564,13 +580,19 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
               
               <button
                 onClick={togglePropertiesPanel}
-                className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-2 rounded-md transition-colors"
+                style={{ 
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-primary)'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 title="Toggle Properties Panel"
               >
                 <PanelRight size={16} />
               </button>
               
-              <div className="h-4 w-px bg-gray-300" />
+              <div className="h-4 w-px" style={{ backgroundColor: 'var(--border-medium)' }} />
               
               {/* Zoom Controls */}
               <div className="flex items-center space-x-1">
@@ -580,7 +602,13 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
                       reactFlowInstance.zoomOut();
                     }
                   }}
-                  className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                  className="p-2 rounded-md transition-colors"
+                  style={{ 
+                    backgroundColor: 'transparent',
+                    color: 'var(--text-primary)'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   title="Zoom Out"
                 >
                   <span className="text-sm font-bold">-</span>
@@ -591,7 +619,13 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
                       reactFlowInstance.fitView();
                     }
                   }}
-                  className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors"
+                  className="px-2 py-1 text-xs rounded transition-colors"
+                  style={{ 
+                    backgroundColor: 'var(--bg-tertiary)',
+                    color: 'var(--text-primary)'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-elevated)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
                   title="Fit to View"
                 >
                   Fit
@@ -602,7 +636,13 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
                       reactFlowInstance.zoomIn();
                     }
                   }}
-                  className="p-2 hover:bg-gray-100 rounded-md transition-colors"
+                  className="p-2 rounded-md transition-colors"
+                  style={{ 
+                    backgroundColor: 'transparent',
+                    color: 'var(--text-primary)'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   title="Zoom In"
                 >
                   <span className="text-sm font-bold">+</span>
@@ -641,8 +681,8 @@ const FlowEditor = ({ viewMode = false }: FlowEditorProps) => {
             <MiniMap />
             
             {/* Flow Info Panel */}
-            <Panel position="top-right" className="bg-white p-3 rounded-lg shadow-lg border">
-              <div className="text-sm text-gray-600">
+            <Panel position="top-right" className="p-3 rounded-lg shadow-lg border" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-medium)' }}>
+              <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                 <div>Nodes: {nodes.length}</div>
                 <div>Edges: {edges.length}</div>
                 {currentFlow && (

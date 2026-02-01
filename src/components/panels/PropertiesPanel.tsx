@@ -88,14 +88,19 @@ const PropertiesPanel = ({ viewMode = false }: PropertiesPanelProps) => {
     return (
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
             Edge Label
           </label>
           <input
             type="text"
             value={selectedEdge.label || ''}
             onChange={(e) => useFlowStore.getState().updateEdge(selectedEdge.id, { label: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            style={{ 
+              backgroundColor: 'var(--bg-primary)',
+              color: 'var(--text-primary)',
+              border: '1px solid var(--border-medium)'
+            }}
             placeholder="Enter edge label..."
           />
         </div>
@@ -110,8 +115,12 @@ const PropertiesPanel = ({ viewMode = false }: PropertiesPanelProps) => {
         animate={{ x: 0 }}
         exit={{ x: panelWidth }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="bg-white border-l border-gray-200 shadow-lg h-full flex flex-col"
-        style={{ width: `${panelWidth}px` }}
+        className="shadow-lg h-full flex flex-col"
+        style={{ 
+          width: `${panelWidth}px`,
+          backgroundColor: 'var(--bg-primary)',
+          borderLeft: '1px solid var(--border-medium)'
+        }}
       >
         {/* Resize Handle */}
         <div
@@ -122,8 +131,8 @@ const PropertiesPanel = ({ viewMode = false }: PropertiesPanelProps) => {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
           <div className="flex items-center space-x-2">
-            <Settings size={16} className="text-gray-600" />
-            <h3 className="text-lg font-semibold text-gray-900">
+            <Settings size={16} style={{ color: 'var(--text-secondary)' }} />
+            <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
               {selectedNode ? `${selectedNode.type} Properties` : 
                selectedEdge ? 'Edge Properties' : 'Properties'}
             </h3>
@@ -137,7 +146,7 @@ const PropertiesPanel = ({ viewMode = false }: PropertiesPanelProps) => {
             onClick={togglePropertiesPanel}
             className="p-1 hover:bg-gray-100 rounded-md transition-colors"
           >
-            <X size={16} className="text-gray-600" />
+            <X size={16} style={{ color: 'var(--text-secondary)' }} />
           </button>
         </div>
 
@@ -157,8 +166,8 @@ const PropertiesPanel = ({ viewMode = false }: PropertiesPanelProps) => {
               {/* Node Info */}
               <div className="bg-gray-50 p-3 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Node ID</span>
-                  <span className="text-xs font-mono text-gray-500">{selectedNode.id}</span>
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Node ID</span>
+                  <span className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>{selectedNode.id}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-700">Type</span>
@@ -173,7 +182,7 @@ const PropertiesPanel = ({ viewMode = false }: PropertiesPanelProps) => {
 
               {/* Actions */}
               {!viewMode && (
-                <div className="flex space-x-2 pt-4 border-t border-gray-200">
+                <div className="flex space-x-2 pt-4" style={{ borderTop: '1px solid var(--border-medium)' }}>
                   <button
                     onClick={async () => {
                       try {
@@ -211,8 +220,8 @@ const PropertiesPanel = ({ viewMode = false }: PropertiesPanelProps) => {
           {selectedEdge && renderEdgeProperties()}
 
           {!selectedNode && !selectedEdge && (
-            <div className="text-center py-8 text-gray-500">
-              <Settings size={48} className="mx-auto mb-4 text-gray-300" />
+            <div className="text-center py-8" style={{ color: 'var(--text-tertiary)' }}>
+              <Settings size={48} className="mx-auto mb-4" style={{ color: 'var(--text-disabled)' }} />
               <p>Select a node or edge to edit its properties</p>
             </div>
           )}

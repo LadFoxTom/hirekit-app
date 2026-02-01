@@ -1206,8 +1206,8 @@ export default function HomePage() {
     isDraftLoadedRef.current = false;
   }, [getDraftSnapshot]);
 
-  const requestNavigation = useCallback((action: () => void) => {
-    if (hasUnsavedChanges) {
+  const requestNavigation = useCallback((action: () => void, shouldPrompt: boolean = true) => {
+    if (hasUnsavedChanges && shouldPrompt) {
       pendingLeaveAction.current = action;
       setShowLeavePrompt(true);
       return;
@@ -1216,8 +1216,14 @@ export default function HomePage() {
   }, [hasUnsavedChanges]);
 
   const guardedRouterPush = useCallback((href: string) => {
-    requestNavigation(() => router.push(href));
-  }, [requestNavigation, router]);
+    // Only show prompt if navigating to a different route
+    // Same route navigation (e.g., tab switches) should not trigger the prompt
+    const currentPath = pathname || '/';
+    const targetPath = href.split('?')[0]; // Remove query params for comparison
+    const isSameRoute = currentPath === targetPath || (currentPath === '/' && targetPath === '/');
+    
+    requestNavigation(() => router.push(href), !isSameRoute);
+  }, [requestNavigation, router, pathname]);
 
   const guardedSignOut = useCallback(() => {
     requestNavigation(() => signOut({ callbackUrl: '/' }));
@@ -2773,7 +2779,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="px-6 py-4 flex flex-wrap items-center gap-3 justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
+                <div className="px-6 py-4 flex flex-nowrap items-center gap-3 justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={handleLeaveCancel}
                     className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0"

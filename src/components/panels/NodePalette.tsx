@@ -141,10 +141,10 @@ const NodePalette = () => {
   };
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 p-4">
+    <div className="w-64 p-4" style={{ backgroundColor: 'var(--bg-primary)', borderRight: '1px solid var(--border-medium)' }}>
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Node Palette</h3>
-        <p className="text-sm text-gray-600">Drag nodes to the canvas</p>
+        <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Node Palette</h3>
+        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Drag nodes to the canvas</p>
       </div>
 
       <div className="space-y-2">
@@ -163,7 +163,7 @@ const NodePalette = () => {
             `}
           >
             <div className="flex items-center space-x-3">
-              <div className={`p-2 rounded-lg bg-white/50`}>
+              <div className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-elevated)' }}>
                 {template.icon}
               </div>
               <div className="flex-1 min-w-0">
@@ -179,8 +179,8 @@ const NodePalette = () => {
         ))}
       </div>
 
-      <div className="mt-6 pt-4 border-t border-gray-200">
-        <div className="text-xs text-gray-500 space-y-1">
+      <div className="mt-6 pt-4" style={{ borderTop: '1px solid var(--border-medium)' }}>
+        <div className="text-xs space-y-1" style={{ color: 'var(--text-tertiary)' }}>
           <p>💡 <strong>Tip:</strong> Drag nodes to connect them</p>
           <p>🔧 <strong>Tip:</strong> Click nodes to edit properties</p>
           <p>⌨️ <strong>Tip:</strong> Use keyboard shortcuts</p>

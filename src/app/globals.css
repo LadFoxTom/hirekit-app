@@ -110,6 +110,16 @@ body {
   
   /* Placeholder */
   --placeholder-color: #6b7280;
+  
+  /* Editor specific */
+  --editor-bg: #1a1a1a;
+  --editor-toolbar-bg: #1f1f1f;
+  --editor-toolbar-border: rgba(255, 255, 255, 0.1);
+  --editor-text: #ffffff;
+  --editor-heading: #e5e7eb;
+  --editor-icon: #d1d5db;
+  --editor-icon-hover: #ffffff;
+  --editor-icon-active: #3b82f6;
 }
 
 /* Theme Variables - Day Theme */
@@ -146,6 +156,16 @@ body {
   
   /* Placeholder */
   --placeholder-color: #9ca3af;
+  
+  /* Editor specific */
+  --editor-bg: #ffffff;
+  --editor-toolbar-bg: #f8fafc;
+  --editor-toolbar-border: #e2e8f0;
+  --editor-text: #1a1a1a;
+  --editor-heading: #1e293b;
+  --editor-icon: #64748b;
+  --editor-icon-hover: #334155;
+  --editor-icon-active: #2563eb;
 }
 
 @layer base {
@@ -205,6 +225,54 @@ body {
   .btn-accent {
     background: var(--color-ladderfox-yellow);
     color: var(--color-ladderfox-dark);
+  }
+
+  /* Editor and Form Utilities */
+  .editor-input {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-medium);
+  }
+  
+  .editor-input:focus {
+    outline: none;
+    border-color: var(--color-ladderfox-blue);
+    ring: 2px;
+    ring-color: var(--color-ladderfox-blue);
+  }
+  
+  .editor-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .editor-select {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-medium);
+  }
+  
+  .editor-textarea {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-medium);
+  }
+  
+  .panel-bg {
+    background-color: var(--bg-primary);
+    border-color: var(--border-medium);
+  }
+  
+  .panel-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-medium);
+    color: var(--text-primary);
+  }
+  
+  .panel-section {
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
   }
 
   .btn-accent:hover {
