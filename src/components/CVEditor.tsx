@@ -290,9 +290,9 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
     
     if (section.type === 'text') {
       return content ? (
-        <div className="text-gray-700 whitespace-pre-wrap">{content as string}</div>
+        <div className="whitespace-pre-wrap" style={{ color: 'var(--text-primary)' }}>{content as string}</div>
       ) : (
-        <div className="text-gray-400 italic">No content added yet</div>
+        <div className="italic" style={{ color: 'var(--text-tertiary)' }}>No content added yet</div>
       )
     } else if (section.type === 'simple') {
       // Ensure items is always an array
@@ -307,11 +307,11 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
       return items && items.length > 0 ? (
         <div className="space-y-1">
           {items.map((item, index) => (
-            <div key={index} className="text-gray-700">• {item}</div>
+            <div key={index} style={{ color: 'var(--text-primary)' }}>• {item}</div>
           ))}
         </div>
       ) : (
-        <div className="text-gray-400 italic">No items added yet</div>
+        <div className="italic" style={{ color: 'var(--text-tertiary)' }}>No items added yet</div>
       )
     } else if (section.type === 'list') {
       // Ensure items is always an array
@@ -329,22 +329,22 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
       return items && items.length > 0 ? (
         <div className="space-y-3">
           {items.map((item, index) => (
-            <div key={index} className="border-l-2 border-blue-200 pl-3">
+            <div key={index} className="border-l-2 pl-3" style={{ borderColor: 'var(--border-medium)' }}>
               {/* Handle different data structures */}
               {item.title ? (
                 // Standard CVSection structure
                 <>
-                  <div className="font-medium text-gray-900">{item.title}</div>
+                  <div className="font-medium" style={{ color: 'var(--text-heading)' }}>{item.title}</div>
                   {item.content && Array.isArray(item.content) && item.content.map((bullet: string, bulletIndex: number) => (
-                    <div key={bulletIndex} className="text-gray-700 text-sm">• {bullet}</div>
+                    <div key={bulletIndex} className="text-sm" style={{ color: 'var(--text-primary)' }}>• {bullet}</div>
                   ))}
                 </>
               ) : item.degree ? (
                 // Education structure from direct mapping
                 <>
-                  <div className="font-medium text-gray-900">{item.degree}</div>
+                  <div className="font-medium" style={{ color: 'var(--text-heading)' }}>{item.degree}</div>
                   {(item.institution || item.dates || item.field) && (
-                    <div className="text-sm text-gray-600 mb-1">
+                    <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>
                       {item.institution && <span className="font-medium">{item.institution}</span>}
                       {item.institution && item.dates && <span className="mx-2">•</span>}
                       {item.dates && <span>{item.dates}</span>}
@@ -353,31 +353,31 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                     </div>
                   )}
                   {item.content && Array.isArray(item.content) && item.content.map((bullet: string, bulletIndex: number) => (
-                    <div key={bulletIndex} className="text-gray-700 text-sm">• {bullet}</div>
+                    <div key={bulletIndex} className="text-sm" style={{ color: 'var(--text-primary)' }}>• {bullet}</div>
                   ))}
                 </>
               ) : item.company ? (
                 // Experience structure
                 <>
-                  <div className="font-medium text-gray-900">{item.title || item.position}</div>
-                  <div className="text-sm text-gray-600 mb-1">
+                  <div className="font-medium" style={{ color: 'var(--text-heading)' }}>{item.title || item.position}</div>
+                  <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>
                     {item.company && <span className="font-medium">{item.company}</span>}
                     {item.company && item.dates && <span className="mx-2">•</span>}
                     {item.dates && <span>{item.dates}</span>}
                   </div>
                   {item.content && Array.isArray(item.content) && item.content.map((bullet: string, bulletIndex: number) => (
-                    <div key={bulletIndex} className="text-gray-700 text-sm">• {bullet}</div>
+                    <div key={bulletIndex} className="text-sm" style={{ color: 'var(--text-primary)' }}>• {bullet}</div>
                   ))}
                 </>
               ) : (
                 // Fallback for other structures
-                <div className="font-medium text-gray-900">{JSON.stringify(item)}</div>
+                <div className="font-medium" style={{ color: 'var(--text-heading)' }}>{JSON.stringify(item)}</div>
               )}
             </div>
           ))}
         </div>
       ) : (
-        <div className="text-gray-400 italic">No items added yet</div>
+        <div className="italic" style={{ color: 'var(--text-tertiary)' }}>No items added yet</div>
       )
     }
     
@@ -387,117 +387,128 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Personal Information</h2>
+      <div className="rounded-xl p-6" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
+        <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--text-heading)' }}>Personal Information</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Full Name</label>
             <input
               type="text"
               value={data.fullName || ''}
               onChange={(e) => handleHeaderChange('fullName', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="Enter your full name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Name</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Preferred Name</label>
             <input
               type="text"
               value={data.preferredName || ''}
               onChange={(e) => handleHeaderChange('preferredName', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="Nickname or preferred name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Professional Title</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Professional Title</label>
             <input
               type="text"
               value={data.title || ''}
               onChange={(e) => handleHeaderChange('title', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="e.g., Software Engineer"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Experience Years</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Experience Years</label>
             <input
               type="text"
               value={(data as any).experienceYears || ''}
               onChange={(e) => handleHeaderChange('experienceYears', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="e.g., 5+ years"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Email</label>
             <input
               type="email"
               value={data.contact?.email || ''}
               onChange={(e) => handleHeaderChange('email', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="your.email@example.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Phone</label>
             <input
               type="tel"
               value={data.contact?.phone || ''}
               onChange={(e) => handleHeaderChange('phone', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="+1 (555) 123-4567"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Location</label>
             <input
               type="text"
               value={data.contact?.location || ''}
               onChange={(e) => handleHeaderChange('location', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="City, State/Province, Country"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>LinkedIn</label>
             <input
               type="url"
               value={data.social?.linkedin || ''}
               onChange={(e) => handleHeaderChange('linkedin', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="https://linkedin.com/in/yourname"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Website</label>
             <input
               type="url"
               value={data.social?.website || ''}
               onChange={(e) => handleHeaderChange('website', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="https://yourname.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Current Company</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Current Company</label>
             <input
               type="text"
               value={(data as any).currentCompany || ''}
               onChange={(e) => handleHeaderChange('currentCompany', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="Current company name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Current Role Start Date</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>Current Role Start Date</label>
             <input
               type="text"
               value={(data as any).currentRoleStartDate || ''}
               onChange={(e) => handleHeaderChange('currentRoleStartDate', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
               placeholder="MM/YYYY"
             />
           </div>
@@ -538,16 +549,16 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
           
           
           return (
-            <div key={section.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div key={section.id} className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-medium)' }}>
               {/* Section Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-100">
+              <div className="flex items-center justify-between p-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
                     <div className="text-blue-600 text-sm">📝</div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{section.name}</h3>
-                    <p className="text-sm text-gray-500">
+                    <h3 className="text-lg font-semibold" style={{ color: 'var(--text-heading)' }}>{section.name}</h3>
+                    <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
                       {hasContent ? 'Content available' : 'Click to add content'}
                     </p>
                   </div>
@@ -564,7 +575,10 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                       </button>
                       <button
                         onClick={cancelEditing}
-                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                        className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors"
+                        style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-tertiary)' }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-elevated)'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
                       >
                         Cancel
                       </button>
@@ -572,7 +586,10 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                   ) : (
                     <button
                       onClick={() => startEditing(section.id)}
-                      className="inline-flex items-center px-3 py-2 text-sm font-medium text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors border border-blue-200"
+                      className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors border"
+                      style={{ color: 'var(--color-ladderfox-blue)', backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-medium)' }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
                     >
                       ✏️ {hasContent ? 'Edit' : 'Add'}
                     </button>
@@ -586,14 +603,15 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                   <div className="space-y-4">
                     {section.type === 'text' && (
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                           {section.name}
                         </label>
                         <textarea
                           value={editData.content || ''}
                           onChange={(e) => setEditData({ ...editData, content: e.target.value })}
                           rows={4}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                           placeholder={`Enter your ${section.name.toLowerCase()}...`}
                         />
                       </div>
@@ -602,12 +620,15 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                     {section.type === 'simple' && (
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <label className="block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                             {section.name}
                           </label>
                           <button
                             onClick={addSimpleItem}
-                            className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded hover:bg-blue-100 transition-colors"
+                            className="inline-flex items-center px-2 py-1 text-xs font-medium rounded transition-colors"
+                            style={{ color: 'var(--color-ladderfox-blue)', backgroundColor: 'var(--bg-secondary)' }}
+                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
                           >
                             ➕ Add Item
                           </button>
@@ -619,14 +640,20 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                 <button
                                   onClick={() => moveItem(index, 'up')}
                                   disabled={index === 0}
-                                  className="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-50"
+                                  className="p-1 disabled:opacity-50"
+                                  style={{ color: 'var(--text-tertiary)' }}
+                                  onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-secondary)')}
+                                  onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-tertiary)')}
                                 >
                                   ⬆️
                                 </button>
                                 <button
                                   onClick={() => moveItem(index, 'down')}
                                   disabled={index === (editData.items || []).length - 1}
-                                  className="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-50"
+                                  className="p-1 disabled:opacity-50"
+                                  style={{ color: 'var(--text-tertiary)' }}
+                                  onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-secondary)')}
+                                  onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-tertiary)')}
                                 >
                                   ⬇️
                                 </button>
@@ -639,13 +666,15 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                     type="text"
                                     value={item.replace(/\s*\([^)]*\)$/, '')} // Remove proficiency level from display
                                     onChange={(e) => updateLanguageItem(index, e.target.value, getLanguageProficiency(item))}
-                                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    className="flex-1 px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                     placeholder="Enter language name..."
                                   />
                                   <select
                                     value={getLanguageProficiency(item)}
                                     onChange={(e) => updateLanguageItem(index, item.replace(/\s*\([^)]*\)$/, ''), e.target.value)}
-                                    className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                                    className="px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                   >
                                     <option value="">Select level</option>
                                     <option value="Native">Native</option>
@@ -661,7 +690,8 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                   type="text"
                                   value={item}
                                   onChange={(e) => updateSimpleItem(index, e.target.value)}
-                                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                  className="flex-1 px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                  style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                   placeholder={`Enter ${section.name.toLowerCase()} item...`}
                                 />
                               )}
@@ -681,32 +711,41 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                     {section.type === 'list' && (
                       <div>
                         <div className="flex items-center justify-between mb-3">
-                          <label className="block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                             {section.name}
                           </label>
                           <button
                             onClick={addListItem}
-                            className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded hover:bg-blue-100 transition-colors"
+                            className="inline-flex items-center px-2 py-1 text-xs font-medium rounded transition-colors"
+                            style={{ color: 'var(--color-ladderfox-blue)', backgroundColor: 'var(--bg-secondary)' }}
+                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
                           >
                             ➕ Add Item
                           </button>
                         </div>
                         <div className="space-y-4">
                           {(Array.isArray(editData.items) ? editData.items : []).map((item: any, index: number) => (
-                            <div key={index} className="border border-gray-200 rounded-lg p-4">
+                            <div key={index} className="rounded-lg p-4" style={{ border: '1px solid var(--border-medium)' }}>
                               <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center space-x-1">
                                   <button
                                     onClick={() => moveItem(index, 'up')}
                                     disabled={index === 0}
-                                    className="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-50"
+                                    className="p-1 disabled:opacity-50"
+                                    style={{ color: 'var(--text-tertiary)' }}
+                                    onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-secondary)')}
+                                    onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-tertiary)')}
                                   >
                                     ⬆️
                                   </button>
                                   <button
                                     onClick={() => moveItem(index, 'down')}
                                     disabled={index === (editData.items || []).length - 1}
-                                    className="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-50"
+                                    className="p-1 disabled:opacity-50"
+                                    style={{ color: 'var(--text-tertiary)' }}
+                                    onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-secondary)')}
+                                    onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.color = 'var(--text-tertiary)')}
                                   >
                                     ⬇️
                                   </button>
@@ -725,50 +764,54 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                   // Education-specific editing interface
                                   <>
                                     <div>
-                                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                         Degree
                                       </label>
                                       <input
                                         type="text"
                                         value={item.degree || ''}
                                         onChange={(e) => updateListItem(index, 'degree', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                         placeholder="e.g., Bachelor of Science"
                                       />
                                     </div>
                                     <div>
-                                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                         Institution
                                       </label>
                                       <input
                                         type="text"
                                         value={item.institution || ''}
                                         onChange={(e) => updateListItem(index, 'institution', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                         placeholder="e.g., University of California"
                                       />
                                     </div>
                                     <div>
-                                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                         Field of Study
                                       </label>
                                       <input
                                         type="text"
                                         value={item.field || ''}
                                         onChange={(e) => updateListItem(index, 'field', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                         placeholder="e.g., Computer Science"
                                       />
                                     </div>
                                     <div>
-                                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                         Dates
                                       </label>
                                       <input
                                         type="text"
                                         value={item.dates || ''}
                                         onChange={(e) => updateListItem(index, 'dates', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                         placeholder="e.g., 2018-2022"
                                       />
                                     </div>
@@ -777,38 +820,41 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                   // Experience-specific editing interface
                                   <>
                                     <div>
-                                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                         Job Title
                                       </label>
                                       <input
                                         type="text"
                                         value={item.title || item.position || ''}
                                         onChange={(e) => updateListItem(index, 'title', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                         placeholder="e.g., Software Engineer"
                                       />
                                     </div>
                                     <div>
-                                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                         Company
                                       </label>
                                       <input
                                         type="text"
                                         value={item.company || ''}
                                         onChange={(e) => updateListItem(index, 'company', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                         placeholder="e.g., Google"
                                       />
                                     </div>
                                     <div>
-                                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                                      <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                         Dates
                                       </label>
                                       <input
                                         type="text"
                                         value={item.dates || ''}
                                         onChange={(e) => updateListItem(index, 'dates', e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                         placeholder="e.g., 2020-2023"
                                       />
                                     </div>
@@ -816,14 +862,15 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                 ) : (
                                   // Standard CVSection editing interface
                                   <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
                                       Title
                                     </label>
                                     <input
                                       type="text"
                                       value={item.title || ''}
                                       onChange={(e) => updateListItem(index, 'title', e.target.value)}
-                                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                      className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                      style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                       placeholder="Enter title..."
                                     />
                                   </div>
@@ -831,12 +878,15 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                 
                                 <div>
                                   <div className="flex items-center justify-between mb-2">
-                                    <label className="block text-sm font-medium text-gray-700">
+                                    <label className="block text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                                       Details
                                     </label>
                                     <button
                                       onClick={() => addBulletPoint(index)}
-                                      className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded hover:bg-blue-100 transition-colors"
+                                      className="inline-flex items-center px-2 py-1 text-xs font-medium rounded transition-colors"
+                                      style={{ color: 'var(--color-ladderfox-blue)', backgroundColor: 'var(--bg-secondary)' }}
+                                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)'}
+                                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'}
                                     >
                                       ➕ Add Point
                                     </button>
@@ -848,7 +898,8 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                                           type="text"
                                           value={bullet}
                                           onChange={(e) => updateBulletPoint(index, bulletIndex, e.target.value)}
-                                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                          className="flex-1 px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                          style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                                           placeholder="Enter detail point..."
                                         />
                                         <button
@@ -869,9 +920,9 @@ export default function CVEditor({ data, onSave, onPrint, isAuthenticated }: CVE
                     )}
                   </div>
                 ) : (
-                  <div className="min-h-[80px] p-4 border-2 border-dashed border-gray-200 rounded-lg">
+                  <div className="min-h-[80px] p-4 border-2 border-dashed rounded-lg" style={{ borderColor: 'var(--border-medium)' }}>
                     {getSectionContent(section.id) || (
-                      <div className="text-center text-gray-500">
+                      <div className="text-center" style={{ color: 'var(--text-tertiary)' }}>
                         <p className="text-sm">No content added yet</p>
                         <p className="text-xs mt-1">Click "Add" to get started</p>
                       </div>

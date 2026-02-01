@@ -101,21 +101,30 @@ export default function CVTextEditorModal({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-6xl w-full max-h-[95vh] overflow-hidden">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ backgroundColor: 'var(--overlay)' }}>
+      <div className="rounded-xl shadow-2xl max-w-6xl w-full max-h-[95vh] overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6" style={{ borderBottom: '1px solid var(--border-medium)' }}>
           <div>
-            <h3 className="text-xl font-semibold text-gray-900">
+            <h3 className="text-xl font-semibold" style={{ color: 'var(--text-heading)' }}>
               Edit CV Text for Letter Generation
             </h3>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
               Review and edit your CV information before using it for the motivational letter
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
+            className="p-2 rounded-lg transition-colors"
+            style={{ color: 'var(--text-tertiary)' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--text-secondary)';
+              e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--text-tertiary)';
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
           >
             <FaTimes className="w-5 h-5" />
           </button>
@@ -126,7 +135,7 @@ export default function CVTextEditorModal({
           {/* Left Panel - Editor */}
           <div className="flex-1 p-6 flex flex-col">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
                 CV Text Content
               </label>
             </div>
@@ -134,44 +143,45 @@ export default function CVTextEditorModal({
               <textarea
                 value={editedText}
                 onChange={handleTextChange}
-                className="w-full h-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none font-mono text-sm overflow-y-auto"
+                className="w-full h-full p-4 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none font-mono text-sm overflow-y-auto"
+                style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-medium)' }}
                 placeholder="Your CV content will appear here..."
               />
-              <div className="absolute bottom-2 right-2 text-xs text-gray-500 bg-white px-2 py-1 rounded">
+              <div className="absolute bottom-2 right-2 text-xs px-2 py-1 rounded" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-primary)' }}>
                 {wordCount} words, {charCount} chars
               </div>
             </div>
           </div>
 
           {/* Right Panel - Info & Actions */}
-          <div className="w-full lg:w-80 p-6 border-l border-gray-200 bg-gray-50">
+          <div className="w-full lg:w-80 p-6" style={{ borderLeft: '1px solid var(--border-medium)', backgroundColor: 'var(--bg-secondary)' }}>
             <div className="space-y-6">
               {/* CV Info */}
               <div>
-                <h4 className="font-medium text-gray-900 mb-3">CV Information</h4>
+                <h4 className="font-medium mb-3" style={{ color: 'var(--text-heading)' }}>CV Information</h4>
                 <div className="space-y-2 text-sm">
                   <div>
-                    <span className="font-medium text-gray-700">Name:</span>
-                    <span className="ml-2 text-gray-600">{getCVTitle()}</span>
+                    <span className="font-medium" style={{ color: 'var(--text-secondary)' }}>Name:</span>
+                    <span className="ml-2" style={{ color: 'var(--text-primary)' }}>{getCVTitle()}</span>
                   </div>
                   <div>
-                    <span className="font-medium text-gray-700">Title:</span>
-                    <span className="ml-2 text-gray-600">{cvData.title || 'Not specified'}</span>
+                    <span className="font-medium" style={{ color: 'var(--text-secondary)' }}>Title:</span>
+                    <span className="ml-2" style={{ color: 'var(--text-primary)' }}>{cvData.title || 'Not specified'}</span>
                   </div>
                   <div>
-                    <span className="font-medium text-gray-700">Template:</span>
-                    <span className="ml-2 text-gray-600">{cvData.template || 'default'}</span>
+                    <span className="font-medium" style={{ color: 'var(--text-secondary)' }}>Template:</span>
+                    <span className="ml-2" style={{ color: 'var(--text-primary)' }}>{cvData.template || 'default'}</span>
                   </div>
                   {cvData.experience && (
                     <div>
-                      <span className="font-medium text-gray-700">Experience:</span>
-                      <span className="ml-2 text-gray-600">{cvData.experience.length} positions</span>
+                      <span className="font-medium" style={{ color: 'var(--text-secondary)' }}>Experience:</span>
+                      <span className="ml-2" style={{ color: 'var(--text-primary)' }}>{cvData.experience.length} positions</span>
                     </div>
                   )}
                   {cvData.education && (
                     <div>
-                      <span className="font-medium text-gray-700">Education:</span>
-                      <span className="ml-2 text-gray-600">{cvData.education.length} entries</span>
+                      <span className="font-medium" style={{ color: 'var(--text-secondary)' }}>Education:</span>
+                      <span className="ml-2" style={{ color: 'var(--text-primary)' }}>{cvData.education.length} entries</span>
                     </div>
                   )}
                 </div>
@@ -179,8 +189,8 @@ export default function CVTextEditorModal({
 
               {/* Tips */}
               <div>
-                <h4 className="font-medium text-gray-900 mb-3">Editing Tips</h4>
-                <div className="space-y-2 text-sm text-gray-600">
+                <h4 className="font-medium mb-3" style={{ color: 'var(--text-heading)' }}>Editing Tips</h4>
+                <div className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                   <div className="flex items-start">
                     <span className="text-blue-600 mr-2">•</span>
                     <span>Remove sensitive information you don't want to share</span>
@@ -225,7 +235,10 @@ export default function CVTextEditorModal({
                   <button
                     onClick={handleReset}
                     disabled={!hasChanges}
-                    className="w-full flex items-center justify-center px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center px-4 py-2 font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = 'var(--bg-elevated)')}
+                    onMouseLeave={(e) => !e.currentTarget.disabled && (e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)')}
                   >
                     <FaUndo className="mr-2" />
                     Reset Changes
@@ -250,14 +263,13 @@ export default function CVTextEditorModal({
               </div>
 
               {/* Status */}
-              <div className="pt-4 border-t border-gray-200">
+              <div className="pt-4" style={{ borderTop: '1px solid var(--border-medium)' }}>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Status:</span>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    hasChanges 
-                      ? 'bg-yellow-100 text-yellow-800' 
-                      : 'bg-green-100 text-green-800'
-                  }`}>
+                  <span style={{ color: 'var(--text-secondary)' }}>Status:</span>
+                  <span className="px-2 py-1 rounded-full text-xs font-medium" style={{
+                    backgroundColor: hasChanges ? 'var(--color-ladderfox-yellow)' : 'var(--color-ladderfox-light)',
+                    color: hasChanges ? 'var(--color-ladderfox-dark)' : 'var(--color-ladderfox-dark)'
+                  }}>
                     {hasChanges ? 'Modified' : 'Saved'}
                   </span>
                 </div>
@@ -267,10 +279,10 @@ export default function CVTextEditorModal({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-gray-200 bg-gray-50">
-          <div className="text-sm text-gray-600">
+        <div className="flex items-center justify-between p-6" style={{ borderTop: '1px solid var(--border-medium)', backgroundColor: 'var(--bg-secondary)' }}>
+          <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>
             {hasChanges && (
-              <span className="text-yellow-600">
+              <span style={{ color: 'var(--color-ladderfox-orange)' }}>
                 ⚠️ You have unsaved changes
               </span>
             )}
@@ -278,7 +290,10 @@ export default function CVTextEditorModal({
           <div className="flex items-center space-x-3">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 rounded-lg transition-colors border"
+              style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-medium)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-primary)'}
             >
               Cancel
             </button>
