@@ -4670,7 +4670,7 @@ export default function HomePage() {
                       }}
                     >
                       <FiFileText size={14} />
-                      <span>CV</span>
+                      <span>{t('artifact_tabs.cv')}</span>
                     </button>
                     <button
                       onClick={() => setArtifactType('letter')}
@@ -4693,7 +4693,7 @@ export default function HomePage() {
                       }}
                     >
                       <FiMail size={14} />
-                      <span>Letter</span>
+                      <span>{t('artifact_tabs.letter')}</span>
                     </button>
                     <button
                     onClick={() => {
@@ -4704,7 +4704,7 @@ export default function HomePage() {
                     title={t('toast.jobs_coming_soon')}
                     >
                       <FiBriefcase size={14} />
-                    <span>Jobs</span>
+                    <span>{t('artifact_tabs.jobs')}</span>
                     </button>
                   </div>
                   <div className="flex items-center gap-1">

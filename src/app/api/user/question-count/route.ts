@@ -107,7 +107,9 @@ export async function POST(request: NextRequest) {
     const limit = isPaid ? Infinity : FREE_ACCOUNT_QUESTION_LIMIT;
     const currentCount = user.questionCount;
     const newCount = currentCount + 1;
-    const limitReached = !isPaid && newCount >= limit;
+    // Use > instead of >= to allow the last question within the limit
+    // If limit is 5, user should be able to ask questions 1-5, blocked only when trying to ask question 6
+    const limitReached = !isPaid && newCount > limit;
 
     // Only increment if limit not reached (or if paid)
     if (!limitReached || isPaid) {
