@@ -19,9 +19,17 @@ export async function POST(request: NextRequest) {
 
     const { plan, interval = 'yearly', currency = 'EUR', successUrl, cancelUrl } = await request.json()
     
+    console.log('[Checkout] Request received:', {
+      plan,
+      interval,
+      currency,
+      hasSuccessUrl: !!successUrl,
+      hasCancelUrl: !!cancelUrl
+    })
+    
     if (!plan || !successUrl || !cancelUrl) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Missing required fields', details: { plan: !!plan, successUrl: !!successUrl, cancelUrl: !!cancelUrl } },
         { status: 400 }
       )
     }
@@ -71,9 +79,44 @@ export async function POST(request: NextRequest) {
       const trialPrices = basicPlan.stripePriceIds.trial
       const trialSetupFeePriceId = trialPrices?.[currency as keyof typeof trialPrices]
       
+      // Enhanced error logging
       if (!priceId || !trialSetupFeePriceId) {
+        console.error('[Checkout] Missing price IDs:', {
+          plan,
+          interval,
+          currency,
+          priceId: priceId || 'MISSING',
+          trialSetupFeePriceId: trialSetupFeePriceId || 'MISSING',
+          availablePrices: {
+            monthly: {
+              EUR: basicPlan.stripePriceIds.monthly.EUR || 'MISSING',
+              USD: basicPlan.stripePriceIds.monthly.USD || 'MISSING'
+            },
+            quarterly: {
+              EUR: basicPlan.stripePriceIds.quarterly.EUR || 'MISSING',
+              USD: basicPlan.stripePriceIds.quarterly.USD || 'MISSING'
+            },
+            yearly: {
+              EUR: basicPlan.stripePriceIds.yearly.EUR || 'MISSING',
+              USD: basicPlan.stripePriceIds.yearly.USD || 'MISSING'
+            },
+            trial: {
+              EUR: basicPlan.stripePriceIds.trial.EUR || 'MISSING',
+              USD: basicPlan.stripePriceIds.trial.USD || 'MISSING'
+            }
+          }
+        })
+        
         return NextResponse.json(
-          { error: 'Trial pricing not configured for this currency' },
+          { 
+            error: 'Trial pricing not configured for this currency',
+            details: {
+              interval,
+              currency,
+              missingPriceId: !priceId,
+              missingTrialPriceId: !trialSetupFeePriceId
+            }
+          },
           { status: 400 }
         )
       }

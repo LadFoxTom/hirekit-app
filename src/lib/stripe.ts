@@ -233,7 +233,12 @@ export class StripeService {
   // Handle webhook events
   static async handleWebhook(event: Stripe.Event) {
     try {
+      console.log(`[Webhook] Received event: ${event.type}`, { id: event.id })
+      
       switch (event.type) {
+        case 'checkout.session.completed':
+          await this.handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session)
+          break
         case 'customer.subscription.created':
         case 'customer.subscription.updated':
           await this.handleSubscriptionChange(event.data.object as Stripe.Subscription)
@@ -248,11 +253,50 @@ export class StripeService {
           await this.handlePaymentFailed(event.data.object as Stripe.Invoice)
           break
         default:
-          console.log(`Unhandled event type: ${event.type}`)
+          console.log(`[Webhook] Unhandled event type: ${event.type}`)
       }
     } catch (error) {
-      console.error('Error handling webhook:', error)
+      console.error(`[Webhook] Error handling event ${event.type}:`, error)
+      if (error instanceof Error) {
+        console.error('[Webhook] Error details:', {
+          name: error.name,
+          message: error.message,
+          stack: error.stack
+        })
+      }
       throw error
+    }
+  }
+
+  // Handle checkout session completed
+  private static async handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+    console.log('[Webhook] Checkout session completed:', {
+      sessionId: session.id,
+      customerId: session.customer,
+      subscriptionId: session.subscription,
+      metadata: session.metadata
+    })
+
+    // Get user ID from metadata or customer
+    let userId: string | null = null
+    
+    if (session.metadata?.userId) {
+      userId = session.metadata.userId
+    } else if (session.customer) {
+      // Try to find user by customer ID
+      const user = await UserService.getUserByStripeCustomerId(session.customer as string)
+      userId = user?.id || null
+    }
+
+    if (!userId) {
+      console.error('[Webhook] Could not find user for checkout session:', session.id)
+      return
+    }
+
+    // If subscription was created, fetch it and update
+    if (session.subscription) {
+      const subscription = await stripe.subscriptions.retrieve(session.subscription as string)
+      await this.handleSubscriptionChange(subscription)
     }
   }
 
@@ -261,27 +305,71 @@ export class StripeService {
     const customerId = subscription.customer as string
     const priceId = subscription.items.data[0]?.price.id
     
+    console.log('[Webhook] Handling subscription change:', {
+      subscriptionId: subscription.id,
+      customerId,
+      priceId,
+      status: subscription.status,
+      trialEnd: subscription.trial_end
+    })
+    
     // Find user by customer ID
-    const user = await UserService.getUserByStripeCustomerId(customerId)
-    if (!user) return
+    let user = await UserService.getUserByStripeCustomerId(customerId)
+    
+    // If not found, try to find by customer metadata
+    if (!user && customerId) {
+      try {
+        const customer = await stripe.customers.retrieve(customerId)
+        if (customer && !customer.deleted && customer.metadata?.userId) {
+          user = await UserService.getUser(customer.metadata.userId)
+        }
+      } catch (error) {
+        console.error('[Webhook] Error retrieving customer:', error)
+      }
+    }
+    
+    if (!user) {
+      console.error('[Webhook] Could not find user for subscription:', {
+        subscriptionId: subscription.id,
+        customerId
+      })
+      return
+    }
+
+    console.log('[Webhook] Found user:', { userId: user.id, email: user.email })
 
     // Determine plan from price ID
     let plan = 'free'
+    let billingCycle = 'monthly'
     
-    // Check Basic plan prices (including monthly for trial)
-    const basicMonthlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.monthly || {})
-    const basicQuarterlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.quarterly || {})
-    const basicYearlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.yearly || {})
+    // Check Basic plan prices
+    const basicMonthlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.monthly || {}).filter(Boolean)
+    const basicQuarterlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.quarterly || {}).filter(Boolean)
+    const basicYearlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.yearly || {}).filter(Boolean)
     const allBasicPrices = [...basicMonthlyPrices, ...basicQuarterlyPrices, ...basicYearlyPrices]
     
     if (allBasicPrices.includes(priceId)) {
       plan = 'basic'
+      // Determine billing cycle
+      if (basicMonthlyPrices.includes(priceId)) {
+        billingCycle = 'monthly'
+      } else if (basicQuarterlyPrices.includes(priceId)) {
+        billingCycle = 'quarterly'
+      } else if (basicYearlyPrices.includes(priceId)) {
+        billingCycle = 'yearly'
+      }
     }
     
     // Check Pro plan prices
-    const proPrices = Object.values(STRIPE_PLANS.pro.stripePriceIds).flatMap(interval => Object.values(interval))
+    const proPrices = Object.values(STRIPE_PLANS.pro.stripePriceIds).flatMap(interval => Object.values(interval)).filter(Boolean)
     if (proPrices.includes(priceId)) {
       plan = 'pro'
+      // Determine billing cycle for pro
+      if (STRIPE_PLANS.pro.stripePriceIds.monthly && Object.values(STRIPE_PLANS.pro.stripePriceIds.monthly).includes(priceId)) {
+        billingCycle = 'monthly'
+      } else if (STRIPE_PLANS.pro.stripePriceIds.yearly && Object.values(STRIPE_PLANS.pro.stripePriceIds.yearly).includes(priceId)) {
+        billingCycle = 'yearly'
+      }
     }
 
     // Determine subscription status
@@ -289,12 +377,22 @@ export class StripeService {
     const isInTrial = subscription.trial_end && subscription.trial_end > Math.floor(Date.now() / 1000)
     const subscriptionStatus = isInTrial ? 'trialing' : subscription.status
 
+    console.log('[Webhook] Updating subscription:', {
+      userId: user.id,
+      plan,
+      billingCycle,
+      status: subscriptionStatus,
+      priceId
+    })
+
     // Update subscription
     await UserService.updateSubscription(user.id, {
+      stripeCustomerId: customerId,
       stripeSubscriptionId: subscription.id,
       stripePriceId: priceId,
       status: subscriptionStatus,
       plan: plan,
+      billingCycle: billingCycle,
       currentPeriodStart: new Date(subscription.current_period_start * 1000),
       currentPeriodEnd: new Date(subscription.current_period_end * 1000),
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
@@ -302,6 +400,8 @@ export class StripeService {
       aiEnabled: STRIPE_PLANS[plan as keyof typeof STRIPE_PLANS].aiEnabled,
       exportEnabled: STRIPE_PLANS[plan as keyof typeof STRIPE_PLANS].exportEnabled
     })
+
+    console.log('[Webhook] Subscription updated successfully for user:', user.id)
   }
 
   // Handle subscription cancellation

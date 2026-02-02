@@ -26,10 +26,55 @@ export default function PricingPage() {
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  const { isAuthenticated, user, subscription } = useAuth()
+  const { isAuthenticated, user, subscription: authSubscription, refreshUser } = useAuth()
   const router = useRouter()
   const pathname = usePathname()
   const { t, language, setLanguage, availableLanguages } = useLocale()
+  
+  // Fetch subscription directly from API to get latest data
+  const [subscription, setSubscription] = useState(authSubscription)
+  const [subscriptionLoading, setSubscriptionLoading] = useState(false)
+  
+  useEffect(() => {
+    if (isAuthenticated && user?.id) {
+      setSubscriptionLoading(true)
+      fetch('/api/user/subscription')
+        .then(res => res.json())
+        .then(data => {
+          console.log('[Pricing] Subscription data from API:', data)
+          if (!data.error && data.plan) {
+            const subscriptionData = {
+              plan: data.plan,
+              status: data.status,
+              currentPeriodEnd: data.currentPeriodEnd,
+              cancelAtPeriodEnd: data.cancelAtPeriodEnd,
+            }
+            console.log('[Pricing] Setting subscription state:', subscriptionData)
+            setSubscription(subscriptionData)
+            // Also refresh the session to keep it in sync
+            refreshUser()
+          } else {
+            console.log('[Pricing] No subscription data or error:', data)
+            setSubscription(null)
+          }
+        })
+        .catch(err => {
+          console.error('[Pricing] Failed to fetch subscription:', err)
+          setSubscription(null)
+        })
+        .finally(() => {
+          setSubscriptionLoading(false)
+        })
+    } else {
+      setSubscription(null)
+    }
+  }, [isAuthenticated, user?.id, refreshUser])
+  
+  // Debug log subscription state
+  useEffect(() => {
+    console.log('[Pricing] Subscription state changed:', subscription)
+    console.log('[Pricing] isSubscribed:', subscription && ['basic', 'pro'].includes(subscription.plan) && (subscription.status === 'active' || subscription.status === 'trialing'))
+  }, [subscription])
 
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
@@ -60,7 +105,9 @@ export default function PricingPage() {
 
   const currency = getUserCurrency()
   const currencySymbol = currency === 'EUR' ? '€' : '$'
-  const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free'
+  // Treat 'trialing' as active for badge display
+  const isActiveSubscription = subscription?.status === 'active' || subscription?.status === 'trialing'
+  const subBadge = isActiveSubscription && subscription?.plan !== 'free' ? 'Pro' : 'Free'
   
   // Menu Item Component (matching homepage)
   function MenuItem({ 
@@ -296,21 +343,36 @@ export default function PricingPage() {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to create checkout session')
+        const errorData = await response.json().catch(() => ({}))
+        console.error('Checkout error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        })
+        
+        // Show more detailed error message
+        const errorMessage = errorData.error || 'Failed to create checkout session'
+        const errorDetails = errorData.details ? ` (${JSON.stringify(errorData.details)})` : ''
+        throw new Error(`${errorMessage}${errorDetails}`)
       }
 
       const { url } = await response.json()
+      if (!url) {
+        throw new Error('No checkout URL returned')
+      }
+      
       window.location.href = url
     } catch (error) {
       console.error('Subscription error:', error)
-      toast.error(t('pricing.failed_subscription'))
+      const errorMessage = error instanceof Error ? error.message : t('pricing.failed_subscription')
+      toast.error(errorMessage)
     } finally {
       setIsLoading(false)
     }
   }
 
-  // Helper to check if user is subscribed
-  const isSubscribed = subscription && ['basic', 'pro'].includes(subscription.plan) && subscription.status === 'active'
+  // Helper to check if user is subscribed (treat 'trialing' as active)
+  const isSubscribed = subscription && ['basic', 'pro'].includes(subscription.plan) && (subscription.status === 'active' || subscription.status === 'trialing')
 
   return (
     <>
@@ -970,8 +1032,8 @@ export default function PricingPage() {
                 className="rounded-2xl p-8 relative overflow-hidden flex flex-col"
                 style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
               >
-                {/* Current Plan Badge for logged-in users */}
-                {isAuthenticated && !isSubscribed && (
+                {/* Current Plan Badge for logged-in users on Free plan */}
+                {isAuthenticated && subscription && subscription.plan === 'free' && (
                   <div className="absolute top-0 right-0">
                     <div className="text-xs font-medium px-4 py-1.5 rounded-bl-xl" style={{ backgroundColor: 'rgba(34, 197, 94, 0.9)', color: '#fff' }}>
                       {t('pricing.current_plan')}
@@ -1010,7 +1072,7 @@ export default function PricingPage() {
                   
                   {/* Button - fixed at bottom */}
                   <div className="mt-8">
-                    {isAuthenticated && !isSubscribed ? (
+                    {isAuthenticated && subscription && subscription.plan === 'free' ? (
                       <div className="w-full py-3 px-6 rounded-xl font-medium text-center" style={{ backgroundColor: 'rgba(34, 197, 94, 0.2)', color: '#4ade80', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
                         {t('pricing.active')}
                       </div>
@@ -1050,12 +1112,21 @@ export default function PricingPage() {
                   border: '1px solid rgba(59, 130, 246, 0.3)'
                 }}
               >
-                {/* Popular Badge */}
-                <div className="absolute top-0 right-0">
-                  <div className="text-xs font-medium px-4 py-1.5 rounded-bl-xl" style={{ background: 'linear-gradient(to right, #3b82f6, #a855f7)', color: '#fff' }}>
-                    {t('pricing.most_popular')}
+                {/* Current Plan Badge for logged-in users on Basic plan */}
+                {isAuthenticated && subscription && (subscription.plan === 'basic' || subscription.plan === 'pro') ? (
+                  <div className="absolute top-0 right-0">
+                    <div className="text-xs font-medium px-4 py-1.5 rounded-bl-xl" style={{ backgroundColor: 'rgba(34, 197, 94, 0.9)', color: '#fff' }}>
+                      {t('pricing.current_plan')}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  /* Popular Badge */
+                  <div className="absolute top-0 right-0">
+                    <div className="text-xs font-medium px-4 py-1.5 rounded-bl-xl" style={{ background: 'linear-gradient(to right, #3b82f6, #a855f7)', color: '#fff' }}>
+                      {t('pricing.most_popular')}
+                    </div>
+                  </div>
+                )}
 
                 <div className="relative z-10 flex flex-col flex-grow">
                   {/* Header section - fixed height */}

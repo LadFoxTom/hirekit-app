@@ -166,6 +166,43 @@ export const authOptions = {
         session.user.email = token.email as string;
         session.user.name = token.name as string;
         session.user.image = token.image as string;
+        
+        // Fetch subscription data from database
+        if (token.id) {
+          try {
+            const subscription = await prisma.subscription.findUnique({
+              where: { userId: token.id as string },
+              select: {
+                plan: true,
+                status: true,
+                currentPeriodEnd: true,
+                cancelAtPeriodEnd: true,
+              }
+            });
+            
+            if (subscription) {
+              session.user.subscription = {
+                plan: subscription.plan || 'free',
+                status: subscription.status || 'active',
+                currentPeriodEnd: subscription.currentPeriodEnd?.toISOString(),
+                cancelAtPeriodEnd: subscription.cancelAtPeriodEnd || false,
+              };
+            } else {
+              // Default to free plan if no subscription exists
+              session.user.subscription = {
+                plan: 'free',
+                status: 'active',
+              };
+            }
+          } catch (error) {
+            console.error('Error fetching subscription in session callback:', error);
+            // Default to free plan on error
+            session.user.subscription = {
+              plan: 'free',
+              status: 'active',
+            };
+          }
+        }
       }
       return session;
     },

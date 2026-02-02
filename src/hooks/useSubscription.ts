@@ -136,7 +136,8 @@ export function useSubscription() {
   }, [session, sessionStatus]);
 
   const hasFeature = (feature: keyof SubscriptionData['features']): boolean => {
-    if (!subscription || subscription.status !== 'active') {
+    // Treat 'trialing' as active (trial users have full access)
+    if (!subscription || (subscription.status !== 'active' && subscription.status !== 'trialing')) {
       return false;
     }
 
@@ -156,7 +157,8 @@ export function useSubscription() {
   };
 
   const hasQuota = (quotaType: keyof SubscriptionData['usageQuotas']): boolean => {
-    if (!subscription || subscription.status !== 'active') {
+    // Treat 'trialing' as active (trial users have full access)
+    if (!subscription || (subscription.status !== 'active' && subscription.status !== 'trialing')) {
       return false;
     }
 
@@ -186,7 +188,7 @@ export function useSubscription() {
     hasQuota,
     isPlan,
     isAtLeastPlan,
-    isActive: subscription?.status === 'active',
+    isActive: subscription?.status === 'active' || subscription?.status === 'trialing',
   };
 }
 
