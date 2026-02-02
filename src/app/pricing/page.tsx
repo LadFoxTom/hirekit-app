@@ -372,7 +372,7 @@ export default function PricingPage() {
   }
 
   // Helper to check if user is subscribed (treat 'trialing' as active)
-  const isSubscribed = subscription && ['basic', 'pro'].includes(subscription.plan) && (subscription.status === 'active' || subscription.status === 'trialing')
+  const isSubscribed = !!(subscription && ['basic', 'pro'].includes(subscription.plan) && (subscription.status === 'active' || subscription.status === 'trialing'))
 
   return (
     <>
