@@ -78,7 +78,11 @@ ${cvText ? `Candidate CV Information:\n${cvText}` : 'No CV information provided'
 
 IMPORTANT: Do NOT include placeholder text like [Your Name], [Your Current Title], [Your Email], [Your Phone], or [Your Address] in the letter content. If sender information is not provided, simply omit those details from the letter. Focus on creating compelling content without using placeholder text.
 
-Please create a complete motivational letter using ONLY the information provided above. If any section is missing or incomplete, use professional generic language rather than inventing specific details. The letter should be authentic, compelling, and tailored to the specific position and company. Use the CV information to create more personalized and relevant content.`
+IMPORTANT USER REMINDER: After generating the letter, you MUST remind the user that they can fill in their sender information (name, email, phone, address) and recipient information (recipient name, company name, etc.) in the Editor tab under "Letter Editor". This ensures the letter header and salutation are complete and personalized. Users can easily access these fields by going to the Editor tab and selecting the "Letter Editor" section.
+
+Please create a complete motivational letter using ONLY the information provided above. If any section is missing or incomplete, use professional generic language rather than inventing specific details. The letter should be authentic, compelling, and tailored to the specific position and company. Use the CV information to create more personalized and relevant content.
+
+After generating the letter, always remind the user: "Don't forget to fill in your sender information (name, email, phone, address) and recipient details (recipient name, company name, etc.) in the Editor tab under 'Letter Editor' to complete your letter header and personalize the salutation."`
 
     // Call OpenAI API
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
