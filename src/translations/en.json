@@ -940,6 +940,8 @@
   "letter.actions.save": "Save Letter",
   "letter.actions.clear": "Clear Letter",
   
+  "letter.signature.sincerely": "Sincerely,",
+  
   "letter.templates.professional": "Professional",
   "letter.templates.modern": "Modern",
   "letter.templates.executive": "Executive",
@@ -1013,6 +1015,10 @@
   "letter.preview.title": "Letter Preview",
   "letter.preview.full": "Full Preview",
   "letter.preview.download": "Download PDF",
+  "letter.preview.add_recipient_info": "Click to add recipient and company information",
+  "letter.preview.click_to_edit_recipient": "Click to edit recipient information in the Editor tab",
+  "letter.preview.add_opening": "Click to add opening/salutation",
+  "letter.preview.click_to_edit_opening": "Click to edit opening in the Editor tab",
   
   "letter.upload.title": "Upload Information",
   "letter.upload.description": "Upload job descriptions, company information, or paste relevant details to help create a targeted letter.",

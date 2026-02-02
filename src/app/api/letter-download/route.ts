@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { letterData, format } = await request.json()
+    const { letterData, format, language = 'en' } = await request.json()
 
     if (!letterData) {
       return NextResponse.json(
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
     if (format === 'pdf') {
       // Generate PDF using Puppeteer to match preview exactly
-      const pdfBuffer = await generatePDFContent(letterData)
+      const pdfBuffer = await generatePDFContent(letterData, language)
       
       return new NextResponse(pdfBuffer, {
         headers: {
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       })
     } else if (format === 'docx') {
       // Generate Word document using docx library
-      const docxBuffer = await generateWordContent(letterData)
+      const docxBuffer = await generateWordContent(letterData, language)
 
       return new NextResponse(docxBuffer, {
         headers: {
@@ -90,9 +90,19 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function generatePDFContent(letterData: LetterData): Promise<Buffer> {
+// Translation mapping for "Sincerely"
+const SINCERELY_TRANSLATIONS: Record<string, string> = {
+  'en': 'Sincerely,',
+  'nl': 'Hoogachtend,',
+  'fr': 'Cordialement,',
+  'es': 'Atentamente,',
+  'de': 'Mit freundlichen Grüßen,',
+}
+
+async function generatePDFContent(letterData: LetterData, language: string = 'en'): Promise<Buffer> {
   const template = LETTER_TEMPLATES.find((t) => t.id === letterData.template) || LETTER_TEMPLATES[0]
   const styles = template.styles
+  const sincerelyText = SINCERELY_TRANSLATIONS[language] || SINCERELY_TRANSLATIONS['en']
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return new Date().toLocaleDateString('en-US', { 
@@ -305,7 +315,7 @@ async function generatePDFContent(letterData: LetterData): Promise<Buffer> {
           ` : ''}
           
           <div class="signature-section">
-            <div>Sincerely,</div>
+            <div>${sincerelyText}</div>
             <div class="signature-name">${letterData.senderName || 'Your Name'}</div>
             ${letterData.signature ? `<div class="signature-text">${letterData.signature}</div>` : ''}
           </div>
@@ -368,9 +378,10 @@ async function generatePDFContent(letterData: LetterData): Promise<Buffer> {
   return Buffer.from(pdfBuffer)
 }
 
-async function generateWordContent(letterData: LetterData): Promise<Buffer> {
+async function generateWordContent(letterData: LetterData, language: string = 'en'): Promise<Buffer> {
   const template = LETTER_TEMPLATES.find((t) => t.id === letterData.template) || LETTER_TEMPLATES[0]
   const styles = template.styles
+  const sincerelyText = SINCERELY_TRANSLATIONS[language] || SINCERELY_TRANSLATIONS['en']
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return new Date().toLocaleDateString('en-US', { 
@@ -652,7 +663,7 @@ async function generateWordContent(letterData: LetterData): Promise<Buffer> {
     new Paragraph({
       children: [
         new TextRun({
-          text: 'Sincerely,',
+          text: sincerelyText,
           size: 24,
         }),
       ],

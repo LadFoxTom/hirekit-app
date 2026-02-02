@@ -105,11 +105,15 @@ interface SavedCV {
 function LetterPreview({ 
   data, 
   onDataChange, 
-  cvData 
+  cvData,
+  t,
+  onNavigateToEditor
 }: { 
   data: LetterData; 
   onDataChange: (data: LetterData) => void;
   cvData: CVData;
+  t: (key: string) => string;
+  onNavigateToEditor?: () => void;
 }) {
   // Get the selected template or default to professional
   const template = LETTER_TEMPLATES.find((t) => t.id === (data.template || 'professional')) || LETTER_TEMPLATES[0];
@@ -144,19 +148,44 @@ function LetterPreview({
               <p className="mt-2">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </div>
             
-            {data.companyName && (
+            {/* Recipient Information */}
+            {data.companyName || data.recipientName ? (
               <div className="text-sm text-gray-600 mb-6">
                 <p>{data.recipientName || 'Hiring Manager'}</p>
                 {data.recipientTitle && <p>{data.recipientTitle}</p>}
-                <p>{data.companyName}</p>
+                {data.companyName && <p>{data.companyName}</p>}
                 {data.companyAddress && <p>{data.companyAddress}</p>}
+              </div>
+            ) : (
+              <div 
+                className="text-sm text-gray-400 mb-6 p-3 rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-colors"
+                onClick={onNavigateToEditor}
+                title={t('letter.preview.click_to_edit_recipient')}
+              >
+                <div className="flex items-center gap-2">
+                  <FiEdit3 size={14} className="text-gray-400" />
+                  <p className="italic">{t('letter.preview.add_recipient_info')}</p>
+                </div>
               </div>
             )}
           </div>
 
           {/* Letter Body */}
           <div className="space-y-4 text-gray-800 leading-relaxed">
-            <p className="font-medium">{data.opening || 'Dear Hiring Manager,'}</p>
+            {data.opening ? (
+              <p className="font-medium">{data.opening}</p>
+            ) : (
+              <div 
+                className="p-3 rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-colors"
+                onClick={onNavigateToEditor}
+                title={t('letter.preview.click_to_edit_opening')}
+              >
+                <div className="flex items-center gap-2 text-gray-500 italic">
+                  <FiEdit3 size={14} />
+                  <p>{t('letter.preview.add_opening')}</p>
+                </div>
+              </div>
+            )}
             
             {data.body ? (
               typeof data.body === 'string' ? (
@@ -179,7 +208,7 @@ function LetterPreview({
             <p className="mt-6">{data.closing || 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.'}</p>
             
             <div className="mt-8">
-              <p>Sincerely,</p>
+              <p>{t('letter.signature.sincerely')}</p>
               <p className="mt-4 font-medium">{data.signature || cvData.fullName || 'Your Name'}</p>
             </div>
           </div>
@@ -5131,6 +5160,14 @@ export default function HomePage() {
                           data={letterData}
                           onDataChange={setLetterData}
                           cvData={cvData}
+                          t={t}
+                          onNavigateToEditor={() => {
+                            setActiveView('editor');
+                            // Set the editor tab to letter if not already set
+                            if (artifactType !== 'letter') {
+                              setArtifactType('letter');
+                            }
+                          }}
                         />
                       </motion.div>
                     )}

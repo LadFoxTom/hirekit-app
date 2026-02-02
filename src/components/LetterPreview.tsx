@@ -3,6 +3,7 @@
 import React, { memo } from 'react'
 import { LetterData } from '@/types/letter'
 import { LETTER_TEMPLATES } from '@/data/letterTemplates'
+import { useLocale } from '@/context/LocaleContext'
 
 interface LetterPreviewProps {
   data: LetterData
@@ -10,6 +11,7 @@ interface LetterPreviewProps {
 }
 
 const LetterPreview: React.FC<LetterPreviewProps> = memo(({ data, isPreview = false }) => {
+  const { t } = useLocale()
   const template = LETTER_TEMPLATES.find((t) => t.id === data.template) || LETTER_TEMPLATES[0]
   const styles = template.styles
 
@@ -146,7 +148,7 @@ const LetterPreview: React.FC<LetterPreviewProps> = memo(({ data, isPreview = fa
 
       {/* Signature */}
       <div className="mt-8">
-        <div className="mb-2">Sincerely,</div>
+        <div className="mb-2">{t('letter.signature.sincerely')}</div>
         <div className="font-semibold">{data.senderName || 'Your Name'}</div>
         {data.signature && (
           <div className="mt-4 text-gray-600 italic">
