@@ -9,14 +9,15 @@ import LanguageDebug from '@/components/LanguageDebug';
 import { CVData, CV_TEMPLATES } from '@/types/cv';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
   FiSend, FiPaperclip, FiDownload, FiCopy, FiCheck,
   FiFileText, FiEdit3, FiBriefcase, FiUser, FiSettings,
   FiChevronDown, FiMic, FiMicOff, FiMaximize2, FiMinimize2,
   FiClock, FiStar, FiPlus, FiMenu, FiX, FiLogOut, FiCreditCard,
   FiGrid, FiFolder, FiHelpCircle, FiExternalLink, FiAward, FiLock,
   FiTrash2, FiChevronRight, FiMail, FiImage, FiUpload,
-  FiZoomIn, FiZoomOut, FiList, FiCheckCircle, FiClipboard, FiEye
+  FiZoomIn, FiZoomOut, FiList, FiCheckCircle, FiClipboard, FiEye,
+  FiRepeat
 } from 'react-icons/fi';
 import { signOut } from 'next-auth/react';
 import { toast, Toaster } from 'react-hot-toast';
@@ -91,12 +92,12 @@ interface LetterData {
 }
 
 // Suggestion prompts - will be made dynamic based on language
-const getSuggestions = (t: (key: string) => string) => [
+const getSuggestions = (t: (key: string) => string, language: string) => [
   { icon: FiFileText, text: t('landing.main.suggestions.create_cv'), prompt: t('landing.main.suggestions.prompt.create_cv') },
   { icon: FiEdit3, text: t('landing.main.suggestions.update_resume'), prompt: t('landing.main.suggestions.prompt.update_resume') },
-  // Jobs temporarily disabled
-  // { icon: FiBriefcase, text: t('landing.main.suggestions.find_jobs'), prompt: t('landing.main.suggestions.prompt.find_jobs') },
   { icon: FiMail, text: t('landing.main.suggestions.write_letter'), prompt: t('landing.main.suggestions.prompt.write_letter') },
+  // Link to CV/Letter guide page
+  { icon: FiHelpCircle, text: t('landing.main.suggestions.cv_guide') || 'CV Tips & Advice', link: language === 'nl' ? '/voorbeeld/cv' : language === 'es' ? '/ejemplos/cv' : '/examples/cv' },
 ];
 
 // Saved CV type
@@ -1054,7 +1055,7 @@ export default function HomePage() {
   }, [language, t]);
   
   // Get dynamic suggestions based on language
-  const SUGGESTIONS = getSuggestions(t);
+  const SUGGESTIONS = getSuggestions(t, language);
   
   // UI State
   const [isConversationActive, setIsConversationActive] = useState(false);
@@ -1062,6 +1063,7 @@ export default function HomePage() {
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [isArtifactFullscreen, setIsArtifactFullscreen] = useState(false);
   const [artifactType, setArtifactType] = useState<ArtifactType>(null);
+  const [mobileView, setMobileView] = useState<'chat' | 'preview'>('chat');
   const [cvZoom, setCvZoom] = useState(0.75);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   
@@ -3845,7 +3847,13 @@ export default function HomePage() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 + idx * 0.05 }}
-                      onClick={() => handleSuggestionClick(suggestion.prompt)}
+                      onClick={() => {
+                        if ('link' in suggestion && suggestion.link) {
+                          router.push(suggestion.link);
+                        } else if ('prompt' in suggestion && suggestion.prompt) {
+                          handleSuggestionClick(suggestion.prompt);
+                        }
+                      }}
                       className="flex items-center gap-2 px-4 py-2.5 border rounded-xl text-sm transition-all"
                       style={{
                         backgroundColor: 'var(--bg-tertiary)',
@@ -3877,7 +3885,13 @@ export default function HomePage() {
               className="h-[calc(100vh-56px)] flex"
             >
               {/* Left Pane: Chat or Editor */}
-              <div className={`flex flex-col ${isArtifactFullscreen ? 'hidden' : 'w-full lg:w-[45%]'}`} style={{ borderRight: '1px solid var(--border-subtle)' }}>
+              <div className={`flex flex-col ${
+                isArtifactFullscreen
+                  ? 'hidden'
+                  : mobileView === 'preview'
+                    ? 'hidden lg:flex lg:w-[45%]'
+                    : 'w-full lg:w-[45%]'
+              }`} style={{ borderRight: '1px solid var(--border-subtle)' }}>
                 {/* View Toggle (Chat/Editor/Photos) */}
                 <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                   <button
@@ -4597,7 +4611,7 @@ export default function HomePage() {
                 ) : activeView === 'chat' ? (
                   <>
                     {/* Messages */}
-                    <div className="flex-1 overflow-y-auto px-4 py-6">
+                    <div className="flex-1 overflow-y-auto px-4 py-6 pb-20 lg:pb-6">
                       <div className="max-w-2xl mx-auto space-y-6">
                         {messages.map((message) => (
                           <MessageBubble key={message.id} message={message} />
@@ -5000,7 +5014,11 @@ export default function HomePage() {
 
               {/* Artifact Pane */}
               <div className={`flex flex-col ${
-                isArtifactFullscreen ? 'w-full' : 'hidden lg:flex lg:w-[55%]'
+                isArtifactFullscreen
+                  ? 'w-full'
+                  : mobileView === 'preview'
+                    ? 'flex flex-col w-full lg:w-[55%]'
+                    : 'hidden lg:flex lg:w-[55%]'
               }`}
               style={{ backgroundColor: 'var(--bg-secondary)' }}
               >
@@ -5314,13 +5332,41 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Mobile: Show Artifact Toggle */}
-              <button
-                onClick={() => setIsArtifactFullscreen(!isArtifactFullscreen)}
-                className="lg:hidden fixed bottom-20 right-4 z-30 p-4 bg-blue-600 text-white rounded-full shadow-lg shadow-blue-600/30"
-              >
-                {artifactType === 'jobs' ? <FiBriefcase size={20} /> : artifactType === 'letter' ? <FiMail size={20} /> : <FiFileText size={20} />}
-              </button>
+              {/* Mobile Bottom Navigation */}
+              <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0d0d0d]/95 backdrop-blur-sm border-t border-white/10">
+                <div className="flex items-center h-14 safe-area-pb">
+                  {/* Chat Tab */}
+                  <button
+                    onClick={() => setMobileView('chat')}
+                    className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-2 transition-colors ${
+                      mobileView === 'chat' ? 'text-blue-500' : 'text-gray-400'
+                    }`}
+                  >
+                    <FiSend size={20} />
+                    <span className="text-[10px]">Chat</span>
+                  </button>
+
+                  {/* Preview Tab */}
+                  <button
+                    onClick={() => setMobileView('preview')}
+                    className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-2 transition-colors ${
+                      mobileView === 'preview' ? 'text-blue-500' : 'text-gray-400'
+                    }`}
+                  >
+                    {artifactType === 'letter' ? <FiMail size={20} /> : <FiFileText size={20} />}
+                    <span className="text-[10px]">{artifactType === 'letter' ? 'Brief' : 'CV'}</span>
+                  </button>
+
+                  {/* Toggle CV/Letter */}
+                  <button
+                    onClick={() => setArtifactType(artifactType === 'letter' ? 'cv' : 'letter')}
+                    className="flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-gray-400 transition-colors"
+                  >
+                    <FiRepeat size={20} />
+                    <span className="text-[10px]">{artifactType === 'letter' ? 'CV' : 'Brief'}</span>
+                  </button>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

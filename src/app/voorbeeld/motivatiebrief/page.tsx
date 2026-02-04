@@ -1,21 +1,21 @@
 import { Metadata } from 'next'
-import ExamplesOverviewPage from '@/components/examples/ExamplesOverviewPage'
+import CVAdvisorPage from '@/components/examples/CVAdvisorPage'
 import type { Language } from '@/data/professions'
 
 export const metadata: Metadata = {
-  title: 'Motivatiebrief Voorbeelden per Beroep | LadderFox',
-  description: 'Bekijk professionele motivatiebrief voorbeelden per beroep. Leer wat een goede motivatiebrief maakt en laat je inspireren om je eigen brief te maken.',
+  title: 'Motivatiebrief Gids & Advies | LadderFox',
+  description: 'Krijg gepersonaliseerd advies voor je motivatiebrief op basis van je land, sector en beroep. Ontdek wat recruiters zoeken.',
   keywords: [
-    'motivatiebrief voorbeelden',
-    'motivatiebrief voorbeeld',
-    'sollicitatiebrief voorbeelden',
+    'motivatiebrief advies',
+    'motivatiebrief tips',
+    'sollicitatiebrief voorbeeld',
     'professionele motivatiebrief',
     'brief per beroep',
     'motivatiebrief nederland'
   ],
   openGraph: {
-    title: 'Motivatiebrief Voorbeelden per Beroep | LadderFox',
-    description: 'Bekijk professionele motivatiebrief voorbeelden per beroep. Leer wat een goede motivatiebrief maakt.',
+    title: 'Motivatiebrief Gids & Advies | LadderFox',
+    description: 'Krijg gepersonaliseerd advies voor je motivatiebrief op basis van je land, sector en beroep.',
     type: 'website',
     locale: 'nl_NL'
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function DutchLetterExamplesOverviewPage() {
+export default function DutchLetterAdvisorPage() {
   const language: Language = 'nl'
-  return <ExamplesOverviewPage type="letter" language={language} />
+  return <CVAdvisorPage type="letter" language={language} />
 }

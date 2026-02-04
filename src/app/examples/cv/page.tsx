@@ -1,22 +1,22 @@
 import { Metadata } from 'next'
-import ExamplesOverviewPage from '@/components/examples/ExamplesOverviewPage'
+import CVAdvisorPage from '@/components/examples/CVAdvisorPage'
 import type { Language } from '@/data/professions'
 
 export const metadata: Metadata = {
-  title: 'CV Examples by Profession | LadderFox',
-  description: 'Browse professional CV examples by profession. Learn what makes a great CV and get inspired to create your own professional resume.',
+  title: 'CV Guide & Advice | LadderFox',
+  description: 'Get personalized CV advice based on your country, sector, and profession. Discover what recruiters are looking for and create a professional CV.',
   keywords: [
-    'cv examples',
+    'cv advice',
+    'cv tips',
     'resume examples',
-    'cv template',
     'professional cv',
     'cv by profession',
     'cv samples',
-    'curriculum vitae examples'
+    'curriculum vitae tips'
   ],
   openGraph: {
-    title: 'CV Examples by Profession | LadderFox',
-    description: 'Browse professional CV examples by profession. Learn what makes a great CV and get inspired.',
+    title: 'CV Guide & Advice | LadderFox',
+    description: 'Get personalized CV advice based on your country, sector, and profession.',
     type: 'website',
     locale: 'en_US'
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function CVExamplesOverviewPage() {
+export default function CVAdvisorPageEN() {
   const language: Language = 'en'
-  return <ExamplesOverviewPage type="cv" language={language} />
+  return <CVAdvisorPage type="cv" language={language} />
 }

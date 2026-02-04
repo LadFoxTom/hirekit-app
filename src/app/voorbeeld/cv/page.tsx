@@ -1,22 +1,22 @@
 import { Metadata } from 'next'
-import ExamplesOverviewPage from '@/components/examples/ExamplesOverviewPage'
+import CVAdvisorPage from '@/components/examples/CVAdvisorPage'
 import type { Language } from '@/data/professions'
 
 export const metadata: Metadata = {
-  title: 'CV Voorbeelden per Beroep | LadderFox',
-  description: 'Bekijk professionele CV voorbeelden per beroep. Leer wat een goed CV maakt en laat je inspireren om je eigen professionele CV te maken.',
+  title: 'CV Gids & Advies | LadderFox',
+  description: 'Krijg gepersonaliseerd CV advies op basis van je land, sector en beroep. Ontdek wat recruiters zoeken en maak een professioneel CV.',
   keywords: [
-    'cv voorbeelden',
+    'cv advies',
+    'cv tips',
     'cv voorbeeld',
-    'cv template',
     'professioneel cv',
     'cv per beroep',
-    'cv voorbeelden nederland',
-    'curriculum vitae voorbeelden'
+    'cv nederland',
+    'curriculum vitae tips'
   ],
   openGraph: {
-    title: 'CV Voorbeelden per Beroep | LadderFox',
-    description: 'Bekijk professionele CV voorbeelden per beroep. Leer wat een goed CV maakt en laat je inspireren.',
+    title: 'CV Gids & Advies | LadderFox',
+    description: 'Krijg gepersonaliseerd CV advies op basis van je land, sector en beroep.',
     type: 'website',
     locale: 'nl_NL'
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function DutchCVExamplesOverviewPage() {
+export default function DutchCVAdvisorPage() {
   const language: Language = 'nl'
-  return <ExamplesOverviewPage type="cv" language={language} />
+  return <CVAdvisorPage type="cv" language={language} />
 }

@@ -1,21 +1,21 @@
 import { Metadata } from 'next'
-import ExamplesOverviewPage from '@/components/examples/ExamplesOverviewPage'
+import CVAdvisorPage from '@/components/examples/CVAdvisorPage'
 import type { Language } from '@/data/professions'
 
 export const metadata: Metadata = {
-  title: 'Motivational Letter Examples by Profession | LadderFox',
-  description: 'Browse professional motivational letter examples by profession. Learn what makes a great cover letter and get inspired to create your own.',
+  title: 'Cover Letter Guide & Advice | LadderFox',
+  description: 'Get personalized cover letter advice based on your country, sector, and profession. Discover what recruiters are looking for.',
   keywords: [
-    'cover letter examples',
-    'motivational letter examples',
+    'cover letter advice',
+    'cover letter tips',
     'cover letter template',
     'professional cover letter',
     'letter by profession',
-    'application letter examples'
+    'application letter tips'
   ],
   openGraph: {
-    title: 'Motivational Letter Examples by Profession | LadderFox',
-    description: 'Browse professional motivational letter examples by profession. Learn what makes a great cover letter.',
+    title: 'Cover Letter Guide & Advice | LadderFox',
+    description: 'Get personalized cover letter advice based on your country, sector, and profession.',
     type: 'website',
     locale: 'en_US'
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   }
 }
 
-export default function LetterExamplesOverviewPage() {
+export default function LetterAdvisorPageEN() {
   const language: Language = 'en'
-  return <ExamplesOverviewPage type="letter" language={language} />
+  return <CVAdvisorPage type="letter" language={language} />
 }

@@ -845,4 +845,9 @@ ul, ol {
 
 li {
   margin-bottom: 0.25rem;
+}
+
+/* Safe area for iOS home indicator */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 } 

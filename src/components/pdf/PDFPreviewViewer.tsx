@@ -675,7 +675,7 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
               </button>
             </motion.div>
           ) : isMobile && pdfUrl ? (
-            /* Mobile: Show actual PDF */
+            /* Mobile: Show PDF preview (restricted for free users) */
             <motion.div
               key="mobile-preview"
               initial={{ opacity: 0, y: 10 }}
@@ -684,62 +684,99 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
               className="w-full"
             >
               {/* Mobile info banner */}
-              <div className="bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-3 text-white mb-4 rounded-t-lg">
+              <div className={`px-4 py-3 text-white mb-4 rounded-t-lg ${
+                canDownloadPDF
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500'
+                  : 'bg-gradient-to-r from-amber-500 to-orange-500'
+              }`}>
                 <div className="flex items-center gap-2 text-sm font-medium">
-                  <FiFileText size={16} />
-                  <span>CV Preview</span>
+                  {canDownloadPDF ? <FiFileText size={16} /> : <FiLock size={16} />}
+                  <span>{canDownloadPDF ? 'CV Preview' : 'Preview Mode'}</span>
                 </div>
                 <p className="text-xs text-white/80 mt-1">
-                  Tap download to get the full PDF
+                  {canDownloadPDF
+                    ? 'Tap download to get the full PDF'
+                    : 'Upgrade to Pro to download your CV'
+                  }
                 </p>
               </div>
-              
-              {/* PDF Preview - Show actual PDF */}
+
+              {/* PDF Preview - Show actual PDF only for Pro users, otherwise show preview image */}
               <div className="bg-white rounded-lg shadow-lg overflow-hidden mx-auto" style={{ maxWidth: '100%', width: '100%' }}>
-                <div 
-                  className="overflow-auto bg-white"
-                  style={{ 
-                    minHeight: '600px',
-                    maxHeight: '80vh',
-                    maxWidth: '100%',
-                    width: '100%',
-                    overflowX: 'hidden'
-                  }}
-                >
-                  {/* Embed PDF using object tag for mobile compatibility */}
-                  <object
-                    data={pdfUrl}
-                    type="application/pdf"
-                    className="w-full"
-                    style={{ minHeight: '600px', maxWidth: '100%', width: '100%' }}
+                {canDownloadPDF ? (
+                  <div
+                    className="overflow-auto bg-white"
+                    style={{
+                      minHeight: '600px',
+                      maxHeight: '80vh',
+                      maxWidth: '100%',
+                      width: '100%',
+                      overflowX: 'hidden'
+                    }}
                   >
-                    <div className="p-8 text-center">
-                      <p className="text-gray-500 mb-4">Your browser doesn't support PDF preview.</p>
-                      <button
-                        onClick={handleDownload}
-                        disabled={!canDownloadPDF}
-                        className={`px-4 py-2 text-white rounded-lg transition-all disabled:opacity-50 ${
-                          canDownloadPDF 
-                            ? 'bg-blue-500 hover:bg-blue-600' 
-                            : 'bg-gray-500 cursor-not-allowed'
-                        }`}
-                      >
-                        {canDownloadPDF ? 'Download PDF' : 'Upgrade to Download'}
-                      </button>
+                    {/* Embed PDF using object tag for mobile compatibility - Pro users only */}
+                    <object
+                      data={pdfUrl}
+                      type="application/pdf"
+                      className="w-full"
+                      style={{ minHeight: '600px', maxWidth: '100%', width: '100%' }}
+                    >
+                      <div className="p-8 text-center">
+                        <p className="text-gray-500 mb-4">Your browser doesn't support PDF preview.</p>
+                        <button
+                          onClick={handleDownload}
+                          className="px-4 py-2 text-white rounded-lg transition-all bg-blue-500 hover:bg-blue-600"
+                        >
+                          Download PDF
+                        </button>
+                      </div>
+                    </object>
+                  </div>
+                ) : (
+                  /* Free users: Show preview as image (no native download) */
+                  <div
+                    className="relative bg-gray-100"
+                    style={{
+                      minHeight: '500px',
+                      maxWidth: '100%',
+                      width: '100%'
+                    }}
+                  >
+                    {/* PDF rendered as image using canvas - prevents native browser download */}
+                    <iframe
+                      src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                      className="w-full pointer-events-none"
+                      style={{
+                        minHeight: '500px',
+                        maxWidth: '100%',
+                        width: '100%',
+                        border: 'none'
+                      }}
+                      title="CV Preview"
+                    />
+                    {/* Overlay to prevent interaction with PDF viewer controls */}
+                    <div className="absolute inset-0 bg-transparent" />
+                    {/* Upgrade overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-16">
+                      <div className="text-center text-white">
+                        <FiLock size={24} className="mx-auto mb-2" />
+                        <p className="font-medium mb-1">Preview Only</p>
+                        <p className="text-sm text-white/80">Upgrade to download your CV</p>
+                      </div>
                     </div>
-                  </object>
-                </div>
+                  </div>
+                )}
               </div>
-              
-              {/* Mobile download section */}
+
+              {/* Mobile download/upgrade section */}
               <div className="mt-4 px-4" style={{ maxWidth: '100%', width: '100%' }}>
                 <button
                   onClick={handleDownload}
-                  disabled={isDownloading || subscriptionLoading || !canDownloadPDF}
+                  disabled={isDownloading || subscriptionLoading}
                   className={`w-full flex items-center justify-center gap-2 py-4 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-70 ${
-                    canDownloadPDF 
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600' 
-                      : 'bg-gray-500 hover:bg-gray-600 cursor-not-allowed'
+                    canDownloadPDF
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600'
+                      : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600'
                   }`}
                 >
                   {isDownloading ? (
@@ -760,7 +797,7 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
                   )}
                 </button>
                 <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">
-                  {canDownloadPDF 
+                  {canDownloadPDF
                     ? 'Your CV will be downloaded as a professional PDF'
                     : 'Upgrade to a premium plan to download your CV as PDF'
                   }
