@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { pdf } from '@react-pdf/renderer'
 import { CVDocumentPDF, CVTemplate, TEMPLATE_INFO } from './CVDocumentPDF'
 import { CVData } from '@/types/cv'
-import { 
+import {
   FiChevronLeft, FiChevronRight, FiDownload, FiZoomIn, FiZoomOut,
   FiLayout, FiDroplet, FiCheck, FiEye, FiFileText, FiLock
 } from 'react-icons/fi'
@@ -16,7 +16,8 @@ import { useSubscription } from '@/hooks/useSubscription'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 
-// No longer need CVPreview for mobile - showing actual PDF instead
+// Import CVPreview for HTML-based mobile preview (mobile browsers can't render embedded PDFs)
+import { CVPreview } from '@/components/CVPreview'
 
 // Detect mobile device
 const isMobileDevice = (): boolean => {
@@ -674,8 +675,8 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
                 Retry
               </button>
             </motion.div>
-          ) : isMobile && pdfUrl ? (
-            /* Mobile: Show PDF preview (restricted for free users) */
+          ) : isMobile && data ? (
+            /* Mobile: Show HTML-based CV preview (mobile browsers can't render embedded PDFs) */
             <motion.div
               key="mobile-preview"
               initial={{ opacity: 0, y: 10 }}
@@ -684,7 +685,7 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
               className="w-full"
             >
               {/* Mobile info banner */}
-              <div className={`px-4 py-3 text-white mb-4 rounded-t-lg ${
+              <div className={`px-4 py-3 text-white mb-4 rounded-lg ${
                 canDownloadPDF
                   ? 'bg-gradient-to-r from-blue-500 to-purple-500'
                   : 'bg-gradient-to-r from-amber-500 to-orange-500'
@@ -701,68 +702,31 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
                 </p>
               </div>
 
-              {/* PDF Preview - Show actual PDF only for Pro users, otherwise show preview image */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden mx-auto" style={{ maxWidth: '100%', width: '100%' }}>
-                {canDownloadPDF ? (
-                  <div
-                    className="overflow-auto bg-white"
-                    style={{
-                      minHeight: '600px',
-                      maxHeight: '80vh',
-                      maxWidth: '100%',
-                      width: '100%',
-                      overflowX: 'hidden'
-                    }}
-                  >
-                    {/* Embed PDF using object tag for mobile compatibility - Pro users only */}
-                    <object
-                      data={pdfUrl}
-                      type="application/pdf"
-                      className="w-full"
-                      style={{ minHeight: '600px', maxWidth: '100%', width: '100%' }}
-                    >
-                      <div className="p-8 text-center">
-                        <p className="text-gray-500 mb-4">Your browser doesn't support PDF preview.</p>
-                        <button
-                          onClick={handleDownload}
-                          className="px-4 py-2 text-white rounded-lg transition-all bg-blue-500 hover:bg-blue-600"
-                        >
-                          Download PDF
-                        </button>
-                      </div>
-                    </object>
+              {/* HTML-based CV Preview - renders natively on mobile */}
+              <div className="relative bg-white rounded-lg shadow-lg overflow-hidden mx-auto" style={{ maxWidth: '100%', width: '100%' }}>
+                <div
+                  className="overflow-auto"
+                  style={{
+                    maxHeight: '70vh',
+                    maxWidth: '100%',
+                    width: '100%',
+                    overflowX: 'auto',
+                    WebkitOverflowScrolling: 'touch'
+                  }}
+                >
+                  {/* Scale down the CV preview to fit mobile screens */}
+                  <div style={{ transform: 'scale(0.65)', transformOrigin: 'top left', width: '154%' }}>
+                    <CVPreview data={data} isPreview={true} />
                   </div>
-                ) : (
-                  /* Free users: Show preview as image (no native download) */
-                  <div
-                    className="relative bg-gray-100"
-                    style={{
-                      minHeight: '500px',
-                      maxWidth: '100%',
-                      width: '100%'
-                    }}
-                  >
-                    {/* PDF rendered as image using canvas - prevents native browser download */}
-                    <iframe
-                      src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                      className="w-full pointer-events-none"
-                      style={{
-                        minHeight: '500px',
-                        maxWidth: '100%',
-                        width: '100%',
-                        border: 'none'
-                      }}
-                      title="CV Preview"
-                    />
-                    {/* Overlay to prevent interaction with PDF viewer controls */}
-                    <div className="absolute inset-0 bg-transparent" />
-                    {/* Upgrade overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-16">
-                      <div className="text-center text-white">
-                        <FiLock size={24} className="mx-auto mb-2" />
-                        <p className="font-medium mb-1">Preview Only</p>
-                        <p className="text-sm text-white/80">Upgrade to download your CV</p>
-                      </div>
+                </div>
+
+                {/* Upgrade overlay for free users */}
+                {!canDownloadPDF && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 pt-20">
+                    <div className="text-center text-white">
+                      <FiLock size={24} className="mx-auto mb-2" />
+                      <p className="font-medium mb-1">Preview Only</p>
+                      <p className="text-sm text-white/80">Upgrade to download your CV</p>
                     </div>
                   </div>
                 )}

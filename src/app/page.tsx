@@ -3189,77 +3189,70 @@ export default function HomePage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="px-6 py-4 flex flex-nowrap items-stretch gap-3 justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
-                  <button
-                    onClick={handleLeaveCancel}
-                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0 flex items-center justify-center"
-                    style={{ 
-                      color: 'var(--text-primary)',
-                      backgroundColor: 'var(--bg-elevated)',
-                      border: '1px solid var(--border-medium)',
-                      minHeight: '40px'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                      e.currentTarget.style.borderColor = 'var(--border-medium)';
-                      e.currentTarget.style.transform = 'translateY(-1px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
-                      e.currentTarget.style.borderColor = 'var(--border-medium)';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                  >
-                    <span className="whitespace-nowrap">{t('cv_editor.leave_cancel')}</span>
-                  </button>
-                  <button
-                    onClick={handleLeaveWithoutSaving}
-                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex-shrink-0 flex items-center justify-center"
-                    style={{ 
-                      color: '#ef4444',
-                      backgroundColor: 'var(--bg-elevated)',
-                      border: '1px solid var(--border-medium)',
-                      minHeight: '40px'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-                      e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-                      e.currentTarget.style.transform = 'translateY(-1px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
-                      e.currentTarget.style.borderColor = 'var(--border-medium)';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                  >
-                    <span className="whitespace-nowrap">{t('cv_editor.leave_without_saving')}</span>
-                  </button>
+                <div className="px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-stretch gap-2 sm:gap-3 sm:justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
+                  {/* On mobile: Save button first (most important action) */}
                   <button
                     onClick={handleLeaveSave}
                     disabled={isSavingBeforeLeave}
-                    className="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 flex items-center justify-center"
+                    className="order-1 sm:order-3 w-full sm:w-auto px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                     style={{
                       backgroundColor: 'var(--color-ladderfox-blue)',
                       color: '#ffffff',
                       boxShadow: '0 2px 8px rgba(59, 130, 246, 0.25)',
-                      minHeight: '40px'
+                      minHeight: '44px'
                     }}
                     onMouseEnter={(e) => {
                       if (!isSavingBeforeLeave) {
                         e.currentTarget.style.backgroundColor = '#2563eb';
-                        e.currentTarget.style.transform = 'translateY(-1px)';
                         e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.35)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!isSavingBeforeLeave) {
                         e.currentTarget.style.backgroundColor = 'var(--color-ladderfox-blue)';
-                        e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = '0 2px 8px rgba(59, 130, 246, 0.25)';
                       }
                     }}
                   >
-                    <span className="whitespace-nowrap">{isSavingBeforeLeave ? t('pricing.processing') : t('cv_editor.save_continue')}</span>
+                    <span>{isSavingBeforeLeave ? t('pricing.processing') : t('cv_editor.save_continue')}</span>
+                  </button>
+                  <button
+                    onClick={handleLeaveWithoutSaving}
+                    className="order-2 w-full sm:w-auto px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center justify-center"
+                    style={{
+                      color: '#ef4444',
+                      backgroundColor: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-medium)',
+                      minHeight: '44px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                      e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                    }}
+                  >
+                    <span>{t('cv_editor.leave_without_saving')}</span>
+                  </button>
+                  <button
+                    onClick={handleLeaveCancel}
+                    className="order-3 sm:order-1 w-full sm:w-auto px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center justify-center"
+                    style={{
+                      color: 'var(--text-primary)',
+                      backgroundColor: 'var(--bg-elevated)',
+                      border: '1px solid var(--border-medium)',
+                      minHeight: '44px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                    }}
+                  >
+                    <span>{t('cv_editor.leave_cancel')}</span>
                   </button>
                 </div>
               </div>
@@ -4621,7 +4614,7 @@ export default function HomePage() {
                     </div>
 
                 {/* Input Area */}
-                <div className="p-4" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                <div className="p-4 pb-20 lg:pb-4" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <div className="max-w-2xl mx-auto">
                     {/* Question Limit Indicator */}
                     {!isPro && (
