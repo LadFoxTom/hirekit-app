@@ -16,6 +16,12 @@ const ConsentBanner = dynamic(() => import('@/components/ConsentBanner'), {
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   title: {
     default: 'LadderFox - Create Professional CVs with AI Assistance',
     template: '%s | LadderFox'

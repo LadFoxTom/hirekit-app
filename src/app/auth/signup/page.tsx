@@ -63,6 +63,27 @@ export default function SignupPage() {
     }
   }
 
+  // Handle mobile keyboard - scroll submit button into view when password field is focused
+  React.useEffect(() => {
+    const passwordInput = document.getElementById('signup-password')
+    const submitButton = document.querySelector('form button[type="submit"]')
+    
+    if (!passwordInput || !submitButton) return
+
+    const handleFocus = () => {
+      // Small delay to ensure keyboard is shown
+      setTimeout(() => {
+        submitButton?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }, 300)
+    }
+
+    passwordInput.addEventListener('focus', handleFocus)
+    
+    return () => {
+      passwordInput.removeEventListener('focus', handleFocus)
+    }
+  }, [])
+
   const benefits = [
     'Create unlimited professional CVs',
     'AI-powered content suggestions',
@@ -95,7 +116,7 @@ export default function SignupPage() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center px-4 py-12">
+      <main className="flex-1 flex items-center justify-center px-4 py-12 pb-24 md:pb-12">
         <div className="w-full max-w-4xl flex gap-12 items-center">
           {/* Left: Benefits */}
           <motion.div 
@@ -137,7 +158,8 @@ export default function SignupPage() {
             {/* Google Login */}
             <button
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-6 rounded-xl font-medium hover:bg-gray-100 transition-colors mb-6"
+              type="button"
+              className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-6 rounded-xl font-medium hover:bg-gray-100 transition-colors mb-6 min-h-[48px] touch-manipulation"
             >
               <FcGoogle size={20} />
               {t('auth.continue_with_google')}
@@ -154,47 +176,57 @@ export default function SignupPage() {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                <label htmlFor="signup-name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
                 <div className="relative">
                   <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                   <input
+                    id="signup-name"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name"
-                    className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    autoComplete="name"
+                    inputMode="text"
+                    className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors text-base"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                <label htmlFor="signup-email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
                 <div className="relative">
                   <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                   <input
+                    id="signup-email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    autoComplete="email"
+                    inputMode="email"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors text-base"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                <label htmlFor="signup-password" className="block text-sm font-medium text-gray-300 mb-2">Password</label>
                 <div className="relative">
                   <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                   <input
+                    id="signup-password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    autoComplete="new-password"
+                    className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors text-base"
                     required
                     minLength={8}
                   />
@@ -205,7 +237,7 @@ export default function SignupPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-3 px-6 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-3 px-6 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6 min-h-[48px] touch-manipulation"
               >
                 {isLoading ? (
                   <>
