@@ -201,7 +201,7 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500;
     background: var(--color-ladderfox-blue);
     color: #fff;
     border-radius: 0.5rem;
@@ -215,11 +215,11 @@ body {
   }
 
   .btn-secondary {
-    @apply inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+    @apply inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500;
   }
 
   .input-primary {
-    @apply rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+    @apply rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
   }
 
   .btn-accent {
@@ -345,10 +345,59 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Better focus states for mobile */
+/* Better focus states - only show outline for keyboard navigation, not mouse clicks */
 *:focus {
+  outline: none;
+}
+
+*:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
+}
+
+/* Remove focus outline and ring for buttons, links, and other interactive elements on click */
+button:focus,
+a:focus,
+[role="button"]:focus,
+[tabindex]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  ring: 0 !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Remove focus rings from all buttons on click (but keep for keyboard navigation) */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+  --tw-ring-offset-shadow: none !important;
+  --tw-ring-shadow: none !important;
+  --tw-shadow: none !important;
+}
+
+/* Override all Tailwind focus:ring classes for buttons when clicked (not keyboard) */
+button:focus:not(:focus-visible) *,
+button:focus:not(:focus-visible)::before,
+button:focus:not(:focus-visible)::after {
+  --tw-ring-offset-shadow: none !important;
+  --tw-ring-shadow: none !important;
+}
+
+/* Ensure no ring appears on button focus from mouse clicks */
+button:focus:not(:focus-visible) {
+  --tw-ring-width: 0px !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-color: transparent !important;
 }
 
 /* Mobile-optimized animations */

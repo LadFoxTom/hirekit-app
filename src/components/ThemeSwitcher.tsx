@@ -18,7 +18,8 @@ export function ThemeSwitcher() {
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
-      className="p-2 flex items-center justify-center rounded-lg transition-colors min-w-[44px] min-h-[44px] touch-manipulation"
+      onMouseDown={(e) => e.currentTarget.blur()}
+      className="p-2 flex items-center justify-center rounded-lg transition-colors min-w-[44px] min-h-[44px] touch-manipulation focus:outline-none focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
       style={{
         backgroundColor: isHovered ? 'var(--bg-hover)' : 'transparent',
       }}
