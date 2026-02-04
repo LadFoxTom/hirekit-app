@@ -347,21 +347,21 @@ export default function ApplicationsPage() {
 
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 h-14 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50">
-        <div className="h-full max-w-screen-xl mx-auto px-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button onClick={() => router.push('/')} className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors">
+        <div className="h-full max-w-screen-xl mx-auto px-2 sm:px-4 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 min-w-0">
+            <button onClick={() => router.push('/')} className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors flex-shrink-0">
               <FiChevronLeft size={20} />
             </button>
-            <a href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
+            <a href="/" className="flex items-center gap-2 flex-shrink-0 min-w-0">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white flex-shrink-0">
                 LF
               </div>
-              <span className="font-semibold text-lg hidden sm:block">LadderFox</span>
+              <span className="font-semibold text-lg hidden sm:block whitespace-nowrap">LadderFox</span>
             </a>
           </div>
 
           {/* Language, Theme & User Menu */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             <LanguageSelector onMobileMenuOpen={() => setIsLanguageMenuOpen(true)} />
             <ThemeSwitcher />
             <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
@@ -370,7 +370,7 @@ export default function ApplicationsPage() {
                   console.log('[UserMenu] toggle click (applications)', { wasOpen: isUserMenuOpen });
                   setIsUserMenuOpen(!isUserMenuOpen);
                 }}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 rounded-lg transition-colors flex-shrink-0"
                 style={{ color: 'var(--text-primary)' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
@@ -379,10 +379,10 @@ export default function ApplicationsPage() {
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }}
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium">
+                <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
                   {user?.name?.[0] || 'U'}
                 </div>
-                <FiChevronDown size={14} className={`transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
+                <FiChevronDown size={14} className={`transition-transform hidden sm:block ${isUserMenuOpen ? 'rotate-180' : ''}`} style={{ color: 'var(--text-tertiary)' }} />
               </button>
               
               {/* Desktop: Original dropdown (mobile menu is at root level) */}
@@ -543,6 +543,8 @@ export default function ApplicationsPage() {
                 backgroundColor: 'var(--bg-elevated)',
                 borderLeft: '1px solid var(--border-subtle)',
               }}
+              onClick={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
             >
               <div className="p-4 space-y-4">
                 {/* User Info */}
