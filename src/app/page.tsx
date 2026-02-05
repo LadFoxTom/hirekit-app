@@ -92,12 +92,37 @@ interface LetterData {
 }
 
 // Suggestion prompts - will be made dynamic based on language
+// action: 'instant-cv' | 'instant-letter' | 'update-cv' | 'link'
 const getSuggestions = (t: (key: string) => string, language: string) => [
-  { icon: FiFileText, text: t('landing.main.suggestions.create_cv'), prompt: t('landing.main.suggestions.prompt.create_cv') },
-  { icon: FiEdit3, text: t('landing.main.suggestions.update_resume'), prompt: t('landing.main.suggestions.prompt.update_resume') },
-  { icon: FiMail, text: t('landing.main.suggestions.write_letter'), prompt: t('landing.main.suggestions.prompt.write_letter') },
+  {
+    icon: FiFileText,
+    text: t('landing.main.suggestions.create_cv'),
+    prompt: t('landing.main.suggestions.prompt.create_cv'),
+    action: 'instant-cv' as const,
+    instantResponse: t('landing.main.suggestions.instant.cv_response')
+  },
+  {
+    icon: FiEdit3,
+    text: t('landing.main.suggestions.update_resume'),
+    prompt: t('landing.main.suggestions.prompt.update_resume'),
+    action: 'update-cv' as const,
+    instantResponseLoggedIn: t('landing.main.suggestions.instant.update_cv_logged_in'),
+    instantResponseGuest: t('landing.main.suggestions.instant.update_cv_guest')
+  },
+  {
+    icon: FiMail,
+    text: t('landing.main.suggestions.write_letter'),
+    prompt: t('landing.main.suggestions.prompt.write_letter'),
+    action: 'instant-letter' as const,
+    instantResponse: t('landing.main.suggestions.instant.letter_response')
+  },
   // Link to CV/Letter guide page
-  { icon: FiHelpCircle, text: t('landing.main.suggestions.cv_guide') || 'CV Tips & Advice', link: language === 'nl' ? '/voorbeeld/cv' : language === 'es' ? '/ejemplos/cv' : '/examples/cv' },
+  {
+    icon: FiHelpCircle,
+    text: t('landing.main.suggestions.cv_guide') || 'CV Tips & Advice',
+    link: language === 'nl' ? '/voorbeeld/cv' : language === 'es' ? '/ejemplos/cv' : '/examples/cv',
+    action: 'link' as const
+  },
 ];
 
 // Saved CV type
@@ -1936,10 +1961,59 @@ export default function HomePage() {
     e.target.style.height = Math.min(e.target.scrollHeight, 200) + 'px';
   };
 
-  // Handle suggestion click
+  // Handle suggestion click - now supports instant actions
   const handleSuggestionClick = (prompt: string) => {
     setInputValue(prompt);
     inputRef.current?.focus();
+  };
+
+  // Handle instant action - starts chat immediately with predefined response
+  const handleInstantAction = (suggestion: ReturnType<typeof getSuggestions>[number]) => {
+    const now = Date.now();
+
+    // Create user message
+    const userMessage: Message = {
+      id: `user-${now}`,
+      role: 'user',
+      content: suggestion.prompt || '',
+      timestamp: new Date(),
+    };
+
+    // Determine the instant response based on action type
+    let instantResponse = '';
+    if (suggestion.action === 'instant-cv') {
+      instantResponse = 'instantResponse' in suggestion ? suggestion.instantResponse : '';
+      setArtifactType('cv');
+      // On mobile, switch to preview after a short delay
+      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+        setTimeout(() => setMobileView('preview'), 500);
+      }
+    } else if (suggestion.action === 'instant-letter') {
+      instantResponse = 'instantResponse' in suggestion ? suggestion.instantResponse : '';
+      setArtifactType('letter');
+      // On mobile, switch to preview after a short delay
+      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+        setTimeout(() => setMobileView('preview'), 500);
+      }
+    } else if (suggestion.action === 'update-cv') {
+      instantResponse = isAuthenticated
+        ? ('instantResponseLoggedIn' in suggestion ? suggestion.instantResponseLoggedIn : '')
+        : ('instantResponseGuest' in suggestion ? suggestion.instantResponseGuest : '');
+      setArtifactType('cv');
+    }
+
+    // Create assistant message with instant response
+    const assistantMessage: Message = {
+      id: `assistant-${now}`,
+      role: 'assistant',
+      content: instantResponse,
+      timestamp: new Date(),
+    };
+
+    // Set messages and activate conversation
+    setMessages([userMessage, assistantMessage]);
+    setIsConversationActive(true);
+    setInputValue('');
   };
 
   // Detect artifact type from user input
@@ -3848,10 +3922,10 @@ export default function HomePage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 + idx * 0.05 }}
                       onClick={() => {
-                        if ('link' in suggestion && suggestion.link) {
-                          router.push(suggestion.link);
-                        } else if ('prompt' in suggestion && suggestion.prompt) {
-                          handleSuggestionClick(suggestion.prompt);
+                        if (suggestion.action === 'link' && 'link' in suggestion) {
+                          router.push((suggestion as any).link);
+                        } else if (suggestion.action === 'instant-cv' || suggestion.action === 'instant-letter' || suggestion.action === 'update-cv') {
+                          handleInstantAction(suggestion);
                         }
                       }}
                       className="flex items-center gap-2 px-4 py-2.5 border rounded-xl text-sm transition-all"
