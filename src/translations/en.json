@@ -187,7 +187,15 @@
   "auth.error.reset_failed": "Failed to send reset email. Please try again.",
   "auth.success.account_created": "Account created successfully!",
   "auth.success.logged_in": "Logged in successfully!",
-  
+  "auth.hero_title": "Start building your career today",
+  "auth.password_requirement": "Must be at least 8 characters",
+  "auth.terms_prefix": "By signing up, you agree to our",
+  "auth.terms": "Terms",
+  "auth.and": "and",
+  "auth.privacy_policy": "Privacy Policy",
+  "auth.benefits.export": "Export to PDF & Word",
+  "auth.benefits.premium_templates": "Access 20+ premium templates",
+
   "dashboard.title": "Dashboard",
   "dashboard.welcome_back": "Welcome back, {name}! Manage your documents.",
   "dashboard.new_letter": "New Letter",

@@ -85,10 +85,10 @@ export default function SignupPage() {
   }, [])
 
   const benefits = [
-    'Create unlimited professional CVs',
-    'AI-powered content suggestions',
-    'Export to PDF & Word',
-    'Access 20+ premium templates',
+    t('auth.benefits.unlimited_cvs'),
+    t('auth.benefits.ai_suggestions'),
+    t('auth.benefits.export'),
+    t('auth.benefits.premium_templates'),
   ]
 
   return (
@@ -124,7 +124,7 @@ export default function SignupPage() {
             animate={{ opacity: 1, x: 0 }}
             className="hidden lg:block flex-1"
           >
-            <h2 className="text-2xl font-bold mb-6">Start building your career today</h2>
+            <h2 className="text-2xl font-bold mb-6">{t('auth.hero_title')}</h2>
             <ul className="space-y-4">
               {benefits.map((benefit, idx) => (
                 <motion.li 
@@ -178,7 +178,7 @@ export default function SignupPage() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
               <div>
-                <label htmlFor="signup-name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                <label htmlFor="signup-name" className="block text-sm font-medium text-gray-300 mb-2">{t('auth.name')}</label>
                 <div className="relative">
                   <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                   <input
@@ -186,7 +186,7 @@ export default function SignupPage() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
+                    placeholder={t('auth.placeholder.name')}
                     autoComplete="name"
                     inputMode="text"
                     className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors text-base"
@@ -196,7 +196,7 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label htmlFor="signup-email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                <label htmlFor="signup-email" className="block text-sm font-medium text-gray-300 mb-2">{t('auth.email')}</label>
                 <div className="relative">
                   <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                   <input
@@ -204,7 +204,7 @@ export default function SignupPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
+                    placeholder={t('auth.placeholder.email')}
                     autoComplete="email"
                     inputMode="email"
                     autoCapitalize="none"
@@ -216,7 +216,7 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label htmlFor="signup-password" className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                <label htmlFor="signup-password" className="block text-sm font-medium text-gray-300 mb-2">{t('auth.password')}</label>
                 <div className="relative">
                   <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                   <input
@@ -231,7 +231,7 @@ export default function SignupPage() {
                     minLength={8}
                   />
                 </div>
-                <p className="text-xs text-gray-500 mt-2">Must be at least 8 characters</p>
+                <p className="text-xs text-gray-500 mt-2">{t('auth.password_requirement')}</p>
               </div>
 
               <button
@@ -245,11 +245,11 @@ export default function SignupPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Creating account...
+                    {t('auth.creating_account')}
                   </>
                 ) : (
                   <>
-                    Create account
+                    {t('auth.create_account_button')}
                     <FiArrowRight size={18} />
                   </>
                 )}
@@ -258,17 +258,17 @@ export default function SignupPage() {
 
             {/* Terms */}
             <p className="text-center text-gray-500 text-xs mt-6">
-              By signing up, you agree to our{' '}
-              <Link href="/terms" className="text-blue-400 hover:text-blue-300">Terms</Link>
-              {' '}and{' '}
-              <Link href="/privacy" className="text-blue-400 hover:text-blue-300">Privacy Policy</Link>
+              {t('auth.terms_prefix')}{' '}
+              <Link href="/terms" className="text-blue-400 hover:text-blue-300">{t('auth.terms')}</Link>
+              {' '}{t('auth.and')}{' '}
+              <Link href="/privacy" className="text-blue-400 hover:text-blue-300">{t('auth.privacy_policy')}</Link>
             </p>
 
             {/* Sign in link */}
             <p className="text-center text-gray-400 mt-6">
-              Already have an account?{' '}
+              {t('auth.already_have_account')}{' '}
               <Link href="/auth/login" className="text-blue-400 hover:text-blue-300 font-medium">
-                Sign in
+                {t('auth.sign_in')}
               </Link>
             </p>
           </motion.div>
