@@ -159,14 +159,106 @@ const SECTORS = {
   }
 }
 
-// Navigation sections
-const NAV_SECTIONS = [
-  { id: 'advisor', icon: FiZap, labelKey: 'Smart Advisor' },
-  { id: 'country', icon: FiGlobe, labelKey: 'Country Guide' },
-  { id: 'sector', icon: FiBriefcase, labelKey: 'Sector Tips' },
-  { id: 'checklist', icon: FiCheckCircle, labelKey: 'Quick Checklist' },
-  { id: 'start', icon: FiArrowRight, labelKey: 'Start Building' }
-]
+// Navigation sections with translations
+const NAV_SECTIONS = {
+  advisor: {
+    id: 'advisor',
+    icon: FiZap,
+    labels: { en: 'Smart Advisor', nl: 'Slim Advies', es: 'Asesor Inteligente', de: 'Smarter Berater', fr: 'Conseiller Intelligent' }
+  },
+  country: {
+    id: 'country',
+    icon: FiGlobe,
+    labels: { en: 'Country Guide', nl: 'Landengids', es: 'Guía por País', de: 'Länderführer', fr: 'Guide par Pays' }
+  },
+  sector: {
+    id: 'sector',
+    icon: FiBriefcase,
+    labels: { en: 'Sector Tips', nl: 'Sectortips', es: 'Consejos por Sector', de: 'Branchentipps', fr: 'Conseils Secteur' }
+  },
+  checklist: {
+    id: 'checklist',
+    icon: FiCheckCircle,
+    labels: { en: 'Quick Checklist', nl: 'Snelle Checklist', es: 'Lista Rápida', de: 'Schnelle Checkliste', fr: 'Checklist Rapide' }
+  },
+  start: {
+    id: 'start',
+    icon: FiArrowRight,
+    labels: { en: 'Start Building', nl: 'Start nu', es: 'Empezar', de: 'Jetzt Starten', fr: 'Commencer' }
+  }
+}
+
+const getNavSections = () => Object.values(NAV_SECTIONS)
+
+// UI translations for the page
+const UI_TRANSLATIONS = {
+  typeName: {
+    cv: { en: 'CV', nl: 'CV', es: 'CV', de: 'Lebenslauf', fr: 'CV' },
+    letter: { en: 'Cover Letter', nl: 'Motivatiebrief', es: 'Carta de Presentación', de: 'Anschreiben', fr: 'Lettre de Motivation' }
+  },
+  letterTab: { en: 'Letter', nl: 'Brief', es: 'Carta', de: 'Brief', fr: 'Lettre' },
+  guideLabel: { en: 'Guide', nl: 'Gids', es: 'Guía', de: 'Leitfaden', fr: 'Guide' },
+  interactive: { en: 'Interactive', nl: 'Interactief', es: 'Interactivo', de: 'Interaktiv', fr: 'Interactif' },
+  hero: {
+    cvTitle: { en: 'Build a Perfect CV', nl: 'Maak een Perfect CV', es: 'Crea un CV Perfecto', de: 'Erstelle einen perfekten Lebenslauf', fr: 'Créez un CV Parfait' },
+    letterTitle: { en: 'Write a Strong Cover Letter', nl: 'Schrijf een Sterke Brief', es: 'Escribe una Carta Convincente', de: 'Schreibe ein starkes Anschreiben', fr: 'Rédigez une Lettre Percutante' },
+    subtitle: { en: 'Get personalized advice based on your country, sector, and profession. Discover what recruiters are looking for.', nl: 'Krijg gepersonaliseerd advies op basis van je land, sector en beroep. Ontdek wat recruiters zoeken.', es: 'Obtén consejos personalizados según tu país, sector y profesión. Descubre lo que buscan los reclutadores.', de: 'Erhalte personalisierte Tipps basierend auf Land, Branche und Beruf.', fr: 'Obtenez des conseils personnalisés selon votre pays, secteur et profession.' }
+  },
+  advisor: {
+    subtitle: { en: 'Select your situation for tailored advice', nl: 'Selecteer je situatie voor advies op maat', es: 'Selecciona tu situación para consejos personalizados', de: 'Wähle deine Situation für maßgeschneiderte Tipps', fr: 'Sélectionnez votre situation pour des conseils adaptés' },
+    country: { en: 'Country', nl: 'Land', es: 'País', de: 'Land', fr: 'Pays' },
+    selectCountry: { en: 'Select country...', nl: 'Kies land...', es: 'Selecciona país...', de: 'Land wählen...', fr: 'Choisir pays...' },
+    selectSector: { en: 'Select sector...', nl: 'Kies sector...', es: 'Selecciona sector...', de: 'Branche wählen...', fr: 'Choisir secteur...' },
+    profession: { en: 'Profession', nl: 'Beroep', es: 'Profesión', de: 'Beruf', fr: 'Métier' },
+    selectProfession: { en: 'Select profession...', nl: 'Kies beroep...', es: 'Selecciona profesión...', de: 'Beruf wählen...', fr: 'Choisir métier...' },
+    yourAdvice: { en: 'Your Personalized Advice', nl: 'Jouw Gepersonaliseerde Advies', es: 'Tu Consejo Personalizado', de: 'Dein personalisierter Rat', fr: 'Vos Conseils Personnalisés' },
+    keywords: { en: 'Important keywords for your sector:', nl: 'Belangrijke keywords voor jouw sector:', es: 'Palabras clave importantes para tu sector:', de: 'Wichtige Keywords für deine Branche:', fr: 'Mots-clés importants pour votre secteur:' }
+  },
+  buttons: {
+    startWith: { en: 'Start Building Your', nl: 'Start met je', es: 'Empieza tu', de: 'Starte dein', fr: 'Commencez votre' },
+    learnMore: { en: 'Learn More', nl: 'Meer informatie', es: 'Más información', de: 'Mehr erfahren', fr: 'En savoir plus' },
+    create: { en: 'Create', nl: 'Maak', es: 'Crear', de: 'Erstellen', fr: 'Créer' },
+    startFree: { en: 'Start Free', nl: 'Start Gratis', es: 'Empezar Gratis', de: 'Kostenlos starten', fr: 'Commencer Gratuitement' }
+  },
+  country: {
+    title: { en: 'CV Conventions by Country', nl: 'CV Conventies per Land', es: 'Convenciones de CV por País', de: 'CV-Konventionen nach Land', fr: 'Conventions CV par Pays' },
+    subtitle: { en: 'Every country has different expectations', nl: 'Elk land heeft andere verwachtingen', es: 'Cada país tiene diferentes expectativas', de: 'Jedes Land hat andere Erwartungen', fr: 'Chaque pays a des attentes différentes' },
+    photo: { en: 'Photo:', nl: 'Foto:', es: 'Foto:', de: 'Foto:', fr: 'Photo:' }
+  },
+  sector: {
+    title: { en: 'Tips by Sector', nl: 'Tips per Sector', es: 'Consejos por Sector', de: 'Tipps nach Branche', fr: 'Conseils par Secteur' },
+    subtitle: { en: 'What recruiters look for in your industry', nl: 'Wat recruiters zoeken in jouw branche', es: 'Lo que buscan los reclutadores en tu industria', de: 'Was Recruiter in deiner Branche suchen', fr: 'Ce que recherchent les recruteurs dans votre secteur' }
+  },
+  checklist: {
+    title: { en: 'Quick Checklist', nl: 'Snelle Checklist', es: 'Lista Rápida', de: 'Schnelle Checkliste', fr: 'Checklist Rapide' },
+    subtitle: { en: "Make sure you don't miss anything", nl: 'Zorg dat je niets vergeet', es: 'Asegúrate de no olvidar nada', de: 'Stelle sicher, dass du nichts vergisst', fr: 'Assurez-vous de ne rien oublier' },
+    essential: { en: 'Essential', nl: 'Essentieel', es: 'Esencial', de: 'Wesentlich', fr: 'Essentiel' },
+    proTips: { en: 'Pro Tips', nl: 'Pro Tips', es: 'Consejos Pro', de: 'Profi-Tipps', fr: 'Conseils Pro' },
+    items: {
+      contact: { en: 'Contact info up-to-date', nl: 'Contactgegevens up-to-date', es: 'Datos de contacto actualizados', de: 'Kontaktdaten aktuell', fr: 'Coordonnées à jour' },
+      experience: { en: 'Relevant work experience', nl: 'Relevante werkervaring', es: 'Experiencia laboral relevante', de: 'Relevante Berufserfahrung', fr: 'Expérience professionnelle pertinente' },
+      education: { en: 'Education & certifications', nl: 'Opleiding & certificaten', es: 'Educación y certificaciones', de: 'Ausbildung & Zertifikate', fr: 'Formation & certifications' },
+      skills: { en: 'Skills section', nl: 'Vaardigheden sectie', es: 'Sección de habilidades', de: 'Fähigkeiten-Bereich', fr: 'Section compétences' },
+      spelling: { en: 'No spelling errors', nl: 'Geen spelfouten', es: 'Sin errores ortográficos', de: 'Keine Rechtschreibfehler', fr: 'Pas de fautes d\'orthographe' }
+    },
+    proItems: {
+      quantify: { en: 'Quantify achievements', nl: 'Kwantificeer resultaten', es: 'Cuantifica logros', de: 'Erfolge quantifizieren', fr: 'Quantifier les réalisations' },
+      actionVerbs: { en: 'Use action verbs', nl: 'Gebruik actieve werkwoorden', es: 'Usa verbos de acción', de: 'Aktive Verben verwenden', fr: 'Utiliser des verbes d\'action' },
+      ats: { en: 'ATS-friendly format', nl: 'ATS-vriendelijke opmaak', es: 'Formato compatible con ATS', de: 'ATS-freundliches Format', fr: 'Format compatible ATS' },
+      customize: { en: 'Customize per job', nl: 'Pas aan per vacature', es: 'Personaliza por puesto', de: 'Pro Stelle anpassen', fr: 'Personnaliser par offre' },
+      concise: { en: 'Keep it concise', nl: 'Houd het beknopt', es: 'Sé conciso', de: 'Kurz und prägnant', fr: 'Restez concis' }
+    }
+  },
+  cta: {
+    ready: { en: 'Ready to create your', nl: 'Klaar om je', es: '¿Listo para crear tu', de: 'Bereit, dein', fr: 'Prêt à créer votre' },
+    readySuffix: { en: '?', nl: ' te maken?', es: '?', de: ' zu erstellen?', fr: ' ?' },
+    aiHelp: { en: 'Our AI assistant will help you create a professional document step by step.', nl: 'Onze AI-assistent helpt je stap voor stap een professioneel document te maken.', es: 'Nuestro asistente de IA te ayudará a crear un documento profesional paso a paso.', de: 'Unser KI-Assistent hilft dir Schritt für Schritt ein professionelles Dokument zu erstellen.', fr: 'Notre assistant IA vous aidera à créer un document professionnel étape par étape.' },
+    noCreditCard: { en: 'No credit card required', nl: 'Geen creditcard nodig', es: 'No se requiere tarjeta de crédito', de: 'Keine Kreditkarte erforderlich', fr: 'Aucune carte de crédit requise' }
+  }
+}
+
+// Helper to get translation
+const getT = (obj: Record<string, string>, lang: string) => obj[lang] || obj.en
 
 function getCategoryName(category: string, language: Language): string {
   const categories: Record<string, Record<string, string>> = {
@@ -198,7 +290,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
 
   const segments = URL_SEGMENTS[language]
   const professionsByCategory = getProfessionsByCategory(language)
-  const typeName = type === 'cv' ? 'CV' : (currentLanguage === 'nl' ? 'Motivatiebrief' : 'Cover Letter')
+  const typeName = getT(UI_TRANSLATIONS.typeName[type], currentLanguage)
 
   const isActiveOrTrialing = subscription?.status === 'active' || subscription?.status === 'trialing'
   const plan = isActiveOrTrialing ? (subscription?.plan || 'free') : 'free'
@@ -246,7 +338,14 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
     return advice
   }
 
-  const ctaUrl = type === 'cv' ? '/' : '/?preferredArtifactType=letter'
+  // Navigate to home with instant action (like home page shortcuts)
+  const handleStartBuilding = () => {
+    // Set localStorage flags for home page to pick up
+    localStorage.setItem('activateSplitscreen', 'true');
+    localStorage.setItem('preferredArtifactType', type);
+    localStorage.setItem('instantAction', type === 'cv' ? 'instant-cv' : 'instant-letter');
+    router.push('/');
+  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
@@ -291,7 +390,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 style={type !== 'letter' ? { color: 'var(--text-secondary)' } : {}}
               >
                 <FiMail size={14} />
-                {currentLanguage === 'nl' ? 'Brief' : 'Letter'}
+                {getT(UI_TRANSLATIONS.letterTab, currentLanguage)}
               </Link>
             </div>
           </div>
@@ -360,7 +459,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
             <div className="absolute inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)} />
             <div className="relative w-72 h-full overflow-y-auto" style={{ backgroundColor: 'var(--bg-secondary)' }}>
               <nav className="p-4 space-y-1">
-                {NAV_SECTIONS.map((section) => (
+                {getNavSections().map((section) => (
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
@@ -370,7 +469,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                     style={activeSection !== section.id ? { color: 'var(--text-secondary)' } : {}}
                   >
                     <section.icon size={18} />
-                    {section.labelKey}
+                    {section.labels[currentLanguage as keyof typeof section.labels] || section.labels.en}
                   </button>
                 ))}
               </nav>
@@ -386,10 +485,10 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
           style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}>
           <div className="p-4">
             <h2 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--text-tertiary)' }}>
-              {typeName} Guide
+              {typeName} {getT(UI_TRANSLATIONS.guideLabel, currentLanguage)}
             </h2>
             <nav className="space-y-1">
-              {NAV_SECTIONS.map((section) => (
+              {getNavSections().map((section) => (
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
@@ -399,7 +498,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                   style={activeSection !== section.id ? { color: 'var(--text-secondary)' } : {}}
                 >
                   <section.icon size={16} />
-                  {section.labelKey}
+                  {section.labels[currentLanguage as keyof typeof section.labels] || section.labels.en}
                   {activeSection === section.id && (
                     <FiChevronRight size={14} className="ml-auto" />
                   )}
@@ -410,13 +509,13 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
 
           {/* Quick CTA in sidebar */}
           <div className="p-4 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
-            <Link
-              href={ctaUrl}
+            <button
+              onClick={handleStartBuilding}
               className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all"
             >
               <FiZap size={16} />
-              Create {typeName}
-            </Link>
+              {getT(UI_TRANSLATIONS.buttons.create, currentLanguage)} {typeName}
+            </button>
           </div>
         </aside>
 
@@ -427,24 +526,21 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
             <div className="max-w-4xl mx-auto">
               <div className="flex items-center gap-2 mb-4">
                 <span className="px-2.5 py-1 text-xs font-semibold rounded-full bg-blue-500/10 text-blue-500">
-                  {type === 'cv' ? 'CV' : 'Letter'} Guide
+                  {typeName} {getT(UI_TRANSLATIONS.guideLabel, currentLanguage)}
                 </span>
                 <span className="px-2.5 py-1 text-xs font-semibold rounded-full"
                   style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-tertiary)' }}>
-                  Interactive
+                  {getT(UI_TRANSLATIONS.interactive, currentLanguage)}
                 </span>
               </div>
               <h1 className="text-3xl lg:text-4xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
                 {type === 'cv'
-                  ? (currentLanguage === 'nl' ? 'Maak een Perfect CV' : 'Build a Perfect CV')
-                  : (currentLanguage === 'nl' ? 'Schrijf een Sterke Brief' : 'Write a Strong Cover Letter')
+                  ? getT(UI_TRANSLATIONS.hero.cvTitle, currentLanguage)
+                  : getT(UI_TRANSLATIONS.hero.letterTitle, currentLanguage)
                 }
               </h1>
               <p className="text-lg max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
-                {currentLanguage === 'nl'
-                  ? 'Krijg gepersonaliseerd advies op basis van je land, sector en beroep. Ontdek wat recruiters zoeken.'
-                  : 'Get personalized advice based on your country, sector, and profession. Discover what recruiters are looking for.'
-                }
+                {getT(UI_TRANSLATIONS.hero.subtitle, currentLanguage)}
               </p>
             </div>
           </section>
@@ -458,10 +554,10 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 </div>
                 <div>
                   <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                    Smart {typeName} Advisor
+                    {getT(NAV_SECTIONS.advisor.labels, currentLanguage)}
                   </h2>
                   <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                    {currentLanguage === 'nl' ? 'Selecteer je situatie voor advies op maat' : 'Select your situation for tailored advice'}
+                    {getT(UI_TRANSLATIONS.advisor.subtitle, currentLanguage)}
                   </p>
                 </div>
               </div>
@@ -473,7 +569,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                   <div className="flex items-center gap-2 mb-3">
                     <FiGlobe size={16} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
-                      {currentLanguage === 'nl' ? 'Land' : 'Country'}
+                      {getT(UI_TRANSLATIONS.advisor.country, currentLanguage)}
                     </span>
                   </div>
                   <select
@@ -486,7 +582,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                       border: '1px solid var(--border-subtle)'
                     }}
                   >
-                    <option value="">{currentLanguage === 'nl' ? 'Kies land...' : 'Select country...'}</option>
+                    <option value="">{getT(UI_TRANSLATIONS.advisor.selectCountry, currentLanguage)}</option>
                     {Object.entries(COUNTRIES).map(([key, country]) => (
                       <option key={key} value={key}>
                         {country.flag} {country.name[currentLanguage as keyof typeof country.name] || country.name.en}
@@ -513,7 +609,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                       border: '1px solid var(--border-subtle)'
                     }}
                   >
-                    <option value="">{currentLanguage === 'nl' ? 'Kies sector...' : 'Select sector...'}</option>
+                    <option value="">{getT(UI_TRANSLATIONS.advisor.selectSector, currentLanguage)}</option>
                     {Object.entries(SECTORS).map(([key, sector]) => (
                       <option key={key} value={key}>
                         {sector.icon} {sector.name[currentLanguage as keyof typeof sector.name] || sector.name.en}
@@ -527,7 +623,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                   <div className="flex items-center gap-2 mb-3">
                     <FiUser size={16} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
-                      {currentLanguage === 'nl' ? 'Beroep' : 'Profession'}
+                      {getT(UI_TRANSLATIONS.advisor.profession, currentLanguage)}
                     </span>
                   </div>
                   <select
@@ -540,7 +636,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                       border: '1px solid var(--border-subtle)'
                     }}
                   >
-                    <option value="">{currentLanguage === 'nl' ? 'Kies beroep...' : 'Select profession...'}</option>
+                    <option value="">{getT(UI_TRANSLATIONS.advisor.selectProfession, currentLanguage)}</option>
                     {Object.entries(professionsByCategory).map(([category, profs]) => (
                       <optgroup key={category} label={getCategoryName(category, currentLanguage as Language)}>
                         {profs.map(({ id, translation }) => (
@@ -568,7 +664,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                     <div className="flex items-center gap-2 mb-4">
                       <FiStar className="text-blue-500" size={18} />
                       <h3 className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-                        {currentLanguage === 'nl' ? 'Jouw Gepersonaliseerde Advies' : 'Your Personalized Advice'}
+                        {getT(UI_TRANSLATIONS.advisor.yourAdvice, currentLanguage)}
                       </h3>
                     </div>
                     <ul className="space-y-2">
@@ -583,7 +679,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                     {selectedSector && SECTORS[selectedSector as keyof typeof SECTORS] && (
                       <div className="mt-4 pt-4 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
                         <p className="text-xs font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>
-                          {currentLanguage === 'nl' ? 'Belangrijke keywords voor jouw sector:' : 'Important keywords for your sector:'}
+                          {getT(UI_TRANSLATIONS.advisor.keywords, currentLanguage)}
                         </p>
                         <div className="flex flex-wrap gap-2">
                           {SECTORS[selectedSector as keyof typeof SECTORS].keywords.map((keyword, i) => (
@@ -601,19 +697,19 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
 
               {/* CTA after advisor */}
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href={ctaUrl}
+                <button
+                  onClick={handleStartBuilding}
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all"
                 >
                   <FiZap size={18} />
-                  {currentLanguage === 'nl' ? `Start met je ${typeName}` : `Start Building Your ${typeName}`}
-                </Link>
+                  {getT(UI_TRANSLATIONS.buttons.startWith, currentLanguage)} {typeName}
+                </button>
                 <button
                   onClick={() => scrollToSection('country')}
                   className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-colors"
                   style={{ backgroundColor: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)' }}
                 >
-                  {currentLanguage === 'nl' ? 'Meer informatie' : 'Learn More'}
+                  {getT(UI_TRANSLATIONS.buttons.learnMore, currentLanguage)}
                   <FiChevronDown size={18} />
                 </button>
               </div>
@@ -629,10 +725,10 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 </div>
                 <div>
                   <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                    {currentLanguage === 'nl' ? 'CV Conventies per Land' : 'CV Conventions by Country'}
+                    {getT(UI_TRANSLATIONS.country.title, currentLanguage)}
                   </h2>
                   <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                    {currentLanguage === 'nl' ? 'Elk land heeft andere verwachtingen' : 'Every country has different expectations'}
+                    {getT(UI_TRANSLATIONS.country.subtitle, currentLanguage)}
                   </p>
                 </div>
               </div>
@@ -654,7 +750,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                           {country.name[currentLanguage as keyof typeof country.name] || country.name.en}
                         </h3>
                         <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                          {currentLanguage === 'nl' ? 'Foto:' : 'Photo:'} {country.conventions.photo} • {country.conventions.length}
+                          {getT(UI_TRANSLATIONS.country.photo, currentLanguage)} {country.conventions.photo} • {country.conventions.length}
                         </p>
                       </div>
                     </div>
@@ -681,10 +777,10 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 </div>
                 <div>
                   <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                    {currentLanguage === 'nl' ? 'Tips per Sector' : 'Tips by Sector'}
+                    {getT(UI_TRANSLATIONS.sector.title, currentLanguage)}
                   </h2>
                   <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                    {currentLanguage === 'nl' ? 'Wat recruiters zoeken in jouw branche' : 'What recruiters look for in your industry'}
+                    {getT(UI_TRANSLATIONS.sector.subtitle, currentLanguage)}
                   </p>
                 </div>
               </div>
@@ -723,10 +819,10 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 </div>
                 <div>
                   <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                    {currentLanguage === 'nl' ? 'Snelle Checklist' : 'Quick Checklist'}
+                    {getT(UI_TRANSLATIONS.checklist.title, currentLanguage)}
                   </h2>
                   <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                    {currentLanguage === 'nl' ? 'Zorg dat je niets vergeet' : 'Make sure you don\'t miss anything'}
+                    {getT(UI_TRANSLATIONS.checklist.subtitle, currentLanguage)}
                   </p>
                 </div>
               </div>
@@ -735,15 +831,15 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
                   <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                     <FiList size={16} />
-                    {currentLanguage === 'nl' ? 'Essentieel' : 'Essential'}
+                    {getT(UI_TRANSLATIONS.checklist.essential, currentLanguage)}
                   </h3>
                   <ul className="space-y-2">
                     {[
-                      currentLanguage === 'nl' ? 'Contactgegevens up-to-date' : 'Contact info up-to-date',
-                      currentLanguage === 'nl' ? 'Relevante werkervaring' : 'Relevant work experience',
-                      currentLanguage === 'nl' ? 'Opleiding & certificaten' : 'Education & certifications',
-                      currentLanguage === 'nl' ? 'Vaardigheden sectie' : 'Skills section',
-                      currentLanguage === 'nl' ? 'Geen spelfouten' : 'No spelling errors'
+                      getT(UI_TRANSLATIONS.checklist.items.contact, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.items.experience, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.items.education, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.items.skills, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.items.spelling, currentLanguage)
                     ].map((item, i) => (
                       <li key={i} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         <div className="w-4 h-4 rounded border flex items-center justify-center"
@@ -758,15 +854,15 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 <div className="rounded-xl p-5" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
                   <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                     <FiAward size={16} />
-                    {currentLanguage === 'nl' ? 'Pro Tips' : 'Pro Tips'}
+                    {getT(UI_TRANSLATIONS.checklist.proTips, currentLanguage)}
                   </h3>
                   <ul className="space-y-2">
                     {[
-                      currentLanguage === 'nl' ? 'Kwantificeer resultaten' : 'Quantify achievements',
-                      currentLanguage === 'nl' ? 'Gebruik actieve werkwoorden' : 'Use action verbs',
-                      currentLanguage === 'nl' ? 'ATS-vriendelijke opmaak' : 'ATS-friendly format',
-                      currentLanguage === 'nl' ? 'Pas aan per vacature' : 'Customize per job',
-                      currentLanguage === 'nl' ? 'Houd het beknopt' : 'Keep it concise'
+                      getT(UI_TRANSLATIONS.checklist.proItems.quantify, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.proItems.actionVerbs, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.proItems.ats, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.proItems.customize, currentLanguage),
+                      getT(UI_TRANSLATIONS.checklist.proItems.concise, currentLanguage)
                     ].map((item, i) => (
                       <li key={i} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         <FiStar size={14} className="text-yellow-500" />
@@ -786,26 +882,20 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 {type === 'cv' ? <FiFileText className="text-white" size={28} /> : <FiMail className="text-white" size={28} />}
               </div>
               <h2 className="text-2xl lg:text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
-                {currentLanguage === 'nl'
-                  ? `Klaar om je ${typeName} te maken?`
-                  : `Ready to create your ${typeName}?`
-                }
+                {getT(UI_TRANSLATIONS.cta.ready, currentLanguage)} {typeName}{getT(UI_TRANSLATIONS.cta.readySuffix, currentLanguage)}
               </h2>
               <p className="text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>
-                {currentLanguage === 'nl'
-                  ? 'Onze AI-assistent helpt je stap voor stap een professioneel document te maken.'
-                  : 'Our AI assistant will help you create a professional document step by step.'
-                }
+                {getT(UI_TRANSLATIONS.cta.aiHelp, currentLanguage)}
               </p>
-              <Link
-                href={ctaUrl}
+              <button
+                onClick={handleStartBuilding}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg font-semibold rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all shadow-lg shadow-blue-500/25"
               >
-                {currentLanguage === 'nl' ? `Start Gratis` : `Start Free`}
+                {getT(UI_TRANSLATIONS.buttons.startFree, currentLanguage)}
                 <FiArrowRight size={20} />
-              </Link>
+              </button>
               <p className="mt-4 text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                {currentLanguage === 'nl' ? 'Geen creditcard nodig' : 'No credit card required'}
+                {getT(UI_TRANSLATIONS.cta.noCreditCard, currentLanguage)}
               </p>
             </div>
           </section>

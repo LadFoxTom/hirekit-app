@@ -1101,7 +1101,8 @@ export default function HomePage() {
     if (typeof window !== 'undefined') {
       const preferred = localStorage.getItem('preferredArtifactType');
       const activateSplitscreen = localStorage.getItem('activateSplitscreen');
-      
+      const instantAction = localStorage.getItem('instantAction');
+
       if (activateSplitscreen === 'true') {
         // Activate splitscreen view (chat overview)
         setIsConversationActive(true);
@@ -1109,7 +1110,7 @@ export default function HomePage() {
         setActiveView('chat');
         localStorage.removeItem('activateSplitscreen'); // Clear after use
       }
-      
+
       if (preferred === 'letter') {
         setArtifactType('letter');
         localStorage.removeItem('preferredArtifactType'); // Clear after use
@@ -1117,14 +1118,61 @@ export default function HomePage() {
         setArtifactType('cv');
         localStorage.removeItem('preferredArtifactType'); // Clear after use
       }
+
+      // Handle instant action from example pages
+      if (instantAction) {
+        const suggestions = getSuggestions(t, language);
+        const suggestion = suggestions.find(s => s.action === instantAction);
+        if (suggestion) {
+          const now = Date.now();
+          const isMobileScreen = window.innerWidth < 1024;
+
+          // Create user message
+          const userMessage: Message = {
+            id: `user-${now}`,
+            role: 'user',
+            content: suggestion.prompt || '',
+            timestamp: new Date(),
+          };
+
+          // Determine instant response based on action type and screen size
+          let instantResponse = '';
+          if (instantAction === 'instant-cv' || instantAction === 'instant-letter') {
+            if (isMobileScreen && 'instantResponseMobile' in suggestion) {
+              instantResponse = (suggestion as any).instantResponseMobile;
+            } else if ('instantResponse' in suggestion) {
+              instantResponse = (suggestion as any).instantResponse;
+            }
+          }
+
+          // Create assistant message
+          const assistantMessage: Message = {
+            id: `assistant-${now}`,
+            role: 'assistant',
+            content: instantResponse,
+            timestamp: new Date(),
+          };
+
+          // Set messages and activate conversation
+          setMessages([userMessage, assistantMessage]);
+          setIsConversationActive(true);
+
+          // On mobile, stay on chat view
+          if (isMobileScreen) {
+            setMobileView('chat');
+          }
+        }
+        localStorage.removeItem('instantAction'); // Clear after use
+      }
     }
-  }, []);
+  }, [t, language]);
   const [activeView, setActiveView] = useState<'chat' | 'editor' | 'photos' | 'templates' | 'ats-checker'>('chat');
   const [templateTab, setTemplateTab] = useState<'cv' | 'letter'>('cv');
   const [photos, setPhotos] = useState<string[]>([]); // Array of photo URLs
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileUserMenuRef = useRef<HTMLDivElement>(null);
   
   // Subscription gating
   // Treat 'trialing' as active (trial users have full access)
@@ -1169,10 +1217,11 @@ export default function HomePage() {
   const sendButtonRef = useRef<HTMLButtonElement>(null);
   const isManualSelectionRef = useRef(false);
   const isLoadingFromLocalStorage = useRef(false);
+  const hasShownLoadToastRef = useRef(false);
 
   // Load CV from localStorage (when redirected from dashboard) - MUST run before photo initialization
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !hasShownLoadToastRef.current) {
       const savedCvData = localStorage.getItem('cvData');
       const savedCvId = localStorage.getItem('saved_cv_id');
       
@@ -1245,6 +1294,7 @@ export default function HomePage() {
           localStorage.removeItem('cv_builder_question_index');
           
           toast.success(t('toast.cv_loaded'));
+          hasShownLoadToastRef.current = true;
           isLoadingFromLocalStorage.current = false;
           setTimeout(() => {
             markAsSaved();
@@ -1296,7 +1346,19 @@ export default function HomePage() {
             
             setIsConversationActive(true);
             setArtifactType('cv');
-            toast.success(t('toast.cv_loaded'));
+
+            // Only show toast if draft contains meaningful CV data
+            const hasMeaningfulData =
+              (draftCv.personalInfo?.name || draftCv.personalInfo?.firstName || draftCv.personalInfo?.lastName) ||
+              (draftCv.experience && draftCv.experience.length > 0) ||
+              (draftCv.education && draftCv.education.length > 0) ||
+              (draftCv.skills && draftCv.skills.length > 0) ||
+              draftCv.summary;
+
+            if (hasMeaningfulData) {
+              toast.success(t('toast.cv_loaded'));
+              hasShownLoadToastRef.current = true;
+            }
             // Set baseline after draft is loaded so we can detect actual changes
             setTimeout(() => {
               const snapshot = JSON.stringify({
@@ -1634,8 +1696,9 @@ export default function HomePage() {
       const target = event.target as Node;
       const clickedInsideButton = userMenuRef.current?.contains(target);
       const clickedInsideDropdown = dropdownRef.current?.contains(target);
-      
-      if (!clickedInsideButton && !clickedInsideDropdown) {
+      const clickedInsideMobileMenu = mobileUserMenuRef.current?.contains(target);
+
+      if (!clickedInsideButton && !clickedInsideDropdown && !clickedInsideMobileMenu) {
         console.log('[UserMenu] Click outside, closing dropdown (home)');
         setIsUserMenuOpen(false);
       }
@@ -1789,7 +1852,7 @@ export default function HomePage() {
         setCurrentCVId(cvId);
         setIsConversationActive(true);
         setArtifactType('cv');
-        toast.success('CV loaded!');
+        toast.success(t('toast.cv_loaded'));
         clearDraft();
         setTimeout(() => {
           markAsSaved();
@@ -2772,7 +2835,75 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Center: New Chat Button (when in conversation) */}
+          {/* Desktop: Toggle between New Chat and Chat Overview */}
+          {isAuthenticated && (
+            <div className="hidden lg:flex items-center gap-2">
+              {isConversationActive && isSidebarOpen ? (
+                /* Show New Chat when Chat Overview is already open */
+                <motion.button
+                  key="new-chat"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  onClick={() => {
+                    setIsConversationActive(false);
+                    setMessages([]);
+                    setCvData({ template: 'modern', layout: { accentColor: '#3b82f6', showIcons: true } });
+                    setCurrentCVId(null);
+                    setActiveView('chat');
+                    // Reset unsaved changes tracking when starting new chat
+                    initialSnapshotRef.current = null;
+                    lastSavedSnapshotRef.current = null;
+                    isDraftLoadedRef.current = false;
+                    setHasUnsavedChanges(false);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+                  style={{
+                    backgroundColor: 'var(--bg-tertiary)',
+                    color: 'var(--text-primary)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                  }}
+                >
+                  <FiPlus size={16} />
+                  <span className="hidden xl:inline">New Chat</span>
+                  <span className="xl:hidden">New</span>
+                </motion.button>
+              ) : (
+                /* Show Chat Overview when sidebar is closed */
+                <motion.button
+                  key="chat-overview"
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => {
+                    // Show full chat overview (split view) like after first message
+                    setActiveView('chat');
+                    setIsConversationActive(true);
+                    setIsSidebarOpen(true);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+                  style={{
+                    backgroundColor: 'var(--bg-tertiary)',
+                    color: 'var(--text-primary)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                  }}
+                >
+                  <FiList size={16} />
+                  <span className="hidden xl:inline">Chat overview</span>
+                  <span className="xl:hidden">Chats</span>
+                </motion.button>
+              )}
+            </div>
+          )}
+
+          {/* Mobile: New Chat Button (only show on mobile when in conversation) */}
           {isConversationActive && (
             <motion.button
               initial={{ opacity: 0, y: -10 }}
@@ -2789,7 +2920,7 @@ export default function HomePage() {
                 isDraftLoadedRef.current = false;
                 setHasUnsavedChanges(false);
               }}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+              className="lg:hidden flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
               style={{
                 backgroundColor: 'var(--bg-tertiary)',
                 color: 'var(--text-primary)',
@@ -2804,36 +2935,6 @@ export default function HomePage() {
               <FiPlus size={16} />
               <span className="hidden sm:inline">New Chat</span>
             </motion.button>
-          )}
-
-          {/* Desktop Chat Overview shortcut */}
-          {isAuthenticated && (
-            <div className="hidden lg:flex items-center gap-2">
-              <motion.button
-                whileTap={{ scale: 0.97 }}
-                onClick={() => {
-                  // Show full chat overview (split view) like after first message
-                  setActiveView('chat');
-                  setIsConversationActive(true);
-                  setIsSidebarOpen(true);
-                }}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
-                style={{
-                  backgroundColor: 'var(--bg-tertiary)',
-                  color: 'var(--text-primary)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
-                }}
-              >
-                <FiList size={16} />
-                <span className="hidden xl:inline">Chat overview</span>
-                <span className="xl:hidden">Chats</span>
-              </motion.button>
-            </div>
           )}
 
           {/* Right: Language Selector, Theme Switcher & User Menu */}
@@ -3005,6 +3106,7 @@ export default function HomePage() {
             
             {/* User Menu - Slide in from right (like hamburger from left) */}
             <motion.aside
+              ref={mobileUserMenuRef}
               initial={{ x: 280 }}
               animate={{ x: 0 }}
               exit={{ x: 280 }}

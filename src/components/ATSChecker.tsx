@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FiCheckCircle, FiXCircle, FiAlertCircle, FiInfo, FiRefreshCw } from 'react-icons/fi';
+import { FiCheckCircle, FiXCircle, FiAlertCircle, FiInfo, FiRefreshCw, FiLock } from 'react-icons/fi';
+import { useAuth } from '@/context/AuthContext';
+import { useLocale } from '@/context/LocaleContext';
+import Link from 'next/link';
 
 interface ATSCheckerProps {
   cvData: any;
@@ -101,9 +104,89 @@ const clearATSCache = () => {
 };
 
 const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
+  const { isAuthenticated } = useAuth();
+  const { t, language } = useLocale();
   const [assessment, setAssessment] = useState<ATSAssessment | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Login prompt translations
+  const loginPromptText = {
+    title: {
+      en: 'Login Required',
+      nl: 'Inloggen Vereist',
+      es: 'Inicio de Sesión Requerido',
+      de: 'Anmeldung Erforderlich',
+      fr: 'Connexion Requise'
+    },
+    description: {
+      en: 'Sign in to use the ATS CV Checker and get detailed feedback on your CV.',
+      nl: 'Log in om de ATS CV Checker te gebruiken en gedetailleerde feedback op je CV te krijgen.',
+      es: 'Inicia sesión para usar el verificador ATS de CV y obtener comentarios detallados sobre tu CV.',
+      de: 'Melden Sie sich an, um den ATS-Lebenslauf-Checker zu verwenden.',
+      fr: 'Connectez-vous pour utiliser le vérificateur ATS de CV.'
+    },
+    loginButton: {
+      en: 'Sign In',
+      nl: 'Inloggen',
+      es: 'Iniciar Sesión',
+      de: 'Anmelden',
+      fr: 'Se Connecter'
+    },
+    signupButton: {
+      en: 'Create Account',
+      nl: 'Account Aanmaken',
+      es: 'Crear Cuenta',
+      de: 'Konto Erstellen',
+      fr: 'Créer un Compte'
+    },
+    freeFeature: {
+      en: 'Free feature for registered users',
+      nl: 'Gratis functie voor geregistreerde gebruikers',
+      es: 'Función gratuita para usuarios registrados',
+      de: 'Kostenlose Funktion für registrierte Benutzer',
+      fr: 'Fonctionnalité gratuite pour les utilisateurs enregistrés'
+    }
+  };
+
+  const getLoginText = (key: keyof typeof loginPromptText) =>
+    loginPromptText[key][language as keyof typeof loginPromptText.title] || loginPromptText[key].en;
+
+  // Show login prompt if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="flex flex-col items-center justify-center p-8 text-center min-h-[400px]">
+        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+          style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+          <FiLock size={32} style={{ color: 'var(--text-tertiary)' }} />
+        </div>
+        <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
+          {getLoginText('title')}
+        </h3>
+        <p className="text-sm mb-6 max-w-md" style={{ color: 'var(--text-secondary)' }}>
+          {getLoginText('description')}
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link
+            href="/auth/login"
+            className="px-6 py-3 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            {getLoginText('loginButton')}
+          </Link>
+          <Link
+            href="/auth/signup"
+            className="px-6 py-3 rounded-lg font-medium transition-colors"
+            style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+          >
+            {getLoginText('signupButton')}
+          </Link>
+        </div>
+        <p className="mt-4 text-xs" style={{ color: 'var(--text-tertiary)' }}>
+          {getLoginText('freeFeature')}
+        </p>
+      </div>
+    );
+  }
 
   // Fetch new assessment (only when explicitly called or CV changes)
   const fetchAssessment = useCallback(async (forceRefresh = false) => {
