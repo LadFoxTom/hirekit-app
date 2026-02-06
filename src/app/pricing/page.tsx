@@ -86,8 +86,9 @@ export default function PricingPage() {
       const target = event.target as Node
       const clickedInsideButton = userMenuRef.current?.contains(target)
       const clickedInsideDropdown = dropdownRef.current?.contains(target)
-      
-      if (!clickedInsideButton && !clickedInsideDropdown) {
+      const clickedInsideMobileMenu = (target as HTMLElement).closest?.('[data-mobile-user-menu]')
+
+      if (!clickedInsideButton && !clickedInsideDropdown && !clickedInsideMobileMenu) {
         console.log('[UserMenu] Click outside, closing dropdown')
         setIsUserMenuOpen(false)
       }
@@ -110,7 +111,34 @@ export default function PricingPage() {
   // Treat 'trialing' as active for badge display
   const isActiveSubscription = subscription?.status === 'active' || subscription?.status === 'trialing'
   const subBadge = isActiveSubscription && subscription?.plan !== 'free' ? 'Pro' : 'Free'
-  
+
+  // Feature translation mapping
+  const featureToTranslationKey: Record<string, string> = {
+    'Unlimited CVs & letters': 'pricing.features.unlimited_cvs',
+    '3 basic templates': 'pricing.features.basic_templates',
+    'Preview only (no downloads)': 'pricing.features.preview_only',
+    '10 chat prompts per day': 'pricing.features.chat_prompts_day',
+    'Watermark on preview': 'pricing.features.watermark',
+    'Upgrade prompts on premium features': 'pricing.features.upgrade_prompts',
+    'All premium templates (20+)': 'pricing.features.all_templates',
+    'PDF & DOCX export': 'pricing.features.pdf_docx_export',
+    'AI writing assistance (unlimited prompts)': 'pricing.features.ai_unlimited',
+    'No watermarks': 'pricing.features.no_watermarks',
+    'Cover letter builder': 'pricing.features.cover_letter',
+    'Auto-save & version history': 'pricing.features.auto_save',
+    'Everything in Basic': 'pricing.features.everything_basic',
+    'Team collaboration': 'pricing.features.team_collab',
+    'Bulk operations': 'pricing.features.bulk_ops',
+    'Priority support': 'pricing.features.priority_support',
+    'API access': 'pricing.features.api_access',
+    'Advanced analytics': 'pricing.features.advanced_analytics',
+  }
+
+  const translateFeature = (feature: string): string => {
+    const key = featureToTranslationKey[feature]
+    return key ? t(key) : feature
+  }
+
   // Menu Item Component (matching homepage)
   function MenuItem({ 
     icon: Icon, 
@@ -872,7 +900,7 @@ export default function PricingPage() {
                     {STRIPE_PLANS.free.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <FiCheck className="mt-0.5 flex-shrink-0" size={16} style={{ color: 'var(--text-tertiary)' }} />
-                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{feature}</span>
+                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{translateFeature(feature)}</span>
                       </li>
                     ))}
                     <li className="flex items-start gap-3">
@@ -983,7 +1011,7 @@ export default function PricingPage() {
                     {STRIPE_PLANS.basic.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <FiCheck className="text-blue-400 mt-0.5 flex-shrink-0" size={16} />
-                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{feature}</span>
+                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{translateFeature(feature)}</span>
                       </li>
                     ))}
                   </ul>

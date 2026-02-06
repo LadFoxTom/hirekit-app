@@ -5948,6 +5948,7 @@ export default function HomePage() {
                           data={letterData}
                           onDataChange={setLetterData}
                           showControls={false}
+                          externalZoom={cvZoom}
                         />
                       </motion.div>
                     )}

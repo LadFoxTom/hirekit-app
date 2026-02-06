@@ -171,8 +171,9 @@ export default function ApplicationsPage() {
       const target = event.target as Node
       const clickedInsideButton = userMenuRef.current?.contains(target)
       const clickedInsideDropdown = dropdownRef.current?.contains(target)
-      
-      if (!clickedInsideButton && !clickedInsideDropdown) {
+      const clickedInsideMobileMenu = (target as HTMLElement).closest?.('[data-mobile-user-menu]')
+
+      if (!clickedInsideButton && !clickedInsideDropdown && !clickedInsideMobileMenu) {
         console.log('[UserMenu] Click outside, closing dropdown (applications)')
         setIsUserMenuOpen(false);
       }

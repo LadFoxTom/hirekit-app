@@ -165,8 +165,9 @@ export default function SettingsPage() {
       const target = event.target as Node
       const clickedInsideButton = userMenuRef.current?.contains(target)
       const clickedInsideDropdown = dropdownRef.current?.contains(target)
-      
-      if (!clickedInsideButton && !clickedInsideDropdown) {
+      const clickedInsideMobileMenu = (target as HTMLElement).closest?.('[data-mobile-user-menu]')
+
+      if (!clickedInsideButton && !clickedInsideDropdown && !clickedInsideMobileMenu) {
         console.log('[UserMenu] Click outside, closing dropdown (settings)')
         setIsUserMenuOpen(false)
       }
@@ -284,6 +285,33 @@ export default function SettingsPage() {
 
   const getPlanFeatures = (plan: string) => {
     return STRIPE_PLANS[plan as keyof typeof STRIPE_PLANS]?.features || []
+  }
+
+  // Feature translation mapping
+  const featureToTranslationKey: Record<string, string> = {
+    'Unlimited CVs & letters': 'pricing.features.unlimited_cvs',
+    '3 basic templates': 'pricing.features.basic_templates',
+    'Preview only (no downloads)': 'pricing.features.preview_only',
+    '10 chat prompts per day': 'pricing.features.chat_prompts_day',
+    'Watermark on preview': 'pricing.features.watermark',
+    'Upgrade prompts on premium features': 'pricing.features.upgrade_prompts',
+    'All premium templates (20+)': 'pricing.features.all_templates',
+    'PDF & DOCX export': 'pricing.features.pdf_docx_export',
+    'AI writing assistance (unlimited prompts)': 'pricing.features.ai_unlimited',
+    'No watermarks': 'pricing.features.no_watermarks',
+    'Cover letter builder': 'pricing.features.cover_letter',
+    'Auto-save & version history': 'pricing.features.auto_save',
+    'Everything in Basic': 'pricing.features.everything_basic',
+    'Team collaboration': 'pricing.features.team_collab',
+    'Bulk operations': 'pricing.features.bulk_ops',
+    'Priority support': 'pricing.features.priority_support',
+    'API access': 'pricing.features.api_access',
+    'Advanced analytics': 'pricing.features.advanced_analytics',
+  }
+
+  const translateFeature = (feature: string): string => {
+    const key = featureToTranslationKey[feature]
+    return key ? t(key) : feature
   }
 
   if (isLoading) {
@@ -1057,7 +1085,7 @@ export default function SettingsPage() {
                         {getPlanFeatures(subscription?.plan || 'free').map((feature, index) => (
                           <li key={index} className="flex items-center gap-2 text-sm text-gray-300">
                             <FiCheck className="text-green-400 flex-shrink-0" size={14} />
-                            {feature}
+                            {translateFeature(feature)}
                           </li>
                         ))}
                       </ul>

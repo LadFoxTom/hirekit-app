@@ -109,6 +109,7 @@ export default function MobileUserMenu({
           backgroundColor: 'var(--bg-elevated)',
           borderLeft: '1px solid var(--border-subtle)',
         }}
+        data-mobile-user-menu="true"
         onClick={(e) => e.stopPropagation()}
         onTouchStart={(e) => e.stopPropagation()}
       >

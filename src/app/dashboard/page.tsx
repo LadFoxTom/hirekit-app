@@ -191,8 +191,9 @@ export default function DashboardPage() {
       const target = event.target as Node
       const clickedInsideButton = userMenuRef.current?.contains(target)
       const clickedInsideDropdown = dropdownRef.current?.contains(target)
-      
-      if (!clickedInsideButton && !clickedInsideDropdown) {
+      const clickedInsideMobileMenu = (target as HTMLElement).closest?.('[data-mobile-user-menu]')
+
+      if (!clickedInsideButton && !clickedInsideDropdown && !clickedInsideMobileMenu) {
         console.log('[UserMenu] Click outside, closing dropdown (dashboard)')
         setIsUserMenuOpen(false)
       }
@@ -995,18 +996,18 @@ export default function DashboardPage() {
                             e.currentTarget.style.borderColor = 'var(--border-subtle)';
                           }}
                         >
-                          <div className={viewMode === 'grid' ? 'mb-4' : 'flex-1'}>
+                          <div className={viewMode === 'grid' ? 'mb-4' : 'flex-1 min-w-0'}>
                             <div className="flex items-center gap-2 mb-1">
-                              <h3 className="font-medium truncate" style={{ color: 'var(--text-primary)' }}>{item.title}</h3>
+                              <h3 className="font-medium truncate flex-1 min-w-0" style={{ color: 'var(--text-primary)' }}>{item.title}</h3>
                               {item.type === 'cv' && (
-                                <span className="text-xs bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full">{t('dashboard.document_type.cv')}</span>
+                                <span className="hidden sm:inline-block text-xs bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full flex-shrink-0">{t('dashboard.document_type.cv')}</span>
                               )}
                               {item.type === 'letter' && (
-                                <span className="text-xs bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full">{t('dashboard.document_type.letter')}</span>
+                                <span className="hidden sm:inline-block text-xs bg-green-500/10 text-green-400 px-2 py-0.5 rounded-full flex-shrink-0">{t('dashboard.document_type.letter')}</span>
                               )}
-                              {item.isFavorite && <FiStar className="text-yellow-400" size={14} />}
+                              {item.isFavorite && <FiStar className="text-yellow-400 flex-shrink-0" size={14} />}
                             </div>
-                            <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
+                            <p className="text-sm truncate" style={{ color: 'var(--text-tertiary)' }}>
                               {item.template} • {formatDate(item.updatedAt)}
                             </p>
                           </div>
