@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { FiFileText, FiArrowRight, FiCheckCircle, FiLoader } from 'react-icons/fi'
 import { useLocale } from '@/context/LocaleContext'
 import { CVData } from '@/types/cv'
@@ -113,6 +113,25 @@ export default function UploadedPDFPreview({
   const [isConverting, setIsConverting] = useState(false)
   const [numPages, setNumPages] = useState<number>(1)
   const [currentPage, setCurrentPage] = useState<number>(1)
+  const [pdfWidth, setPdfWidth] = useState<number>(500)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Calculate PDF width based on container size
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        // Get container width and subtract padding
+        const containerWidth = containerRef.current.offsetWidth - 32 // 16px padding on each side
+        // Cap at 800px for readability, minimum 280px for mobile
+        const newWidth = Math.max(280, Math.min(containerWidth, 800))
+        setPdfWidth(newWidth)
+      }
+    }
+
+    updateWidth()
+    window.addEventListener('resize', updateWidth)
+    return () => window.removeEventListener('resize', updateWidth)
+  }, [])
 
   const getText = (key: keyof typeof TEXT) =>
     TEXT[key][language as keyof typeof TEXT.title] || TEXT[key].en
@@ -120,6 +139,21 @@ export default function UploadedPDFPreview({
   const handleConvert = async () => {
     setIsConverting(true)
     try {
+      // Format languages with proficiency levels: "English (Native)"
+      const formattedLanguages: string[] = Array.isArray(extractedData.languages)
+        ? extractedData.languages.map((lang: any) => {
+            if (typeof lang === 'string') return lang
+            const name = lang.language || lang.name || ''
+            const level = lang.level || lang.proficiency || ''
+            return level ? `${name} (${level})` : name
+          }).filter(Boolean)
+        : []
+
+      // Format interests - join array to single string if needed
+      const formattedInterests: string = Array.isArray((extractedData as any).interests)
+        ? (extractedData as any).interests.join(', ')
+        : (extractedData as any).interests || ''
+
       // Create full CVData from extracted data
       const cvData: CVData = {
         fullName: extractedData.fullName || '',
@@ -131,7 +165,8 @@ export default function UploadedPDFPreview({
         education: extractedData.education || [],
         skills: extractedData.skills || {},
         certifications: extractedData.certifications || [],
-        languages: extractedData.languages || [],
+        languages: formattedLanguages,
+        interests: formattedInterests,
         projects: extractedData.projects || [],
         template: 'modern',
         layout: {
@@ -191,7 +226,7 @@ export default function UploadedPDFPreview({
       </div>
 
       {/* PDF Preview with Overlay */}
-      <div className="flex-1 relative overflow-auto">
+      <div ref={containerRef} className="flex-1 relative overflow-auto">
         {/* PDF Display */}
         <div className="flex justify-center p-4">
           {pdfDataUrl ? (
@@ -212,7 +247,7 @@ export default function UploadedPDFPreview({
               >
                 <Page
                   pageNumber={currentPage}
-                  width={Math.min(typeof window !== 'undefined' ? window.innerWidth - 100 : 500, 500)}
+                  width={pdfWidth}
                   renderTextLayer={false}
                   renderAnnotationLayer={false}
                 />

@@ -1832,10 +1832,10 @@ export default function HomePage() {
     });
     // Close modal
     setShowCVUploadModal(false);
-    // Switch to preview mode to show the PDF
+    // Switch to editor view so user sees what was extracted
     setArtifactType('cv');
     setIsConversationActive(true);
-    setActiveView('chat'); // Keep chat view but show uploaded PDF in preview
+    setActiveView('editor'); // Show editor so user can see/edit extracted data
   };
 
   // Handler for converting uploaded CV to LadderFox format

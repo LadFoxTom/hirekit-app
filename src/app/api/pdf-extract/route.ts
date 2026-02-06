@@ -55,6 +55,7 @@ interface ExtractedCVData {
     technologies?: string[]
     link?: string
   }>
+  interests?: string[]
 }
 
 export async function POST(request: NextRequest) {
@@ -149,7 +150,8 @@ Extract all available information and return it as a JSON object with the follow
       "technologies": ["Tech used"],
       "link": "URL if available"
     }
-  ]
+  ],
+  "interests": ["Hobbies, interests, or personal activities mentioned"]
 }
 
 Rules:
@@ -283,6 +285,14 @@ function normalizeExtractedData(data: any): ExtractedCVData {
       technologies: Array.isArray(proj.technologies) ? proj.technologies : [],
       link: proj.link || proj.url || ''
     })).filter((proj: any) => proj.name)
+  }
+
+  // Normalize interests
+  if (Array.isArray(data.interests) && data.interests.length > 0) {
+    normalized.interests = data.interests.filter((i: any) => typeof i === 'string' && i.trim())
+  } else if (typeof data.interests === 'string' && data.interests.trim()) {
+    // If it's a single string, split by comma
+    normalized.interests = data.interests.split(',').map((i: string) => i.trim()).filter(Boolean)
   }
 
   return normalized
