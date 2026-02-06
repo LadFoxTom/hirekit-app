@@ -3,17 +3,16 @@
 import React, { useState, useRef, useCallback } from 'react'
 import { FiUpload, FiX, FiFile, FiCheckCircle, FiAlertCircle } from 'react-icons/fi'
 import { useLocale } from '@/context/LocaleContext'
-import PDFExtractReview from './PDFExtractReview'
 import { CVData } from '@/types/cv'
 import toast from 'react-hot-toast'
 
 interface CVUploadModalProps {
   isOpen: boolean
   onClose: () => void
-  onCVCreated: (cvId: string, cvData: CVData) => void
+  onCVUploaded: (pdfDataUrl: string, extractedData: Partial<CVData>, fileName: string) => void
 }
 
-type UploadState = 'idle' | 'uploading' | 'extracting' | 'reviewing' | 'saving' | 'success' | 'error'
+type UploadState = 'idle' | 'uploading' | 'extracting' | 'success' | 'error'
 
 // Translations
 const MODAL_TEXT = {
@@ -46,25 +45,18 @@ const MODAL_TEXT = {
     fr: 'Téléchargement...'
   },
   extracting: {
-    en: 'Extracting CV data...',
-    nl: 'CV-gegevens extraheren...',
-    es: 'Extrayendo datos del CV...',
-    de: 'Lebenslaufdaten extrahieren...',
-    fr: 'Extraction des données du CV...'
-  },
-  saving: {
-    en: 'Saving your CV...',
-    nl: 'Je CV opslaan...',
-    es: 'Guardando tu CV...',
-    de: 'Ihren Lebenslauf speichern...',
-    fr: 'Enregistrement de votre CV...'
+    en: 'Analyzing CV with AI...',
+    nl: 'CV analyseren met AI...',
+    es: 'Analizando CV con IA...',
+    de: 'Lebenslauf mit KI analysieren...',
+    fr: 'Analyse du CV avec IA...'
   },
   success: {
-    en: 'CV uploaded successfully!',
-    nl: 'CV succesvol geüpload!',
-    es: '¡CV subido con éxito!',
-    de: 'Lebenslauf erfolgreich hochgeladen!',
-    fr: 'CV téléchargé avec succès!'
+    en: 'CV processed successfully!',
+    nl: 'CV succesvol verwerkt!',
+    es: '¡CV procesado con éxito!',
+    de: 'Lebenslauf erfolgreich verarbeitet!',
+    fr: 'CV traité avec succès!'
   },
   error: {
     en: 'Upload failed',
@@ -96,11 +88,10 @@ const MODAL_TEXT = {
   }
 }
 
-export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUploadModalProps) {
+export default function CVUploadModal({ isOpen, onClose, onCVUploaded }: CVUploadModalProps) {
   const { language } = useLocale()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [uploadState, setUploadState] = useState<UploadState>('idle')
-  const [extractedData, setExtractedData] = useState<Partial<CVData> | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [fileName, setFileName] = useState<string>('')
   const [isDragOver, setIsDragOver] = useState(false)
@@ -110,12 +101,21 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
 
   const handleClose = useCallback(() => {
     setUploadState('idle')
-    setExtractedData(null)
     setError(null)
     setFileName('')
     setIsDragOver(false)
     onClose()
   }, [onClose])
+
+  // Convert file to base64 data URL
+  const fileToDataUrl = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
 
   const processFile = async (file: File) => {
     // Validate file type
@@ -124,6 +124,7 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
       'application/msword',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     ]
+    const isPDF = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')
     const isValidType = validTypes.includes(file.type) ||
       file.name.toLowerCase().endsWith('.pdf') ||
       file.name.toLowerCase().endsWith('.doc') ||
@@ -145,7 +146,13 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
     setUploadState('uploading')
 
     try {
-      // Step 1: Extract text from document
+      // Step 1: Convert file to data URL for preview (only for PDFs)
+      let pdfDataUrl = ''
+      if (isPDF) {
+        pdfDataUrl = await fileToDataUrl(file)
+      }
+
+      // Step 2: Extract text from document
       const formData = new FormData()
       formData.append('file', file)
 
@@ -167,7 +174,7 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
 
       setUploadState('extracting')
 
-      // Step 2: Parse CV data from extracted text
+      // Step 3: Parse CV data from extracted text using AI
       const parseResponse = await fetch('/api/pdf-extract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -179,9 +186,16 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
         throw new Error(errorData.error || 'Failed to parse CV data')
       }
 
-      const { extractedData: parsedData } = await parseResponse.json()
-      setExtractedData(parsedData || {})
-      setUploadState('reviewing')
+      const { extractedData } = await parseResponse.json()
+
+      setUploadState('success')
+      toast.success(getText('success'))
+
+      // Brief success state, then pass data to parent
+      setTimeout(() => {
+        onCVUploaded(pdfDataUrl, extractedData || {}, file.name)
+        handleClose()
+      }, 500)
 
     } catch (err) {
       console.error('Upload error:', err)
@@ -214,55 +228,12 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
     setIsDragOver(false)
   }
 
-  const handleConfirmData = async (data: Partial<CVData>) => {
-    setUploadState('saving')
-
-    try {
-      // Save to database
-      const response = await fetch('/api/cv', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: data.fullName || 'Uploaded CV',
-          content: data,
-          template: 'modern',
-        }),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to save CV')
-      }
-
-      const { cv } = await response.json()
-      setUploadState('success')
-      toast.success(getText('success'))
-
-      // Notify parent with new CV
-      setTimeout(() => {
-        onCVCreated(cv.id, data as CVData)
-        handleClose()
-      }, 1000)
-
-    } catch (err) {
-      console.error('Save error:', err)
-      setError(err instanceof Error ? err.message : 'Save failed')
-      setUploadState('error')
-    }
-  }
-
-  const handleCancelReview = () => {
-    setUploadState('idle')
-    setExtractedData(null)
-    setFileName('')
-  }
-
   if (!isOpen) return null
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div
-        className="rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        className="rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden"
         style={{ backgroundColor: 'var(--bg-primary)' }}
       >
         {/* Header */}
@@ -321,13 +292,12 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
             </div>
           )}
 
-          {(uploadState === 'uploading' || uploadState === 'extracting' || uploadState === 'saving') && (
+          {(uploadState === 'uploading' || uploadState === 'extracting') && (
             <div className="text-center py-16">
               <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
               <p className="text-lg font-medium" style={{ color: 'var(--text-primary)' }}>
                 {uploadState === 'uploading' && getText('uploading')}
                 {uploadState === 'extracting' && getText('extracting')}
-                {uploadState === 'saving' && getText('saving')}
               </p>
               {fileName && (
                 <p className="text-sm mt-2 flex items-center justify-center gap-2" style={{ color: 'var(--text-tertiary)' }}>
@@ -336,14 +306,6 @@ export default function CVUploadModal({ isOpen, onClose, onCVCreated }: CVUpload
                 </p>
               )}
             </div>
-          )}
-
-          {uploadState === 'reviewing' && extractedData && (
-            <PDFExtractReview
-              extractedData={extractedData}
-              onConfirm={handleConfirmData}
-              onCancel={handleCancelReview}
-            />
           )}
 
           {uploadState === 'success' && (

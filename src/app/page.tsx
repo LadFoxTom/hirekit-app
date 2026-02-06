@@ -32,6 +32,7 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import ATSChecker from '@/components/ATSChecker';
 import CVUploadModal from '@/components/CVUploadModal';
+import UploadedPDFPreview from '@/components/UploadedPDFPreview';
 import { hotjarStateChange } from '@/components/Hotjar';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
@@ -955,6 +956,14 @@ export default function HomePage() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [showCVUploadModal, setShowCVUploadModal] = useState(false);
 
+  // State for uploaded PDF preview
+  const [uploadedPDFData, setUploadedPDFData] = useState<{
+    pdfDataUrl: string;
+    extractedData: Partial<CVData>;
+    fileName: string;
+    isConverted: boolean;
+  } | null>(null);
+
   // Load preferred artifact type and activate splitscreen from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -1523,6 +1532,8 @@ export default function HomePage() {
       localStorage.removeItem('preferredArtifactType');
       localStorage.removeItem('instantAction');
     }
+    // Clear uploaded PDF data state
+    setUploadedPDFData(null);
     requestNavigation(() => signOut({ callbackUrl: '/' }));
   }, [requestNavigation]);
 
@@ -1795,14 +1806,104 @@ export default function HomePage() {
     setShowCVUploadModal(true);
   };
 
-  // Handler for when a CV is uploaded and created
-  const handleCVUploadComplete = async (cvId: string, cvData: CVData) => {
-    // Load the newly created CV
-    await handleLoadCV(cvId);
+  // Handler for when a CV is uploaded (new flow with PDF preview)
+  const handleCVUploaded = (pdfDataUrl: string, extractedData: Partial<CVData>, fileName: string) => {
+    // Store the uploaded PDF data for preview
+    setUploadedPDFData({
+      pdfDataUrl,
+      extractedData,
+      fileName,
+      isConverted: false,
+    });
     // Close modal
     setShowCVUploadModal(false);
-    // Switch to ATS checker view
-    setActiveView('ats-checker');
+    // Switch to preview mode to show the PDF
+    setArtifactType('cv');
+    setIsConversationActive(true);
+    setActiveView('chat'); // Keep chat view but show uploaded PDF in preview
+  };
+
+  // Handler for converting uploaded CV to LadderFox format
+  const handleConvertUploadedCV = async (cvDataToSave: CVData) => {
+    if (!isAuthenticated) {
+      toast.error(t('toast.please_sign_in'));
+      return;
+    }
+
+    try {
+      // Save to database
+      const response = await fetch('/api/cv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: cvDataToSave.fullName || 'Uploaded CV',
+          content: cvDataToSave,
+          template: 'modern',
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to save CV');
+      }
+
+      const { cv } = await response.json();
+
+      // Update local state with converted CV
+      setCvData(cvDataToSave);
+      setCurrentCVId(cv.id);
+
+      // Mark as converted
+      setUploadedPDFData(prev => prev ? { ...prev, isConverted: true } : null);
+
+      // Refresh saved CVs list
+      try {
+        const cvsRes = await fetch('/api/cv');
+        const cvsData = await cvsRes.json();
+        if (cvsData.cvs) {
+          setSavedCVs(cvsData.cvs.slice(0, 5).map((cv: any) => ({
+            id: cv.id,
+            title: cv.title || 'Untitled CV',
+            updatedAt: formatRelativeTime(new Date(cv.updatedAt)),
+          })));
+        }
+      } catch (err) {
+        console.error('Failed to refresh CVs:', err);
+      }
+
+      toast.success(t('toast.cv_saved') || 'CV saved successfully!');
+    } catch (error) {
+      console.error('Convert error:', error);
+      toast.error('Failed to convert CV');
+      throw error;
+    }
+  };
+
+  // Handler to start ATS check on uploaded or converted CV
+  const handleStartATSCheckOnUploaded = () => {
+    if (uploadedPDFData) {
+      if (uploadedPDFData.isConverted) {
+        // Use the converted CV data (already in cvData state)
+        setUploadedPDFData(null);
+        setActiveView('ats-checker');
+      } else {
+        // Use the extracted data directly for ATS check
+        const tempCVData: CVData = {
+          fullName: uploadedPDFData.extractedData.fullName || '',
+          title: uploadedPDFData.extractedData.title || '',
+          professionalHeadline: uploadedPDFData.extractedData.title || '',
+          summary: uploadedPDFData.extractedData.summary || '',
+          contact: uploadedPDFData.extractedData.contact || {},
+          experience: uploadedPDFData.extractedData.experience || [],
+          education: uploadedPDFData.extractedData.education || [],
+          skills: uploadedPDFData.extractedData.skills || {},
+          template: 'modern',
+        };
+        setCvData(tempCVData);
+        setUploadedPDFData(null);
+        setActiveView('ats-checker');
+      }
+    }
   };
 
   // Save current CV
@@ -5761,7 +5862,26 @@ export default function HomePage() {
                 {/* Artifact Content */}
                 <div className="flex-1 overflow-hidden">
                   <AnimatePresence mode="wait">
-                    {artifactType === 'cv' && (
+                    {artifactType === 'cv' && uploadedPDFData && (
+                      <motion.div
+                        key="uploaded-pdf"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="h-full"
+                      >
+                        <UploadedPDFPreview
+                          pdfDataUrl={uploadedPDFData.pdfDataUrl}
+                          extractedData={uploadedPDFData.extractedData}
+                          fileName={uploadedPDFData.fileName}
+                          onConvert={handleConvertUploadedCV}
+                          onStartATSCheck={handleStartATSCheckOnUploaded}
+                          isConverted={uploadedPDFData.isConverted}
+                          className="h-full"
+                        />
+                      </motion.div>
+                    )}
+                    {artifactType === 'cv' && !uploadedPDFData && (
                       <motion.div
                         key="cv"
                         initial={{ opacity: 0, x: -20 }}
@@ -5769,7 +5889,7 @@ export default function HomePage() {
                         exit={{ opacity: 0, x: 20 }}
                         className="h-full"
                       >
-                        <PDFPreviewViewer 
+                        <PDFPreviewViewer
                           data={cvData}
                           onDataChange={setCvData}
                           onDownload={() => toast.success('PDF downloaded!')}
@@ -5860,7 +5980,7 @@ export default function HomePage() {
       <CVUploadModal
         isOpen={showCVUploadModal}
         onClose={() => setShowCVUploadModal(false)}
-        onCVCreated={handleCVUploadComplete}
+        onCVUploaded={handleCVUploaded}
       />
 
       {/* Language Debug Component (only in development) */}
