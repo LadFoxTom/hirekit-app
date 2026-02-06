@@ -185,6 +185,13 @@ const NO_CV_TEXT = {
     es: 'o',
     de: 'oder',
     fr: 'ou'
+  },
+  changeCV: {
+    en: 'Select Different CV',
+    nl: 'Ander CV Selecteren',
+    es: 'Seleccionar Otro CV',
+    de: 'Anderen Lebenslauf Wählen',
+    fr: 'Sélectionner un Autre CV'
   }
 };
 
@@ -233,12 +240,26 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, savedCVs, onLoadCV, onC
   const [assessment, setAssessment] = useState<ATSAssessment | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showCVSelection, setShowCVSelection] = useState(false);
 
   const getLoginText = (key: keyof typeof LOGIN_PROMPT_TEXT) =>
     LOGIN_PROMPT_TEXT[key][language as keyof typeof LOGIN_PROMPT_TEXT.title] || LOGIN_PROMPT_TEXT[key].en;
 
   const getNoCVText = (key: keyof typeof NO_CV_TEXT) =>
     NO_CV_TEXT[key][language as keyof typeof NO_CV_TEXT.title] || NO_CV_TEXT[key].en;
+
+  // Handle CV selection - reset state and load the CV
+  const handleSelectCV = (cvId: string) => {
+    setShowCVSelection(false);
+    setAssessment(null);
+    onLoadCV?.(cvId);
+  };
+
+  // Handle showing CV selection screen
+  const handleChangeCV = () => {
+    setShowCVSelection(true);
+    setAssessment(null);
+  };
 
   // Check if CV has meaningful content
   const cvHasContent = hasMeaningfulCVContent(cvData);
@@ -422,8 +443,8 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, savedCVs, onLoadCV, onC
     );
   }
 
-  // Show CV selection when authenticated with saved CVs but no current CV content
-  if (!cvHasContent && savedCVs && savedCVs.length > 0) {
+  // Show CV selection when authenticated with saved CVs but no current CV content, or when user requests to change CV
+  if ((showCVSelection || !cvHasContent) && savedCVs && savedCVs.length > 0) {
     return (
       <div className="flex flex-col p-4 min-h-[400px]">
         <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
@@ -438,7 +459,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, savedCVs, onLoadCV, onC
           {savedCVs.map((cv) => (
             <button
               key={cv.id}
-              onClick={() => onLoadCV?.(cv.id)}
+              onClick={() => handleSelectCV(cv.id)}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left"
               style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
@@ -817,29 +838,58 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, savedCVs, onLoadCV, onC
         </div>
       )}
 
-      {/* Refresh Button */}
-      <button
-        onClick={() => fetchAssessment(true)}
-        disabled={isLoading}
-        className="w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-        style={{
-          backgroundColor: 'var(--bg-hover)',
-          color: 'var(--text-primary)',
-        }}
-        onMouseEnter={(e) => {
-          if (!isLoading) {
-            e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!isLoading) {
-            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-          }
-        }}
-      >
-        <FiRefreshCw className={isLoading ? 'animate-spin' : ''} size={14} />
-        {isLoading ? (t('ats.assessing') || 'Assessing...') : (t('ats.refresh') || 'Refresh Assessment')}
-      </button>
+      {/* Action Buttons */}
+      <div className="flex gap-2">
+        {/* Refresh Button */}
+        <button
+          onClick={() => fetchAssessment(true)}
+          disabled={isLoading}
+          className="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          style={{
+            backgroundColor: 'var(--bg-hover)',
+            color: 'var(--text-primary)',
+          }}
+          onMouseEnter={(e) => {
+            if (!isLoading) {
+              e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!isLoading) {
+              e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+            }
+          }}
+        >
+          <FiRefreshCw className={isLoading ? 'animate-spin' : ''} size={14} />
+          {isLoading ? (t('ats.assessing') || 'Assessing...') : (t('ats.refresh') || 'Refresh Assessment')}
+        </button>
+
+        {/* Change CV Button - only show if there are saved CVs */}
+        {savedCVs && savedCVs.length > 0 && (
+          <button
+            onClick={handleChangeCV}
+            disabled={isLoading}
+            className="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            style={{
+              backgroundColor: 'var(--bg-hover)',
+              color: 'var(--text-primary)',
+            }}
+            onMouseEnter={(e) => {
+              if (!isLoading) {
+                e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isLoading) {
+                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+              }
+            }}
+          >
+            <FiFileText size={14} />
+            {getNoCVText('changeCV')}
+          </button>
+        )}
+      </div>
     </div>
   );
 };
