@@ -4,6 +4,8 @@ import { authOptions } from '@/lib/auth';
 import { PrismaClient } from '@prisma/client';
 import * as XLSX from 'xlsx';
 
+export const dynamic = 'force-dynamic';
+
 const prisma = new PrismaClient();
 
 // Helper function to check admin access

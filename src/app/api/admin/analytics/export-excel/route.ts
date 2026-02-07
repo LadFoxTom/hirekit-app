@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import * as XLSX from 'xlsx';
 
+export const dynamic = 'force-dynamic';
+
 // Helper function to check admin access
 async function checkAdminAccess() {
   const session = await getServerSession(authOptions);
