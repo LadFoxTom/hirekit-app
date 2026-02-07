@@ -4263,14 +4263,15 @@ export default function HomePage() {
                         height: '64px',
                         minHeight: '64px',
                         maxHeight: '200px',
-                        paddingTop: '20px',
-                        paddingBottom: '24px',
+                        paddingTop: '12px',
+                        paddingBottom: '12px',
                         lineHeight: '20px',
                         overflowY: 'hidden',
                         scrollbarWidth: 'none',
                         textAlign: 'left',
                         boxSizing: 'border-box',
                         color: 'var(--text-primary)',
+                        whiteSpace: 'pre-wrap',
                       } as React.CSSProperties}
                       disabled={isUploading || isRecording}
                     />

@@ -196,6 +196,7 @@ body {
   textarea::placeholder {
     color: var(--placeholder-color);
     opacity: 1;
+    white-space: pre-wrap;
   }
 }
 
