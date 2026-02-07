@@ -91,7 +91,7 @@ export default function DataCompliancePage() {
           <div className="grid md:grid-cols-2 gap-4 text-sm">
             <div>
               <h4 className="font-medium text-white mb-2">{t('data_compliance.privacy.retention.documents')}</h4>
-              <p className="text-gray-400">30 {t('data_compliance.privacy.retention.days')}</p>
+              <p className="text-gray-400">2 {t('data_compliance.privacy.retention.years')}</p>
             </div>
             <div>
               <h4 className="font-medium text-white mb-2">{t('data_compliance.privacy.retention.account')}</h4>

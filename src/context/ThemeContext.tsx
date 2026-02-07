@@ -13,7 +13,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('night')
+  const [theme, setThemeState] = useState<Theme>('day')
   const [mounted, setMounted] = useState(false)
 
   // Load theme from localStorage on mount
@@ -22,8 +22,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (savedTheme && (savedTheme === 'day' || savedTheme === 'night')) {
       setThemeState(savedTheme)
     } else {
-      // Default to night theme
-      setThemeState('night')
+      // Default to day theme
+      setThemeState('day')
     }
     setMounted(true)
   }, [])

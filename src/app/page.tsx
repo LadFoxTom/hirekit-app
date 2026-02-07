@@ -3534,8 +3534,20 @@ export default function HomePage() {
                     </div>
                     <span className="flex-1 text-left ml-3">{t('nav.job_applications_short')}</span>
                   </button>
+                  <button
+                    onClick={() => { setIsUserMenuOpen(false); toast(t('toast.tests_coming_soon')); }}
+                    disabled
+                    aria-disabled="true"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium opacity-50 cursor-not-allowed rounded-lg"
+                    style={{ color: 'var(--text-disabled)' }}
+                  >
+                    <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+                      <FiClipboard size={20} className="opacity-50" />
+                    </div>
+                    <span className="flex-1 text-left ml-3">{t('nav.tests_short')}</span>
+                  </button>
                 </div>
-                
+
                 {/* Account Items */}
                 <div className="pt-1.5 mt-1.5 space-y-1" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
