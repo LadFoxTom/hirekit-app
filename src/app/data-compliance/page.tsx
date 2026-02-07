@@ -373,18 +373,18 @@ export default function DataCompliancePage() {
 
             {/* Navigation Tabs */}
             <div className="bg-[#1a1a1a] rounded-xl border border-white/10 mb-8 overflow-hidden">
-              <div className="border-b border-white/5">
-                <nav className="flex overflow-x-auto" aria-label="Tabs">
+              <div className="border-b border-white/5 md:border-b-0">
+                <nav className="flex flex-col md:flex-row" aria-label="Tabs">
                   {sections.map((section) => {
                     const Icon = section.icon;
                     return (
                       <button
                         key={section.id}
                         onClick={() => setActiveSection(section.id)}
-                        className={`py-4 px-6 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors whitespace-nowrap ${
+                        className={`flex-1 py-4 px-6 border-b md:border-b-2 font-medium text-sm flex items-center justify-center gap-2 transition-colors ${
                           activeSection === section.id
-                            ? 'border-blue-500 text-blue-400'
-                            : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'
+                            ? 'border-blue-500 text-blue-400 bg-blue-500/10 md:bg-transparent'
+                            : 'border-white/5 md:border-transparent text-gray-400 hover:text-gray-300 hover:bg-white/5 md:hover:bg-transparent md:hover:border-gray-600'
                         }`}
                       >
                         <Icon size={18} />
