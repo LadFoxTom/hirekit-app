@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 // Question limits
 const GUEST_QUESTION_LIMIT = 2; // Without login: start prompt + 1 extra
-const FREE_ACCOUNT_QUESTION_LIMIT = 5; // After login: total 5 (2 guest + 3 free)
+const FREE_ACCOUNT_QUESTION_LIMIT = 7; // After login: total 7 (2 guest + 5 free)
 
 /**
  * GET /api/user/question-count

@@ -15,8 +15,9 @@ import {
   FiCreditCard, FiSettings, FiHelpCircle, FiLogOut, FiEye,
   FiGlobe, FiBriefcase, FiUser, FiCheckCircle, FiArrowRight,
   FiBook, FiTarget, FiAward, FiMenu, FiX, FiFileText, FiMail,
-  FiZap, FiList, FiStar, FiHome
+  FiZap, FiList, FiStar, FiHome, FiClipboard
 } from 'react-icons/fi'
+import { toast } from 'react-hot-toast'
 import MobileUserMenu from '@/components/MobileUserMenu'
 
 interface CVAdvisorPageProps {
@@ -289,6 +290,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const userMenuRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const segments = URL_SEGMENTS[language]
   const professionsByCategory = getProfessionsByCategory(language)
@@ -301,8 +303,15 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
 
   // Close menus when clicking outside
   useEffect(() => {
+    if (!isUserMenuOpen) return
+
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+      const target = event.target as HTMLElement
+      const clickedInsideButton = userMenuRef.current?.contains(target)
+      const clickedInsideDropdown = dropdownRef.current?.contains(target)
+      const clickedInsideMobileMenu = target.closest?.('[data-mobile-user-menu]')
+
+      if (!clickedInsideButton && !clickedInsideDropdown && !clickedInsideMobileMenu) {
         setIsUserMenuOpen(false)
       }
     }
@@ -312,7 +321,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('touchstart', handleClickOutside)
     }
-  }, [])
+  }, [isUserMenuOpen])
 
   // Scroll to section
   const scrollToSection = (sectionId: string) => {
@@ -406,34 +415,138 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center gap-2 px-2 py-1.5 rounded-lg transition-colors"
+                  style={{ backgroundColor: isUserMenuOpen ? 'var(--bg-hover)' : 'transparent' }}
                 >
                   <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium text-white">
                     {user?.name?.[0] || 'U'}
                   </div>
+                  <FiChevronDown size={14} className="hidden lg:block" style={{ color: 'var(--text-tertiary)' }} />
                 </button>
 
+                {/* Desktop Dropdown Menu */}
                 <AnimatePresence>
                   {isUserMenuOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      className="absolute right-0 top-full mt-2 w-48 rounded-xl py-2 z-50"
-                      style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-medium)' }}
+                      ref={dropdownRef}
+                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                      transition={{ duration: 0.15 }}
+                      className="hidden lg:block absolute right-0 top-full mt-2 rounded-xl z-[9999]"
+                      style={{
+                        width: '280px',
+                        backgroundColor: 'var(--bg-elevated)',
+                        border: '1px solid var(--border-medium)',
+                        boxShadow: 'var(--shadow-lg)',
+                      }}
                     >
-                      <Link href="/dashboard" className="block px-4 py-2 text-sm hover:bg-white/5" style={{ color: 'var(--text-primary)' }}>
-                        Dashboard
-                      </Link>
-                      <Link href="/pricing" className="block px-4 py-2 text-sm hover:bg-white/5" style={{ color: 'var(--text-primary)' }}>
-                        {isPro ? 'Pro' : 'Upgrade'}
-                      </Link>
-                      <button
-                        onClick={() => signOut({ callbackUrl: '/' })}
-                        className="w-full text-left px-4 py-2 text-sm hover:bg-white/5"
-                        style={{ color: 'var(--text-tertiary)' }}
-                      >
-                        Sign Out
-                      </button>
+                      {/* User Info */}
+                      <div className="px-3 py-2.5" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                        <p className="font-semibold text-sm leading-tight mb-0.5 truncate" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
+                        <p className="text-[11px] truncate leading-relaxed" style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}>{user?.email || ''}</p>
+                      </div>
+
+                      {/* Navigation Items */}
+                      <div className="py-1.5">
+                        <Link
+                          href="/dashboard"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          <FiGrid size={16} style={{ color: 'var(--text-tertiary)' }} />
+                          {t('nav.dashboard') || 'Dashboard'}
+                        </Link>
+                        <Link
+                          href="/dashboard?tab=cvs"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          <FiFolder size={16} style={{ color: 'var(--text-tertiary)' }} />
+                          {t('nav.my_cvs') || 'My CVs'}
+                        </Link>
+                        <Link
+                          href={`/${segments.examples}/${segments.cv}`}
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          <FiEye size={16} style={{ color: 'var(--text-tertiary)' }} />
+                          {t('nav.cv_examples') || 'CV Examples'}
+                        </Link>
+                        <Link
+                          href={`/${segments.examples}/${segments.letter}`}
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          <FiEye size={16} style={{ color: 'var(--text-tertiary)' }} />
+                          {t('nav.letter_examples') || 'Letter Examples'}
+                        </Link>
+                        <button
+                          onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon') || 'Coming soon'); }}
+                          disabled
+                          className="w-full flex items-center gap-3 px-3 py-2 text-sm opacity-50 cursor-not-allowed"
+                          style={{ color: 'var(--text-tertiary)' }}
+                        >
+                          <FiBriefcase size={16} />
+                          {t('nav.job_applications_short') || 'Applications'}
+                        </button>
+                        <button
+                          onClick={() => { setIsUserMenuOpen(false); toast(t('toast.tests_coming_soon') || 'Coming soon'); }}
+                          disabled
+                          className="w-full flex items-center gap-3 px-3 py-2 text-sm opacity-50 cursor-not-allowed"
+                          style={{ color: 'var(--text-tertiary)' }}
+                        >
+                          <FiClipboard size={16} />
+                          {t('nav.tests_short') || 'Tests'}
+                        </button>
+                      </div>
+
+                      {/* Account Items */}
+                      <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                        <Link
+                          href="/pricing"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          <FiCreditCard size={16} style={{ color: 'var(--text-tertiary)' }} />
+                          {t('nav.subscription') || 'Subscription'}
+                          <span className="ml-auto px-2 py-0.5 text-xs rounded-full" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>{subBadge}</span>
+                        </Link>
+                        <Link
+                          href="/settings"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          <FiSettings size={16} style={{ color: 'var(--text-tertiary)' }} />
+                          {t('nav.settings') || 'Settings'}
+                        </Link>
+                        <Link
+                          href="/faq"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          <FiHelpCircle size={16} style={{ color: 'var(--text-tertiary)' }} />
+                          {t('nav.help_support_short') || 'Help'}
+                        </Link>
+                      </div>
+
+                      {/* Sign Out */}
+                      <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                        <button
+                          onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
+                          className="w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-white/5"
+                          style={{ color: 'var(--text-tertiary)' }}
+                        >
+                          <FiLogOut size={16} />
+                          {t('nav.sign_out') || 'Sign Out'}
+                        </button>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

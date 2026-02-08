@@ -1404,22 +1404,22 @@ export default function HomePage() {
           if (response.ok) {
             const data = await response.json();
             setQuestionCount(data.count ?? 0);
-            setQuestionLimit(data.limit ?? (isPro ? Infinity : 5));
+            setQuestionLimit(data.limit ?? (isPro ? Infinity : 7));
             // Handle Infinity and null values safely
-            const remaining = data.remaining ?? (isPro ? Infinity : 5);
-            setQuestionRemaining(remaining === Infinity ? Infinity : (remaining ?? 5));
+            const remaining = data.remaining ?? (isPro ? Infinity : 7);
+            setQuestionRemaining(remaining === Infinity ? Infinity : (remaining ?? 7));
           } else {
             // Fallback if API fails
             setQuestionCount(0);
-            setQuestionLimit(isPro ? Infinity : 5);
-            setQuestionRemaining(isPro ? Infinity : 5);
+            setQuestionLimit(isPro ? Infinity : 7);
+            setQuestionRemaining(isPro ? Infinity : 7);
           }
         } catch (error) {
           console.error('Failed to load question count:', error);
           // Fallback on error
           setQuestionCount(0);
-          setQuestionLimit(isPro ? Infinity : 5);
-          setQuestionRemaining(isPro ? Infinity : 5);
+          setQuestionLimit(isPro ? Infinity : 7);
+          setQuestionRemaining(isPro ? Infinity : 7);
         }
       } else {
         // For guests, check localStorage

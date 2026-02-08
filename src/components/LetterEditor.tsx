@@ -375,8 +375,8 @@ const LetterEditor: React.FC<LetterEditorProps> = ({
                 value={letterData.closing || ''}
                 onChange={(e) => updateField('closing', e.target.value)}
                 placeholder="Express your enthusiasm for the opportunity and include a call to action..."
-                rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                rows={6}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-y"
               />
             </div>
 
