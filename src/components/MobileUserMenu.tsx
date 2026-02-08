@@ -11,7 +11,7 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 import { LanguageSelector } from '@/components/LanguageSelector'
 import {
   FiGrid, FiFolder, FiEye, FiBriefcase, FiCreditCard,
-  FiSettings, FiHelpCircle, FiLogOut
+  FiSettings, FiHelpCircle, FiLogOut, FiClipboard
 } from 'react-icons/fi'
 
 interface MobileUserMenuProps {
@@ -151,6 +151,12 @@ export default function MobileUserMenu({
               icon={FiBriefcase}
               label={t('nav.job_applications_short')}
               onClick={() => { onClose(); toast(t('toast.job_applications_coming_soon')); }}
+              disabled
+            />
+            <MenuButton
+              icon={FiClipboard}
+              label={t('nav.tests_short')}
+              onClick={() => { onClose(); toast(t('toast.tests_coming_soon')); }}
               disabled
             />
           </div>

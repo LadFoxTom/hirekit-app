@@ -8,11 +8,12 @@ import { useLocale } from '@/context/LocaleContext'
 import { Toaster, toast } from 'react-hot-toast'
 import { STRIPE_PLANS, BILLING_INTERVALS } from '@/lib/stripe'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  FiCheck, FiX, FiArrowLeft, FiShield, FiClock, FiZap, 
+import {
+  FiCheck, FiX, FiArrowLeft, FiShield, FiClock, FiZap,
   FiFileText, FiDownload, FiStar, FiCreditCard, FiChevronDown,
-  FiGrid, FiSettings, FiLogOut, FiHelpCircle, FiFolder, FiBriefcase, FiExternalLink, FiClipboard, FiPlus
+  FiGrid, FiSettings, FiLogOut, FiHelpCircle, FiFolder, FiBriefcase, FiExternalLink, FiClipboard, FiPlus, FiEye
 } from 'react-icons/fi'
+import { URL_SEGMENTS, type Language } from '@/data/professions'
 import { signOut } from 'next-auth/react'
 import Head from 'next/head'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
@@ -258,14 +259,32 @@ export default function PricingPage() {
           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
           isActive={pathname === '/dashboard'}
         />
-        <MenuItem 
-          icon={FiFolder} 
-          label={t('nav.my_cvs')} 
+        <MenuItem
+          icon={FiFolder}
+          label={t('nav.my_cvs')}
           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
         />
-        <MenuItem 
-          icon={FiBriefcase} 
-          label={t('nav.job_applications_short')} 
+        <MenuItem
+          icon={FiEye}
+          label={t('nav.cv_examples')}
+          onClick={() => {
+            setIsUserMenuOpen(false);
+            const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
+            router.push(`/${segments.examples}/${segments.cv}`);
+          }}
+        />
+        <MenuItem
+          icon={FiEye}
+          label={t('nav.letter_examples')}
+          onClick={() => {
+            setIsUserMenuOpen(false);
+            const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
+            router.push(`/${segments.examples}/${segments.letter}`);
+          }}
+        />
+        <MenuItem
+          icon={FiBriefcase}
+          label={t('nav.job_applications_short')}
           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
           disabled={true}
         />

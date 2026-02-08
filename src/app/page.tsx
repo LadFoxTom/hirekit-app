@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useLocale } from '@/context/LocaleContext';
 import { URL_SEGMENTS, type Language } from '@/data/professions';
 import LanguageDebug from '@/components/LanguageDebug';
@@ -33,6 +33,7 @@ import { LanguageSelector } from '@/components/LanguageSelector';
 import ATSChecker from '@/components/ATSChecker';
 import CVUploadModal from '@/components/CVUploadModal';
 import { hotjarStateChange } from '@/components/Hotjar';
+import { analytics } from '@/lib/analytics';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
 const PDFPreviewViewer = dynamic(
@@ -949,8 +950,23 @@ export default function HomePage() {
   const { isAuthenticated, user, subscription } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { t, language, setLanguage, availableLanguages } = useLocale();
-  
+
+  // Track purchase conversion when returning from Stripe with success=true
+  useEffect(() => {
+    const success = searchParams?.get('success');
+    if (success === 'true') {
+      // Fire Google Ads purchase conversion event
+      analytics.trackPurchaseConversion();
+
+      // Clean up the URL to remove the success parameter
+      const url = new URL(window.location.href);
+      url.searchParams.delete('success');
+      window.history.replaceState({}, '', url.pathname);
+    }
+  }, [searchParams]);
+
   // Debug logging
   useEffect(() => {
     console.log('[HomePage] Current language:', language);

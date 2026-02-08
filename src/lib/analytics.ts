@@ -226,6 +226,34 @@ class Analytics {
     });
   }
 
+  // Google Ads Purchase Conversion tracking
+  trackPurchaseConversion(transactionId?: string, value?: number, currency: string = 'EUR'): void {
+    if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
+      // Fire Google Ads conversion event
+      window.gtag('event', 'ads_conversion_PURCHASE_1', {
+        transaction_id: transactionId || `purchase_${Date.now()}`,
+        value: value,
+        currency: currency,
+      });
+
+      // Also track as a standard purchase event for GA4
+      window.gtag('event', 'purchase', {
+        transaction_id: transactionId || `purchase_${Date.now()}`,
+        value: value,
+        currency: currency,
+      });
+
+      console.log('[Analytics] Purchase conversion tracked');
+    }
+
+    // Track in our internal analytics as well
+    this.trackEvent('purchase_conversion', {
+      transactionId,
+      value,
+      currency,
+    });
+  }
+
   private async sendToAnalyticsService(event: AnalyticsEvent): Promise<void> {
     try {
       // In production, send to your analytics service
@@ -301,7 +329,8 @@ export function useAnalytics() {
     trackExperiment: analytics.trackExperiment.bind(analytics),
     trackError: analytics.trackError.bind(analytics),
     trackPerformanceMetric: analytics.trackPerformanceMetric.bind(analytics),
-    trackUserAction: analytics.trackUserAction.bind(analytics)
+    trackUserAction: analytics.trackUserAction.bind(analytics),
+    trackPurchaseConversion: analytics.trackPurchaseConversion.bind(analytics)
   };
 }
 

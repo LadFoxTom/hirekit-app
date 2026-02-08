@@ -14,8 +14,9 @@ import {
   FiChevronDown, FiArrowLeft, FiHelpCircle, FiMail, FiMessageCircle,
   FiGrid, FiSettings, FiLogOut, FiCreditCard, FiUser, FiFileText,
   FiShield, FiSmartphone, FiGlobe, FiDownload, FiEdit3, FiZap,
-  FiFolder, FiBriefcase, FiX, FiExternalLink, FiClipboard
+  FiFolder, FiBriefcase, FiX, FiExternalLink, FiClipboard, FiEye
 } from 'react-icons/fi';
+import { URL_SEGMENTS, type Language } from '@/data/professions';
 
 // Menu Item Component (matching homepage)
 function MenuItem({ 
@@ -315,14 +316,32 @@ export default function FAQPage() {
                           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
                           isActive={pathname === '/dashboard'}
                         />
-                        <MenuItem 
-                          icon={FiFolder} 
-                          label={t('nav.my_cvs')} 
+                        <MenuItem
+                          icon={FiFolder}
+                          label={t('nav.my_cvs')}
                           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
                         />
-                        <MenuItem 
-                          icon={FiBriefcase} 
-                          label={t('nav.job_applications_short')} 
+                        <MenuItem
+                          icon={FiEye}
+                          label={t('nav.cv_examples')}
+                          onClick={() => {
+                            setIsUserMenuOpen(false);
+                            const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
+                            router.push(`/${segments.examples}/${segments.cv}`);
+                          }}
+                        />
+                        <MenuItem
+                          icon={FiEye}
+                          label={t('nav.letter_examples')}
+                          onClick={() => {
+                            setIsUserMenuOpen(false);
+                            const segments = URL_SEGMENTS[language as Language] || URL_SEGMENTS.en;
+                            router.push(`/${segments.examples}/${segments.letter}`);
+                          }}
+                        />
+                        <MenuItem
+                          icon={FiBriefcase}
+                          label={t('nav.job_applications_short')}
                           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
                           disabled={true}
                         />
