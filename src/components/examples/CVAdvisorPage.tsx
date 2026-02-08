@@ -161,6 +161,18 @@ const SECTORS = {
   }
 }
 
+// Mapping from SECTORS to profession categories
+const SECTOR_TO_CATEGORIES: Record<string, string[]> = {
+  technology: ['technology'],
+  healthcare: ['healthcare'],
+  finance: ['business', 'administration'],
+  creative: ['creative'],
+  sales: ['sales'],
+  engineering: ['engineering'],
+  education: ['education'],
+  hospitality: ['hospitality']
+}
+
 // Navigation sections with translations
 const NAV_SECTIONS = {
   advisor: {
@@ -826,7 +838,12 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                   </div>
                   <select
                     value={selectedSector || ''}
-                    onChange={(e) => setSelectedSector(e.target.value || null)}
+                    onChange={(e) => {
+                      const newSector = e.target.value || null
+                      setSelectedSector(newSector)
+                      // Clear profession when sector changes to avoid invalid combinations
+                      setSelectedProfession(null)
+                    }}
                     className="w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer"
                     style={{
                       backgroundColor: 'var(--bg-secondary)',
@@ -862,13 +879,21 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                     }}
                   >
                     <option value="">{getT(UI_TRANSLATIONS.advisor.selectProfession, currentLanguage)}</option>
-                    {Object.entries(professionsByCategory).map(([category, profs]) => (
-                      <optgroup key={category} label={getCategoryName(category, currentLanguage as Language)}>
-                        {profs.map(({ id, translation }) => (
-                          <option key={id} value={id}>{translation.name}</option>
-                        ))}
-                      </optgroup>
-                    ))}
+                    {Object.entries(professionsByCategory)
+                      .filter(([category]) => {
+                        // If sector is selected, only show matching categories
+                        if (selectedSector && SECTOR_TO_CATEGORIES[selectedSector]) {
+                          return SECTOR_TO_CATEGORIES[selectedSector].includes(category)
+                        }
+                        return true // Show all if no sector selected
+                      })
+                      .map(([category, profs]) => (
+                        <optgroup key={category} label={getCategoryName(category, currentLanguage as Language)}>
+                          {profs.map(({ id, translation }) => (
+                            <option key={id} value={id}>{translation.name}</option>
+                          ))}
+                        </optgroup>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -1018,7 +1043,7 @@ export default function CVAdvisorPage({ type, language }: CVAdvisorPageProps) {
                       selectedSector === key ? 'ring-2 ring-orange-500' : ''
                     }`}
                     style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}
-                    onClick={() => setSelectedSector(key)}
+                    onClick={() => { setSelectedSector(key); setSelectedProfession(null); }}
                   >
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-xl">{sector.icon}</span>

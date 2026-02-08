@@ -989,7 +989,11 @@ export default function HomePage() {
       if (activateSplitscreen === 'true') {
         // Activate splitscreen view (chat overview)
         setIsConversationActive(true);
-        setIsSidebarOpen(true);
+        // Only open sidebar on desktop (lg: breakpoint = 1024px)
+        // On mobile, keep sidebar closed so user goes directly to chat
+        if (window.innerWidth >= 1024) {
+          setIsSidebarOpen(true);
+        }
         setActiveView('chat');
         localStorage.removeItem('activateSplitscreen'); // Clear after use
       }

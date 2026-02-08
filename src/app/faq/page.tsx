@@ -10,8 +10,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import MobileUserMenu from '@/components/MobileUserMenu';
-import { 
-  FiChevronDown, FiChevronLeft, FiHelpCircle, FiMail, FiMessageCircle,
+import {
+  FiChevronDown, FiArrowLeft, FiHelpCircle, FiMail, FiMessageCircle,
   FiGrid, FiSettings, FiLogOut, FiCreditCard, FiUser, FiFileText,
   FiShield, FiSmartphone, FiGlobe, FiDownload, FiEdit3, FiZap,
   FiFolder, FiBriefcase, FiX, FiExternalLink, FiClipboard
@@ -246,7 +246,7 @@ export default function FAQPage() {
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              <FiChevronLeft size={20} />
+              <FiArrowLeft size={20} />
             </button>
             <a href="/" className="flex items-center gap-2 flex-shrink-0 min-w-0" style={{ color: 'var(--text-primary)' }}>
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white flex-shrink-0">
