@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 
-const VALID_STATUSES = ['new', 'reviewing', 'shortlisted', 'rejected'];
+const VALID_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
 
 export async function PATCH(
   request: NextRequest,

@@ -6,6 +6,7 @@ import { signOut, useSession } from 'next-auth/react';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: 'ph-squares-four' },
+  { href: '/jobs', label: 'Jobs', icon: 'ph-briefcase' },
   { href: '/applications', label: 'Applications', icon: 'ph-users' },
   { href: '/configuration', label: 'Configuration', icon: 'ph-sliders' },
   { href: '/embed', label: 'Embed Code', icon: 'ph-code' },

@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation';
 
 const STATUSES = [
   { value: 'new', label: 'New', icon: 'ph-envelope-simple', bg: '#E0E7FF', text: '#4F46E5', ring: '#4F46E5' },
-  { value: 'reviewing', label: 'Reviewing', icon: 'ph-eye', bg: '#FEF3C7', text: '#D97706', ring: '#D97706' },
-  { value: 'shortlisted', label: 'Shortlisted', icon: 'ph-check-circle', bg: '#DCFCE7', text: '#16A34A', ring: '#16A34A' },
+  { value: 'screening', label: 'Screening', icon: 'ph-eye', bg: '#FEF3C7', text: '#D97706', ring: '#D97706' },
+  { value: 'interviewing', label: 'Interviewing', icon: 'ph-video-camera', bg: '#DBEAFE', text: '#2563EB', ring: '#2563EB' },
+  { value: 'offered', label: 'Offered', icon: 'ph-hand-heart', bg: '#F3E8FF', text: '#7C3AED', ring: '#7C3AED' },
+  { value: 'hired', label: 'Hired', icon: 'ph-check-circle', bg: '#DCFCE7', text: '#16A34A', ring: '#16A34A' },
   { value: 'rejected', label: 'Rejected', icon: 'ph-x-circle', bg: '#FEE2E2', text: '#DC2626', ring: '#DC2626' },
 ];
 

@@ -5,6 +5,7 @@ import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { StatusUpdater } from './StatusUpdater';
+import { AiScoreCard } from './AiScoreCard';
 
 export default async function ApplicationDetailPage({
   params,
@@ -27,6 +28,8 @@ export default async function ApplicationDetailPage({
 
   const cvData = application.cvData as Record<string, any>;
   const skills = getSkills(cvData.skills);
+  const aiScore = (application as any).aiScore as number | null;
+  const aiScoreData = (application as any).aiScoreData as Record<string, any> | null;
 
   return (
     <DashboardLayout>
@@ -179,6 +182,14 @@ export default async function ApplicationDetailPage({
               />
             </div>
 
+            {/* AI Score */}
+            <AiScoreCard
+              applicationId={application.id}
+              currentScore={aiScore}
+              currentScoreData={aiScoreData as any}
+              hasJob={!!application.job}
+            />
+
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
               <h3 className="text-lg font-bold text-[#1E293B] mb-4">Details</h3>
               <dl className="space-y-4 text-sm">
@@ -192,7 +203,12 @@ export default async function ApplicationDetailPage({
                   <div>
                     <dt className="text-[#94A3B8]">Job</dt>
                     <dd className="font-medium text-[#1E293B] mt-0.5">
-                      {application.job.title}
+                      <Link
+                        href={`/jobs/${application.job.id}`}
+                        className="text-[#4F46E5] hover:text-[#4338CA] transition-colors"
+                      >
+                        {application.job.title}
+                      </Link>
                     </dd>
                   </div>
                 )}
