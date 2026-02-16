@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3002';
 
-export default function LoginPage() {
+function LoginForm() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -134,5 +134,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }
