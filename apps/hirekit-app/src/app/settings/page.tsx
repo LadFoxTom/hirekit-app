@@ -175,22 +175,24 @@ export default function SettingsPage() {
               Configure your widget appearance and behavior
             </p>
           </div>
-          <button
-            onClick={save}
-            disabled={saving}
-            className="px-6 py-3 bg-[#4F46E5] text-white rounded-full text-sm font-semibold shadow-md shadow-indigo-500/25 hover:shadow-lg hover:shadow-indigo-500/35 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
-          >
-            {saving ? 'Saving...' : 'Save Changes'}
-          </button>
+          {['general', 'job-listings', 'cv-builder'].includes(activeTab) && (
+            <button
+              onClick={save}
+              disabled={saving}
+              className="px-6 py-3 bg-[#4F46E5] text-white rounded-full text-sm font-semibold shadow-md shadow-indigo-500/25 hover:shadow-lg hover:shadow-indigo-500/35 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50"
+            >
+              {saving ? 'Saving...' : 'Save Changes'}
+            </button>
+          )}
         </div>
 
-        {saved && (
+        {saved && ['general', 'job-listings', 'cv-builder'].includes(activeTab) && (
           <div className="mb-6 p-4 bg-[#DCFCE7] text-[#16A34A] rounded-2xl text-sm font-medium flex items-center gap-2">
             <i className="ph ph-check-circle text-lg" />
             Settings saved successfully.
           </div>
         )}
-        {error && (
+        {error && ['general', 'job-listings', 'cv-builder'].includes(activeTab) && (
           <div className="mb-6 p-4 bg-[#FEE2E2] text-[#DC2626] rounded-2xl text-sm font-medium flex items-center gap-2">
             <i className="ph ph-warning text-lg" />
             {error}
