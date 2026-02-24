@@ -151,23 +151,9 @@ export function MinimalTemplate({ company, branding, landingPage, jobs, departme
       {/* Jobs */}
       <div className="max-w-3xl mx-auto px-6 pb-20">
         <p className="text-sm text-slate-400 mb-6">{jobs.length} open position{jobs.length !== 1 ? 's' : ''}</p>
-        <div className="divide-y divide-slate-100">
+        <div className="space-y-3">
           {jobs.map((job) => (
-            <a
-              key={job.id}
-              href={`/career/${company.slug}/${job.id}`}
-              className="flex items-center justify-between py-5 hover:bg-slate-50 -mx-4 px-4 rounded-lg transition-colors"
-            >
-              <div>
-                <h3 className="font-medium text-slate-900">{job.title}</h3>
-                <div className="flex items-center gap-3 mt-1 text-sm text-slate-500">
-                  {job.location && <span>{job.location}</span>}
-                  {job.type && <span>{job.type}</span>}
-                  {job.department && <span>{job.department}</span>}
-                </div>
-              </div>
-              <i className="ph ph-arrow-right text-slate-400" />
-            </a>
+            <JobCard key={job.id} job={job} slug={company.slug} primaryColor={branding.primaryColor} />
           ))}
         </div>
 
