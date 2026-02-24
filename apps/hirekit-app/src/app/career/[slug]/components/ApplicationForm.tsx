@@ -24,6 +24,9 @@ export function ApplicationForm({ companyId, jobId, primaryColor }: ApplicationF
     const origin = window.location.origin;
     const scriptUrl = `${origin}/widget/hirekit-widget.iife.js`;
 
+    // Set API URL to current origin so the widget doesn't use localhost
+    (window as any).__HIREKIT_API_URL__ = `${origin}/api`;
+
     // Load the widget script
     const script = document.createElement('script');
     script.src = scriptUrl;
@@ -32,7 +35,7 @@ export function ApplicationForm({ companyId, jobId, primaryColor }: ApplicationF
         (window as any).HireKit.init({
           companyId,
           jobId,
-          container: `#hirekit-widget-${jobId}`,
+          container: widgetDiv,
         });
       }
     };
