@@ -35,17 +35,17 @@ export function JobCard({ job, slug, primaryColor }: JobCardProps) {
   return (
     <Link
       href={`/career/${slug}/${job.id}`}
-      className="block bg-white border border-slate-200 rounded-xl p-6 hover:border-slate-300 hover:shadow-md transition-all duration-200 group"
+      className="block bg-white border border-slate-200 rounded-xl px-6 py-5 hover:border-slate-300 hover:shadow-md transition-all duration-200 group"
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-center justify-between gap-4">
         <div className="flex-1 min-w-0">
           <h3
-            className="text-lg font-semibold group-hover:opacity-80 transition-opacity"
+            className="text-base font-semibold group-hover:opacity-80 transition-opacity"
             style={{ color: primaryColor }}
           >
             {job.title}
           </h3>
-          <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-slate-500">
+          <div className="flex flex-wrap items-center gap-3 mt-1.5 text-sm text-slate-500">
             {job.location && (
               <span className="flex items-center gap-1">
                 <i className="ph ph-map-pin text-xs" />
@@ -73,8 +73,8 @@ export function JobCard({ job, slug, primaryColor }: JobCardProps) {
           </div>
         </div>
         <div
-          className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}
+          className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center opacity-40 group-hover:opacity-100 transition-opacity"
+          style={{ backgroundColor: `${primaryColor}10`, color: primaryColor }}
         >
           <i className="ph ph-arrow-right text-sm" />
         </div>

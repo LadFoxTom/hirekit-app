@@ -127,26 +127,31 @@ export default async function JobDetailPage({ params }: PageProps) {
   };
 
   return (
-    <div style={{ fontFamily: branding.fontFamily }}>
+    <div style={{ fontFamily: branding.fontFamily }} className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* Header */}
-      <nav className="border-b border-slate-200 bg-white">
+      <nav className="bg-white sticky top-0 z-10 border-b border-slate-200">
+        <div
+          className="h-1"
+          style={{ background: `linear-gradient(90deg, ${primaryColor}, ${primaryColor}60)` }}
+        />
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href={`/career/${params.slug}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             {branding.logoUrl && (
               <img src={branding.logoUrl} alt={company.name} className="h-8" />
             )}
             {branding.showCompanyName && (
-              <span className="font-semibold text-slate-900">{company.name}</span>
+              <span className="font-bold text-slate-900">{company.name}</span>
             )}
           </Link>
           <Link
             href={`/career/${params.slug}`}
-            className="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1"
+            className="text-sm font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+            style={{ color: primaryColor }}
           >
             <i className="ph ph-arrow-left text-xs" />
             All Jobs
@@ -154,21 +159,21 @@ export default async function JobDetailPage({ params }: PageProps) {
         </div>
       </nav>
 
-      {/* Job Detail */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 mb-4">{job.title}</h1>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
+      {/* Job Title Area */}
+      <div style={{ backgroundColor: `${primaryColor}05` }} className="border-b border-slate-100">
+        <div className="max-w-4xl mx-auto px-6 py-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-5">{job.title}</h1>
+          <div className="flex flex-wrap items-center gap-2.5 text-sm">
             {job.location && (
-              <span className="flex items-center gap-1.5">
-                <i className="ph ph-map-pin" />
+              <span className="flex items-center gap-1.5 text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                <i className="ph ph-map-pin" style={{ color: primaryColor }} />
                 {job.location}
               </span>
             )}
             {(job as any).workplaceType && (
               <span
-                className="px-3 py-1 rounded-full text-xs font-medium"
-                style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+                style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}
               >
                 {workplaceLabels[(job as any).workplaceType] || (job as any).workplaceType}
               </span>
@@ -176,38 +181,41 @@ export default async function JobDetailPage({ params }: PageProps) {
             {((job as any).employmentTypes?.length > 0 ? (job as any).employmentTypes : job.type ? [job.type] : []).map((t: string) => (
               <span
                 key={t}
-                className="px-3 py-1 rounded-full text-xs font-medium"
-                style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+                style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}
               >
                 {TYPE_LABELS[t] || t}
               </span>
             ))}
             {(job as any).experienceLevel && (
-              <span className="flex items-center gap-1.5">
-                <i className="ph ph-chart-line-up" />
+              <span className="flex items-center gap-1.5 text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                <i className="ph ph-chart-line-up" style={{ color: primaryColor }} />
                 {experienceLabels[(job as any).experienceLevel] || (job as any).experienceLevel}
               </span>
             )}
             {job.department && (
-              <span className="flex items-center gap-1.5">
-                <i className="ph ph-buildings" />
+              <span className="flex items-center gap-1.5 text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                <i className="ph ph-buildings" style={{ color: primaryColor }} />
                 {job.department}
               </span>
             )}
             {salary && (
-              <span className="flex items-center gap-1.5">
-                <i className="ph ph-currency-circle-dollar" />
+              <span className="flex items-center gap-1.5 text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                <i className="ph ph-currency-circle-dollar" style={{ color: primaryColor }} />
                 {salary}
               </span>
             )}
           </div>
         </div>
+      </div>
 
+      {/* Job Content */}
+      <div className="max-w-4xl mx-auto px-6 py-10">
         {/* Description */}
         {job.description && (
-          <div className="mb-8">
+          <div className="mb-10">
             <div
-              className="prose prose-slate max-w-none"
+              className="prose prose-slate max-w-none prose-headings:text-slate-900 prose-a:no-underline"
               dangerouslySetInnerHTML={{ __html: ensureHtml(job.description) }}
             />
           </div>
@@ -215,10 +223,18 @@ export default async function JobDetailPage({ params }: PageProps) {
 
         {/* Requirements */}
         {(job as any).requirements && (
-          <div className="mb-8">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">Requirements</h2>
+          <div className="mb-10">
+            <div className="flex items-center gap-2.5 mb-5">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ backgroundColor: `${primaryColor}10` }}
+              >
+                <i className="ph ph-list-checks text-sm" style={{ color: primaryColor }} />
+              </div>
+              <h2 className="text-xl font-bold text-slate-900">Requirements</h2>
+            </div>
             <div
-              className="prose prose-slate max-w-none"
+              className="prose prose-slate max-w-none prose-headings:text-slate-900"
               dangerouslySetInnerHTML={{ __html: ensureHtml((job as any).requirements) }}
             />
           </div>
@@ -226,15 +242,23 @@ export default async function JobDetailPage({ params }: PageProps) {
 
         {/* Benefits */}
         {((job as any).benefits || (job as any).benefitTags?.length > 0) && (
-          <div className="mb-8">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">Benefits & Perks</h2>
+          <div className="mb-10">
+            <div className="flex items-center gap-2.5 mb-5">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ backgroundColor: `${primaryColor}10` }}
+              >
+                <i className="ph ph-gift text-sm" style={{ color: primaryColor }} />
+              </div>
+              <h2 className="text-xl font-bold text-slate-900">Benefits & Perks</h2>
+            </div>
             {(job as any).benefitTags?.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-5">
                 {(job as any).benefitTags.map((tag: string) => (
                   <span
                     key={tag}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}
+                    className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+                    style={{ backgroundColor: `${primaryColor}10`, color: primaryColor }}
                   >
                     {tag}
                   </span>
@@ -243,7 +267,7 @@ export default async function JobDetailPage({ params }: PageProps) {
             )}
             {(job as any).benefits && (
               <div
-                className="prose prose-slate max-w-none"
+                className="prose prose-slate max-w-none prose-headings:text-slate-900"
                 dangerouslySetInnerHTML={{ __html: ensureHtml((job as any).benefits) }}
               />
             )}
@@ -259,8 +283,8 @@ export default async function JobDetailPage({ params }: PageProps) {
       </div>
 
       {/* Footer */}
-      <div className="border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-        Powered by HireKit
+      <div className="border-t border-slate-200 py-8 text-center text-sm text-slate-400">
+        <p>&copy; {new Date().getFullYear()} {company.name} &middot; Powered by HireKit</p>
       </div>
     </div>
   );
